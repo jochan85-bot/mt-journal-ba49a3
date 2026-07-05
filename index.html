@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+</style></head>
+<body>
+<h1>📓 매매일지</h1>
+<div class="dim">돌파매매 자동 트레이딩 기록 · 2026-07-06 이후 거래</div>
+<div class="card">
+<b>보유중 0건</b> · 청산 거래 없음
+<div class="dim">마지막 갱신: 2026-07-05 21:28 KST</div>
+</div><div class="empty">아직 기록된 거래가 없습니다.<br>첫 거래가 발생하면 자동으로 이곳에 나타납니다. 📈</div>
+<div class="footer">MacTrader auto-journal</div>
+<script>
+function sortTable(n, numeric) {
+  const table = document.getElementById('trades');
+  const tbody = table.tBodies[0];
+  const rows = Array.from(tbody.rows);
+  const dir = table.dataset['sort'+n] === 'asc' ? -1 : 1;
+  table.dataset['sort'+n] = dir === 1 ? 'asc' : 'desc';
+  rows.sort((a, b) => {
+    let x = a.cells[n].dataset.v ?? a.cells[n].textContent.trim();
+    let y = b.cells[n].dataset.v ?? b.cells[n].textContent.trim();
+    if (numeric) { x = parseFloat(x) || -9999; y = parseFloat(y) || -9999; return (x - y) * dir; }
+    return x.localeCompare(y) * dir;
+  });
+  rows.forEach(r => tbody.appendChild(r));
+}
+</script>
+</body></html>
