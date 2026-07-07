@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>SEPN — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>SEPN <span class="dim" style="font-size:1rem">셉터나</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span></div>
+
+<div class="card">
+평균 매수가 <b>$36.47</b>
+
+· 수익률 <span class="neg">-1.75%</span>
+· 보유 95주
+<div class="dim">2026-07-07 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 95주 @ $36.47
+<div class="dim">2026-07-07 22:51 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">셉터나(Septerna)는 자체 &#x27;Native Complex Platform&#x27;으로 세포막 GPCR(G단백질연결수용체)을 온전한 형태로 재현해 경구용 저분자 신약을 발굴하는 임상단계 바이오텍으로, 노보 노디스크와 22억 달러 규모의 경구 비만치료제 협력을 맺은 GPCR 신약개발 플랫폼 기업이다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">셉터나의 핵심 자산은 세포막에 존재하는 GPCR을 지질·보조인자와 함께 온전한 3차원 구조로 재구성하는 독자 플랫폼(Native Complex Platform)으로, 이를 통해 기존에 &#x27;난공불락&#x27;으로 여겨지던 GPCR 표적에 대한 경구용 저분자 후보물질을 발굴한다. 아직 승인 제품이 없는 임상단계 기업이라 매출은 대부분 파트너십(협업) 수익으로 구성되며, 2025년 5월 체결한 노보 노디스크와의 협력 계약이 매출의 핵심 동력이다. 주력 파이프라인은 만성 두드러기(CSU) 등 비만세포 매개 질환을 겨냥한 경구 MRGPRX2 음성 알로스테릭 조절제 SEP-631, 부갑상선기능저하증을 겨냥한 경구 PTH1R 작용제 SEP-479 등이다. 노보 노디스크와는 GLP-1·GIP·글루카곤 등 대사질환 수용체를 표적으로 하는 4개 전임상 프로그램을 공동 진행한다. 경쟁 지위 측면에서 &#x27;온전한 GPCR 구조 기반 저분자 발굴&#x27;이라는 차별화된 플랫폼이 강점이며, 노보 노디스크라는 글로벌 대사질환 1위 기업을 핵심 파트너로 확보한 점이 신뢰도를 뒷받침한다. 다만 자체 상업화 제품이 없어 수익 구조는 여전히 마일스톤·로열티 기대에 의존하는 초기 단계다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 1분기(3월 마감) 매출은 약 2,650만 달러, 순손실은 860만 달러로 전년 대비 손실 폭이 축소되었고, 주당순손실(EPS)은 -0.19달러로 시장 컨센서스(-0.32달러)를 40.6% 상회했다. 이 매출의 상당 부분은 노보 노디스크 협력에 따른 계약·연구비 수익으로, 노보가 파트너십 관련 R&amp;D 비용을 전액 부담하는 구조가 손실 축소에 기여하고 있다. 2026년 3월 31일 기준 현금·시장성 유가증권은 약 5억 2,210만 달러로, 경영진은 이 자금이 최소 2029년까지 운영을 지원할 것으로 보고 있어 단기 자금 조달(희석) 압박은 낮다. 애널리스트들은 2026년 연간 매출을 약 8,790만 달러, 연간 EPS를 약 -1.57달러로 전망한다. 다음 실적 발표는 2026년 8월 10일로 예정되어 있으며 컨센서스 EPS는 -0.49달러다. 승인 제품이 없는 임상단계 기업 특성상 &#x27;마진 추이&#x27;는 큰 의미가 없고, 현금 소진 속도(burn rate)와 파트너십 마일스톤 인식이 핵심 재무 지표다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">돌파의 배경에는 상반기 내내 누적된 긍정적 파이프라인·수급 이벤트가 시간순으로 작용했다. 첫째, 3월 1일 경구 MRGPRX2 조절제 SEP-631의 긍정적 Phase 1 데이터(10mg 저용량에서 완전한 피부 팽진 억제, 위약 수준 안전성)를 발표하며 임상적 작용기전 입증에 성공했고, 2026년 하반기 CSU 대상 Phase 2 개시 계획을 제시했다. 둘째, 6월 8일 구겐하임이 &#x27;Buy&#x27;로 커버리지를 개시하며 기관 관심이 확대되었다. 셋째, 6월 13~16일 열린 내분비학회 연례회의(ENDO 2026)에서 부갑상선기능저하증 경구 PTH1R 작용제 SEP-479의 전임상 데이터를 구두 발표하며 파이프라인 확장 서사를 강화했다. 넷째, 6월 말 러셀 2000·2500·3000·소형성장주 지수에 대거 편입되며 패시브 자금 유입과 유통 물량 확대가 이뤄졌다. 다섯째, 7월 1일 구겐하임이 목표가를 52→45달러로 낮췄으나 매수 의견은 유지했고 HC 웨인라이트도 매수를 재확인하며 긍정적 커버리지가 이어졌다. 이러한 재료 누적과 지수 편입 수급이 맞물리며 35.17달러 피벗 돌파가 발생한 것으로 판단된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">GPCR 표적 경구 저분자, 특히 경구 비만치료제(오랄 GLP-1 계열) 테마는 2025~2026년 바이오 섹터에서 가장 뜨거운 사이클에 위치해 있으며, 노보 노디스크·일라이 릴리 등 빅파마가 경구 대사질환 자산을 공격적으로 확보하는 흐름이 지속되고 있다. 셉터나는 22억 달러 규모 노보 협력을 통해 이 테마의 &#x27;플랫폼 공급자&#x27;로 자리매김하며 피어 대비 검증된 파트너십과 다중 파이프라인(대사질환+면역/희귀질환)이라는 강점을 보유한다. 반면 아직 자체 후기 임상 자산이 없고 매출·이익이 없는 초기 임상단계라는 점은 상업화 단계 피어 대비 약점이다. 애널리스트 컨센서스는 &#x27;Strong Buy&#x27;로 섹터 내 선호도가 높으나, 금리·바이오 심리에 민감한 고베타 소형 바이오라는 구조적 변동성은 감안해야 한다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">돌파 데이터를 보면 피벗 35.17달러를 상향 돌파해 36.47달러에 진입, 피벗 대비 확장은 +3.72%로 추격 리스크가 크지 않은 양호한 진입 위치다. 다만 진입 시점 상대거래량(RVOL)이 1.44배로, 미너비니가 선호하는 강한 돌파(통상 1.5~2배 이상 거래량 팽창) 기준에는 다소 못 미치는 &#x27;보통 수준&#x27;의 수급이라는 점이 아쉽다. 위로는 러셀 편입 전후 형성된 매물대와 최근 애널리스트 목표가 하단인 35~45달러 구간이 심리적 저항/지지로 작용할 수 있으며, 아래로는 피벗 35.17달러가 1차 지지선이자 손절 기준선 역할을 한다. 베이스는 상반기 재료 누적 속에 형성된 것으로 추정되나, 저RVOL 돌파는 초기 되돌림(shakeout) 가능성을 열어두므로 거래량 확인이 필요하다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">상승 시나리오의 핵심 트리거는 (1) 2026년 하반기 SEP-631의 CSU 대상 Phase 2 개시 및 초기 데이터, (2) 노보 노디스크 협력의 첫 프로그램 IND 진입·마일스톤 인식, (3) 부갑상선기능저하증 SEP-479의 Phase 1 데이터(2026년 말~2027년 초)다. 이들이 순차적으로 긍정적으로 확인되면 &#x27;검증된 플랫폼+다중 파이프라인&#x27; 재평가가 진행될 수 있다. 애널리스트 목표가는 평균 약 45.78달러(매수가 대비 +26%), 최저 35달러에서 최고 60달러(캔터 피츠제럴드)까지 분포하며 레이먼드 제임스는 53달러를 제시했다. 컨센서스가 &#x27;Strong Buy&#x27;(9개 IB 중 8곳 매수)로 쏠려 있어 재료 확인 시 목표가 상향 여지가 크다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">첫째, 임상 실패/데이터 실망 리스크 — 하반기 SEP-631 Phase 2나 SEP-479 Phase 1 데이터가 기대에 못 미치면 파이프라인 가치가 급격히 재조정되어 주가가 20~40% 급락할 수 있는 전형적 바이오 이벤트 리스크다. 둘째, 파트너십 의존 리스크 — 매출의 핵심인 노보 노디스크 협력이 프로그램 중단·재협상될 경우 매출 서사와 자금 안정성이 동시에 훼손된다. 셋째, 매크로/심리 리스크 — 승인 제품·이익이 없는 고베타 소형 바이오라 금리 상승이나 바이오 섹터 자금 이탈 시 실적과 무관하게 낙폭이 확대될 수 있다. 넷째, 기술적 리스크 — RVOL 1.44배의 상대적으로 약한 돌파 수급으로 인해 피벗(35.17달러) 하향 이탈 시 러셀 편입 관련 단기 물량이 겹쳐 손절 트리거가 빠르게 작동할 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 8월 10일 — 2분기 실적 발표(현금 소진 속도, 노보 협력 매출 인식, 파이프라인 진척 업데이트 확인). ② 2026년 하반기 — SEP-631 CSU 대상 Phase 2 임상 개시 여부와 시점. ③ 2026년 말~2027년 초 — 부갑상선기능저하증 SEP-479 Phase 1 초기 데이터 판독. ④ 노보 노디스크 협력 4개 프로그램의 IND-enabling/IND 진입 및 마일스톤 발생 뉴스. ⑤ 애널리스트 목표가·등급 변경(구겐하임·HC 웨인라이트·캔터·레이먼드 제임스) 흐름과 러셀 지수 리밸런싱 관련 수급. ⑥ 기술적 손절선: 피벗 35.17달러 종가 이탈 여부를 매 거래일 점검.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 노보 노디스크 22억 달러 협력, 5.2억 달러의 2029년까지 충분한 현금, &#x27;Strong Buy&#x27; 컨센서스(평균 목표가 45.78달러)와 다중 파이프라인 등 펀더멘털 서사는 견고하다. 그러나 승인 제품·이익이 없는 임상단계 바이오로 데이터 이벤트에 따른 바이너리 변동성이 크고, 진입 돌파의 RVOL이 1.44배로 미너비니 기준상 강한 수급 팽창에 못 미친다는 점에서 확신은 &#x27;보통&#x27; 수준이다. 피벗 35.17달러를 손절선으로 엄격히 지키며 8월 10일 실적과 하반기 임상 이벤트를 확인하는 관리형 접근이 적절하다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

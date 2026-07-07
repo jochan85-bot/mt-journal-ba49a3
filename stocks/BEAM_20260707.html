@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>BEAM — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>BEAM <span class="dim" style="font-size:1rem">빔 테라퓨틱스</span></h1>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span></div>
+
+<div class="card">
+평균 매수가 <b>$36.08</b>
+· 평균 매도가 <b>$34.96</b>
+· 수익률 <span class="neg">-3.10%</span>
+
+<div class="dim">2026-07-07 진입 → 2026-07-07 청산</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 96주 @ $36.08
+<div class="dim">2026-07-07 23:20 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 96주 @ $34.96
+<div class="dim">2026-07-07 23:26  — Stop 발동 (MA90/lock, floor +0.0%)</div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">빔 테라퓨틱스는 DNA 이중가닥 절단 없이 단일 염기를 정밀 교정하는 &#x27;염기편집(Base Editing)&#x27; 원천기술을 보유한 유전자편집 임상 단계 바이오텍으로, 겸상적혈구증(SCD)과 알파-1 항트립신 결핍증(AATD)에서 잇단 임상 성공으로 상업화 초입에 진입하고 있다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">빔은 노벨상 수상 기술을 발전시킨 &#x27;염기편집&#x27;을 핵심 플랫폼으로, 세포를 잘라내지 않고 A→G, C→T 등 단일 염기 하나를 바꿔 질병 유발 변이를 교정하는 차세대 유전자편집 회사다. 주력 파이프라인은 겸상적혈구증 치료제 리스토-셀(risto-cel, 구 BEAM-101, 체외 자가조혈모세포 치료제)과, 간 표적 인비보(in vivo) 치료제 BEAM-302(AATD)·BEAM-301(당원축적병 1a형)이다. 아직 승인 제품이 없어 매출의 대부분은 협업 파트너로부터의 마일스톤·연구비로 구성되며, 최대 파트너는 일라이 릴리(간 질환·심혈관), 그리고 과거 버텍스·리제네론 등과의 협력 이력이 있다. 경쟁 지위는 &#x27;염기편집&#x27; 분야 선두주자로, 기존 CRISPR 절단 방식(버텍스/크리스퍼의 카스거비 등)이 갖는 이중가닥 절단 안전성 우려를 구조적으로 회피한다는 차별점을 갖는다. 자체 LNP(지질나노입자) 전달 기술로 인비보 간 표적 편집을 세계 최초로 임상에서 입증하며 기술 해자를 넓히고 있다. 다만 현금흐름은 전액 R&amp;D 투자 단계로, 수익 구조는 향후 제품 승인·상업화와 파트너십 마일스톤 실현에 전적으로 의존한다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 1분기(5월 7일 발표) 매출은 3,170만 달러로 전년 동기 750만 달러 대비 약 322% 급증했으며, 이는 일라이 릴리 협업에서 2,500만 달러 마일스톤이 인식된 영향으로 컨센서스(약 2,080만 달러)를 52% 상회했다. 순손실은 9,430만 달러로 전년비 축소됐고, R&amp;D 비용은 1억 450만 달러로 임상 3개 프로그램 동시 진행에 따라 높은 수준을 유지했다. 임상 단계 바이오텍 특성상 영업이익은 적자이나, 매출 성장은 파트너십 이정표 달성이라는 질적 개선을 반영한다. 재무 체력은 매우 견고해, 1분기 말 현금·현금성자산·시장성증권 12억 달러를 보유하고 2033년 만기 신규 신용시설에서 1억 달러를 인출, 자금 소진 예상 시점(runway)을 2029년 중반까지 확보했다. 다음 실적 발표는 2026년 2분기 실적으로 통상 8월 초(전년 패턴상 8월 첫째 주)로 예상되며, 파이프라인 마일스톤 인식 여부가 매출 변동의 핵심 변수다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">이번 돌파의 근본 배경은 2026년 상반기 파이프라인 데이터가 연이어 확인되며 &#x27;임상 성공 → 상업화 경로 가시화&#x27;로 서사가 전환된 데 있다. 첫째, 2025년 12월 ASH 학회에서 리스토-셀(SCD)의 BEACON 1/2상 업데이트 데이터가 발표되며 지속성·차별성이 부각됐다. 둘째, 2026년 4월 동 데이터가 최고 권위지 뉴잉글랜드의학저널(NEJM)에 게재되어(환자 31명, 평균 HbF 60% 이상, 병적 HbS 40% 미만, 이식 후 중증 혈관폐색성 위기 미발생) 임상적 신뢰도가 정점을 찍었고, RMAT(첨단재생의약품) 지정도 확보했다. 셋째, 2026년 3월 BEAM-302(AATD) 29명 톱라인 데이터 공개와 함께 FDA와 AAT 바이오마커 기반 &#x27;가속승인 경로&#x27; 정렬에 도달했고, 60mg을 최적 용량으로 확정해 하반기 pivotal 코호트 개시를 예고했다. 여기에 1분기 릴리 마일스톤 유입과 12억 달러 현금·2029년 runway 확보라는 재무 안전판이 더해지며 리스크 프리미엄이 축소됐다. 수급 측면에서 바이오 섹터(XBI)가 2025년 4월 저점 대비 큰 폭 반등한 우호적 환경도 배경이며, 이러한 촉매들이 누적되며 35.74달러 피벗을 RVOL 1.46배로 돌파했다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">유전자편집 섹터는 카스거비(승인 CRISPR 치료제) 출시 이후 &#x27;임상 검증 → 상업화&#x27; 사이클로 진입 중이며, CRISPR 세그먼트는 2025년 47.6억 달러에서 2035년 188.9억 달러(CAGR 약 14.8%)로 성장이 전망된다. 2026년 2월 FDA가 초희귀질환 맞춤형 유전자치료를 위한 &#x27;개연적 기전(plausible mechanism)&#x27; 프레임워크 초안을 내놓는 등 규제 환경도 우호적으로 개선되고 있다. 피어 대비 빔의 강점은 이중가닥 절단이 없는 &#x27;염기편집&#x27;의 안전성 차별화와, 인테리아(인비보 CRISPR, ATTR 3상)·크리스퍼 등과 달리 체외(SCD)·인비보(AATD) 양쪽에서 동시에 임상 데이터를 축적한 플랫폼 확장성이다. 약점은 여전히 무매출·고비용 임상 단계로 상업화 실적이 없다는 점과, 세포치료(SCD)의 골수전처치 부담·상업적 확장성 한계다. 종합적으로 빔은 섹터 내 &#x27;염기편집 선두·데이터 검증 완료&#x27; 포지션으로 상위권에 위치한다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">베이스는 임상 데이터 이벤트를 소화하며 형성된 중기 조정 구간으로, 35.74달러 피벗은 직전 매물대 상단으로 해석된다. 이번 돌파는 진입 시점 RVOL 1.46배로 &#x27;평균 이상이나 폭발적이진 않은&#x27; 수준의 거래량을 동반했고, 피벗 대비 확장폭은 +1.01%로 과열 없이 피벗 바로 위에서 진입한 이상적 타점이다(추격매수 리스크 최소화). 미너비니 관점에서 확장폭이 작아 손절 여지(피벗/최근 저점 하단)가 타이트하게 설정 가능하다는 점은 리스크/리워드상 유리하다. 다만 RVOL이 2배 미만이라 돌파의 &#x27;질&#x27;은 최상급은 아니어서, 피벗(35.74) 재이탈 여부와 후속 거래량 확대 확인이 필요하다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">상승 트리거는 ①2026년 하반기 BEAM-302 pivotal 코호트 개시 및 AATD 가속승인 경로 진전, ②리스토-셀(SCD)의 BLA 제출 로드맵 구체화와 RMAT 기반 신속심사, ③릴리 등 파트너십 추가 마일스톤·확장이다. 이들이 순차 실현되면 &#x27;임상 바이오텍 → 상업화 임박 기업&#x27;으로 밸류에이션 리레이팅이 가능하다. 애널리스트 목표가는 21명 기준 평균 약 51.58달러, 중앙값 43.50달러로 현재가(36.08달러) 대비 상단이 열려 있으며, 최고 80달러(HC Wainwright)·최저 22달러로 분포한다. 컨센서스는 매수 12~14·보유 1~2·매도 0의 &#x27;Strong Buy&#x27;로, 하반기 pivotal 진입 시 중앙값(43.50) 도달은 현실적 1차 목표다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">①임상/규제 리스크: BEAM-302 pivotal 코호트나 SCD BLA 과정에서 안전성 시그널(간 관련 부작용 등)·FDA 요구 강화가 발생하면 바이오 특성상 하루 -20~40% 급락이 가능하다. ②상업화·경쟁 리스크: 카스거비(버텍스/크리스퍼) 등 기존 승인 SCD 치료제와의 경쟁, 세포치료의 전처치 부담·보험 급여·상업적 침투 지연 시 매출 실현이 기대에 못 미쳐 밸류에이션이 훼손된다. ③재무·희석 리스크: 무매출 고비용 구조로 2029년 runway를 확보했으나, 상업화 지연 시 추가 유상증자·전환사채 발행에 따른 지분 희석과 주가 하방 압력이 발생한다. ④거시/수급 리스크: 금리·바이오 심리(XBI) 변동에 베타가 높아, 섹터 조정이나 시장 리스크오프 국면에서 개별 호재와 무관하게 피벗(35.74) 하향 이탈이 나타날 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">①2026년 8월 초 예상 2분기 실적 발표 — 릴리 마일스톤 인식·현금 소진 속도·runway 재확인. ②2026년 하반기 BEAM-302(AATD) pivotal 코호트 개시 공식 발표 — 최대 상방 촉매. ③SCD 리스토-셀 BLA 제출/RMAT 기반 규제 마일스톤 일정 업데이트. ④하반기 주요 학회(ASH 12월 등) 추가 임상 데이터 발표. ⑤기술적으로 피벗 35.74달러 지지 유지 여부와 후속 거래량 확대(RVOL 2배 이상 재확인)를 상시 점검하고, 피벗 하향 이탈 시 손절 규율 준수.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 리스토-셀 NEJM 게재·RMAT, BEAM-302 FDA 가속승인 경로 정렬, 12억 달러 현금과 &#x27;Strong Buy&#x27; 컨센서스(평균 목표 약 51.58달러)라는 강력한 펀더멘털 촉매가 뒷받침되어 방향성은 긍정적이다. 다만 돌파 거래량이 RVOL 1.46배로 폭발적이지 않아 돌파의 &#x27;질&#x27;이 최상급은 아니고, 무매출·고비용 임상 단계 특유의 이벤트 리스크(임상·규제·희석)가 상존한다. 따라서 피벗 35.74달러 지지와 후속 거래량 확인을 전제로 한 규율 있는 보유가 적절하다.</div></div>
+<h3>📉 매도 분석 — 2026-07-07</h3>
+<div class="card"><b>하락/청산 원인</b><div class="section-body">BEAM은 7월 초 BEAM-304(페닐케톤뇨증)의 FDA IND 승인 호재로 90일간 약 35.8% 급등하며 52주 신고가 36.89달러를 찍은 직후였고, 진입일인 7월 7일 평균 36.08달러는 사실상 신고가권 최상단 매수였습니다. 그러나 IND 승인은 이미 주가에 상당 부분 선반영된 &#x27;재료 소멸(sell-the-news)&#x27; 국면이었고, P/S 20.3배(업종 평균 12.4배 대비 과열)라는 밸류에이션 부담이 겹치며 신고가 직후 차익실현 매물이 쏟아졌습니다. 진입 당일 곧바로 가격이 34.96달러까지 밀리면서(고점 대비 약 -5%) 상승 모멘텀이 꺾였고, 임상 초기 단계 유전자편집주 특유의 변동성이 매물벽을 키웠습니다. 결국 신고가 돌파 매수가 곧바로 눌림으로 전환되며 진입 하루 만에 MA90 락 손절선이 발동, -3.1%에 정리되었습니다.</div></div>
+<div class="card"><b>당일 시장 상황</b><div class="section-body">매도 당일 바이오섹터 자체는 견조해 XBI는 160~162달러대(2026년 연초 대비 +23%, 1년 +94%)로 강세 리더십을 유지하고 있었으므로, 이번 하락은 섹터 전반의 약세가 아니라 BEAM 개별 종목의 급등 후 차익실현 성격이 강합니다. 즉 유전자편집·정밀의학 테마는 살아 있으나, 신고가에서 재료가 소진된 개별주에 국한된 눌림이었습니다. 동종 초기임상 유전자치료주 대비 BEAM만 두드러진 단기 과열이 있었다는 점이 매도의 배경입니다.</div></div>
+<div class="card"><b>시스템 판단 평가</b><div class="section-body">MA90/lock 손절 규칙의 취지는 &#x27;진입 근거(신고가 돌파)가 무효화되면 손실을 소액으로 확정한다&#x27;는 것으로, 이번에는 그 취지대로 -3.1%에서 감정 개입 없이 기계적으로 정리했다는 점에서 규칙 자체는 정상 작동했습니다. 다만 문제는 매도가 아니라 &#x27;진입 타이밍&#x27;에 있습니다 — 90일 +35% 급등의 신고가 최상단에서 매수했기 때문에, 정상적 눌림(MA 되돌림) 한 번에도 손절선이 즉시 닿을 수밖에 없는 위치였습니다. VCP/SEPA 관점에서 진입 지점의 위험대비보상(R/R)이 이미 나빴고, 시스템은 잘못된 진입의 손실을 최소화하는 방어 역할만 충실히 한 셈입니다. 결과적으로 손절은 적절했으나, 애초에 과확장(extended) 구간 진입을 걸러내는 필터가 더 중요했다는 평가입니다.</div></div>
+<div class="card"><b>대안 검토</b><div class="section-body">규칙 범위 안에서는 신고가 최상단 대신 첫 눌림 후 저변동성 수축(피벗 재형성)을 확인하고 진입했다면 손절선까지의 거리가 확보돼 당일 아웃당하지 않았을 가능성이 큽니다. 손절가를 MA90 락 대신 진입 당일 저가 하단으로 약간 여유를 뒀어도 -3.1% 시점의 흔들림은 견뎠을 수 있으나, 그럴 경우 손실 확대 리스크도 함께 커졌을 것입니다. 다만 어느 대안도 &#x27;과확장 구간 매수&#x27;라는 근본 문제를 해결하진 못하므로, 최선의 대안은 이 자리에서는 진입 자체를 보류하는 것이었습니다.</div></div>
+<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">펀더멘털은 훼손되지 않았습니다 — 애널리스트 14 Buy/2 Hold, 목표주가 중앙값 43.5달러(최고 80달러), H.C. Wainwright의 BEAM-302 피벗 준비 및 risto-cel BLA 기대가 유효해 중장기 상승 스토리는 살아 있습니다. 다만 단기적으로는 신고가 급등 후 소화 국면이므로, 재진입은 지금이 아니라 새로운 저변동성 베이스(수축) 형성과 거래량 급감 후 재차 피벗 돌파가 확인될 때가 조건입니다. 워치리스트 관점 체크포인트는 ① 33~34달러대에서의 지지 및 MA 안착 여부, ② VCP식 변동성 수축(2~3주 이상)과 거래량 마름, ③ BEAM-302/risto-cel 관련 다음 촉매 일정입니다. 이 조건들이 충족되기 전까지는 &#x27;보유&#x27;가 아닌 &#x27;관찰&#x27; 대상으로 두는 것이 적절합니다.</div></div>
+<h3>🏁 거래 종합 리뷰</h3>
+<div class="card"><b>요약</b><div class="section-body">BEAM은 지난 1년간 +90% 상승하며 52주 신고가(약 $36.89) 부근까지 올라온 바이오 리더주로, 미너비니식 VCP 돌파 관점에서 신고가 돌파 매수 후보였습니다. 2026-07-07 23:20 $36.08에 96주 진입했으나, 진입 직후 단 6분 만인 23:26 $34.96에 MA90/lock 트레일링 스톱(floor +0.0%)이 발동되어 -3.10%로 청산됐습니다. 즉 돌파 직후의 얕은 되돌림(shakeout)에서 breakeven 근처로 잠긴 스톱이 그대로 얻어맞은 전형적인 &#x27;진입 직후 흔들기&#x27;에 걸린 케이스입니다. 문제는 이후 BEAM이 다시 $37.02 수준까지 회복해 진입가($36.08)를 넘어섰다는 점으로, 결과적으로 스톱이 잃은 손실이었습니다. 보유 기간 중 BEAM-304 IND 승인, BEAM-302 임상 데이터 등 펀더멘털 촉매와 강한 바이오 섹터 분위기가 유지되어 종목 자체의 추세는 훼손되지 않았습니다.</div></div>
+<div class="card"><b>진입 평가</b><div class="section-body">진입 위치 자체는 52주 신고가·강한 상승추세라는 미너비니가 선호하는 리더주 조건을 충족해 큰 틀에서 합격입니다. 다만 6분 만에 되돌림에 걸렸다는 사실은 진입 시점이 돌파 후 되돌림 없이 &#x27;스파이크 끝&#x27;을 다소 추격했을 가능성을 시사합니다. 거래량 확인(돌파 시 평균 대비 명확한 거래량 팽창) 근거가 로그상 드러나지 않아, 피벗 돌파의 볼륨 확증이 충분했는지 재점검이 필요합니다. 스톱 여유가 6분 만에 -3.1%에 닿았다는 것은 진입가와 스톱(MA90) 간 거리가 이 종목의 일중 변동성 대비 너무 좁았다는 신호입니다.</div></div>
+<div class="card"><b>청산 평가</b><div class="section-body">규칙(MA90/lock, floor +0.0%)은 설계대로 정확히 작동했고, 손실을 -3.10%로 제한한 점은 리스크 관리 측면에서 규칙 준수 자체는 문제가 없었습니다. 그러나 이 케이스에서는 명백히 &#x27;실&#x27;이었습니다 — 청산 후 주가가 $34.96에서 진입가를 넘어 $37.02까지 회복해, 스톱이 정상적인 돌파 후 shakeout을 손절로 확정지어 버렸기 때문입니다. floor +0.0%로 트레일링 스톱을 breakeven에 바짝 잠근 설정이, 진입 직후 아직 이익 쿠션이 없는 구간에서 오히려 정상 노이즈에 취약하게 만든 것이 핵심 원인입니다. 즉 규칙은 지켜졌으나 규칙의 파라미터가 이 진입 상황에 부적합했습니다.</div></div>
+<div class="card"><b>시장 환경</b><div class="section-body">보유 기간의 시장 환경은 오히려 우호적이었습니다 — 2026-07-07 Jim Cramer가 바이오를 &#x27;시장에서 가장 뜨거운 그룹&#x27;으로 지목하고 M&amp;A 확대를 전망하는 등 섹터 심리가 강했습니다. 종목 고유 촉매(BEAM-304 FDA IND 승인, BEAM-302 임상 데이터)도 우호적이어서, 이 손절은 시장·섹터 악재가 아니라 순전히 일중 변동성/타이트한 스톱에 의한 기술적 흔들기였습니다.</div></div>
+<div class="card"><b>잘된 점</b><div class="section-body">손실을 -3.10%로 즉시 제한하고 규칙에 따라 감정 개입 없이 기계적으로 청산한 리스크 통제는 정석대로 작동했습니다. 진입 대상 선정 측면에서도 52주 신고가·강추세·펀더멘털 촉매를 갖춘 진짜 리더주를 골랐다는 점은 종목 스크리닝의 질이 높았음을 보여줍니다.</div></div>
+<div class="card"><b>아쉬운 점</b><div class="section-body">floor +0.0%로 breakeven에 잠긴 트레일링 스톱이 이익 쿠션이 전혀 없는 진입 직후 구간에서 발동되어, 정상적인 돌파 후 되돌림을 손절로 확정지었습니다. 진입 직후 일정 시간/일정 이익(예: 초기 스톱을 피벗 하단 또는 진입가 대비 고정 % 아래에 두고, breakeven 잠금은 이익이 확보된 뒤로 지연)까지는 MA90 lock을 유예하는 &#x27;진입 후 유예 규칙&#x27;이 있었다면 이 whipsaw를 피할 수 있었을 것입니다.</div></div>
+<div class="card"><b>교훈</b><div class="section-body">돌파 직후 아직 이익 쿠션이 없는 구간에서 스톱을 breakeven에 바짝 잠그면, 정상적인 shakeout조차 손절로 확정된다 — 초기 스톱 폭은 종목의 일중 변동성과 피벗 구조를 반영해 넉넉히 두고, breakeven/타이트 트레일링은 이익이 확보된 뒤에 가동해야 한다.</div></div>
+<div class="card"><b>등급</b><div class="section-body">C — 종목 선정과 규칙 준수·손실 제한이라는 프로세스의 뼈대는 정상 작동해 F는 아닙니다. 그러나 진입 직후 6분 만의 whipsaw 손절과 이후 진입가 회복은, 스톱 파라미터(floor +0.0%)와 진입 타이밍이 이 셋업에 최적화되지 못했음을 드러내므로 평균 수준으로 평가합니다.</div></div>
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
