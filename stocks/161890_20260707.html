@@ -2,7 +2,7 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>매매일지</title><style>
+<title>161890 — 매매일지</title><style>
 :root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
         --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -43,53 +43,30 @@ a:hover { text-decoration:underline; }
 .footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
 </style></head>
 <body>
-<h1>📓 매매일지</h1>
-<div class="dim">돌파매매 자동 트레이딩 기록 · 2026-07-06 이후 거래</div>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>161890 <span class="dim" style="font-size:1rem">한국콜마</span></h1>
+<div><span class="badge closed">청산 완료</span> <span class="badge kr">KR</span></div>
+
 <div class="card">
-<b>보유중 1건</b> · 청산 1건 · 승률 0% · 평균 -3.11%
-<div class="dim">마지막 갱신: 2026-07-07 15:53 KST</div>
-</div><table id="trades">
-<thead><tr>
-<th onclick="sortTable(0,false)">매수일 ⇅</th>
-<th>시장</th>
-<th onclick="sortTable(2,false)">티커 ⇅</th>
-<th>평균매수가</th>
-<th onclick="sortTable(4,true)">수익률 ⇅</th>
-<th>상태</th>
-</tr></thead>
-<tbody><tr>
-<td data-v="2026-07-07T09:14:05.671580+09:00">2026-07-07</td>
-<td><span class="badge kr">KR</span></td>
-<td data-v="161890"><a href="stocks/161890_20260707.html"><b>161890</b></a><br>
-    <span class="dim">한국콜마</span></td>
-<td>122,200원</td>
-<td data-v="-3.109656301145663"><span class="neg">-3.11%</span></td>
-<td><span class="badge closed">청산</span></td>
-</tr><tr>
-<td data-v="2026-07-07T09:10:12.857612+09:00">2026-07-07</td>
-<td><span class="badge kr">KR</span></td>
-<td data-v="010950"><a href="stocks/010950_20260707.html"><b>010950</b></a><br>
-    <span class="dim">S-Oil</span></td>
-<td>119,655원</td>
-<td data-v="5.637039822823952"><span class="pos">+5.64%</span></td>
-<td><span class="badge open">보유중</span></td>
-</tr></tbody>
-</table>
+평균 매수가 <b>122,200원</b>
+· 평균 매도가 <b>118,400원</b>
+· 수익률 <span class="neg">-3.11%</span>
+
+<div class="dim">2026-07-07 진입 → 2026-07-07 청산</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 28주 @ 122,200원
+<div class="dim">2026-07-07 09:14 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 28주 @ 118,400원
+<div class="dim">2026-07-07 10:19  — Stop 발동 (MA90/lock, floor +0.0%)</div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<h3>📉 매도 분석 #1</h3>
+<h3>🏁 거래 종합 리뷰</h3>
+
 <div class="footer">MacTrader auto-journal</div>
-<script>
-function sortTable(n, numeric) {
-  const table = document.getElementById('trades');
-  const tbody = table.tBodies[0];
-  const rows = Array.from(tbody.rows);
-  const dir = table.dataset['sort'+n] === 'asc' ? -1 : 1;
-  table.dataset['sort'+n] = dir === 1 ? 'asc' : 'desc';
-  rows.sort((a, b) => {
-    let x = a.cells[n].dataset.v ?? a.cells[n].textContent.trim();
-    let y = b.cells[n].dataset.v ?? b.cells[n].textContent.trim();
-    if (numeric) { x = parseFloat(x) || -9999; y = parseFloat(y) || -9999; return (x - y) * dir; }
-    return x.localeCompare(y) * dir;
-  });
-  rows.forEach(r => tbody.appendChild(r));
-}
-</script>
 </body></html>
