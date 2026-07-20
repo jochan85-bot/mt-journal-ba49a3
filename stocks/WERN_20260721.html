@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>WERN — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>WERN <span class="dim" style="font-size:1rem">웨너 엔터프라이지스</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span></div>
+
+<div class="card">
+평균 매수가 <b>$46.54</b>
+
+· 수익률 <span class="neg">-0.49%</span>
+· 보유 64주
+<div class="dim">2026-07-21 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 64주 @ $46.54
+<div class="dim">2026-07-21 02:42 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">웨너 엔터프라이지스는 미국 3대 트럭운송(Truckload) 기업 중 하나로, 화물 운송침체(freight recession)의 바닥을 지나 Dedicated(전용계약) 중심으로 체질을 개선하며 2026년 업황 회복의 초입에서 흑자 전환에 성공한 경기순환 회복주다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">웨너는 크게 두 개 사업부로 구성된다. ①Truckload Transportation Services(자산 기반 트럭운송)와 ②Werner Logistics(비자산 기반 물류)다. TTS 부문은 다시 Dedicated(고객 전용 장기계약)와 One-Way Truckload(스팟·단기계약)로 나뉘는데, 2024~2025년 245백만 달러 규모의 FirstFleet 인수를 통해 Dedicated 비중을 전체 트럭운송 매출의 50% 이상으로 끌어올려 경기 방어력을 강화했다. Dedicated는 고객 유지율 약 95%로 매출 안정성이 높고, One-Way는 스팟 시황에 민감하지만 구조조정을 통해 트럭당 매출(revenue per truck)을 두 자릿수 가까이 개선 중이다. Werner Logistics는 트럭 브로커리지(물류부문 매출의 72%), 인터모달(16%, 최근 화물 22% 증가로 24% 성장), 프레이트 매니지먼트, 국제물류를 제공하는 비자산 사업으로 경기 회복 시 레버리지가 크다. 주요 고객은 대형 소매·소비재·제조 화주이며, 현대적이고 평균 차령이 낮은 저연식 플릿을 무기로 삼는다. 경쟁사로는 Knight-Swift, J.B. Hunt, Schneider 등이 있으며 웨너는 Dedicated 규모와 운영 효율에서 상위권 지위를 유지한다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 1분기(가장 최근 발표) 총매출은 8억 860만 달러로 전년 대비 14% 증가하며 컨센서스(8억 480만 달러)를 상회했다. 영업이익은 400만 달러로 전년 동기 580만 달러 적자에서 흑자 전환했고, 조정영업이익은 1,190만 달러(전년 조정 영업손실 180만 달러)로 크게 개선됐다. 주당순이익(EPS)은 2센트로 컨센서스(3센트 손실)를 뒤엎고 흑자를 냈으며 전년 동기 12센트 손실 대비 뚜렷한 반등이다. TTS 매출(별도 집계 기준)은 18% 증가한 반면 Logistics 매출은 3% 감소해 부문 간 온도차가 존재한다. 마진은 여전히 낮은 한 자릿수 영업마진 수준으로 완전한 정상화 전 단계이며, 경영진은 2026년에도 저~중 한 자릿수 이상의 운임 인상이 있어야 마진이 의미 있게 개선된다고 밝혔다. 다음 실적(2026년 2분기) 발표는 2026-07-27로 예정되어 있어 매수 직후 중요한 이벤트가 대기 중이다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">돌파는 화물 운송침체의 바닥 통과와 업황 회복 기대가 주가에 반영되는 흐름 속에서 나왔다. 시간순으로 보면, ①1분기 실적(매출 +14%, 흑자 전환)이 서프라이즈를 기록하며 회복 내러티브를 강화했고, ②CEO 데릭 리더스가 비국적·B-1 비자 드라이버에 대한 규제 단속과 &#x27;용량 감소(capacity attrition)&#x27;가 2026년 트럭운송 공급을 타이트하게 만들어 웨너의 가격 결정력을 높일 것이라 강조했다. ③7월 들어 애널리스트들의 잇단 목표가 상향이 촉매가 됐다 — 7월 1일 Evercore ISI가 Underperform→In-Line 상향, 7월 8일 Stephens가 Overweight·목표가 50달러로 재개시, 7월 9일 Citigroup 목표가 37→47달러, 7월 13일 Stifel 목표가 36→40달러로 상향. ④이러한 목표가 상향 랠리가 주가를 52주 신고가(약 45.27달러) 부근까지 밀어올렸고, 본 매수는 그 저항선을 상향 돌파하는 신고가 돌파(46.17 피벗) 구간에서 체결됐다. 즉 공급 타이트닝 + 실적 턴어라운드 + 셀사이드 상향의 3박자가 겹친 수급 배경이다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">미국 트럭운송 섹터는 2022년 하반기부터 이어진 장기 화물침체의 후반부에 있으며, 2026년을 &#x27;균형 잡힌 시장&#x27;으로의 전환 원년으로 보는 시각이 우세하다. 핵심 지표는 산업 전반의 용량 이탈(capacity attrition), OEM 장비 공급 제약, 규제 단속으로, 이는 진입장벽을 높여 스팟·계약 운임 반등을 이끌 것으로 기대된다. 다만 스팟 운임은 여전히 전년 대비 &#x27;보합&#x27; 수준이라 회복은 점진적이다. 웨너는 Dedicated 50%+ 비중과 저연식 플릿, 침체기 저점 자사주 매입 등 규율 있는 자본 배분으로 피어 대비 회복 레버리지가 높으나, One-Way와 Logistics의 운임 민감도가 단기 약점이다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">매수 데이터를 보면 46.17 피벗을 상향 돌파하며 피벗 대비 +0.79% 확장된 46.54에 진입해 확장폭이 작아(추격매수 아님) 이상적인 진입 구간이다. 다만 진입 시점 상대거래량(RVOL)이 1.41배로 강한 돌파에 통상 요구되는 1.5~2.0배에는 다소 못 미쳐 거래량 확인은 &#x27;보통&#x27; 수준이다. 이 구간은 기존 52주 고점(약 45.27달러)을 넘어서는 신고가 돌파여서 위쪽 매물대(오버헤드 저항)가 거의 없다는 점이 강점이며, 지지선은 피벗 46.17과 그 아래 45.2 전고점대다. 베이스는 실적·목표가 상향으로 형성된 상승 추세 후반의 신고가 베이스로 판단된다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">상승 시나리오의 핵심 트리거는 ①7월 27일 2분기 실적에서 흑자 폭 확대와 운임 회복 가시화, ②규제 단속·용량 이탈로 인한 하반기 스팟/계약 운임의 실질 반등이다. 이 경우 예상 경로는 Dedicated 안정 매출 위에 One-Way·Logistics 마진 레버리지가 더해져 이익 정상화 기대가 커지는 것이다. 애널리스트 목표가는 컨센서스 약 37~40달러(15명 기준 평균 약 37.29~39.92달러, Hold)이나, 상단은 Stephens 50달러, Citigroup 47달러로 매수가(46.54) 대비 상방 여력이 최상위 시나리오에서 열려 있다. 즉 낙관론이 컨센서스로 확산되면 47~50달러 재평가가 가능하다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">①밸류에이션 괴리 리스크: 매수가 46.54는 컨센서스 목표가(약 37~40달러)를 이미 상회해 낙관론이 선반영된 상태다 — 실적이 기대에 못 미치면 목표가 수렴 과정에서 40달러 초반으로의 되돌림 가능. ②실적 이벤트 리스크: 7월 27일 2분기 실적이 매수 6일 후여서, 운임/마진 가이던스가 실망스러우면 갭다운 급락 위험. ③운임 회복 지연 리스크: 스팟 운임이 여전히 전년 보합 수준이라 경영진이 언급한 &#x27;의미 있는 마진 개선&#x27;에 필요한 운임 인상이 지연되면 회복 내러티브가 약화되고 경기순환주 특성상 급조정. ④거래량 미확인 리스크: RVOL 1.41배로 돌파 강도가 강하지 않아, 신고가 돌파가 힘을 잃으면 피벗(46.17) 하향 이탈 시 손절 트리거 발동 가능.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">①2026-07-27 2분기 실적 발표 — 매출 성장 지속·조정영업이익 확대·운임(revenue per mile) 방향성과 하반기 가이던스가 최우선 체크포인트(매수 6일 후, 최대 변수). ②실적 후 컨퍼런스콜에서 Dedicated 유지율(95% 수준)·One-Way 트럭당 매출·규제 단속에 따른 용량 이탈 언급 확인. ③월간 트럭운송 스팟 운임·Cass Freight Index 등 산업 지표로 운임 반등 실체 확인. ④애널리스트 추가 상향/하향 동향(현재 Stephens 50, Citi 47 vs 컨센 37~40)과 등급 변화. ⑤기술적으로 피벗 46.17 지지 유지 여부와 신고가 유지 여부를 지속 모니터링.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 실적 흑자 전환·공급 타이트닝·셀사이드 목표가 상향이 겹친 명확한 회복 내러티브와 신고가·저확장(+0.79%) 돌파라는 기술적 강점은 매력적이다. 다만 매수가(46.54)가 이미 컨센서스 목표가(약 37~40달러)를 웃돌아 낙관론이 선반영됐고, RVOL 1.41배로 돌파 거래량이 강하지 않으며, 6일 뒤 2분기 실적(7/27)이라는 대형 이벤트 리스크가 대기 중이어서 확신을 &#x27;보통&#x27;으로 제한한다. 피벗 46.17을 손절 기준으로 삼는 규율이 필수다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
