@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AMLX — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>AMLX <span class="dim" style="font-size:1rem">아밀릭스 파마슈티컬스</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span></div>
+
+<div class="card">
+평균 매수가 <b>$19.31</b>
+
+· 수익률 <span class="pos">+1.24%</span>
+· 보유 155주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260728 기준)</span></div>
+<div class="dim">2026-07-29 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 154주 @ $19.31
+<div class="dim">2026-07-29 01:32 </div>
+</div><div class="tl-item buy">
+<b>매수</b> · 1주 @ $19.29
+<div class="dim">2026-07-29 01:37 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">핵심 임상 실패(ALS 치료제 Relyvrio 철수) 이후 GLP-1 수용체 길항제 avexitide로 파이프라인을 전환한 희귀 내분비질환 임상단계 바이오텍으로, Phase 3 톱라인 데이터 발표를 앞두고 있다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">Amylyx Pharmaceuticals는 미충족 의료수요가 큰 희귀 내분비·신경퇴행성 질환 치료제를 개발하는 임상단계 바이오제약사다. 원래 주력 파이프라인은 ALS(근위축성측삭경화증) 치료제 Relyvrio(AMX0035)였으나 2024년 4월 확증 Phase 3 임상(PHOENIX) 실패로 시장에서 자진 철수하고 대규모 감원을 단행했다. 이후 2023년 Eiger BioPharmaceuticals로부터 인수한 avexitide(GLP-1 수용체 길항제)를 신규 핵심 파이프라인으로 전환했으며, 위루술 후 저혈당증(Post-Bariatric Hypoglycemia, PBH)과 선천성 고인슐린혈증(congenital Hyperinsulinism, HI) 두 적응증을 타깃한다. avexitide는 두 적응증 모두 FDA 희귀소아질환 지정 및 고인슐린혈증성 저혈당(PBH+HI 포괄) 희귀의약품 지정, PBH·congenital HI 각각 혁신치료제(Breakthrough Therapy) 지정을 받았다. 아직 승인 제품이 없어 매출은 발생하지 않는 순수 파이프라인 기반 기업이며, 경쟁 지위는 해당 초희귀 적응증에서 사실상 유일한 후기임상 단계 GLP-1 길항제 보유사로 사실상 독점적 지위에 있다. 고객·파트너십은 아직 상업화 이전 단계로 제한적이며, 승인 시 2027년 상업 출시를 목표로 준비 중이다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 5월 7일 발표된 1분기(2026 Q1) 실적에서 순손실 $41.3M(주당순손실 -$0.37)을 기록해 컨센서스(-$0.33)를 하회하는 실적 미스를 냈다. 영업비용은 $43.8M으로 전년 동기 대비 16% 증가했으며, 이 중 R&amp;D 비용이 $27.6M(전년 $22.1M)으로 avexitide 개발비 확대 및 AMX0318 프로그램 마일스톤 지급이 주요 원인이다. 현금 및 단기투자자산은 2026년 3월 31일 기준 $279.8M으로, 2025년 말 $317.0M 대비 감소했으나 회사는 2028년까지의 현금 런웨이를 확보했다고 밝혔다. 매출은 상업화 전 단계로 아직 보고되지 않는다. 다음 실적 발표는 2분기(Q2 2026)로 8월 초 예정되며, 그보다 더 큰 이벤트인 LUCIDITY Phase 3 톱라인 데이터가 2026년 3분기 중 발표될 예정이다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 3월 avexitide의 PBH 대상 피벗 Phase 3 LUCIDITY 임상(78명 등록, 16주 무작위·이중맹검·위약대조)이 등록을 완료했고, 회사는 톱라인 데이터가 2026년 3분기 중 순조롭게 발표될 예정이라고 재확인했다. 이후 6월 24일 H.C. Wainwright가 매수 등급을 재확인했고, 6월 25일에는 Guggenheim이 목표주가를 $40으로 상향하며 Best Idea로 지정했다. 6월 하순 ENDO 2026 학회에서 PBH·congenital HI 관련 avexitide 데이터 포스터 발표가 예고되며 임상 스토리에 대한 관심이 재점화됐다. 7월 2일에는 애널리스트들의 전반적 낙관론(bullish 코멘트)이 재차 부각됐고, 7월 20일 Mizuho가 목표주가를 $21에서 $24로 상향하며 뉴스플로우가 누적됐다. 이런 일련의 애널리스트 상향·학회 발표 예고가 겹치며 3분기 임상 데이터 발표를 앞둔 포지셔닝 수요가 유입됐고, 이날 상대거래량 1.56배를 동반한 피벗(18.42) 돌파로 이어진 것으로 보인다. 즉, 실적 서프라이즈보다는 임박한 바이너리 임상 이벤트에 대한 사전 기대감이 돌파의 직접적 동력이다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">소형 희귀질환·임상단계 바이오텍 섹터는 최근 GLP-1 계열 치료제에 대한 시장 전반의 관심 고조(비만·당뇨 치료제 붐)의 파생 수혜를 받고 있으며, avexitide 역시 GLP-1 수용체 길항제라는 점에서 이 테마에 편입돼 있다. 후기 임상(Phase 3) 데이터 발표를 앞둔 바이오텍은 통상 이벤트 드리븐 트레이딩의 대상이 되어 변동성이 매우 크다는 특징이 있다. Amylyx는 PBH·congenital HI라는 매우 좁은 초희귀 적응증에서 사실상 유일한 후기임상 경쟁자로, 직접적인 피어 경쟁 압박은 낮으나 반대로 시장 규모 자체가 제한적이라는 약점도 있다. 다만 과거 ALS 치료제(Relyvrio) 임상 실패 전력이 있어, 동일 경영진·개발팀에 대한 시장 신뢰도는 여전히 완전히 회복되지 않은 상태다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">피벗 18.42를 돌파하며 상대거래량(RVOL) 1.56배, 피벗 대비 확장 +4.72%로 진입이 이루어졌다. RVOL이 SEPA/VCP 기준에서 통상 요구되는 1.5~2배 이상 구간의 하단에 걸쳐 있어 거래량 동반 강도는 다소 완만한 편이며, 확장폭 역시 5% 이내로 초입 진입에 해당해 추격매수 리스크는 크지 않다. 이전 베이스는 Relyvrio 철수(2024년 4월) 이후 형성된 저점권에서 avexitide 파이프라인 재평가에 따른 완만한 상승 추세 위에 놓여 있는 것으로 판단되며, 상단 매물대는 최근 애널리스트 목표가 분포($17~$40) 하단인 $20~$22 부근에서 저항으로 작용할 가능성이 있다. Q3 임상 데이터 발표 전까지는 뉴스플로우에 따라 베이스가 재차 형성되거나 변동성이 확대될 여지가 크다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">가장 큰 상승 트리거는 2026년 3분기로 예정된 LUCIDITY Phase 3 톱라인 데이터로, Phase 2에서 이미 통계적으로 유의미한 저혈당 이벤트 감소가 확인된 바 있어 긍정적 결과 시 FDA 승인 경로가 가속화되고 2027년 상업 출시로 이어질 수 있다. 애널리스트 목표가는 Guggenheim $40(Best Idea, 6/25), Mizuho $24(7/20 상향) 등으로 분포하며, 컨센서스 평균은 자료원에 따라 $17~$23 수준으로 현재가(19.31) 대비 상당한 업사이드를 반영하고 있다. 데이터 발표를 앞두고 추가적인 애널리스트 커버리지 개시·목표가 상향이 이어질 경우 단기 모멘텀이 지속될 수 있으며, congenital HI 적응증까지 병행 개발되고 있어 승인 시 적응증 확장에 따른 추가 밸류에이션 리레이팅도 기대할 수 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">1) 임상 실패 리스크: LUCIDITY는 78명의 소규모 표본으로 진행되는 피벗 시험이며, primary endpoint(Level 2/3 저혈당 이벤트 복합 감소)를 충족하지 못할 경우 과거 Relyvrio 실패의 재현으로 해석되며 주가가 급락(수십% 하락)할 수 있다. 2) 실적 미스 지속 리스크: 이미 Q1 2026에서 EPS 컨센서스를 하회했으며, R&amp;D·상업화 준비 비용 확대로 분기 손실이 계속 늘어날 경우 시장의 자금소진 우려가 부각될 수 있다. 3) 자금조달 희석 리스크: 현금 런웨이가 2028년까지로 제시됐으나 상업화 준비 비용이 계속 증가할 경우 데이터 발표 전후로 추가 유상증자가 이루어져 기존 주주 지분이 희석될 가능성이 있다. 4) 밸류에이션 전부가 단일 파이프라인에 의존: 매출이 전무한 상태에서 시가총액 대부분이 avexitide의 성공 여부에 달려 있어, 규제당국(FDA)의 승인 지연이나 추가 임상 요구가 나올 경우 주가 하방 압력이 크다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 3분기(구체적 일자 미확정) LUCIDITY Phase 3 avexitide(PBH) 톱라인 데이터 발표 — 가장 중요한 바이너리 이벤트. ② 2026년 8월 초(예상) 2분기(Q2 2026) 실적 발표 — 현금 소진 속도 및 가이던스 재확인 필요. ③ ENDO 2026 학회 포스터 발표(PBH·congenital HI 데이터) 세부 내용 확인. ④ congenital HI 적응증 관련 임상·규제 진행 상황 추가 공시 여부 모니터링.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 애널리스트 목표가 상향과 임박한 Phase 3 톱라인 데이터라는 명확한 촉매가 있어 돌파 자체의 논리는 합리적이지만, RVOL 1.56배로 거래량 동반 강도가 보통 수준이고 매출 전무·과거 임상 실패 전력을 가진 바이너리 이벤트 종목이라는 점에서 confidence 7점에 부합하는 중립적 보유가 적절하다. Q3 데이터 발표 전까지 포지션 크기를 관리하며 리스크를 통제할 필요가 있다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
