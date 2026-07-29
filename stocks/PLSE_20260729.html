@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>PLSE — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>PLSE <span class="dim" style="font-size:1rem">펄스 바이오사이언시스</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span></div>
+
+<div class="card">
+평균 매수가 <b>$34.31</b>
+
+· 수익률 <span class="neg">-0.18%</span>
+· 보유 87주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260728 기준)</span></div>
+<div class="dim">2026-07-29 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 86주 @ $34.32
+<div class="dim">2026-07-29 23:48 </div>
+</div><div class="tl-item buy">
+<b>매수</b> · 1주 @ $33.53
+<div class="dim">2026-07-29 23:51 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">AF(심방세동) 치료 시장에서 나노초 펄스전기장(nsPFA) 기술로 기존 PFA 대비 우수한 임상 데이터를 제시하며 FDA 피벗 임상을 진행 중인 매출 전무 단계의 소형 의료기기 개발사</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">Pulse Biosciences는 CellFX 시스템 기반의 나노초 펄스 전기장(nanosecond Pulsed Field Ablation, nsPFA) 기술을 개발하는 임상 단계 의료기기 회사로, 세포를 비열적(non-thermal)으로 소거하면서 주변 비세포 조직은 보존하는 것이 핵심 차별점이다. 현재 주력 파이프라인은 심방세동(AF) 치료를 위한 심장 카테터 및 심장 수술용 시스템이며, 피부과·이비인후과 등 일부 비심장 적응증도 병행 개발 중이다. 2026년 1분기 기준 매출은 약 40만 달러 수준으로, 상업화 이전 단계이며 사실상 임상·연구 매출에 의존하는 프리레베뉴 기업이다. 경쟁 구도상 Boston Scientific(Farapulse, PFA 지출점유율 약 41%)과 Medtronic(PulseSelect, 약 48%), Johnson &amp; Johnson(약 11%), Abbott(Volt, 약 1%) 등 대형 의료기기 업체들이 이미 상업화 제품으로 시장을 장악하고 있어, Pulse Biosciences는 후발주자로서 기술적 차별화(더 높은 AF 재발 방지율)에 승부를 걸고 있다. 주요 고객/파트너는 아직 임상시험 참여 의료기관 및 전기생리학(EP) 연구자 그룹 수준이며, 상업적 유통망은 구축되지 않은 상태다. FDA 510(k) 승인을 받은 CellFX nsPFA 경피 전극(percutaneous electrode)과 별개로, 진짜 성장동력은 대규모 AF 시장(2026년 약 20억 달러에서 2031년 약 64억 달러로 연평균 26% 성장 전망)을 겨냥한 심장 카테터 피벗 임상 결과에 달려 있다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 1분기(Q1) 실적은 매출 약 40만 달러로 컨센서스를 하회했으나, 주당손실(EPS) -0.27달러로 예상치 -0.30달러 대비 서프라이즈를 기록했다. GAAP 순손실은 1,860만 달러로 전년 동기 1,680만 달러 대비 확대되었고, Non-GAAP 순손실도 1,640만 달러로 전년 1,140만 달러 대비 크게 늘어 임상시험·제품개발·시장개발 투자 확대가 비용 증가의 주 요인으로 지목되었다. GAAP 기준 총비용은 1,960만 달러(전년 1,800만 달러), Non-GAAP 기준은 1,740만 달러(전년 1,270만 달러)로 분기 소진 현금(cash burn)이 뚜렷하게 가속화되고 있다. 1분기 말 현금 보유액은 6,830만 달러였으며, 분기 이후 추가로 ATM(시장가 매도)을 통해 1,290만 달러를 조달해 유동성을 보강했다. 회사는 2026년 주요 마일스톤(NANOPULSE-AF 피벗 임상 등록 완료 등, 2026년 4분기 초 목표) 달성까지 현재 현금으로 충분하다고 밝혔으며, 다음 실적 발표는 2026년 8월 6일 장마감 후 예정되어 있다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 초부터 AF Symposium에서 발표된 nsPFA 360도 심장 카테터 시스템의 첫 인체 적용 실현가능성(feasibility) 연구 데이터가 긍정적으로 평가되며 주가 재평가가 시작되었다. 이어 4월 말~5월 초 FDA가 nsPFA 심장 수술 시스템(cardiac surgery system) 및 nPulse 카테터 절제 시스템에 대해 각각 IDE(임상시험용 기기 예외) 승인을 내주며 임상 진행에 청신호가 켜졌다. 5월 4일 발표된 1분기 실적에서는 EPS 서프라이즈에도 불구, 매출 부진과 손실 확대로 주가가 단기 하락했으나 이후 NANOPULSE-AF 피벗 임상 등록 개시 소식이 반등의 계기가 되었다. 이후 7월 들어 Oppenheimer가 nsPFA의 1년 AF 무재발률이 90%로 타 PFA 플랫폼(약 75%)을 크게 상회한다는 EFS(초기 실현가능성 연구) 데이터를 근거로 목표주가를 30달러에서 35달러로 상향하며 재료가 부각됐다. 이 흐름 속에 주가는 최근 한 달간 약 30% 급등했고, 매수 시점인 7월 28~29일에는 52주 신고가(장중 34달러 부근)를 경신하며 33.49달러 피벗을 돌파했다. 다만 이날 상대거래량은 1.5배 수준으로 대형 모멘텀 종목치고는 다소 완만한 거래대금 유입이었으며, 피벗 대비 확장폭도 +2.66%로 과열이라기보다는 초기 돌파 단계에 해당한다. 7월 15일에는 신규 직원 대상 인센티브 스톡옵션(9,000주) 부여 공시가 있었는데, 이는 통상적 인사 관련 조치로 주가 재료로서의 비중은 낮다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">펄스장 절제(PFA) 시장은 2026년 약 20억 달러에서 2031년 약 64억 달러로 연평균 26% 이상 성장할 것으로 전망되는 심혈관 의료기기 내 최고 성장 섹터 중 하나이며, AF 절제 시장 전체도 2026년 50억~80억 달러에서 2028년 110억 달러 규모로 확대될 전망이다. 그러나 이 시장은 이미 Boston Scientific(Farapulse, 점유율 약 41%), Medtronic(PulseSelect, 약 48%로 급성장), Johnson &amp; Johnson(약 11%), Abbott(Volt, 약 1%) 등 4대 글로벌 기업이 상업화 제품으로 선점한 상태다. Pulse Biosciences는 아직 상업 매출이 사실상 없는 임상 단계 소형주로, 나노초 펄스라는 기술적 차별화(더 높은 AF 무재발률)를 앞세워 후발주자로 진입을 모색 중이며, 규모의 경제나 유통망 측면에서는 경쟁사 대비 명백한 열위에 있다. 섹터 전반의 강한 성장 모멘텀과 임상적 차별화 스토리는 긍정적이나, 상업화까지 남은 규제·임상 허들과 자본조달 부담이 대형 경쟁사 대비 리스크 프리미엄을 정당화한다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">베이스는 지난 3개월간 강한 상승 추세(월간 +29.78%, 3년 +315.1%) 속 형성된 단기 조정 후 재상승형 베이스로 판단되며, 33.49달러 피벗을 돌파하며 52주 신고가 영역에 진입했다. 다만 돌파 시점 RVOL이 1.5배에 불과해 거래량 측면에서의 확증(volume confirmation)이 강하지 않았고, 확장폭도 +2.66%로 과열 없이 초입 진입이 가능했던 점은 긍정적이다. 위쪽으로는 뚜렷한 저항 매물대가 크지 않아(사상 신고가 부근) 추가 상승 여력이 있으나, 직전 피벗(33.49달러)이 1차 지지선, 그 아래 최근 상승 갭·베이스 저점이 2차 지지선 역할을 할 것으로 보인다. 거래량이 받쳐주지 못한 돌파는 통상 추세 지속력이 약할 수 있어, 향후 며칠 내 거래량 동반 여부를 확인할 필요가 있다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">핵심 트리거는 NANOPULSE-AF 피벗 임상의 등록 완료(2026년 4분기 초 목표) 및 이후 발표될 피벗 데이터로, EFS 단계에서 확인된 90% 1년 AF 무재발률이 피벗에서도 재현될 경우 대형 경쟁사 대비 임상적 우위를 입증하며 재평가(re-rating)가 가능하다. 단기적으로는 8월 6일 2분기 실적에서 현금 소진 속도 둔화나 임상 진행 가속 신호가 확인되면 추가 상승 동력이 될 수 있다. 애널리스트 목표가는 Canaccord Genuity 32달러(Buy), Oppenheimer 35달러(Outperform, 최근 30→35달러 상향)로 형성되어 있으며 컨센서스 평균은 32.33달러(Moderate Buy)로, 현재가(34.32달러)는 이미 평균 목표가를 상회한 상태다. AF 치료 시장 자체가 연 26% 이상 성장 중이라는 섹터 순풍도 밸류에이션 프리미엄을 일부 정당화하는 요인이다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">1) 임상/규제 리스크 - NANOPULSE-AF 피벗 임상은 EFS 대비 허용 병변 세트(lesion set)가 달라 EFS의 90% 무재발률이 그대로 재현되지 않을 가능성이 있으며(Oppenheimer가 직접 지적한 리스크), 등록 지연이나 실망스러운 중간 데이터 발표 시 급락 가능. 2) 현금소진/희석 리스크 - 분기 순손실이 전년 대비 확대(GAAP -1,860만 달러)되는 가운데 상업화 매출이 사실상 없어, 6,830만 달러(+1,290만 달러 ATM 조달) 현금으로 버틸 기간이 제한적이며 추가 유상증자·ATM 매도 시 주주가치 희석 우려. 3) 밸류에이션 리스크 - 현재가(34.32달러)가 이미 컨센서스 평균 목표가(32.33달러)를 상회했고 Weiss Ratings는 &#x27;sell(d-)&#x27;로 정반대 의견을 제시, 시장 기대가 과도하게 선반영된 경우 실적/임상 이벤트 전후 변동성 확대 가능. 4) 경쟁 리스크 - Boston Scientific·Medtronic·J&amp;J·Abbott 등 상업화된 대형 경쟁사가 이미 병원 유통망과 브랜드를 선점한 상태에서, Pulse Biosciences가 실제 상업화 단계에 진입해도 채택 속도가 예상보다 더딜 수 있음.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 8월 6일 장마감 후 2분기 실적 발표(현금 소진 속도, NANOPULSE-AF 등록 진행률 공개 예정) ② NANOPULSE-AF 피벗 임상 등록 완료 목표 시점(2026년 4분기 초) 준수 여부 ③ 향후 학회(HRS, AF Symposium 등)에서의 중간/추가 임상 데이터 발표 일정 ④ 추가 ATM 매도 또는 유상증자 등 자본조달 공시 여부 ⑤ CellFX nsPFA 경피 전극 관련 FDA 510(k) 심사 진행 상황.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — nsPFA 기술의 임상적 차별화(90% 1년 AF 무재발률)와 섹터 고성장이라는 긍정 요인은 분명하나, 진입 시점 RVOL이 1.5배로 거래량 확증이 약하고 현재가가 이미 애널리스트 평균 목표가(32.33달러)를 상회한 상태에서 8월 6일 실적 발표를 코앞에 두고 있어 단기 변동성 리스크가 크다. 상업 매출이 사실상 전무한 프리레베뉴 소형주 특성상 임상 결과(2026년 4분기 등록 완료 전후) 이전까지는 리포트의 conviction 7점을 그대로 따르기보다 포지션 관리와 손절 기준을 명확히 하는 것이 바람직하다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
