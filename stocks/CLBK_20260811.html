@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>CLBK — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; }
+.tr.hide { display:none; }
+.l1 { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>CLBK <span class="dim" style="font-size:1rem">컬럼비아 파이낸셜</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span></div>
+
+<div class="card">
+평균 매수가 <b>$11.03</b>
+
+· 수익률 <span class="pos">+0.54%</span>
+· 보유 271주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 4점 (20260811 기준)</span></div>
+<div class="dim">2026-08-11 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 270주 @ $11.03
+<div class="dim">2026-08-11 22:46 </div>
+</div><div class="tl-item buy">
+<b>매수</b> · 1주 @ $11.03
+<div class="dim">2026-08-11 22:48 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">뉴저지 기반 저축은행지주사 컬럼비아 파이낸셜이 2026년 7월 2단계 완전 전환(Second-Step Conversion)과 노스필드 뱅콥 인수를 동시에 마무리하며 자산 180억 달러 규모의 &#x27;신생 상장&#x27; 지역은행으로 재탄생한 종목.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">컬럼비아 파이낸셜은 뉴저지·뉴욕 메트로 지역을 기반으로 하는 저축은행지주사로, 자회사 컬럼비아뱅크를 통해 소매·상업은행업, 주택담보대출, 자산관리(웰스매니지먼트) 서비스를 제공한다. 2026년 7월 20일 상호저축은행지주(MHC) 구조에서 완전 주식회사 형태로 전환하는 &#x27;2단계 전환&#x27;을 완료하며 총 1.7억 달러(공모 규모)를 조달했고, 동시에 스태튼아일랜드/뉴저지 기반 노스필드 뱅콥(NFBK, 약 5.97억 달러 규모)을 인수 완료했다. 이 딜로 프로포마 기준 총자산 180억 달러, 예금 125억 달러, 대출 119억 달러 규모로 확대되며 뉴욕 메트로 권역 내 존재감이 크게 강화됐다. 수익 구조는 순이자수익(대출·예금 스프레드)이 핵심이며, 상업용부동산·주거용 모기지·소비자대출이 주력 자산군이다. 경쟁 지위는 대형 은행 대비 지역밀착형 관계금융에 강점이 있으나, 규모 면에서는 여전히 소형 지역은행에 속한다. 전환 공모로 자본비율이 업계 평균을 크게 웃도는 &#x27;과잉자본&#x27; 은행이 된 점이 구조적 특징이다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기(6월 30일 마감, 노스필드 합병 반영 전 스탠드얼론 기준) 순이익은 1,450만 달러(주당 0.14달러)로 전년동기 1,230만 달러(주당 0.12달러) 대비 성장했고, 핵심순이익(core)은 1,510만 달러(주당 0.15달러)를 기록했다. 순이자수익은 6,290만 달러로 전년 대비 920만 달러 증가했으며, 순이자마진(NIM)은 2.44%로 전년동기 대비 25bp 확대됐다(대출 잔액·수익률 상승 및 조달비용 하락 효과). 상반기 누적 순이익은 2,760만 달러(주당 0.27달러)로 전년 2,120만 달러(주당 0.21달러) 대비 개선됐다. 이사회는 8월 26일 지급 예정인 분기 배당금 0.05달러를 신규 선언했는데, 이는 전환·상장 이후 첫 배당이다. 다만 이 실적은 노스필드 인수 효과가 완전히 반영되지 않은 수치이며, 다음 실적 발표(3분기, 2026년 10월 하순 예상)에서 노스필드 편입 후 첫 통합 실적이 공개될 예정이라 이익 구조의 실질적 검증은 그때 이뤄진다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">타임라인상 2026년 6월 25일 주주총회에서 전환·합병안이 승인됐고, 7월 6일 주간 공모(주당 10.00달러)가 개시됐으며, 7월 20일 전환·노스필드 합병이 동시 완료, 7월 21일부터 신주가 나스닥에서 거래를 시작했다. 상장 초기(7월 24일 종가 10.88달러) 주가는 IPO가 10달러 부근에서 약 3주간 좁은 박스권 베이스를 형성했다. 7월 29~31일 2분기 실적 발표와 함께 전환 후 첫 분기배당(0.05달러, 8/26 지급)이 선언되며 &#x27;배당 개시 은행&#x27;이라는 새로운 내러티브가 형성됐다. 이후 8월 11일 피벗 10.90달러를 돌파하며 종가 11.03달러(+1.28% 확장)로 마감, 평소 대비 3.05배의 거래량이 동반됐다. 이는 신규 상장 후 첫 실적·배당 발표로 형성된 관심과, 노스필드 통합 기대감, 과잉자본 은행에 대한 저평가 매수세가 맞물린 결과로 해석된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">2026년 지역은행 섹터는 국채 수익률 곡선 재가팔화(2년-10년 스프레드 +0.52%)가 순이자마진에 우호적으로 작용하는 반면, 연준 금리인하 기대가 12월로 밀리며 단기 마진 압박 우려도 공존하는 혼재 국면이다. 업계 전반적으로 대출·예금 성장(동종 피어 평균 두 자릿수 성장)과 자산건전성 개선이 확인되고 있어 실적 모멘텀 자체는 긍정적이다. 컬럼비아 파이낸셜은 이번 전환 공모로 자본비율이 피어 대비 월등히 높은 &#x27;과잉자본 은행&#x27;이 됐다는 점에서 차별화되며, 이는 향후 자사주매입·특별배당·추가 M&amp;A(인수자)로서의 잠재력을 시사한다. 다만 아직 통합 초기 단계라 노스필드 편입에 따른 비용 시너지·자산건전성이 실제 숫자로 증명되지 않은 상태다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">차트 구조 자체는 전형적인 &#x27;신규 전환/IPO 베이스&#x27;로, 7월 21일 상장 이후 약 3주간 10~11달러 박스권에서 다지기를 거쳤다. 8월 11일 피벗 10.90달러를 돌파하며 종가 11.03달러(+1.28% 확장)로 마감했고, RVOL 3.05배는 기관 수급 유입을 시사하는 유의미한 거래량 확인 신호다. 피벗 대비 확장폭이 1.3% 수준으로 낮아 진입 리스크(추격매수 부담)는 제한적이나, 상장 3주 미만이라 이동평균선 추세템플릿(50일선 200일선 위 정배열 등)이 형성될 만한 가격 히스토리가 전무하다는 점이 미너비니 SEPA 기준에서는 명백한 약점이다. 하방 지지는 IPO 공모가 10.00달러 및 최근 박스권 저점 부근으로 추정되나 검증된 지지선이라 보기는 이르다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">과잉자본 해소 스토리가 현실화될 경우 — 3년 규제 제한 만료 후 자사주매입/특별배당 발표, 노스필드 통합 비용 시너지 조기 실현, 3분기(10월 예정) 실적에서 합병 후 첫 EPS 개선 확인 등이 트리거가 될 수 있다. 현재 애널리스트(2곳, Piper Sandler·Brean Capital 등) 평균 목표주가는 약 18~19달러 수준이나, 이는 전환 전 구조·주식수 기준 수치로 신규 자본구조를 완전히 반영하지 못했을 가능성이 높아 향후 상향 재산정 여지가 있다. 상승 경로는 실적 발표(10월)→통합 시너지 가시화→자본배치 계획 발표 순으로 전개될 가능성이 있으며, 소형 뉴저지/뉴욕 커뮤니티은행 M&amp;A 씬에서 잠재 인수 후보(피인수 대상)로 부각될 여지도 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 금리 경로 리스크 — 연준의 금리인하가 12월로 지연되거나 추가 연기될 경우 조달비용 부담이 지속되며 NIM 개선 속도가 둔화, 이익 모멘텀 훼손 가능. ② 통합 리스크 — 58억 달러 규모의 노스필드 자산 편입 과정에서 예상보다 큰 비용 초과나 인수 자산의 신용 부실이 드러나면 3분기 실적 쇼크로 주가 급락 가능. ③ 신규 상장 변동성 리스크 — 거래 이력이 3주 남짓으로 짧아 유동성이 얕고, 락업 해제나 초기 배정 주주(예금자/직원주식소유제도)의 매도 압력이 갑작스러운 하방 변동을 유발할 수 있음. ④ 규제상 자본배치 제한 — 완전 전환 은행은 통상 3년간 자사주매입 등 자본환원에 제약이 있어, 강세 시나리오의 핵심 트리거(자사주매입)가 단기간 내 실현되지 않을 위험. ⑤ 밸류에이션/애널리스트 시각 — 현재 커버 애널리스트 컨센서스가 &#x27;중립(Hold)&#x27;에 머물러 있어 기관 매수 유입 강도가 제한적일 수 있음.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 8월 26일: 전환 후 첫 분기배당 지급일 — 배당 지속성/증액 시그널 확인. ② 2026년 10월 하순(잠정): 3분기 실적 발표 — 노스필드 인수 후 첫 통합 실적, NIM·비용시너지·자산건전성 지표 핵심 체크포인트. ③ 2026년 9월 16~17일, 10월 28~29일, 12월 9~10일: FOMC 회의 — 금리 경로 변화가 은행 섹터 전반 마진에 영향. ④ 피어 지역은행(예: 노스필드 편입 완료 은행들) 실적 발표 시즌 — 업종 NIM/대출성장 트렌드 교차 확인. ⑤ 애널리스트 커버리지 갱신 여부 — 신규 자본구조 반영한 목표주가 재산정 발표 시 주가 반응 모니터링.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — RVOL 3.05배에 피벗 대비 확장 1.28%로 진입 자체의 기술적 질은 양호하고, 과잉자본·배당개시·M&amp;A 통합이라는 스토리는 매력적이나, 상장 3주 남짓의 &#x27;신생 베이스&#x27;로 추세템플릿 검증이 전혀 안 됐다는 점과 애널리스트 컨센서스가 중립(Hold)에 머물러 있다는 점이 감점 요인이다. 리포트 AI의 사전 conviction 4점(관망) 판단과 궤를 같이하며, 3분기 실적(10월)에서 통합 성과가 확인되기 전까지는 보수적 포지션 관리가 적절하다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

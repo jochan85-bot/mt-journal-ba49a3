@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ABNB — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; }
+.tr.hide { display:none; }
+.l1 { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>ABNB <span class="dim" style="font-size:1rem">에어비앤비</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span></div>
+
+<div class="card">
+평균 매수가 <b>$180.18</b>
+
+· 수익률 <span class="pos">+2.87%</span>
+· 보유 16주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260811 기준)</span></div>
+<div class="dim">2026-08-11 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 16주 @ $180.18
+<div class="dim">2026-08-11 22:46 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">실적 서프라이즈와 가이던스 상향을 등에 업고 4년 최고가를 경신 중인 글로벌 숙박 공유 플랫폼 1위 기업</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">에어비앤비는 전 세계 개인 호스트와 여행객을 연결하는 온라인 숙박 공유 마켓플레이스로, 8백만 개 이상의 활성 리스팅을 보유하고 있다. 매출은 예약이 성사될 때 호스트 수수료(약 3%)와 게스트 서비스 수수료(약 14~16%)를 부과하는 방식으로 발생하며, 숙박(Homes)이 매출의 대부분을 차지하고 익스피리언스(Experiences)와 신규 사업인 호텔(Airbnb Hotels) 예약이 빠르게 성장 중이다. 경쟁사는 부킹홀딩스(Booking.com), 익스피디아(Vrbo 포함), 트립어드바이저 등이며, 에어비앤비는 대체숙박 카테고리에서 압도적 1위 지위를 유지하고 있다. 최근에는 젠지(Gen Z) 신규 이용자 확보와 호텔 카테고리 확장을 통해 전통 OTA와의 경쟁 구도를 넓히고 있다. 파트너십 측면에서는 각국 정부·지자체와의 규제 협상, 결제 및 AI 개인화 기술 파트너들이 주요 이해관계자다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 8월 7일 발표된 2분기(Q2) 실적에서 매출 36.1억 달러(전년比 +17%, 컨센서스 35.8억 달러 상회), 총예약가치(GBV) 272억 달러(+16% YoY), EPS 1.37달러로 시장 예상을 모두 상회했다. 숙박·익스피리언스 예약 건수는 전년比 +10%로 1분기 대비 가속화됐고, 첫 예약 이용자(first-time booker) 증가율은 +11%로 최근 4년 내 최고치를 기록했으며 젠지 코호트가 견인했다. 회사는 2026년 연간 가이던스를 두 차례 연속 상향해 매출 성장률을 &#x27;최소 중반대(mid-teens)&#x27;로, 조정 EBITDA 마진을 &#x27;35.5% 이상&#x27;으로 제시했다. 3분기 가이던스는 매출 46.9억~47.7억 달러(+15~17% YoY)이며, 다음 실적 발표일은 2026년 11월 5일(Q3)이다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">8월 7일 실적 발표 직후 주가는 시간외 거래에서 최대 11~18% 급등하며 단숨에 4년 만의 최고 수준으로 도약했는데, 이는 FIFA 월드컵 특수로 인한 예약 수요 급증과 호텔 사업부(전체 숙박 사업 대비 약 3배 빠른 성장)의 매출 기여 확대, 그리고 두 번째 연속 가이던스 상향이 복합적으로 작용한 결과다. 실적 발표 후 다수 대형 증권사(웨드부시, 에버코어ISI, 뱅크오브아메리카, RBC)가 일제히 목표주가를 상향하며 투심을 뒷받침했다. 이후 주가는 급등분을 소화하는 좁은 박스권(핸들) 조정을 거쳤고, 8월 11일 22:46(한국시간) 기준 피벗 178.48달러를 평균거래량 대비 2.04배의 RVOL을 동반하며 돌파, 180.18달러에 진입이 체결됐다. 피벗 대비 확장폭이 +0.85%에 불과해 실적 급등 이후에도 추가 매물 소화 없이 낮은 리스크로 재상승 흐름에 올라탄 형태다. 이는 기관 자금이 실적 서프라이즈 이후에도 지속적으로 유입되고 있음을 시사하는 전형적인 &#x27;갭업 후 눌림목 재돌파(gap-and-flag)&#x27; 패턴이다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">2026년 온라인여행/숙박 섹터는 AI 기반 개인화 검색·추천 기술 확산과 비즈니스 여행 회복(여행관리회사 95%가 낙관적 전망 제시)에 힘입어 견조한 흐름을 이어가고 있다. 부킹홀딩스가 여전히 글로벌 최대 OTA 지위를 지키고 있고 익스피디아는 2026년 매출 성장률 가이던스가 6~9%에 그치는 반면, 에어비앤비는 &#x27;중반대(mid-teens)&#x27; 성장 가이던스로 피어 대비 우위를 보이고 있다. 다만 미국·유럽을 중심으로 한 단기임대 규제 강화(등록제, 리스팅 삭제 명령 등)가 업종 전반의 공급 리스크 요인으로 부각되고 있어, 규제 대응력이 상대적 경쟁력을 가르는 변수로 떠오르고 있다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">실적 발표(8/7) 이후 하루 만에 약 18% 급등하며 4년래 최고가 영역에 진입했고, 이후 단기 과열을 소화하는 좁은 박스권(핸들 형태)에서 며칠간 다진 뒤 피벗 178.48달러를 상향 돌파했다. 돌파 시점 RVOL이 2.04배로 평균 대비 두 배 이상의 거래 활동을 동반해 수급의 질이 양호하며, 피벗 대비 확장폭이 +0.85%로 매우 낮아 추격매수 리스크가 제한적인 저위험 진입 지점으로 평가된다. 다만 실적 급등분 자체가 크기 때문에 단기적으로는 피벗(178.48) 및 실적 발표 전 저항대가 1차 지지선 역할을 하며, 상단으로는 뚜렷한 과거 매물대가 없는 4년 신고가 영역이라 추세 지속 시 저항 없는 상승이 가능하나 반대로 되돌림 시 지지 테스트가 빠르게 나타날 수 있다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">① 3분기(4.69~4.77억달러 가이던스) 및 4분기 실적에서 호텔 사업부·젠지 신규 이용자 유입이 계속 서프라이즈를 만들어낼 경우, ② 연간 EBITDA 마진 35.5% 이상 달성이 확인되며 밸류에이션 재평가(re-rating)가 이어질 경우 추가 상승 여력이 크다. 현재 애널리스트 목표주가는 웨드부시 200달러(Outperform 상향), 에버코어ISI 190달러, RBC 195달러, 뱅크오브아메리카 175달러 등으로 진입가(180.18달러) 대비 대체로 상단 여력이 형성돼 있다. 11월 5일 3분기 실적에서 재차 가이던스 상향이 나올 경우 모멘텀 지속이 유력한 트리거가 될 수 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 규제 리스크: 미국 뉴욕·휴스턴, 유럽 바르셀로나·프랑스 등에서 단기임대 등록제·리스팅 삭제 명령이 확산되고 있고 2026년 5월 20일부로 EU 전역 데이터공유 규정(EU Short-Term Rental Data Regulation)이 시행돼 향후 추가 지역 규제가 리스팅 공급과 GBV 성장을 제약할 수 있다. ② 단기 과열 리스크: 실적 발표 하루 만에 18% 급등한 뒤 재돌파한 구조라 상승분 되돌림(밸류에이션 조정) 압력이 상존하며, 시장 전반 조정 시 성장주 특성상 베타가 커 낙폭이 확대될 수 있다. ③ 거시 소비 둔화 리스크: 소비자 심리 위축이나 경기 둔화가 현실화되면 재량소비 항목인 여행 예약이 가장 먼저 축소되며 GBV·나이트 예약건수 성장률이 꺾일 수 있다. ④ 경쟁 심화: 부킹홀딩스·익스피디아(Vrbo)와의 대체숙박 경쟁, 신규 진출한 호텔 카테고리에서의 실행 리스크가 마진 압박이나 성장 둔화로 이어질 가능성이 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 11월 5일 3분기 실적 발표 — 가이던스 상향 지속 여부 및 호텔 사업부 성장률 확인, ② EU 회원국별 단기임대 추가 규제 발표(2026년 5월 EU 데이터공유 규정 시행 이후 후속 조치) 모니터링, ③ 미국 내 뉴욕·휴스턴 외 추가 도시의 등록제/리스팅 삭제 명령 확산 여부, ④ 부킹홀딩스·익스피디아 등 피어사 실적 발표를 통한 업계 전반 여행 수요 read-through, ⑤ 거시 소비자 지출 지표(소매판매, 소비자심리지수) 발표 시 재량소비 섹터 반응 확인.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 실적 서프라이즈, 두 차례 연속 가이던스 상향, 다수 증권사 목표가 상향이라는 강한 펀더멘털 모멘텀과 낮은 피벗 확장폭·양호한 RVOL이라는 우수한 기술적 진입 조건이 결합돼 있으나, 이미 실적 발표 후 하루 만에 18% 급등한 뒤의 재돌파라는 점에서 단기 과열 및 규제 리스크가 병존한다. AI 사전판단 conviction 7점과 부합하는 중간~긍정 수준의 확신도로 판단된다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
