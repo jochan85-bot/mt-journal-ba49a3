@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>078930 — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; }
+.tr.hide { display:none; }
+.l1 { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>078930 <span class="dim" style="font-size:1rem">GS</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge kr">KR</span></div>
+
+<div class="card">
+평균 매수가 <b>102,682원</b>
+
+· 수익률 <span class="neg">-1.64%</span>
+· 보유 34주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260811 기준)</span></div>
+<div class="dim">2026-08-12 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 33주 @ 102,651원
+<div class="dim">2026-08-12 09:10 </div>
+</div><div class="tl-item buy">
+<b>매수</b> · 1주 @ 103,700원
+<div class="dim">2026-08-12 09:13 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">GS칼텍스 등 에너지·유통·건설을 아우르는 GS그룹 지주사로, 2026년 2분기 정유 마진 서프라이즈를 발판으로 신고가 돌파를 시도 중인 종목</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">GS는 GS칼텍스(정유·윤활유), GS리테일(편의점 유통), GS건설(건설), GS EPS·GS파워(발전) 등을 지배하는 순수지주회사로, 자회사 배당수익과 브랜드 수수료가 주 수익원이다. 연결 실적의 핵심은 지분 50%를 보유한 GS칼텍스로, 정제마진·수출단가에 따라 그룹 전체 실적 변동성이 좌우된다. 윤활유 부문은 글로벌 공급 차질 속에서 최근 역대 최고 실적을 기록할 만큼 경쟁력 있는 사업부이며, 원유 조달·정제·석유화학·윤활유까지 수직계열화된 밸류체인이 강점이다. 유통(GS리테일)과 건설(GS건설)이 안정적 현금흐름과 실적 다각화를 보완하는 구조다. 주요 고객은 국내외 정유·화학 트레이딩사, 산업체, 소비재 유통 채널이며, 아시아·미주 수출 비중이 높은 편이다. 2026~2028년 시가배당률 6.4~8.2% 전망이 나올 만큼 그룹 배당정책도 투자 매력 요인으로 부각되고 있다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">GS는 2026년 8월 11일 2분기 실적을 발표했으며, 매출액 7조4131억원(전년동기 대비 +24.93%), 영업이익 1조7174억원(전년동기 대비 +253.37%, 전분기 대비 +36.45%), 당기순이익 1조1320억원(전년동기 대비 +1180.54%)을 기록했다. 상반기 누적으로는 매출 14조2555억원, 영업이익 2조9760억원, 순이익 1조9587억원이다. 호실적의 핵심 동인은 국제유가·석유제품 수출가 상승에 따른 정제마진 확대와 일시적 재고평가이익이며, 윤활유 부문은 글로벌 공급 차질 수혜로 역대 최고 실적을 기록했다. 실적 발표 시점(8월 11일)과 매수 시점(8월 12일 09시10분)이 하루 차이로, 시장이 어닝 서프라이즈를 즉각 반영하며 거래량이 폭증한 것으로 판단된다. KB증권은 2026년 실적이 과거 10년 평균 영업이익의 3.2배 수준에 달할 것으로 전망하며 역대 최고 실적 국면을 예상했다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">5월경 이란 관련 지정학 리스크로 정제마진 확대 기대가 형성되며 1분기 영업이익 개선(+14% 전망)이 선반영됐다. 이후 7월 신한 등 증권가에서 &#x27;공급 차질 이후에도 하방보다 상방&#x27; 전망을 제시하며 정유·화학 업황 개선 기대가 누적됐다. 결정적으로 8월 11일 발표된 2분기 실적에서 영업이익이 전년 대비 253%, 전분기 대비 36% 급증하며 시장 컨센서스를 크게 상회하는 서프라이즈가 확인됐다. 이에 따라 8월 12일 장 초반 진입 시점 기준 RVOL 5.82배라는 폭발적 거래량 증가가 동반되며 피벗 101,700원을 강하게 돌파, 매수 시점 확장폭은 +0.98%로 과열 없이 비교적 안정적인 초입 진입 구간이었다. 어닝 서프라이즈 이후 익일 거래량 급증 및 신고가 돌파는 전형적인 기관 수급 유입 및 실적 모멘텀 랠리의 초기 신호로 해석된다. 여기에 6.4~8.2% 시가배당률 전망 등 밸류/배당 매력까지 재조명되며 매수세가 집중된 것으로 보인다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">정유업은 2026년 하반기 국제유가(WTI)가 80~90달러 구간에서 안정화되는 가운데, 중동·아시아 정제설비 가동 차질(각각 340만b/d, 250만b/d 규모)로 인해 정제마진이 견조하게 유지되는 국면에 있다. 유가 급등 국면은 다소 완화됐으나 낮은 재고와 설비 차질이 마진을 지지하는 구조적 요인으로 작용 중이며, 이는 정유사 실적에 우호적이다. GS는 GS칼텍스를 통해 이 업황 개선의 직접 수혜를 받고 있으며, 특히 윤활유 부문에서 경쟁사 대비 공급 차질 수혜를 극대화하며 역대 최고 실적을 낸 점이 피어 대비 차별화 포인트다. 지주사 구조상 정유 외 유통·건설 부문이 실적 변동성을 일부 상쇄하는 방어적 성격도 갖는다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">매수 시점 기준 피벗 101,700원을 +0.98% 확장 수준(102,651원)에서 돌파했으며, RVOL 5.82배는 어닝 서프라이즈 다음 날 나온 이례적으로 강한 거래량으로 기관 수급 유입 가능성을 시사한다. 확장폭이 1% 미만으로 피벗 근접 진입이라 추격매수 리스크는 제한적이며, VCP/베이스 이론상 이상적인 저확장 돌파 진입 구간에 해당한다. 다만 애널리스트 평균 목표주가(약 72,957원, 최고 90,000원)가 현재가를 이미 하회하고 있어 과거 컨센서스 기준으로는 밸류에이션 부담 구간에 진입했다는 점을 유의해야 하며, 위 매물대는 뚜렷한 과거 저항선이 없는 신고가 영역으로 판단된다. 하방 지지선은 직전 피벗인 101,700원 부근이 1차 방어선이 될 것으로 보인다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">정제마진 강세와 윤활유 부문 초과 실적이 3분기까지 이어질 경우, KB증권이 제시한 &#x27;2026년 역대 최고 실적(과거 10년 평균 영업이익의 3.2배)&#x27; 시나리오가 현실화되며 추가 리레이팅이 가능하다. KB증권 목표주가 115,000원은 현재가 대비 약 12% 추가 상승여력을 시사하며, 실적 서프라이즈가 반복될 경우 목표가 상향 조정 랠리가 이어질 수 있다. 6.4~8.2%로 전망되는 시가배당률은 주가 조정 시 저가 매수세 유입의 하방 지지 요인으로 작용할 수 있다. 정유업 사이클이 예상보다 길게 유지되고 지정학 리스크(이란 등)가 재부각될 경우 정제마진 추가 확대 트리거도 잠재한다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 정제마진 반락 리스크: OSP 안정화나 중동·아시아 설비 정상화가 예상보다 빨리 진행되면 정제마진이 급격히 축소되어 3분기 실적이 2분기 대비 둔화될 수 있다. ② 유가 변동성: WTI가 80달러 하단을 이탈하거나 재고평가손실이 발생하면 일시적 실적 착시가 해소되며 주가 조정 압력이 커질 수 있다. ③ 밸류에이션 부담: 애널리스트 평균 목표주가(약 7.3만원)를 이미 40% 이상 상회한 상태로, 추가 목표가 상향이 뒷받침되지 않으면 차익실현 매물 출회 가능성이 있다. ④ 지주사 디스카운트/자회사 리스크: GS건설 등 비정유 자회사의 업황 부진이나 배당 정책 변경 시 그룹 전체 밸류에이션에 부정적 영향을 줄 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">2026년 3분기 실적 발표(통상 11월 중순 예상, 정확한 일정 확인 필요), 국제유가·정제마진 주간 지표(싱가포르 복합 정제마진) 추이, 중동·아시아 정제설비 가동 재개 뉴스, 증권사 목표주가 상향 리포트 발행 여부(8월 11일 실적 발표 이후 후속 리포트), 배당정책(2026~2028년 시가배당률 상향 관련 공시) 확인이 필요하다.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 2분기 어닝 서프라이즈(영업이익 +253%)와 RVOL 5.82배의 강한 수급을 동반한 저확장(+0.98%) 돌파로 기술적 진입 질은 양호하나, 애널리스트 평균 목표주가(약 7.3만원)를 이미 크게 상회한 밸류에이션 부담과 정제마진 반락 리스크가 상존해 추격보다는 후속 리포트·정제마진 지표 확인이 필요한 구간이다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

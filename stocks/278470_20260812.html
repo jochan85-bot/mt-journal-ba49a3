@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>278470 — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; }
+.tr.hide { display:none; }
+.l1 { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>278470 <span class="dim" style="font-size:1rem">에이피알</span></h1>
+<div><span class="badge closed">청산 완료</span> <span class="badge kr">KR</span></div>
+
+<div class="card">
+평균 매수가 <b>403,500원</b>
+· 평균 매도가 <b>387,000원</b>
+· 수익률 <span class="neg">-4.09%</span>
+
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260811 기준)</span></div>
+<div class="dim">2026-08-12 진입 → 2026-08-12 청산</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 8주 @ 403,500원
+<div class="dim">2026-08-12 09:52 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 8주 @ 387,000원
+<div class="dim">2026-08-12 12:05  — Stop 발동 (FLAT -4%)</div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">메디큐브·에이지알 등 멀티브랜드로 북미·유럽 매출이 폭발적으로 성장 중인 K-뷰티 대표주, 2분기 어닝서프라이즈 직후 신고가를 돌파했다</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">에이피알은 2014년 설립, 2024년 코스닥에 상장한 K-뷰티 기업으로 메디큐브(스킨케어·PDRN 라인), 에이프릴스킨, 포맨트, 에이지알(AGE-R, 홈뷰티디바이스) 등 멀티브랜드 포트폴리오를 운영한다. 2026년 2분기 기준 해외 매출 비중이 92%에 달하며, 특히 미국이 최대 시장으로 부상해 전체 매출의 40%를 넘겼다. 유통 채널은 자사몰과 아마존을 중심으로, 미국은 타겟(약 2,000개점)·월마트(약 3,500개점) 오프라인까지 확대했고 9월 코스트코 입점이 예정되어 있으며, 유럽은 세포라 17개국(약 450개 매장)에 입점했다. 8월 1일 기준 미국·영국·독일·프랑스·스페인 아마존 뷰티 톱100에 47개 제품을 올리는 등 온라인 채널 장악력도 높다. 경쟁사로는 조선미녀, 티르티르, 코스알엑스 등 K-뷰티 인디브랜드와 홈뷰티디바이스 부문의 LG생활건강 계열이 있으며, 메디큐브 PDRN 제품군은 글로벌 누적 판매 5,000만개를 돌파해 카테고리 리더십을 보유하고 있다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기 매출 7,675억원(+134.2% YoY), 영업이익 1,906억원(+134.5% YoY)으로 창사 이래 최대 분기 실적을 기록했으며 영업이익률은 24.8%에 달했다. 상반기 누적 매출은 1조3,609억원으로 반기 기준 역대 최대이자 작년 연간 실적에 육박하는 수준이다. 성장 동력은 북미(매출 +265% YoY)와 유럽 시장 확대이며, 회사는 2026년 연간 가이던스를 매출 +40% YoY, 영업이익률 25%로 상향했고 연간 영업이익은 6,548억원(+79.1% YoY)으로 전망된다. 다음 실적 발표(3분기)는 통상 관행상 2026년 11월 초순 예정이다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">8월 5일 발표된 2분기 실적이 시장 기대치를 크게 웃돌면서(영업이익 134.5% 급증) 어닝서프라이즈로 평가받았고, 이후 증권사들의 목표주가 상향이 잇따랐다(하나증권 6/9 51만원 신규 커버, 신영증권 8월 기존 51만원에서 56만원으로 9.8% 상향). 8월 7일 종가 384,500원(+1.72%)으로 실적 발표 후 상승 랠리를 이어가던 중, 8월 12일 피벗 399,000원을 RVOL 1.6배의 거래량 동반 상승으로 돌파했고 403,500원(+1.0% 확장)에 진입이 체결됐다. 배경에는 9월 코스트코 입점 예정, 세포라 유럽 17개국 확대, 아마존 뷰티 톱100 47개 제품 등재 등 유통망 확대 뉴스가 연속적으로 나오며 실적 모멘텀에 대한 시장 신뢰가 강화된 흐름이 있다. 실적 발표 이후 약 1주일 만에 신고가 영역으로 재차 진입하는 구조로, 기관·외국인 수급이 실적 서프라이즈를 뒤늦게 반영하는 양상으로 해석된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">K-뷰티 섹터는 2026년 1분기 화장품 수출이 21.8억달러(+21.3% YoY)를 기록했고, 미국이 사상 처음으로 중국을 제치고 최대 수출국으로 부상하는 등 업황 지표가 견조하다. 다만 8월 들어 미국 행정부가 무역법 301조를 근거로 한국산 제품에 12.5% 관세를 부과하기로 하면서 중소 수출기업을 중심으로 마진 압박 우려가 부각되고 있다. 에이피알은 채널 다각화(자사몰·아마존·대형유통 동시 공략)와 안전성 인증 강화로 규제 리스크에 상대적으로 잘 대응하는 편이며, 매출 성장률(+134% YoY)이 피어 대비 압도적으로 높아 섹터 내 최선호주 지위를 굳히고 있다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">8월 7일 종가 384,500원에서 8월 12일 피벗 399,000원을 RVOL 1.6배의 유의미한 거래량 증가와 함께 돌파했으며, 진입가 403,500원은 피벗 대비 +1.0% 확장으로 과열 없이 초입 구간에서 진입이 이뤄졌다. 실적 발표 후 신고가 흐름이 이어지고 있어 뚜렷한 위 매물대(저항선)가 형성되어 있지 않은 구간이며, 아래로는 돌파 피벗선 399,000원이 1차 지지선, 그 아래 20일 이동평균선이 2차 지지선으로 작용할 것으로 판단된다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">현재 애널리스트 목표주가는 하나증권 51만원, 신영증권 56만원(8월 상향) 수준으로 진입가(403,500원) 대비 26~39%의 추가 상승 여력이 제시되어 있다. 트리거로는 9월 코스트코 입점 초기 매출 반영, 11월 초 예상되는 3분기 실적에서의 서프라이즈 지속, 2026년 말 예정된 미용의료기기 신제품 출시에 따른 신사업 모멘텀이 있다. 북미·유럽 매출이 시장 기대를 웃도는 속도로 성장하고 있어, 2026년 연 매출 2조원대 진입 시나리오가 현실화될 경우 밸류에이션 재평가와 함께 목표주가가 추가 상향될 가능성이 높다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 미국 관세 리스크: 무역법 301조 근거 12.5% 관세가 확정 시행될 경우 미국 매출 비중 40% 이상인 에이피알의 마진이 직접 압박받을 수 있으며, 영업이익률 25% 가이던스 훼손 우려로 이어질 수 있다. ② 밸류에이션 부담: 목표주가(51~56만원)와 현재가(40만원대) 간 갭이 이미 실적 서프라이즈를 상당 부분 선반영한 상태라, 3분기 실적이 시장 기대를 밑돌면 급격한 차익실현 매물이 나올 수 있다. ③ 경쟁 심화: 조선미녀·티르티르 등 K-뷰티 인디브랜드와 홈뷰티디바이스 경쟁사의 미국·유럽 진출이 가속화될 경우 점유율 및 가격 경쟁력이 훼손될 수 있다. ④ 환율·수급 변동성: 원달러 환율 급변 시 해외매출 비중 92%의 특성상 실적 변동성이 확대되며, 신규 진입 종목 특성상 단기 차익실현 매물에 취약할 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 3분기 실적 발표(2026년 11월 초순 예상) — 북미·유럽 매출 성장 지속 여부 및 영업이익률 25% 가이던스 달성 확인. ② 9월 코스트코 입점 개시 — 초기 판매 실적 및 오프라인 채널 확장 효과 점검. ③ 미국 관세(무역법 301조 12.5%) 시행 세부 일정 및 예외 적용 여부 — 8월 이후 발표되는 미 행정부 후속 조치 모니터링. ④ 2026년 말 예정된 미용의료기기 신제품 출시 일정 구체화 여부.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟢강한 확신 — 2분기 어닝서프라이즈(영업이익 +134.5% YoY)와 잇단 목표주가 상향(신영 56만원 등)이 뒷받침된 가운데, RVOL 1.6배의 건전한 거래량을 동반해 피벗을 완만하게(+1.0%) 돌파한 기술적 구조가 우수하다. 다만 미국 관세 리스크와 이미 상당 부분 선반영된 밸류에이션은 3분기 실적 발표 전까지 주시할 필요가 있다.</div></div>
+<h3>📉 매도 분석 — 2026-08-12</h3>
+<div class="card"><b>하락/청산 원인</b><div class="section-body">에이피알은 8월 7일 2분기 실적 발표(연결 매출 7,675억원, 영업이익 1,906억원, 전년 대비 각각 +134.2%, +134.5%) 이후 &#x27;3조 클럽&#x27; 진입 기대감과 목표주가 상향(48만~50만원)에 힘입어 급등하며 신고가 부근까지 상승했습니다. 그러나 고점 부근에서 기관투자자들의 매도세가 5거래일 연속 이어지며 8월 11일 385,500원까지 밀렸고, 8월 12일 장초반에는 화장품 업종 전반의 강세 속에 갭업 출발하며 평균매수가 403,500원대까지 재차 돌파를 시도했습니다. 하지만 신고가 부근에서 추가 매수세 유입이 이어지지 못하고 기관 매물이 재차 출회되며 상승분을 반납, 오전 12:05경 -4% 손절선인 387,000원을 터치했습니다. 진입일과 매도일이 동일하다는 점에서 이는 당일 돌파 시도가 실패한 &#x27;데드캣 브레이크아웃(false breakout)&#x27; 성격이 짙으며, 펀더멘털 훼손보다는 신고가 부근 단기 과열에 따른 차익실현·물량 소화 국면으로 판단됩니다.</div></div>
+<div class="card"><b>당일 시장 상황</b><div class="section-body">전일(8/11) 코스피는 6,345.53(+0.73%)으로 강보합 마감했고, 8월 12일 장중에는 국가데이터처의 2분기 화장품 수출 호조 통계 발표를 계기로 K뷰티 테마 전반이 강세를 보이며 한국콜마·코스맥스 등 동종 화장품주가 동반 상승했습니다. 그러나 대장주 격인 에이피알은 오히려 업종 강세 흐름과 반대로 기관 매도 우위 속 약세를 보이며 업종 대비 상대적 디커플링(디버전스)이 발생했는데, 이는 업황 우려가 아닌 개별 종목의 단기 급등에 따른 수급 부담이 원인임을 시사합니다.</div></div>
+<div class="card"><b>시스템 판단 평가</b><div class="section-body">-4% FLAT 손절 규칙은 미너비니 SEPA 전략의 핵심인 &#x27;리스크 제한 및 자본 보존&#x27; 원칙에 정확히 부합하며, 돌파 시도가 실패로 확인된 시점에서 신속하게 발동되어 추가 손실을 차단했다는 점에서 규칙 자체는 올바르게 작동했습니다. 다만 진입일과 매도일이 같은 날이라는 점은 셋업(VCP 수축 및 거래량 확인)이 충분히 성숙하기 전, 변동성이 큰 구간에서 피벗을 다소 이르게 설정했을 가능성을 시사합니다. 기관 매도가 5거래일째 이어지는 수급 악화 국면에서 진입한 것 자체가 리스크를 키운 요인이었으나, 손절 자체는 결과론적으로도 타당한 판단이었습니다.</div></div>
+<div class="card"><b>대안 검토</b><div class="section-body">진입 시점에 거래량 동반 여부와 종가 기준 돌파 확인을 거쳤거나, 5일 연속 기관 매도라는 수급 경고 신호를 반영해 포지션 사이즈를 축소했다면 노이즈성 조기 손절을 다소 완화할 여지는 있었을 것입니다. 다만 당일 장중 변동성과 기관 매물 출회 강도를 고려하면 완전한 손절 회피는 어려웠을 것으로 보이며, 결과가 크게 달라졌을 가능성은 낮습니다.</div></div>
+<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">펀더멘털은 여전히 견조합니다 — 북미·유럽 매출 비중이 전년 40%에서 68%로 확대되었고, 타깃·월마트 입점에 이어 하반기 코스트코 입점이 예정되어 있으며 증권가는 연매출 &#x27;3조 클럽&#x27; 진입과 목표주가 48만~50만원을 제시하고 있습니다. 재진입 관점에서는 우선 기관 매도세가 진정되는지, 그리고 이번 조정 구간에서 50일선 부근을 지지대로 새로운 VCP(변동성수축패턴)가 형성되는지를 확인해야 합니다. 거래량을 동반한 재돌파가 확인될 경우 watch list에 재편입할 만하나, 그 전까지는 신고가 부근 재추격 매수는 지양하는 것이 바람직합니다.</div></div>
+<h3>🏁 거래 종합 리뷰</h3>
+<div class="card"><b>요약</b><div class="section-body">에이피알은 2026년 8월 5일 2분기 잠정실적에서 매출 7,675억원(+134.2% YoY), 영업이익 1,906억원(+134.5% YoY, 영업이익률 24.8%)의 사상 최대 실적을 발표했고 북미(+264.6%)·유럽(+380.3%) 매출이 급증하며 증권가 목표주가가 45만~54만원대로 상향된 강한 모멘텀 종목이었다. 다만 주가는 7월 7일 고점 410,000원 이후 한 달째 375,000~410,000원 박스권(7/16 393,000원, 8/7 384,500원, 8/11 385,500원)에서 등락하며 뚜렷한 방향성을 못 잡고 있었다. 8월 12일 09:52 403,500원에 진입한 것은 8/11 장중 고가(399,000원)와 박스권 상단(410,000원)을 향한 돌파 시도였으나, 매수세가 이어지지 못하고 오전 중 빠르게 반전되어 12:05 387,000원에서 -4% 손절 스탑이 발동됐다. 결국 실적 호재에도 불구하고 저항선 돌파는 하루 만에 실패하며 -4.09%로 청산됐다.</div></div>
+<div class="card"><b>진입 평가</b><div class="section-body">펀더멘털 측면(2분기 어닝서프라이즈, 목표주가 대폭 상향)은 매우 우수했지만, 셋업 관점에서는 아쉬움이 있다. 진입가 403,500원은 이미 7월 7일에 한 차례 도달했다가 되밀린 410,000원 저항 부근으로, 최소 한 달간 여러 차례 시험된 구간이라 페이크아웃 리스크가 컸다. 특히 8월 11일 K뷰티 업종 전반(코스맥스·실리콘투 등 두 자릿수 급등)이 강세를 보였음에도 에이피알 자체는 -0.39% 소폭 하락 마감해 업종 대비 상대강도(RS)가 오히려 약화되는 신호가 있었는데, 이를 반영하지 않고 익일 돌파를 시도한 것으로 보인다. 거래량 동반 여부가 확인되지 않은 채(사유란 공란) 진입한 점도 VCP 돌파매매 원칙상 보완이 필요하다.</div></div>
+<div class="card"><b>청산 평가</b><div class="section-body">-4% 규칙 기반 손절은 진입 후 불과 2시간 13분 만에 기계적으로 발동됐으며, 당일 오전 중 빠른 되돌림(whipsaw)이 발생한 만큼 추가 손실을 차단했다는 점에서 시스템 규칙이 정상적으로 제 역할을 했다. 다만 진입 당일 좁은 구간 내에서 급격히 손절가에 도달했다는 것은 애초에 돌파 신뢰도가 낮았음을 방증하며, 손절 자체보다 진입 시점의 판단이 손실의 근본 원인이었다. 청산 이후 주가 흐름은 거래일이 당일(2026-08-12)이라 검색으로 확인되지 않아, 손절이 결과적으로 유리했는지 여부는 후속 데이터로 재검증이 필요하다.</div></div>
+<div class="card"><b>시장 환경</b><div class="section-body">2026년 7월 13일 코스피가 -8.95% 폭락하며 서킷브레이커가 발동되는 등 시장 전체가 극심한 변동성을 겪은 뒤 8월 들어 반등 국면에 있었고, 이런 환경에서는 돌파 신호의 신뢰도가 평소보다 떨어질 수밖에 없다. 미국의 화장품 관세 15% 부과라는 부담 요인이 있었음에도 7월 K뷰티 수출 호조로 8월 11일 업종 전반이 강세를 보였으나, 정작 대장주 격인 에이피알은 그 흐름에 동참하지 못하며 개별 종목 모멘텀이 업종 대비 뒤처지는 이상 신호가 있었다.</div></div>
+<div class="card"><b>잘된 점</b><div class="section-body">실적 모멘텀(사상 최대 분기 실적, 목표주가 상향)이 뚜렷한 우량 성장주를 후보로 선정한 점, 그리고 -4% 손절 규칙을 감정 개입 없이 즉시 실행해 손실을 제한선 내로 통제한 점은 시스템 준수 측면에서 잘 지켜졌다.</div></div>
+<div class="card"><b>아쉬운 점</b><div class="section-body">박스권 상단(저항선) 근처에서 거래량 확인 없이 진입했고, 전일 업종 강세 속 종목 자체의 상대강도 약화 신호를 무시한 채 돌파를 시도한 것이 패인이다. 개선안으로는 ①동일 저항선을 여러 번 테스트한 종목은 거래량 급증(평균 대비 150% 이상 등) 확인 전 진입 보류, ②전일 업종 대비 개별 종목 RS가 뒤처질 경우 진입 사이즈 축소 또는 관망 규칙을 시스템에 추가하는 것을 고려할 만하다.</div></div>
+<div class="card"><b>교훈</b><div class="section-body">펀더멘털이 아무리 강해도 여러 차례 되밀린 저항선을 거래량 확인 없이 돌파 매수하는 것은 페이크아웃 위험이 크므로, 업종 대비 상대강도와 거래량 확인이라는 두 가지 필터를 돌파 진입 전 체크리스트로 명시할 필요가 있다.</div></div>
+<div class="card"><b>등급</b><div class="section-body">C — 손절 규칙 준수와 종목 선정(실적 모멘텀) 자체는 합격점이지만, 반복 테스트된 저항선을 거래량 확인 없이 돌파 매수했고 전일 업종 대비 상대강도 약화 신호를 놓친 것은 셋업 품질 관점에서 명백한 아쉬움이다. 결과(-4.09%)는 시스템이 설계대로 손실을 통제한 정상 케이스이지만 과정상 개선 여지가 뚜렷하다.</div></div>
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
