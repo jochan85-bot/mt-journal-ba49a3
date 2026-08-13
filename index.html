@@ -65,10 +65,10 @@ a:hover { text-decoration:underline; }
 .tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
       padding:10px 12px; }
 .tr.hide { display:none; }
-.l1 { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+.l1 { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
 .tk { font-weight:700; font-size:1rem; }
 .nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
-.rt { font-size:1rem; white-space:nowrap; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right; }
 .l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
       font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
 .l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
@@ -82,11 +82,12 @@ a:hover { text-decoration:underline; }
 .ptag b { color:var(--text); }
 .ai { display:inline-block; padding:1px 6px; border-radius:5px;
       font-size:0.71rem; font-weight:700; color:#111; }
-/* [RVOL-PIVOT 2026-08-13] 종목명 옆 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) */
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
 .ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
       font-size:0.67rem; font-weight:600; white-space:nowrap;
       background:#171a24; border:1px solid var(--border); color:#8f95a8; }
 .ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
 .nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
 </style></head>
 <body>
@@ -94,7 +95,7 @@ a:hover { text-decoration:underline; }
 <div class="dim">돌파매매 자동 트레이딩 기록 · 2026-07-06 이후 거래</div>
 <div class="card">
 <b>보유중 18건</b> · 청산 60건 · 승률 13% · 평균 -2.52%
-<div class="dim">마지막 갱신: 2026-08-13 10:02 KST</div>
+<div class="dim">마지막 갱신: 2026-08-13 10:05 KST</div>
 </div><div class="fbar">
  <div class="frow"><span class="flab">시장</span>
   <button class="on" onclick="setf('mkt','ALL',this)">전체</button>
@@ -118,22 +119,22 @@ a:hover { text-decoration:underline; }
   <button data-lab="피벗%" onclick="setsort('pivot',this)">피벗%</button></div>
 </div>
 <div class="list" id="list"><div class="tr" data-mkt="KR" data-st="open" data-ai="관망"
- data-date="2026-08-13T09:37:26.376389+09:00" data-ret="-2.7877872724984796"
+ data-date="2026-08-13T09:37:26.376389+09:00" data-ret="-2.4674834414358715"
  data-rs="89.0"
  data-rvol="1.42"
  data-pivot="4.52">
  <div class="l1"><div><a href="stocks/009420_20260813.html"><span class="tk">009420 ☀️</span></a>
-   <span class="nm">한올바이오파마</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.5%</span></div><div class="rt"><span class="neg">-2.79%</span></div></div>
+   <span class="nm">한올바이오파마</span></div><div class="rt"><span class="neg">-2.47%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.5%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.13 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs">RS 89</span><span class="ptag"><i style="background:#D98E32"></i>VCP <b>확장</b> · 거래량 안마름</span><span class="ai" style="background:#e67e22">AI 관망 4</span></div>
  <div class="l4">성장 가속 · 감속 1/6</div>
 </div><div class="tr" data-mkt="KR" data-st="open" data-ai="관망"
- data-date="2026-08-13T09:27:05.001783+09:00" data-ret="-1.7241379310344827"
+ data-date="2026-08-13T09:27:05.001783+09:00" data-ret="-1.5086206896551724"
  data-rs="98.0"
  data-rvol="1.41"
  data-pivot="3.12">
  <div class="l1"><div><a href="stocks/159010_20260813.html"><span class="tk">159010</span></a>
-   <span class="nm">아스플로</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.1%</span></div><div class="rt"><span class="neg">-1.72%</span></div></div>
+   <span class="nm">아스플로</span></div><div class="rt"><span class="neg">-1.51%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.1%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.13 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs hi">RS 98</span><span class="ptag"><i style="background:#7B5EA7"></i>VCP <b>눌림</b> · 거래량 중간</span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
  <div class="l4">성장 가속 · 감속 0/6</div>
@@ -143,7 +144,7 @@ a:hover { text-decoration:underline; }
  data-rvol="3.15"
  data-pivot="0.84">
  <div class="l1"><div><a href="stocks/278470_20260813.html"><span class="tk">278470 ☀️</span></a>
-   <span class="nm">에이피알</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 3.1x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div><div class="rt"><span class="neg">-1.19%</span></div></div>
+   <span class="nm">에이피알</span></div><div class="rt"><span class="neg">-1.19%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 3.1x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.13 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs">RS 88</span><span class="ptag"><i style="background:#D98E32"></i>VCP <b>확장</b> · 거래량 안마름</span><span class="ai" style="background:#2ecc71">AI 고려 8</span></div>
  <div class="l4">성장 음전 · 감속 3/6</div>
@@ -153,17 +154,17 @@ a:hover { text-decoration:underline; }
  data-rvol="1.79"
  data-pivot="3.04">
  <div class="l1"><div><a href="stocks/CLDX_20260813.html"><span class="tk">CLDX</span></a>
-   <span class="nm">셀덱스 테라퓨틱스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.0%</span></div><div class="rt"><span class="pos">+0.88%</span></div></div>
+   <span class="nm">셀덱스 테라퓨틱스</span></div><div class="rt"><span class="pos">+0.88%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.0%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.08.13 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs hi">RS 90</span><span class="ptag"><i style="background:#D98E32"></i>VCP <b>확장</b> · 거래량 중간</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 가속 · 감속 NA</div>
 </div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 고려"
- data-date="2026-08-13T00:40:40.214755+09:00" data-ret="-0.7999489394293963"
+ data-date="2026-08-13T00:40:40.214755+09:00" data-ret="-0.7393145118396626"
  data-rs="97.0"
  data-rvol="1.95"
  data-pivot="0.39">
  <div class="l1"><div><a href="stocks/LITE_20260813.html"><span class="tk">LITE ☀️</span></a>
-   <span class="nm">루멘텀 홀딩스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.9x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div><div class="rt"><span class="neg">-0.80%</span></div></div>
+   <span class="nm">루멘텀 홀딩스</span></div><div class="rt"><span class="neg">-0.74%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.9x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.08.13 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs hi">RS 97</span><span class="ptag"><i style="background:#D98E32"></i>VCP <b>확장</b> · 거래량 중간</span><span class="ai" style="background:#2ecc71">AI 고려 8</span></div>
  <div class="l4">성장 음전 · 감속 4/6 · 📦적체</div>
@@ -173,7 +174,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.53"
  data-pivot="1.72">
  <div class="l1"><div><a href="stocks/159010_20260812.html"><span class="tk">159010</span></a>
-   <span class="nm">아스플로</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.7%</span></div><div class="rt"><span class="neg">-4.33%</span></div></div>
+   <span class="nm">아스플로</span></div><div class="rt"><span class="neg">-4.33%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.7%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.12 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.12</span></div>
  <div class="l3"><span class="rs hi">RS 98</span><span class="dim" style="font-size:.72rem">VCP —</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 가속 · 감속 0/6</div>
@@ -183,27 +184,27 @@ a:hover { text-decoration:underline; }
  data-rvol="1.6"
  data-pivot="1.0">
  <div class="l1"><div><a href="stocks/278470_20260812.html"><span class="tk">278470 ☀️</span></a>
-   <span class="nm">에이피알</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.0%</span></div><div class="rt"><span class="neg">-4.09%</span></div></div>
+   <span class="nm">에이피알</span></div><div class="rt"><span class="neg">-4.09%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.0%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.12 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.12</span></div>
  <div class="l3"><span class="rs">RS 89</span><span class="dim" style="font-size:.72rem">VCP —</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 음전 · 감속 3/6</div>
 </div><div class="tr" data-mkt="KR" data-st="open" data-ai="매수 가능"
- data-date="2026-08-12T09:34:56.235837+09:00" data-ret="1.9193857965451053"
+ data-date="2026-08-12T09:34:56.235837+09:00" data-ret="0.7677543186180422"
  data-rs="80.0"
  data-rvol="1.41"
  data-pivot="2.36">
  <div class="l1"><div><a href="stocks/483650_20260812.html"><span class="tk">483650</span></a>
-   <span class="nm">달바글로벌</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.4%</span></div><div class="rt"><span class="pos">+1.92%</span></div></div>
+   <span class="nm">달바글로벌</span></div><div class="rt"><span class="pos">+0.77%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.4%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.12 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs">RS 80</span><span class="dim" style="font-size:.72rem">VCP —</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 음전 · 감속 3/5</div>
 </div><div class="tr" data-mkt="KR" data-st="open" data-ai="매수 가능"
- data-date="2026-08-12T09:11:00.902870+09:00" data-ret="18.187900384483964"
+ data-date="2026-08-12T09:11:00.902870+09:00" data-ret="18.96318544531513"
  data-rs="77.0"
  data-rvol="4.62"
  data-pivot="3.77">
  <div class="l1"><div><a href="stocks/161890_20260812.html"><span class="tk">161890 ☀️</span></a>
-   <span class="nm">한국콜마</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 4.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.8%</span></div><div class="rt"><span class="pos">+18.19%</span></div></div>
+   <span class="nm">한국콜마</span></div><div class="rt"><span class="pos">+18.96%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 4.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.8%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.12 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs">RS 77</span><span class="dim" style="font-size:.72rem">VCP —</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 💎압축 · 감속 2/6</div>
@@ -213,7 +214,7 @@ a:hover { text-decoration:underline; }
  data-rvol="5.82"
  data-pivot="0.98">
  <div class="l1"><div><a href="stocks/078930_20260812.html"><span class="tk">078930</span></a>
-   <span class="nm">GS</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 5.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.0%</span></div><div class="rt"><span class="neg">-0.93%</span></div></div>
+   <span class="nm">GS</span></div><div class="rt"><span class="neg">-0.93%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 5.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.0%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.12 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.13</span></div>
  <div class="l3"><span class="rs hi">RS 90</span><span class="dim" style="font-size:.72rem">VCP —</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 가속 · 감속 0/6</div>
@@ -223,7 +224,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.53"
  data-pivot="3.65">
  <div class="l1"><div><a href="stocks/ADPT_20260811.html"><span class="tk">ADPT ☀️</span></a>
-   <span class="nm">어댑티브 바이오테크놀로지스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.6%</span></div><div class="rt"><span class="neg">-1.47%</span></div></div>
+   <span class="nm">어댑티브 바이오테크놀로지스</span></div><div class="rt"><span class="neg">-1.47%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.6%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.08.11 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.12</span></div>
  <div class="l3"><span class="rs hi">RS 95</span><span class="dim" style="font-size:.72rem">VCP —</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 부진 · 감속 NA</div>
@@ -233,7 +234,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.04"
  data-pivot="0.85">
  <div class="l1"><div><a href="stocks/ABNB_20260811.html"><span class="tk">ABNB</span></a>
-   <span class="nm">에어비앤비</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.0x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div><div class="rt"><span class="neg">-0.09%</span></div></div>
+   <span class="nm">에어비앤비</span></div><div class="rt"><span class="neg">-0.09%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.0x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.08.11 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs">RS 80</span><span class="dim" style="font-size:.72rem">VCP —</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 음전 · 감속 2/5</div>
@@ -243,7 +244,7 @@ a:hover { text-decoration:underline; }
  data-rvol="3.05"
  data-pivot="1.28">
  <div class="l1"><div><a href="stocks/CLBK_20260811.html"><span class="tk">CLBK</span></a>
-   <span class="nm">컬럼비아 파이낸셜</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 3.0x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.3%</span></div><div class="rt"><span class="pos">+5.62%</span></div></div>
+   <span class="nm">컬럼비아 파이낸셜</span></div><div class="rt"><span class="pos">+5.62%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 3.0x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.3%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.08.11 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs">RS 80</span><span class="dim" style="font-size:.72rem">VCP —</span><span class="ai" style="background:#e67e22">AI 관망 4</span></div>
  <div class="l4">성장 NA · 감속 NA</div>
@@ -253,7 +254,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.57"
  data-pivot="3.21">
  <div class="l1"><div><a href="stocks/010950_20260811.html"><span class="tk">010950 ☀️</span></a>
-   <span class="nm">S-Oil</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.2%</span></div><div class="rt"><span class="neg">-1.96%</span></div></div>
+   <span class="nm">S-Oil</span></div><div class="rt"><span class="neg">-1.96%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.2%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.11 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.11</span></div>
  <div class="l3"><span class="rs hi">RS 90</span><span class="ptag"><i style="background:#8B6F4E"></i>VCP <b>수축이탈</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 💎압축 · 감속 0/6 · 📦적체</div>
@@ -263,7 +264,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.74"
  data-pivot="0.49">
  <div class="l1"><div><a href="stocks/CLMT_20260811.html"><span class="tk">CLMT</span></a>
-   <span class="nm">캘러멧</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div><div class="rt"><span class="pos">+4.15%</span></div></div>
+   <span class="nm">캘러멧</span></div><div class="rt"><span class="pos">+4.15%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.08.11 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs hi">RS 90</span><span class="ptag"><i style="background:#7B5EA7"></i>VCP <b>눌림</b> · 거래량 안마름</span><span class="ai" style="background:#e67e22">AI 관망 4</span></div>
  <div class="l4">성장 가속 · 감속 0/4</div>
@@ -273,7 +274,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.54"
  data-pivot="0.4">
  <div class="l1"><div><a href="stocks/FSLY_20260811.html"><span class="tk">FSLY ☀️</span></a>
-   <span class="nm">패스틀리</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div><div class="rt"><span class="pos">+4.32%</span></div></div>
+   <span class="nm">패스틀리</span></div><div class="rt"><span class="pos">+4.32%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.08.11 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs hi">RS 97</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 가속 · 감속 0/5</div>
@@ -283,7 +284,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.46"
  data-pivot="1.37">
  <div class="l1"><div><a href="stocks/AEHR_20260810.html"><span class="tk">AEHR</span></a>
-   <span class="nm">에흐르 테스트 시스템즈</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.4%</span></div><div class="rt"><span class="neg">-4.79%</span></div></div>
+   <span class="nm">에흐르 테스트 시스템즈</span></div><div class="rt"><span class="neg">-4.79%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.4%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.08.10 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.10</span></div>
  <div class="l3"><span class="rs hi">RS 98</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 가속 · 감속 0/6</div>
@@ -293,7 +294,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.14"
  data-pivot="0.59">
  <div class="l1"><div><a href="stocks/006360_20260810.html"><span class="tk">006360 ☀️</span></a>
-   <span class="nm">GS건설</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.1x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div><div class="rt"><span class="neg">-2.05%</span></div></div>
+   <span class="nm">GS건설</span></div><div class="rt"><span class="neg">-2.05%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.1x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.10 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.11</span></div>
  <div class="l3"><span class="rs">RS 85</span><span class="ptag"><i style="background:#D98E32"></i>VCP <b>확장</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 부진 · 감속 2/6 · 📦적체</div>
@@ -303,17 +304,17 @@ a:hover { text-decoration:underline; }
  data-rvol="1.87"
  data-pivot="0.97">
  <div class="l1"><div><a href="stocks/159010_20260810.html"><span class="tk">159010</span></a>
-   <span class="nm">아스플로</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.9x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.0%</span></div><div class="rt"><span class="neg">-4.66%</span></div></div>
+   <span class="nm">아스플로</span></div><div class="rt"><span class="neg">-4.66%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.9x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.0%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.10 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.10</span></div>
  <div class="l3"><span class="rs hi">RS 98</span><span class="ptag"><i style="background:#7B5EA7"></i>VCP <b>눌림</b> · 거래량 중간</span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
  <div class="l4">성장 가속 · 감속 0/6</div>
 </div><div class="tr" data-mkt="KR" data-st="open" data-ai="매수 가능"
- data-date="2026-08-10T09:17:34.369953+09:00" data-ret="6.875000000000001"
+ data-date="2026-08-10T09:17:34.369953+09:00" data-ret="7.000000000000001"
  data-rs="86.0"
  data-rvol="1.75"
  data-pivot="1.27">
  <div class="l1"><div><a href="stocks/001450_20260810.html"><span class="tk">001450</span></a>
-   <span class="nm">현대해상</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.3%</span></div><div class="rt"><span class="pos">+6.88%</span></div></div>
+   <span class="nm">현대해상</span></div><div class="rt"><span class="pos">+7.00%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.3%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.10 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs">RS 86</span><span class="ptag"><i style="background:#9E9E9E"></i>VCP <b>무형</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 NA · 감속 NA</div>
@@ -323,7 +324,7 @@ a:hover { text-decoration:underline; }
  data-rvol="35.67"
  data-pivot="4.95">
  <div class="l1"><div><a href="stocks/222040_20260810.html"><span class="tk">222040</span></a>
-   <span class="nm">코스맥스엔비티</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 35.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+5.0%</span></div><div class="rt"><span class="pos">+0.46%</span></div></div>
+   <span class="nm">코스맥스엔비티</span></div><div class="rt"><span class="pos">+0.46%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 35.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+5.0%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.10 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.12</span></div>
  <div class="l3"><span class="rs hi">RS 95</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 안마름</span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
  <div class="l4">성장 가속 · 감속 1/6</div>
@@ -333,7 +334,7 @@ a:hover { text-decoration:underline; }
  data-rvol="8.16"
  data-pivot="4.69">
  <div class="l1"><div><a href="stocks/089860_20260810.html"><span class="tk">089860</span></a>
-   <span class="nm">롯데렌탈</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 8.2x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.7%</span></div><div class="rt"><span class="neg">-4.24%</span></div></div>
+   <span class="nm">롯데렌탈</span></div><div class="rt"><span class="neg">-4.24%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 8.2x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.7%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.10 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.11</span></div>
  <div class="l3"><span class="rs">RS 83</span><span class="ptag"><i style="background:#9E9E9E"></i>VCP <b>무형</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 가속 · 감속 0/5 · 📦적체</div>
@@ -343,7 +344,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.78"
  data-pivot="0.54">
  <div class="l1"><div><a href="stocks/005090_20260810.html"><span class="tk">005090 ☀️</span></a>
-   <span class="nm">SGC에너지</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div><div class="rt"><span class="pos">+8.24%</span></div></div>
+   <span class="nm">SGC에너지</span></div><div class="rt"><span class="pos">+8.24%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.10 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs hi">RS 93</span><span class="ptag"><i style="background:#7B5EA7"></i>VCP <b>눌림</b> · 거래량 안마름</span><span class="ai" style="background:#2ecc71">AI 고려 8</span></div>
  <div class="l4">성장 가속 · 감속 1/6</div>
@@ -353,7 +354,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.71"
  data-pivot="3.64">
  <div class="l1"><div><a href="stocks/005950_20260810.html"><span class="tk">005950</span></a>
-   <span class="nm">이수화학</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.6%</span></div><div class="rt"><span class="neg">-2.03%</span></div></div>
+   <span class="nm">이수화학</span></div><div class="rt"><span class="neg">-2.03%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.6%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.10 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.10</span></div>
  <div class="l3"><span class="rs hi">RS 93</span><span class="ptag"><i style="background:#7B5EA7"></i>VCP <b>눌림</b> · 거래량 중간</span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
  <div class="l4">성장 가속 · 감속 0/4</div>
@@ -363,7 +364,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.83"
  data-pivot="2.96">
  <div class="l1"><div><a href="stocks/ZD_20260808.html"><span class="tk">ZD</span></a>
-   <span class="nm">지프 데이비스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.0%</span></div><div class="rt"><span class="neg">-3.99%</span></div></div>
+   <span class="nm">지프 데이비스</span></div><div class="rt"><span class="neg">-3.99%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.0%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.08.08 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.08</span></div>
  <div class="l3"><span class="rs">RS 80</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 중간</span><span class="ai" style="background:#e67e22">AI 관망 4</span></div>
  <div class="l4">성장 음전 · 감속 2/6</div>
@@ -373,7 +374,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.8"
  data-pivot="4.91">
  <div class="l1"><div><a href="stocks/ICUI_20260807.html"><span class="tk">ICUI</span></a>
-   <span class="nm">ICU 메디컬</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.9%</span></div><div class="rt"><span class="neg">-4.21%</span></div></div>
+   <span class="nm">ICU 메디컬</span></div><div class="rt"><span class="neg">-4.21%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.9%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.08.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.12</span></div>
  <div class="l3"><span class="rs">RS 81</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 안마름</span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
  <div class="l4">성장 가속 · 감속 1/6</div>
@@ -383,7 +384,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.74"
  data-pivot="4.51">
  <div class="l1"><div><a href="stocks/NET_20260807.html"><span class="tk">NET</span></a>
-   <span class="nm">클라우드플레어</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.5%</span></div><div class="rt"><span class="neg">-4.95%</span></div></div>
+   <span class="nm">클라우드플레어</span></div><div class="rt"><span class="neg">-4.95%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.5%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.08.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.07</span></div>
  <div class="l3"><span class="rs">RS 80</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 마름</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 가속 · 감속 1/5</div>
@@ -393,7 +394,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.57"
  data-pivot="0.42">
  <div class="l1"><div><a href="stocks/004430_20260807.html"><span class="tk">004430</span></a>
-   <span class="nm">송원산업</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div><div class="rt"><span class="neg">-0.52%</span></div></div>
+   <span class="nm">송원산업</span></div><div class="rt"><span class="neg">-0.52%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.12</span></div>
  <div class="l3"><span class="rs">RS 70</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 마름</span><span class="ai" style="background:#e67e22">AI 관망 4</span></div>
  <div class="l4">성장 가속 · 감속 0/6</div>
@@ -403,7 +404,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.44"
  data-pivot="2.95">
  <div class="l1"><div><a href="stocks/001800_20260807.html"><span class="tk">001800</span></a>
-   <span class="nm">오리온홀딩스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.0%</span></div><div class="rt"><span class="neg">-2.29%</span></div></div>
+   <span class="nm">오리온홀딩스</span></div><div class="rt"><span class="neg">-2.29%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.0%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.10</span></div>
  <div class="l3"><span class="rs">RS 80</span><span class="ptag"><i style="background:#D98E32"></i>VCP <b>확장</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 가속 · 감속 1/6</div>
@@ -413,7 +414,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.43"
  data-pivot="0.97">
  <div class="l1"><div><a href="stocks/252990_20260807.html"><span class="tk">252990</span></a>
-   <span class="nm">샘씨엔에스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.0%</span></div><div class="rt"><span class="neg">-4.19%</span></div></div>
+   <span class="nm">샘씨엔에스</span></div><div class="rt"><span class="neg">-4.19%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.0%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.07</span></div>
  <div class="l3"><span class="rs hi">RS 92</span><span class="ptag"><i style="background:#7B5EA7"></i>VCP <b>눌림</b> · 거래량 안마름</span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
  <div class="l4">성장 음전 · 감속 2/6</div>
@@ -423,7 +424,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.46"
  data-pivot="1.86">
  <div class="l1"><div><a href="stocks/483650_20260807.html"><span class="tk">483650 ☀️</span></a>
-   <span class="nm">달바글로벌</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.9%</span></div><div class="rt"><span class="neg">-0.19%</span></div></div>
+   <span class="nm">달바글로벌</span></div><div class="rt"><span class="neg">-0.19%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.9%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.07</span></div>
  <div class="l3"><span class="rs">RS 80</span><span class="ptag"><i style="background:#7B5EA7"></i>VCP <b>눌림</b> · 거래량 안마름</span><span class="ai" style="background:#2ecc71">AI 고려 8</span></div>
  <div class="l4">성장 음전 · 감속 3/5</div>
@@ -433,7 +434,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.47"
  data-pivot="0.43">
  <div class="l1"><div><a href="stocks/005950_20260807.html"><span class="tk">005950</span></a>
-   <span class="nm">이수화학</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div><div class="rt"><span class="neg">-4.17%</span></div></div>
+   <span class="nm">이수화학</span></div><div class="rt"><span class="neg">-4.17%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.07</span></div>
  <div class="l3"><span class="rs hi">RS 92</span><span class="ptag"><i style="background:#7B5EA7"></i>VCP <b>눌림</b> · 거래량 중간</span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
  <div class="l4">성장 가속 · 감속 0/4</div>
@@ -443,7 +444,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.56"
  data-pivot="3.51">
  <div class="l1"><div><a href="stocks/007070_20260806.html"><span class="tk">007070</span></a>
-   <span class="nm">GS리테일</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.5%</span></div><div class="rt"><span class="neg">-0.34%</span></div></div>
+   <span class="nm">GS리테일</span></div><div class="rt"><span class="neg">-0.34%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.5%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.06 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.07</span></div>
  <div class="l3"><span class="rs">RS 82</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 안마름</span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
  <div class="l4">성장 가속 · 감속 2/6</div>
@@ -453,7 +454,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.02"
  data-pivot="0.41">
  <div class="l1"><div><a href="stocks/483650_20260806.html"><span class="tk">483650 ☀️</span></a>
-   <span class="nm">달바글로벌</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.0x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div><div class="rt"><span class="pos">+1.25%</span></div></div>
+   <span class="nm">달바글로벌</span></div><div class="rt"><span class="pos">+1.25%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.0x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.06 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.07</span></div>
  <div class="l3"><span class="rs">RS 78</span><span class="ptag"><i style="background:#7B5EA7"></i>VCP <b>눌림</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 음전 · 감속 3/5</div>
@@ -463,7 +464,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.42"
  data-pivot="2.22">
  <div class="l1"><div><a href="stocks/161890_20260806.html"><span class="tk">161890 ☀️</span></a>
-   <span class="nm">한국콜마</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.2%</span></div><div class="rt"><span class="pos">+0.49%</span></div></div>
+   <span class="nm">한국콜마</span></div><div class="rt"><span class="pos">+0.49%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.2%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.06 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.06</span></div>
  <div class="l3"><span class="rs">RS 78</span><span class="ptag"><i style="background:#9E9E9E"></i>VCP <b>무형</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 💎압축 · 감속 2/6</div>
@@ -473,7 +474,7 @@ a:hover { text-decoration:underline; }
  data-rvol="3.59"
  data-pivot="2.07">
  <div class="l1"><div><a href="stocks/003690_20260806.html"><span class="tk">003690</span></a>
-   <span class="nm">코리안리</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 3.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.1%</span></div><div class="rt"><span class="pos">+1.15%</span></div></div>
+   <span class="nm">코리안리</span></div><div class="rt"><span class="pos">+1.15%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 3.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.1%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.06 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.07</span></div>
  <div class="l3"><span class="rs">RS 81</span><span class="ptag"><i style="background:#7B5EA7"></i>VCP <b>눌림</b> · 거래량 안마름</span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
  <div class="l4">성장 NA · 감속 NA</div>
@@ -483,7 +484,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.18"
  data-pivot="1.51">
  <div class="l1"><div><a href="stocks/028050_20260806.html"><span class="tk">028050 ☀️</span></a>
-   <span class="nm">삼성E&amp;A</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.2x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.5%</span></div><div class="rt"><span class="neg">-4.08%</span></div></div>
+   <span class="nm">삼성E&amp;A</span></div><div class="rt"><span class="neg">-4.08%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.2x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.5%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.06 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.06</span></div>
  <div class="l3"><span class="rs">RS 87</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 중간</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 💎압축 · 감속 2/6</div>
@@ -493,7 +494,7 @@ a:hover { text-decoration:underline; }
  data-rvol="3.81"
  data-pivot="1.31">
  <div class="l1"><div><a href="stocks/SAN_20260805.html"><span class="tk">SAN</span></a>
-   <span class="nm">방코 산탄데르(ADR)</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 3.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.3%</span></div><div class="rt"><span class="pos">+1.23%</span></div></div>
+   <span class="nm">방코 산탄데르(ADR)</span></div><div class="rt"><span class="pos">+1.23%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 3.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.3%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.08.05 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs">RS 82</span><span class="ptag"><i style="background:#8B6F4E"></i>VCP <b>수축이탈</b> · 거래량 안마름</span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
  <div class="l4">성장 NA · 감속 NA</div>
@@ -503,7 +504,7 @@ a:hover { text-decoration:underline; }
  data-rvol="3.57"
  data-pivot="4.06">
  <div class="l1"><div><a href="stocks/028670_20260805.html"><span class="tk">028670 ☀️</span></a>
-   <span class="nm">팬오션</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 3.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.1%</span></div><div class="rt"><span class="neg">-2.03%</span></div></div>
+   <span class="nm">팬오션</span></div><div class="rt"><span class="neg">-2.03%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 3.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.1%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.05 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.10</span></div>
  <div class="l3"><span class="rs">RS 81</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 중간</span><span class="ai" style="background:#2ecc71">AI 고려 8</span></div>
  <div class="l4">성장 가속 · 감속 0/6</div>
@@ -513,7 +514,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.26"
  data-pivot="0.62">
  <div class="l1"><div><a href="stocks/079550_20260805.html"><span class="tk">079550 ☀️</span></a>
-   <span class="nm">LIG디펜스앤에어로스페이스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.3x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div><div class="rt"><span class="neg">-1.97%</span></div></div>
+   <span class="nm">LIG디펜스앤에어로스페이스</span></div><div class="rt"><span class="neg">-1.97%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.3x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.05 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.05</span></div>
  <div class="l3"><span class="rs">RS 81</span><span class="ptag"><i style="background:#D98E32"></i>VCP <b>확장</b> · 거래량 마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 가속 · 감속 0/6 · 📦적체</div>
@@ -523,7 +524,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.73"
  data-pivot="2.13">
  <div class="l1"><div><a href="stocks/105560_20260805.html"><span class="tk">105560</span></a>
-   <span class="nm">KB금융</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.1%</span></div><div class="rt"><span class="neg">-2.77%</span></div></div>
+   <span class="nm">KB금융</span></div><div class="rt"><span class="neg">-2.77%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.1%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.05 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.05</span></div>
  <div class="l3"><span class="rs">RS 84</span><span class="ptag"><i style="background:#9E9E9E"></i>VCP <b>무형</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 NA · 감속 NA</div>
@@ -533,7 +534,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.81"
  data-pivot="2.52">
  <div class="l1"><div><a href="stocks/055550_20260805.html"><span class="tk">055550</span></a>
-   <span class="nm">신한지주</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.5%</span></div><div class="rt"><span class="neg">-2.28%</span></div></div>
+   <span class="nm">신한지주</span></div><div class="rt"><span class="neg">-2.28%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.5%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.05 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.05</span></div>
  <div class="l3"><span class="rs">RS 84</span><span class="ptag"><i style="background:#6B8E9F"></i>VCP <b>플랫</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 NA · 감속 NA</div>
@@ -543,17 +544,17 @@ a:hover { text-decoration:underline; }
  data-rvol="7.79"
  data-pivot="1.33">
  <div class="l1"><div><a href="stocks/006340_20260805.html"><span class="tk">006340 ☀️</span></a>
-   <span class="nm">대원전선</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 7.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.3%</span></div><div class="rt"><span class="neg">-2.97%</span></div></div>
+   <span class="nm">대원전선</span></div><div class="rt"><span class="neg">-2.97%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 7.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.3%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.05 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.06</span></div>
  <div class="l3"><span class="rs hi">RS 98</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 중간</span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
  <div class="l4">성장 💎압축 · 감속 0/6</div>
 </div><div class="tr" data-mkt="KR" data-st="open" data-ai="매수 가능"
- data-date="2026-08-04T10:11:16.571335+09:00" data-ret="11.532290413156845"
+ data-date="2026-08-04T10:11:16.571335+09:00" data-ret="12.007907856283314"
  data-rs="87.0"
  data-rvol="1.46"
  data-pivot="0.36">
  <div class="l1"><div><a href="stocks/007340_20260804.html"><span class="tk">007340 ☀️</span></a>
-   <span class="nm">DN오토모티브</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div><div class="rt"><span class="pos">+11.53%</span></div></div>
+   <span class="nm">DN오토모티브</span></div><div class="rt"><span class="pos">+12.01%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.04 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs">RS 87</span><span class="ptag"><i style="background:#9E9E9E"></i>VCP <b>무형</b> · 거래량 중간</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 가속 · 감속 3/6 · 📦적체</div>
@@ -563,7 +564,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.1"
  data-pivot="0.86">
  <div class="l1"><div><a href="stocks/483650_20260804.html"><span class="tk">483650 ☀️</span></a>
-   <span class="nm">달바글로벌</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.1x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.9%</span></div><div class="rt"><span class="neg">-1.49%</span></div></div>
+   <span class="nm">달바글로벌</span></div><div class="rt"><span class="neg">-1.49%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.1x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.9%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.04 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.05</span></div>
  <div class="l3"><span class="rs">RS 77</span><span class="ptag"><i style="background:#7B5EA7"></i>VCP <b>눌림</b> · 거래량 안마름</span><span class="ai" style="background:#2ecc71">AI 고려 8</span></div>
  <div class="l4">성장 음전 · 감속 3/5</div>
@@ -573,7 +574,7 @@ a:hover { text-decoration:underline; }
  data-rvol="5.01"
  data-pivot="0.81">
  <div class="l1"><div><a href="stocks/017670_20260804.html"><span class="tk">017670</span></a>
-   <span class="nm">SK텔레콤</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 5.0x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div><div class="rt"><span class="pos">+0.23%</span></div></div>
+   <span class="nm">SK텔레콤</span></div><div class="rt"><span class="pos">+0.23%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 5.0x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.04 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.07</span></div>
  <div class="l3"><span class="rs">RS 87</span><span class="ptag"><i style="background:#9E9E9E"></i>VCP <b>무형</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 💎압축 · 감속 1/5</div>
@@ -583,7 +584,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.4"
  data-pivot="1.89">
  <div class="l1"><div><a href="stocks/TFSL_20260803.html"><span class="tk">TFSL</span></a>
-   <span class="nm">TFS 파이낸셜</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.9%</span></div><div class="rt"><span class="neg">-1.21%</span></div></div>
+   <span class="nm">TFS 파이낸셜</span></div><div class="rt"><span class="neg">-1.21%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.9%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.08.03 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.04</span></div>
  <div class="l3"><span class="rs">RS 80</span><span class="ptag"><i style="background:#6B8E9F"></i>VCP <b>플랫</b> · 거래량 안마름</span><span class="ai" style="background:#e67e22">AI 관망 4</span></div>
  <div class="l4">성장 NA · 감속 NA</div>
@@ -593,7 +594,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.65"
  data-pivot="0.52">
  <div class="l1"><div><a href="stocks/161890_20260803.html"><span class="tk">161890 ☀️</span></a>
-   <span class="nm">한국콜마</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div><div class="rt"><span class="neg">-0.14%</span></div></div>
+   <span class="nm">한국콜마</span></div><div class="rt"><span class="neg">-0.14%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.03 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.03</span></div>
  <div class="l3"><span class="rs">RS 72</span><span class="ptag"><i style="background:#9E9E9E"></i>VCP <b>무형</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 💎압축 · 감속 2/6</div>
@@ -603,7 +604,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.8"
  data-pivot="0.36">
  <div class="l1"><div><a href="stocks/017670_20260803.html"><span class="tk">017670</span></a>
-   <span class="nm">SK텔레콤</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div><div class="rt"><span class="pos">+0.36%</span></div></div>
+   <span class="nm">SK텔레콤</span></div><div class="rt"><span class="pos">+0.36%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.03 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.04</span></div>
  <div class="l3"><span class="rs">RS 87</span><span class="ptag"><i style="background:#9E9E9E"></i>VCP <b>무형</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 💎압축 · 감속 1/5</div>
@@ -613,7 +614,7 @@ a:hover { text-decoration:underline; }
  data-rvol="5.56"
  data-pivot="2.48">
  <div class="l1"><div><a href="stocks/340570_20260803.html"><span class="tk">340570</span></a>
-   <span class="nm">티앤엘</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 5.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.5%</span></div><div class="rt"><span class="neg">-33.79%</span></div></div>
+   <span class="nm">티앤엘</span></div><div class="rt"><span class="neg">-33.79%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 5.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.5%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.08.03 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.10</span></div>
  <div class="l3"><span class="rs">RS 70</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 가속 · 감속 0/6</div>
@@ -623,7 +624,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.58"
  data-pivot="0.58">
  <div class="l1"><div><a href="stocks/ILMN_20260801.html"><span class="tk">ILMN</span></a>
-   <span class="nm">일루미나</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div><div class="rt"><span class="neg">-2.39%</span></div></div>
+   <span class="nm">일루미나</span></div><div class="rt"><span class="neg">-2.39%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.08.01 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.06</span></div>
  <div class="l3"><span class="rs hi">RS 94</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 가속 · 감속 2/6</div>
@@ -633,7 +634,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.84"
  data-pivot="0.49">
  <div class="l1"><div><a href="stocks/005090_20260731.html"><span class="tk">005090</span></a>
-   <span class="nm">SGC에너지</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div><div class="rt"><span class="neg">-2.68%</span></div></div>
+   <span class="nm">SGC에너지</span></div><div class="rt"><span class="neg">-2.68%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.31 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.31</span></div>
  <div class="l3"><span class="rs hi">RS 92</span><span class="ptag"><i style="background:#9E9E9E"></i>VCP <b>무형</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 가속 · 감속 1/6</div>
@@ -643,7 +644,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.25"
  data-pivot="0.75">
  <div class="l1"><div><a href="stocks/028670_20260731.html"><span class="tk">028670 ☀️</span></a>
-   <span class="nm">팬오션</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.2x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div><div class="rt"><span class="neg">-2.98%</span></div></div>
+   <span class="nm">팬오션</span></div><div class="rt"><span class="neg">-2.98%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.2x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.31 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.03</span></div>
  <div class="l3"><span class="rs">RS 79</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 중간</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 가속 · 감속 0/6</div>
@@ -653,7 +654,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.67"
  data-pivot="2.96">
  <div class="l1"><div><a href="stocks/GKOS_20260731.html"><span class="tk">GKOS</span></a>
-   <span class="nm">글라우코스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.0%</span></div><div class="rt"><span class="pos">+9.41%</span></div></div>
+   <span class="nm">글라우코스</span></div><div class="rt"><span class="pos">+9.41%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.0%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.07.31 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs hi">RS 90</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 가속 · 감속 1/6</div>
@@ -663,7 +664,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.25"
  data-pivot="4.71">
  <div class="l1"><div><a href="stocks/NEO_20260730.html"><span class="tk">NEO</span></a>
-   <span class="nm">네오지노믹스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.2x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.7%</span></div><div class="rt"><span class="pos">+6.97%</span></div></div>
+   <span class="nm">네오지노믹스</span></div><div class="rt"><span class="pos">+6.97%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.2x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.7%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.07.30 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs hi">RS 96</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 가속 · 감속 3/5</div>
@@ -673,7 +674,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.5"
  data-pivot="2.66">
  <div class="l1"><div><a href="stocks/PLSE_20260729.html"><span class="tk">PLSE</span></a>
-   <span class="nm">펄스 바이오사이언시스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.7%</span></div><div class="rt"><span class="pos">+24.53%</span></div></div>
+   <span class="nm">펄스 바이오사이언시스</span></div><div class="rt"><span class="pos">+24.53%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.7%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.07.29 <span class="badge open">보유중</span> </div>
  <div class="l3"><span class="rs hi">RS 95</span><span class="ptag"><i style="background:#8B6F4E"></i>VCP <b>수축이탈</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 NA · 감속 NA</div>
@@ -683,7 +684,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.56"
  data-pivot="4.72">
  <div class="l1"><div><a href="stocks/AMLX_20260729.html"><span class="tk">AMLX</span></a>
-   <span class="nm">아밀릭스 파마슈티컬스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.7%</span></div><div class="rt"><span class="neg">-0.05%</span></div></div>
+   <span class="nm">아밀릭스 파마슈티컬스</span></div><div class="rt"><span class="neg">-0.05%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.7%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.07.29 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.01</span></div>
  <div class="l3"><span class="rs hi">RS 90</span><span class="ptag"><i style="background:#8B6F4E"></i>VCP <b>수축이탈</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 NA · 감속 NA · 📦적체</div>
@@ -693,7 +694,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.58"
  data-pivot="0.39">
  <div class="l1"><div><a href="stocks/483650_20260727.html"><span class="tk">483650 ☀️</span></a>
-   <span class="nm">달바글로벌</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div><div class="rt"><span class="neg">-3.52%</span></div></div>
+   <span class="nm">달바글로벌</span></div><div class="rt"><span class="neg">-3.52%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.6x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.27 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.28</span></div>
  <div class="l3"><span class="rs">RS 82</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 음전 · 감속 3/5</div>
@@ -703,7 +704,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.13"
  data-pivot="2.07">
  <div class="l1"><div><a href="stocks/KN_20260725.html"><span class="tk">KN</span></a>
-   <span class="nm">놀스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.1x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.1%</span></div><div class="rt"><span class="neg">-4.19%</span></div></div>
+   <span class="nm">놀스</span></div><div class="rt"><span class="neg">-4.19%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.1x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.1%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.07.25 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.27</span></div>
  <div class="l3"><span class="rs">RS 88</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 💎압축 · 감속 1/6</div>
@@ -713,7 +714,7 @@ a:hover { text-decoration:underline; }
  data-rvol="5.06"
  data-pivot="0.5">
  <div class="l1"><div><a href="stocks/017670_20260724.html"><span class="tk">017670</span></a>
-   <span class="nm">SK텔레콤</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 5.1x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div><div class="rt"><span class="neg">-4.85%</span></div></div>
+   <span class="nm">SK텔레콤</span></div><div class="rt"><span class="neg">-4.85%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 5.1x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.24 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.27</span></div>
  <div class="l3"><span class="rs">RS 88</span><span class="ptag"><i style="background:#9E9E9E"></i>VCP <b>무형</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 💎압축 · 감속 1/5</div>
@@ -723,7 +724,7 @@ a:hover { text-decoration:underline; }
  data-rvol="8.8"
  data-pivot="1.64">
  <div class="l1"><div><a href="stocks/005090_20260724.html"><span class="tk">005090</span></a>
-   <span class="nm">SGC에너지</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 8.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.6%</span></div><div class="rt"><span class="neg">-4.30%</span></div></div>
+   <span class="nm">SGC에너지</span></div><div class="rt"><span class="neg">-4.30%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 8.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.6%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.24 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.24</span></div>
  <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 93</span><span class="ptag"><i style="background:#9E9E9E"></i>VCP <b>무형</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 가속 · 감속 1/6</div>
@@ -733,7 +734,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.42"
  data-pivot="3.45">
  <div class="l1"><div><a href="stocks/001450_20260724.html"><span class="tk">001450</span></a>
-   <span class="nm">현대해상</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.5%</span></div><div class="rt"><span class="neg">-4.45%</span></div></div>
+   <span class="nm">현대해상</span></div><div class="rt"><span class="neg">-4.45%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.5%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.24 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.28</span></div>
  <div class="l3"><span class="rs">RS 85</span><span class="ptag"><i style="background:#8B6F4E"></i>VCP <b>수축이탈</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
  <div class="l4">성장 NA · 감속 NA</div>
@@ -743,7 +744,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.41"
  data-pivot="0.46">
  <div class="l1"><div><a href="stocks/004430_20260724.html"><span class="tk">004430</span></a>
-   <span class="nm">송원산업</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div><div class="rt"><span class="neg">-4.15%</span></div></div>
+   <span class="nm">송원산업</span></div><div class="rt"><span class="neg">-4.15%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.24 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.24</span></div>
  <div class="l3"><span class="rs">RS 82</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 안마름</span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
  <div class="l4">성장 가속 · 감속 0/6</div>
@@ -753,7 +754,7 @@ a:hover { text-decoration:underline; }
  data-rvol="3.81"
  data-pivot="1.0">
  <div class="l1"><div><a href="stocks/483650_20260724.html"><span class="tk">483650 ☀️</span></a>
-   <span class="nm">달바글로벌</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 3.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.0%</span></div><div class="rt"><span class="neg">-4.95%</span></div></div>
+   <span class="nm">달바글로벌</span></div><div class="rt"><span class="neg">-4.95%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 3.8x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.0%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.24 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.24</span></div>
  <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 80</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 안마름</span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
  <div class="l4">성장 음전 · 감속 3/5</div>
@@ -763,7 +764,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.41"
  data-pivot="3.46">
  <div class="l1"><div><a href="stocks/078930_20260723.html"><span class="tk">078930</span></a>
-   <span class="nm">GS</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.5%</span></div><div class="rt"><span class="neg">-0.53%</span></div></div>
+   <span class="nm">GS</span></div><div class="rt"><span class="neg">-0.53%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.5%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.23 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.28</span></div>
  <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 88</span><span class="ptag"><i style="background:#7B5EA7"></i>VCP <b>눌림</b> · 거래량 안마름</span><span class="dim" style="font-size:.72rem">AI —</span></div>
  <div class="l4">성장 가속 · 감속 0/6</div>
@@ -773,7 +774,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.53"
  data-pivot="4.9">
  <div class="l1"><div><a href="stocks/161390_20260723.html"><span class="tk">161390</span></a>
-   <span class="nm">한국타이어앤테크놀로지</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.9%</span></div><div class="rt"><span class="neg">-7.65%</span></div></div>
+   <span class="nm">한국타이어앤테크놀로지</span></div><div class="rt"><span class="neg">-7.65%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.9%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.23 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.24</span></div>
  <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 89</span><span class="ptag"><i style="background:#8B6F4E"></i>VCP <b>수축이탈</b> · 거래량 안마름</span><span class="dim" style="font-size:.72rem">AI —</span></div>
  <div class="l4">성장 부진 · 감속 1/6</div>
@@ -783,7 +784,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.38"
  data-pivot="0.66">
  <div class="l1"><div><a href="stocks/475150_20260722.html"><span class="tk">475150 ☀️</span></a>
-   <span class="nm">SK이터닉스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.7%</span></div><div class="rt"><span class="pos">+19.07%</span></div></div>
+   <span class="nm">SK이터닉스</span></div><div class="rt"><span class="pos">+19.07%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.7%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.22 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.27</span></div>
  <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 94</span><span class="ptag"><i style="background:#D98E32"></i>VCP <b>확장</b> · 거래량 안마름</span><span class="dim" style="font-size:.72rem">AI —</span></div>
  <div class="l4">성장 음전 · 감속 1/5 · 📦적체</div>
@@ -793,7 +794,7 @@ a:hover { text-decoration:underline; }
  data-rvol="3.73"
  data-pivot="1.46">
  <div class="l1"><div><a href="stocks/281820_20260722.html"><span class="tk">281820</span></a>
-   <span class="nm">케이씨텍</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 3.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.5%</span></div><div class="rt"><span class="neg">-4.70%</span></div></div>
+   <span class="nm">케이씨텍</span></div><div class="rt"><span class="neg">-4.70%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 3.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.5%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.22 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.22</span></div>
  <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 97</span><span class="ptag"><i style="background:#9E9E9E"></i>VCP <b>무형</b> · 거래량 안마름</span><span class="dim" style="font-size:.72rem">AI —</span></div>
  <div class="l4">성장 NA · 감속 NA</div>
@@ -803,7 +804,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.13"
  data-pivot="0.51">
  <div class="l1"><div><a href="stocks/475150_20260721.html"><span class="tk">475150 ☀️</span></a>
-   <span class="nm">SK이터닉스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.1x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div><div class="rt"><span class="neg">-4.31%</span></div></div>
+   <span class="nm">SK이터닉스</span></div><div class="rt"><span class="neg">-4.31%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.1x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.21 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.21</span></div>
  <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 94</span><span class="ptag"><i style="background:#D98E32"></i>VCP <b>확장</b> · 거래량 안마름</span><span class="dim" style="font-size:.72rem">AI —</span></div>
  <div class="l4">성장 음전 · 감속 1/5 · 📦적체</div>
@@ -813,7 +814,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.38"
  data-pivot="1.35">
  <div class="l1"><div><a href="stocks/483650_20260721.html"><span class="tk">483650</span></a>
-   <span class="nm">달바글로벌</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.4%</span></div><div class="rt"><span class="neg">-0.68%</span></div></div>
+   <span class="nm">달바글로벌</span></div><div class="rt"><span class="neg">-0.68%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.4%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.21 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.22</span></div>
  <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 81</span><span class="ptag"><i style="background:#9E9E9E"></i>VCP <b>무형</b> · 거래량 안마름</span><span class="dim" style="font-size:.72rem">AI —</span></div>
  <div class="l4">성장 음전 · 감속 3/5</div>
@@ -823,7 +824,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.41"
  data-pivot="0.79">
  <div class="l1"><div><a href="stocks/WERN_20260721.html"><span class="tk">WERN</span></a>
-   <span class="nm">웨너 엔터프라이지스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div><div class="rt"><span class="neg">-4.68%</span></div></div>
+   <span class="nm">웨너 엔터프라이지스</span></div><div class="rt"><span class="neg">-4.68%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.07.21 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.23</span></div>
  <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 87</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 중간</span><span class="dim" style="font-size:.72rem">AI —</span></div>
  <div class="l4">성장 가속 · 감속 0/5</div>
@@ -833,7 +834,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.31"
  data-pivot="0.61">
  <div class="l1"><div><a href="stocks/219130_20260720.html"><span class="tk">219130</span></a>
-   <span class="nm">타이거일렉</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.3x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div><div class="rt"><span class="neg">-4.76%</span></div></div>
+   <span class="nm">타이거일렉</span></div><div class="rt"><span class="neg">-4.76%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.3x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.20 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.20</span></div>
  <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 98</span><span class="ptag"><i style="background:#7B5EA7"></i>VCP <b>눌림</b> · 거래량 안마름</span><span class="dim" style="font-size:.72rem">AI —</span></div>
  <div class="l4">성장 💎압축 · 감속 0/6</div>
@@ -843,7 +844,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.94"
  data-pivot="4.81">
  <div class="l1"><div><a href="stocks/GPRE_20260717.html"><span class="tk">GPRE ☀️</span></a>
-   <span class="nm">그린 플레인스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.9x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.8%</span></div><div class="rt"><span class="neg">-2.21%</span></div></div>
+   <span class="nm">그린 플레인스</span></div><div class="rt"><span class="neg">-2.21%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.9x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.8%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.07.17 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.20</span></div>
  <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 85</span><span class="ptag"><i style="background:#9E9E9E"></i>VCP <b>무형</b> · 거래량 마름</span><span class="dim" style="font-size:.72rem">AI —</span></div>
  <div class="l4">성장 가속 · 감속 0/6</div>
@@ -853,7 +854,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.41"
  data-pivot="1.08">
  <div class="l1"><div><a href="stocks/161390_20260708.html"><span class="tk">161390</span></a>
-   <span class="nm">한국타이어앤테크놀로지</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.1%</span></div><div class="rt"><span class="neg">-3.18%</span></div></div>
+   <span class="nm">한국타이어앤테크놀로지</span></div><div class="rt"><span class="neg">-3.18%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.1%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.08 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.08</span></div>
  <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 91</span><span class="ptag"><i style="background:#8B6F4E"></i>VCP <b>수축이탈</b> · 거래량 안마름</span><span class="dim" style="font-size:.72rem">AI —</span></div>
  <div class="l4">성장 부진 · 감속 1/6</div>
@@ -863,7 +864,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.46"
  data-pivot="1.01">
  <div class="l1"><div><a href="stocks/BEAM_20260707.html"><span class="tk">BEAM</span></a>
-   <span class="nm">빔 테라퓨틱스</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.0%</span></div><div class="rt"><span class="neg">-3.10%</span></div></div>
+   <span class="nm">빔 테라퓨틱스</span></div><div class="rt"><span class="neg">-3.10%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.0%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.07.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.07</span></div>
  <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 84</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 안마름</span><span class="dim" style="font-size:.72rem">AI —</span></div>
  <div class="l4">성장 NA · 감속 NA</div>
@@ -873,7 +874,7 @@ a:hover { text-decoration:underline; }
  data-rvol="1.44"
  data-pivot="3.72">
  <div class="l1"><div><a href="stocks/SEPN_20260707.html"><span class="tk">SEPN ☀️</span></a>
-   <span class="nm">셉터나</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.7%</span></div><div class="rt"><span class="neg">-3.67%</span></div></div>
+   <span class="nm">셉터나</span></div><div class="rt"><span class="neg">-3.67%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 1.4x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.7%</span></div></div>
  <div class="l2"><span class="badge us">US</span> 26.07.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.08</span></div>
  <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 91</span><span class="ptag"><i style="background:#4A7EBB"></i>VCP <b>수축</b> · 거래량 안마름</span><span class="dim" style="font-size:.72rem">AI —</span></div>
  <div class="l4">성장 NA · 감속 NA</div>
@@ -883,7 +884,7 @@ a:hover { text-decoration:underline; }
  data-rvol="2.72"
  data-pivot="0.83">
  <div class="l1"><div><a href="stocks/161890_20260707.html"><span class="tk">161890</span></a>
-   <span class="nm">한국콜마</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div><div class="rt"><span class="neg">-3.11%</span></div></div>
+   <span class="nm">한국콜마</span></div><div class="rt"><span class="neg">-3.11%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 2.7x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.07</span></div>
  <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 88</span><span class="ptag"><i style="background:#D98E32"></i>VCP <b>확장</b> · 거래량 안마름</span><span class="dim" style="font-size:.72rem">AI —</span></div>
  <div class="l4">성장 💎압축 · 감속 2/6</div>
@@ -893,7 +894,7 @@ a:hover { text-decoration:underline; }
  data-rvol="6.49"
  data-pivot="2.4">
  <div class="l1"><div><a href="stocks/010950_20260707.html"><span class="tk">010950 ☀️</span></a>
-   <span class="nm">S-Oil</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 6.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.4%</span></div><div class="rt"><span class="pos">+14.87%</span></div></div>
+   <span class="nm">S-Oil</span></div><div class="rt"><span class="pos">+14.87%</span><span class="ev" title="진입 시점 상대거래량(RVOL)">RVOL 6.5x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.4%</span></div></div>
  <div class="l2"><span class="badge kr">KR</span> 26.07.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.07.27</span></div>
  <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 86</span><span class="ptag"><i style="background:#8B6F4E"></i>VCP <b>수축이탈</b> · 거래량 마름</span><span class="dim" style="font-size:.72rem">AI —</span></div>
  <div class="l4">성장 💎압축 · 감속 0/6 · 📦적체</div>

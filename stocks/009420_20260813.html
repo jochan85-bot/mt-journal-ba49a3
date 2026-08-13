@@ -65,10 +65,10 @@ a:hover { text-decoration:underline; }
 .tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
       padding:10px 12px; }
 .tr.hide { display:none; }
-.l1 { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+.l1 { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
 .tk { font-weight:700; font-size:1rem; }
 .nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
-.rt { font-size:1rem; white-space:nowrap; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right; }
 .l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
       font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
 .l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
@@ -82,11 +82,12 @@ a:hover { text-decoration:underline; }
 .ptag b { color:var(--text); }
 .ai { display:inline-block; padding:1px 6px; border-radius:5px;
       font-size:0.71rem; font-weight:700; color:#111; }
-/* [RVOL-PIVOT 2026-08-13] 종목명 옆 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) */
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
 .ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
       font-size:0.67rem; font-weight:600; white-space:nowrap;
       background:#171a24; border:1px solid var(--border); color:#8f95a8; }
 .ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
 .nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
 </style></head>
 <body>
@@ -97,7 +98,7 @@ a:hover { text-decoration:underline; }
 <div class="card">
 평균 매수가 <b>62,441원</b>
 · 평균 매도가 <b>60,900원</b>
-· 수익률 <span class="neg">-2.79%</span>
+· 수익률 <span class="neg">-2.47%</span>
 · 보유 28주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 4점 (20260812 기준)</span></div>
 <div class="dim">2026-08-13 진입</div>
