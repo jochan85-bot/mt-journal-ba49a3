@@ -82,20 +82,25 @@ a:hover { text-decoration:underline; }
 .ptag b { color:var(--text); }
 .ai { display:inline-block; padding:1px 6px; border-radius:5px;
       font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 종목명 옆 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
 .nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
 </style></head>
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>078930 <span class="dim" style="font-size:1rem">GS</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge kr">KR</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge kr">KR</span></div>
 
 <div class="card">
 평균 매수가 <b>102,682원</b>
+· 평균 매도가 <b>101,729원</b>
+· 수익률 <span class="neg">-0.93%</span>
 
-· 수익률 <span class="neg">-2.12%</span>
-· 보유 34주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260811 기준)</span></div>
-<div class="dim">2026-08-12 진입</div>
+<div class="dim">2026-08-12 진입 → 2026-08-13 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -105,6 +110,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item buy">
 <b>매수</b> · 1주 @ 103,700원
 <div class="dim">2026-08-12 09:13 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 34주 @ 101,729원
+<div class="dim">2026-08-13 09:00  — 돌파 실패 — 확정 종가 101000.00 &lt; 피벗 101700.00 (D+1)</div>
 </div></div>
 
 <h3>💡 매수 시점 투자 분석</h3>
