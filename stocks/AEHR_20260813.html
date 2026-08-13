@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AEHR — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>AEHR <span class="dim" style="font-size:1rem">에흐르 테스트 시스템즈</span></h1>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span></div>
+
+<div class="card">
+평균 매수가 <b>$122.19</b>
+· 평균 매도가 <b>$125.61</b>
+· 수익률 <span class="pos">+2.80%</span>
+
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260813 기준)</span></div>
+<div class="dim">2026-08-13 진입 → 2026-08-14 청산</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 22주 @ $122.16
+<div class="dim">2026-08-13 22:46 </div>
+</div><div class="tl-item buy">
+<b>매수</b> · 1주 @ $122.88
+<div class="dim">2026-08-13 22:47 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 23주 @ $125.61
+<div class="dim">2026-08-14 04:31  — 가짜돌파 당일 정리: 환산 거래량 0.85x &lt; 1.0x (마감 전 검증)</div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">AI 프로세서·실리콘포토닉스·SiC 반도체용 웨이퍼레벨 번인(burn-in) 테스트 장비의 니치 리더로, 2026 회계연도 4분기 어닝 서프라이즈와 FY27 파격 가이던스로 초고속 리레이팅 중인 소형 반도체 장비주.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">Aehr Test Systems는 반도체 완성 전 단계에서 결함 칩을 걸러내는 웨이퍼레벨/패키지레벨 번인·테스트 솔루션(FOX-P, WaferPak, DiePak 등)을 제조·판매한다. 과거에는 전기차(EV)용 실리콘카바이드(SiC) 전력반도체 번인 테스트가 매출의 핵심이었으나, FY26 4분기 기준 AI 프로세서와 실리콘포토닉스 번인 매출 비중이 전체의 80% 이상으로 급증(전년 동기 56%)하며 사업 구조가 SiC 단일 축에서 AI 데이터센터/광인터커넥트 축으로 급격히 다변화되고 있다. 경쟁사로는 대형 종합 테스트장비사인 Teradyne, Advantest, Cohu, FormFactor 등이 있으나, Aehr는 웨이퍼레벨 번인이라는 특정 니치에서 독점적 지위를 갖고 있다. 주요 고객은 공개되지 않은 SiC 전력반도체 제조사와 AI 데이터센터용 커스텀 실리콘·광트랜시버 업체로 추정되며, 최근 EV 프로그램 및 AI 데이터센터向 800만 달러 이상 규모의 후속 수주가 확인됐다. FY26 4분기 기준 총현금은 1억1650만 달러로 2월 말(3710만 달러) 대비 대폭 증가했는데, 이는 성장 투자를 위한 유상증자 결과다. 매출 구조상 소수 고객·소수 프로그램에 대한 의존도가 높아 분기별 매출 변동성(lumpiness)이 큰 편이다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">FY26 4분기(2026년 5월 마감) 매출은 1880만 달러로 전년 동기 1410만 달러 대비 +33% 성장했고, GAAP 순이익은 140만 달러(EPS $0.04)로 전년 동기 GAAP 순손실 -290만 달러(EPS -$0.10)에서 흑자 전환했다. Non-GAAP EPS는 $0.11로 컨센서스 -$0.01를 큰 폭으로 상회했다. 분기 수주(bookings)는 사상 최대치인 6070만 달러를 기록했고, 백로그는 8060만 달러, 여기에 5월 말 이후 신규 수주를 더한 유효 백로그는 1억60만 달러에 달한다. 회사는 FY27(2027 회계연도) 매출 가이던스로 1억3000만~1억5000만 달러를 제시했는데 이는 FY26 대비 약 160~200% 성장, 컨센서스였던 약 8500만 달러를 크게 상회하는 수치이며, Non-GAAP 영업마진 18~22%를 목표로 제시했다. 다음 실적 발표(FY27 1분기)는 2026년 10월 1일경으로 예상된다(장 마감 후 발표 관행).</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 7월 14일 장 마감 후 발표된 FY26 4분기 실적에서 매출 서프라이즈(+33% YoY), 사상 최대 수주(6070만 달러), 그리고 컨센서스(약 8500만 달러)를 압도하는 FY27 가이던스(1억3000만~1억5000만 달러)가 공개되며 주가는 7/14 종가 72.01달러에서 7/15 장중 110.20달러까지 폭등했다. 이후 Craig-Hallum(목표가 $68→$125, Buy), Lake Street($110), Freedom Broker(Hold→Buy, 목표가 $90→$110) 등 다수 애널리스트가 목표가를 상향 조정하며 매수세를 뒷받침했다. 후속 뉴스로 SiC 칩 고객으로부터 EV 프로그램 및 AI 데이터센터向 800만 달러 이상의 추가 수주 공시가 나오며 모멘텀이 재점화됐고, 8월 11일 종가는 115.45달러(YTD +426%)까지 상승했다. 8월 12일 사상 최고가 133.35달러를 기록한 뒤 단기 차익실현으로 조정이 나왔고, 이 조정 국면에서 118.5달러 부근이 신규 지지/피벗으로 작용, 8월 13일 RVOL 1.73배의 거래량 동반 재상승으로 이 레벨을 돌파하며 122.16달러(피벗 대비 +3.12% 확장)에 진입이 체결됐다. 즉 실적 발표 후 초기 급등 → 애널리스트 목표가 상향 랠리 → ATH 경신 후 단기 눌림 → 거래량 동반 재돌파로 이어지는 전형적 모멘텀 지속 흐름이다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">반도체 테스트 장비 시장은 AI·HPC·첨단패키징 수요를 축으로 확장 중이며, 2025년 약 93억 달러에서 2032년 약 131억 달러로 연평균 약 5% 성장이 전망된다. SiC/GaN 등 화합물반도체는 자동차 전력반도체 가치의 50% 이상을 2030년까지 차지할 것으로 예상되는 구조적 성장 축이고, 여기에 더해 AI 데이터센터의 커스텀 실리콘·광인터커넥트(실리콘포토닉스) 테스트 수요가 새로운 성장 동력으로 부상했다. Aehr는 대형 종합장비업체(Teradyne, Advantest 등) 대비 규모는 작지만, 웨이퍼레벨 번인이라는 특화 영역에서 독보적 지위를 갖고 있어 AI 관련 수요 급증의 초기 수혜를 직접적으로 받고 있는 위치다. 다만 소형주 특성상 대형 고객 1~2곳의 발주 타이밍에 매출이 크게 좌우돼 업황 사이클 대비 변동성이 피어 대비 훨씬 크다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">최근 3주간 72달러대에서 133.35달러(8/12 사상 최고가)까지 급등한 강한 상승 추세 속에서, ATH 경신 후 단기 조정을 거쳐 118.5달러 부근에서 저점을 지지받는 짧은 손잡이형(핸들) 베이스가 형성됐다. 이 118.5달러 피벗을 RVOL 1.73배의 유의미한 거래량 증가를 동반해 돌파했고, 진입가 122.16달러는 피벗 대비 +3.12%로 확장폭이 크지 않아 추격매수 리스크는 상대적으로 제한적이다. 다만 종목 자체가 단기간 급등한 하이타이트 플래그성 흐름이라 위쪽으로는 뚜렷한 매물대가 없는 대신(사상 최고가 갱신 지역), 아래쪽 1차 지지는 118.5달러 피벗, 2차 지지는 8/11 종가 부근인 110~115달러 구간으로 판단된다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">FY27 가이던스(1억3000만~1억5000만 달러)가 컨센서스를 크게 상회한 만큼, 이후 분기 실적에서 재차 어닝비트-가이던스 상향이 반복될 경우 추가 리레이팅이 가능하다. 애널리스트 목표가는 현재 110~125달러 구간에 형성돼 있어(Craig-Hallum $125, Lake Street $110, Freedom Broker $110) 진입가 122.16달러는 상단 목표가에 근접한 수준이며, AI 데이터센터·광인터커넥트向 신규 대형 수주 발표나 SiC 고객사의 추가 팔로우온 오더가 트리거로 작용해 목표가 재상향을 이끌 수 있다. 10월 1일경 예정된 FY27 1분기 실적에서 유효 백로그(1억60만 달러) 대비 실제 매출 인식 속도가 예상보다 빠르게 확인되면 추가 상승 모멘텀이 형성될 가능성이 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 모멘텀 소진/차익실현 리스크: YTD +426%, 최근 3주 만에 주가가 거의 2배 가까이 뛴 극단적 상승 이후이므로, 시장 전반의 리스크오프나 단기 과열 인식 시 빠른 폭의 조정(118.5달러 피벗 이탈)이 나올 수 있다. ② 고객 집중 리스크: AI 프로세서·실리콘포토닉스 매출 비중이 80%를 넘어서면서 소수 고객의 발주 지연·취소가 발생하면 분기 매출이 급격히 흔들릴 수 있는 lumpy bookings 구조다. ③ 가이던스 실행 리스크: FY27 가이던스(160~200% 성장)가 컨센서스를 크게 상회하는 만큼, 생산능력·공급망 제약으로 백로그의 매출 전환이 지연되면 실망 매도로 이어질 수 있다. ④ 매크로/정책 리스크: 반도체 관세, 대중 수출규제, 금리 상승에 따른 고밸류 성장주 디레이팅 압력, 그리고 EV 판매 둔화 시 SiC向 수요 위축이 동시에 작용할 경우 밸류에이션 하방 압력이 커질 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 다음 실적 발표(FY27 1분기, 예상 2026년 10월 1일경 장마감 후) — 백로그의 매출 전환 속도와 가이던스 재확인 여부가 핵심. ② 개별 수주 공시(8-K/보도자료) — SiC, AI 프로세서, 실리콘포토닉스 관련 신규/후속 수주 뉴스 지속 여부. ③ 경쟁사 실적·가이던스(Teradyne, Advantest, Cohu, FormFactor)와의 교차 확인을 통한 AI capex 사이클 지속성 점검. ④ SEMI 등 반도체 장비 업계 월간 매출 지표(billings) 발표. ⑤ 추가 애널리스트 커버리지 개시나 목표가 조정 뉴스.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — FY27 가이던스 서프라이즈, 사상 최대 수주·백로그, AI/실리콘포토닉스로의 사업 다변화 등 펀더멘털 모멘텀은 명확히 강하고 거래량 동반 돌파도 기술적으로 양호하다. 다만 YTD +426%, ATH 경신 직후의 진입이라는 점에서 단기 과열/차익실현 리스크가 상존하며, 진입가가 이미 다수 애널리스트 목표가 상단(110~125달러)에 근접해 있어 추가 상승 여력 대비 되돌림 리스크도 함께 커진 구간이다.</div></div>
+<h3>📉 매도 분석 — 2026-08-14</h3>
+<div class="card"><b>하락/청산 원인</b><div class="section-body">AEHR는 8월 3일 발표한 FY4Q 실적에서 EPS $0.11 흑자전환(전년 적자)과 함께 FY2027 매출 가이던스를 시장 컨센서스($85M) 대비 크게 높은 $130~150M(전년비 160~200% 성장)로 제시하며 8월 3일과 8월 11일 두 차례 급등, 8월 11일 종가 $115.50에서 8월 12일 장중 $129.11까지 치솟아 사상 최고가를 경신했습니다. 여기에 8월 12일 AI 프로세서 웨이퍼레벨 번인(WLBI) 장비용 $22M 추가 수주 뉴스까지 겹치며 8월 13일 신고가 돌파 매수 진입이 이루어졌습니다. 그러나 이미 저점(7월 말 70달러대) 대비 단기간에 60~80% 이상 급등한 극단적 확장 구간이었기에, 돌파 이후 신규 매수세가 이어지지 못했고 8월 14일 거래량이 최근 평균 대비 0.85배로 위축되며 &#x27;거래량 없는 돌파(가짜돌파)&#x27; 패턴이 확인되었습니다. 가격은 $125.61까지는 유지했으나 돌파를 뒷받침할 매집 강도가 부족해 시스템이 당일 청산 룰을 발동시켰고, 결과적으로 진입가 $122.19 대비 +2.8% 수익으로 마감했습니다.</div></div>
+<div class="card"><b>당일 시장 상황</b><div class="section-body">8월 12일 기준 나스닥 종합지수는 26,803.03pt(+0.81%)로 상승했고, 필라델피아 반도체지수(SOX)는 8월 11일 12,098.47pt(+0.87%)를 기록하며 반도체 섹터 전반이 완만한 강세를 유지했습니다. 다만 이는 CPI 등 인플레이션 지표 완화에 따른 지수 전반의 상승이었을 뿐, 반도체 개별 종목들의 폭발적 거래량 동반 상승은 8월 초 실적 시즌에 집중되었고 8월 중순 들어서는 특별한 모멘텀 없이 &#x27;조용한 주간&#x27; 흐름이었습니다. 즉 AEHR의 8월 13~14일 돌파는 섹터 전체의 강한 자금 유입보다는 개별 종목 뉴스(수주·가이던스)에 의존한 상태였고, 시장 전반의 거래 열기가 식어 있던 시점과 맞물려 후속 매수세 부족의 배경이 되었습니다.</div></div>
+<div class="card"><b>시스템 판단 평가</b><div class="section-body">이 룰은 &#x27;돌파 당일 거래량이 평균을 밑돌면 매집 없는 가짜돌파로 간주하고 당일 청산한다&#x27;는 취지로, 미너비니 방법론의 핵심 원칙(진성 돌파는 반드시 거래량 급증을 동반해야 한다)에 정확히 부합합니다. AEHR는 이미 단기 급등(1년 500%+, 실적 발표 후 2주간 60% 이상 추가 상승)으로 크게 확장된 상태였고, 8/12 신고가 이후 8/13~14 이틀 연속 신규 매수 확산 없이 거래량이 감소한 것은 전형적인 &#x27;돌파 실패 초기 신호&#x27;였습니다. 이런 경우 손실이 아니라 소폭 수익(+2.8%) 상태에서 선제적으로 정리한 것은 극단적으로 확장된 종목에서 흔히 나타나는 &#x27;돌파 후 급락&#x27;의 리스크를 회피한 규칙 본연의 기능이 정상 작동한 사례로 평가됩니다. 다만 매도 시점이 마감 전이라 당일 후반 거래량이 몰릴 가능성(late-day volume surge)을 완전히 반영하지 못했다는 점은 검증이 필요한 부분입니다.</div></div>
+<div class="card"><b>대안 검토</b><div class="section-body">규칙 범위 안에서는 &#x27;마감 후 최종 거래량 확정치까지 대기 후 판단&#x27;하는 옵션이 있었을 수 있으나, 이는 데이터 지연에 따른 청산 타이밍 손실 위험을 감수해야 하므로 시스템 설계상 마감 전 검증 방식이 합리적입니다. 실제로 이 종목은 이미 과열 구간이었던 만큼 결과가 크게 달라졌을 가능성은 낮으며, 오히려 하루 더 보유했다면 거래량 부재 돌파 실패 이후 통상적인 되돌림(핵심 지지선인 8/11 종가 $115.50 부근까지 조정)이 나타나 수익이 축소되거나 손실로 전환됐을 개연성이 더 큽니다.</div></div>
+<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">AEHR는 AI 반도체 번인테스트 수요 확대라는 강력한 펀더멘털 스토리(FY2027 매출 160~200% 성장 가이던스, $22M 신규 수주)를 보유하고 있어 셋업 자체는 여전히 유효하지만, 단기 과열(1년 500%+ 상승, 실적 발표 후 2주 만에 재차 급등)로 인해 최소 수일~수주간 베이스(손잡이컵·플래그 등) 형성 과정이 필요할 것으로 판단됩니다. 재진입 관망 리스트에 올린다면 ① 8월 11~12일 급등 구간의 되돌림이 상승분의 절반 이내(예: $110~118 구간)에서 지지되는지, ② 거래량이 다시 평균 대비 1.5배 이상 실리며 신고가를 재돌파하는지, ③ 눌림 구간에서 거래량이 오히려 감소하는 &#x27;건전한 조정&#x27; 패턴을 보이는지를 확인해야 합니다. 이 조건들이 충족되기 전까지는 추격 매수보다는 새로운 피벗 포인트 형성을 기다리는 것이 바람직합니다.</div></div>
+<h3>🏁 거래 종합 리뷰</h3>
+<div class="card"><b>요약</b><div class="section-body">AEHR는 2026년 8월 11일 발표된 FY4Q 실적에서 매출 1,880만 달러(+33% YoY)와 EPS +0.11달러(컨센서스 -0.01달러 대비 서프라이즈)를 기록하고 FY27 매출 가이던스를 1.3~1.5억 달러(160~200% 성장)로 제시하면서 주가가 7월 말 70달러대에서 8월 12일 장중 사상 최고가 133.35달러까지 급등했다. Craig-Hallum(목표가 68→125달러), Lake Street(목표가 110달러) 등 애널리스트들이 목표가를 대폭 상향하며 모멘텀을 뒷받침했다. 8월 13일 전일종가 129.23달러에서 장중 116.60~126.38달러의 큰 변동성을 보인 눌림목 구간에서 122.16달러(22주)와 122.88달러(1주)에 분할 매수해 재상승 돌파를 시도했다. 이후 주가는 당일 고점(126.38달러) 부근인 125.61달러까지 반등했으나, 환산 거래량이 평균 대비 0.85배로 1.0배 기준을 충족하지 못해 마감 전 검증에서 &#x27;가짜돌파&#x27;로 판정되어 23주 전량을 125.61달러에 매도, 보유 하루 만에 2.80% 수익으로 사이클을 종료했다. 결과적으로 이 거래는 극단적으로 확장된 종목에서 거래량 미확인 반등을 짧게 취하고 빠르게 발을 뺀 전형적인 규율 매매 사례다.</div></div>
+<div class="card"><b>진입 평가</b><div class="section-body">진입 시점(8월13일)은 8월11일 실적 서프라이즈와 애널리스트 목표가 상향(Craig-Hallum 125달러) 직후, 8월12일 사상 최고가 133.35달러를 찍고 난 눌림목 구간이었다. 연초 대비 이미 400%대 상승했고 신규 목표가 125달러 부근에 근접한 매우 확장된 가격대에서의 진입으로, 미너비니 기준의 &#x27;건전한 베이스에서의 저위험 피벗 돌파&#x27;보다는 실적 모멘텀을 쫓는 눌림목 리바운드 베팅에 가까웠다. 122.16달러와 122.88달러로 소량 분할 매수해 포지션 크기(총 23주, 약 2,810달러)를 작게 유지한 점은 변동성(베타 3.09)을 감안한 리스크 관리로 평가되나, 진입 시점 자체에서 거래량 확인 절차는 매수가 아닌 매도 판정에만 사용되어 진입 전 검증은 부재했다.</div></div>
+<div class="card"><b>청산 평가</b><div class="section-body">매도 규칙(환산 거래량 0.85x &lt; 1.0x, 마감 전 검증)은 이 케이스에서 명확히 득이 되었다. 당일 고점 126.38달러 대비 불과 0.6% 낮은 125.61달러에 전량 청산해 하루 만에 2.80% 수익을 확정했고, 실적 급등 이후 극단적으로 확장된 주가가 거래량 뒷받침 없이 오른 상황에서 오버나잇 리스크(갭 하락 가능성)를 원천 차단했다. 이미 목표가(Craig-Hallum 125달러) 부근까지 도달한 상태였다는 점에서 추가 상승 여력보다 되돌림 리스크가 컸고, 실제로 매매 시점 기준으로 익일 이후 가격 흐름은 아직 확인되지 않아 &#x27;더 큰 수익 기회를 놓쳤는지&#x27;는 판단할 수 없으나, 규칙이 설계된 목적(거래량 미확인 돌파의 되돌림 방지) 자체는 충실히 달성했다.</div></div>
+<div class="card"><b>시장 환경</b><div class="section-body">보유 기간(8/13~8/14) 동안 시장 환경은 AEHR 자체의 실적 모멘텀에 의해 지배됐다 — SiC/EV 전력반도체 및 실리콘 포토닉스향 신규 수주 뉴스(자율 8/4)와 실적 서프라이즈(8/11)로 반도체 장비 소형주 전반의 투자 심리가 뜨거웠던 시기였다. 다만 8월12일 사상 최고가를 찍은 직후 8월13일 전일 대비 최대 9.8% 급락(129.23→116.60)하는 변동성이 나타난 것은 실적 랠리 이후 차익실현 압력과 과열 신호로 해석되며, 이런 국면에서의 재돌파 시도는 거래량 확인이 특히 중요했다.</div></div>
+<div class="card"><b>잘된 점</b><div class="section-body">포지션 사이즈를 소량(23주)으로 제한해 변동성 큰 확장 종목에서의 리스크 노출을 통제했고, 거래량 미확인 시 당일 청산이라는 규칙을 실적 서프라이즈발 과열 구간에서 정확히 실행해 하루 만에 2.80% 수익을 확정하며 오버나잇 갭 리스크를 회피했다.</div></div>
+<div class="card"><b>아쉬운 점</b><div class="section-body">진입 시점에 거래량 확인 절차가 선행되지 않아, 이미 400%대 상승 후 애널리스트 신규 목표가 부근까지 도달한 극단적 확장 구간에서 검증 없이 매수가 이뤄졌다 — 거래량 기준이 매도(사후) 안전장치로만 작동하고 매수(사전) 필터로는 작동하지 않은 셈이다. 향후에는 이런 실적 급등 후 재상승 시도에서 진입 자체를 거래량 확인 후로 미루거나, 최소 손잡이(handle) 형성이나 타이트한 베이스 재구축을 확인한 뒤 진입하는 규칙을 검토할 필요가 있다.</div></div>
+<div class="card"><b>교훈</b><div class="section-body">실적 서프라이즈로 이미 크게 확장되고 애널리스트 목표가에 근접한 종목의 재돌파는 사후 거래량 검증(매도 규칙)만으로는 부족하며, 진입 자체를 거래량 확인 이후로 지연시키는 사전 필터를 병행해야 확장 구간에서의 불필요한 리스크 노출을 줄일 수 있다.</div></div>
+<div class="card"><b>등급</b><div class="section-body">B — 진입은 실적 급등 후 목표가 부근까지 확장된 눌림목에서 거래량 확인 없이 이뤄져 다소 성급했지만, 이후 시스템의 거래량 검증 매도 규칙이 정확히 작동해 소액 포지션으로 오버나잇 리스크 없이 2.80% 수익을 확정한 점에서 전체 프로세스의 리스크 관리는 양호했다.</div></div>
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
