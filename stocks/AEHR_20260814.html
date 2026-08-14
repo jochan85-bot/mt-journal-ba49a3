@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AEHR — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>AEHR <span class="dim" style="font-size:1rem">에흐르 테스트 시스템즈</span></h1>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span></div>
+
+<div class="card">
+평균 매수가 <b>$138.39</b>
+· 평균 매도가 <b>$132.76</b>
+· 수익률 <span class="neg">-4.07%</span>
+
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260814 기준)</span></div>
+<div class="dim">2026-08-14 진입 → 2026-08-15 청산</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 21주 @ $138.39
+<div class="dim">2026-08-14 22:45 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 21주 @ $132.76
+<div class="dim">2026-08-15 00:41  — Stop 발동 (FLAT -4%)</div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">AI 데이터센터 광트랜시버(실리콘 포토닉스)와 전기차용 실리콘카바이드(SiC) 반도체의 웨이퍼 레벨 번인/테스트 장비를 공급하는 소형 반도체 후공정 장비업체로, FY2027 매출 160~200% 성장 가이던스를 앞세워 2026년 최대 모멘텀주 중 하나로 부상했다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">Aehr Test Systems는 FOX-P/FOX-XP/FOX-NP 시리즈 웨이퍼 레벨 번인(WLBI) 및 테스트 시스템을 제조하며, 웨이퍼를 개별 다이로 자르기 전 대량으로 스트레스 테스트해 불량을 조기에 선별하는 것이 핵심 사업이다. 최근 매출 성장의 중심축은 크게 두 갈래로, 하나는 전기차·산업용 전력반도체에 쓰이는 실리콘카바이드(SiC) 웨이퍼 테스트이고, 다른 하나는 AI 데이터센터 800G/1.6T 광트랜시버용 실리콘 포토닉스 디바이스 번인이다. 2026년 3월과 7월 두 차례에 걸쳐 하이퍼스케일 데이터센터 광인터커넥트 시장을 겨냥한 대형 실리콘 포토닉스 고객(비공개, 네트워킹·광트랜시버 분야 선도업체로 알려짐)으로부터 FOX-XP 시스템 수주 및 후속 양산 주문을 확보했다. SiC 부문에서는 중국 전기차(EV) 프로그램向으로 800만 달러 이상의 신규 수주를 확보하는 등 지역 다변화도 진행 중이다. 경쟁사로는 Advantest, Teradyne 등 대형 ATE 업체가 있으나 Aehr는 웨이퍼 레벨 번인이라는 틈새 공정에 특화되어 있어 직접 경쟁보다는 보완적 위치에 가깝다. 매출 기반이 소수 대형 고객(특히 SiC 대장주 및 신규 실리콘 포토닉스 고객)에 집중되어 있어 고객 다변화가 진행형 과제다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">FY2026 4분기(2026년 5월 29일 마감) 매출은 1,880만 달러로 전년동기 1,410만 달러 대비 +34% 성장했고, 비GAAP 순이익 360만 달러, 주당순이익(비GAAP) 0.11달러로 시장 컨센서스(손익분기 수준)를 크게 상회했다. 다만 FY2026 전체 연간 매출은 5,000만 달러로 전년 대비 -15% 감소했고, 비GAAP 총마진도 38.5%로 전년 44%에서 하락하는 등 연간 실적 자체는 부진했다 — 즉 이번 강세는 &#x27;바닥을 찍고 반등하는 4분기 서프라이즈&#x27;에 기인한다. 분기 신규 수주(bookings)는 사상 최대인 6,070만 달러를 기록했으며, 2026년 5월 29일 기준 수주잔고(backlog)는 8,060만 달러, 분기 이후 신규 주문을 포함한 유효 수주잔고는 1억 60만 달러로 소형주 반도체 장비업체로는 이례적으로 높은 가시성을 확보했다. 회사는 FY2027(2027년 6월 25일 마감) 매출 가이던스로 1억 3,000만~1억 5,000만 달러(전년비 +160%~+200%)를 제시했고, 비GAAP 세전순이익률 목표는 매출의 18~22%다. 다음 실적 발표(FY2027 1분기)는 2026년 10월 초(10월 1~5일경)로 예상된다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 8월 3일 발표된 FY2026 4분기 실적에서 매출·EPS가 컨센서스를 크게 상회하고 사상 최대 수주(6,070만 달러) 및 FY2027 160~200% 성장 가이던스가 공개되며 주가가 하루 만에 약 27~31% 급등, 거래량이 폭발했다. 이후 8월 11일에도 애널리스트들의 목표가 상향(예: Freedom Broker가 매도의견 Hold→Buy, 목표가 90달러→110달러로 상향)이 이어지며 2차 돌파 랠리가 진행됐다. 이 흐름 속에서 8월 14일 133.35달러 피벗을 2.68배의 상대거래량과 함께 돌파하며 138.39달러에 신규 진입이 체결됐는데, 이는 실적 발표 후 약 열흘이 지난 시점의 &#x27;베이스 재형성 후 2차 돌파(2nd stage breakout)&#x27; 성격이 강하다. 배경 수급으로는 2026년 3월과 7월 두 차례 공개된 대형 실리콘 포토닉스 고객의 신규·후속 양산 수주(AI 데이터센터 800G/1.6T 광트랜시버向 FOX-XP 시스템, 2026년 하반기 출하 예정)와 중국 EV向 SiC 프로그램 800만 달러 이상 수주가 지속적으로 뉴스 흐름을 뒷받침했다. 결과적으로 시장의 기대치는 &#x27;SiC 단일 테마주&#x27;에서 &#x27;AI 광인터커넥트 테스트 장비&#x27;로 서사가 확장되며 밸류에이션 리레이팅이 진행 중이다. 8월 14일 기준 주가는 연초 대비 +426%, 최근 1개월 +79.5% 상승한 상태로, 이번 돌파는 이미 강한 상승 추세 위에서 나온 연장선상의 움직임이다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">SEMI 등에 따르면 반도체 테스트 장비 시장은 2026년 전년비 +31% 성장한 153억 달러 규모로 예상되며, AI 인프라·HBM·첨단 패키징 관련 웨이퍼 테스트 복잡도 증가가 주된 동력이다. SiC/GaN 전력반도체 시장도 EV·재생에너지·AI 인프라向 전력 효율 요구 증가로 구조적 성장 국면에 있다. 다만 SiC 섹터는 2024~2025년 EV 수요 둔화로 온세미(onsemi), Wolfspeed 등 대형 SiC 업체들이 부진을 겪은 바 있어, Aehr의 FY2026 연간 매출 감소(-15%)도 이 사이클의 영향을 받았다. Aehr는 대형 경쟁사(Advantest, Teradyne) 대비 규모는 작지만, 웨이퍼 레벨 번인이라는 특화 니치에서 실리콘 포토닉스라는 신규 성장축을 확보하며 피어 대비 매출 성장률(FY2027 가이던스 +160~200%)이 월등히 높다는 점이 차별점이다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">133.35달러 피벗은 8월 3일 실적 급등 이후 형성된 단기 손잡이형/플래그 베이스의 상단으로 추정되며, 2.68배의 상대거래량을 동반한 돌파는 기관 수급 유입을 시사하는 양호한 신호다. 다만 피벗 대비 확장폭이 +3.63%로 이미 진행된 후 진입한 것이어서 이상적인 저위험 진입 구간(피벗 근접 0~2%)보다는 다소 확장된 상태다. 연초 대비 +426%, 최근 한 달 +79.5% 급등한 종목 특성상 위쪽에 뚜렷한 매물대는 없으나(신고가권), 아래로는 8월 3일 갭업 저점과 20일 이동평균선이 1차 지지선, 133.35달러 피벗 자체가 2차 지지선 역할을 할 것으로 보인다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">실리콘 포토닉스 고객의 2026년 하반기 FOX-XP 신규·업그레이드 시스템 출하가 매출로 인식되고, 후속 양산 주문이 추가로 공개될 경우 FY2027 가이던스(1.3억~1.5억 달러) 상단 돌파 기대가 재부각될 수 있다. 애널리스트 목표가는 최근 상향에도 불구하고 110~125달러 구간(컨센서스 평균 약 115달러, Freedom Broker 110달러)으로 현재가(138.39달러)를 이미 하회하고 있어, 향후 추가 상향 조정이 이어질 경우 목표가 재산정에 따른 추가 매수세가 유입될 가능성이 있다. 중국 EV向 SiC 수주 확대 및 신규 하이퍼스케일러 고객 추가 확보가 확인되면 &#x27;단일 고객 리스크&#x27; 우려가 완화되며 밸류에이션 프리미엄이 정당화되는 경로도 가능하다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 고객 집중 리스크: 실리콘 포토닉스 매출의 상당 부분이 비공개 단일 대형 고객에 의존하고 있어, 해당 고객의 주문 지연이나 프로그램 축소가 발생하면 FY2027 가이던스 하향 및 급락으로 이어질 수 있다. ② 밸류에이션 과열 리스크: 연초 대비 +426% 급등한 상태에서 애널리스트 컨센서스 목표가(약 115달러)를 현재가가 이미 20달러 이상 상회하고 있어, 차익실현 매물 출회 시 단기 조정폭이 클 수 있다. ③ SiC 수요 사이클 리스크: FY2026 연간 매출이 -15% 역성장했던 배경인 EV/SiC 수요 둔화가 재발할 경우(예: 주요 EV OEM의 SiC 채택 지연) 매출 변동성이 재현될 수 있다. ④ 실행 리스크: FY2027 가이던스(+160~200% 성장)는 신규 시스템 출하 및 후속 양산 주문 전환에 크게 의존하는데, 공급망 차질이나 고객 인증(qualification) 지연 시 분기별 매출 변동성이 커질 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 10월 1~5일경 예정된 FY2027 1분기 실적 발표 — 신규 실리콘 포토닉스 고객向 매출 인식 개시 여부 및 가이던스 유지/상향 여부 확인. ② 실리콘 포토닉스 고객의 2026년 하반기 FOX-XP 신규/업그레이드 시스템 출하 공지(회사 보도자료를 통해 수시 공개될 가능성). ③ 중국 EV向 SiC 프로그램 관련 후속 수주 뉴스. ④ SEMI의 분기별 반도체 장비 매출 통계 및 주요 SiC 업체(onsemi, Wolfspeed, STMicro 등)의 실적 발표를 통한 업황 방향성 점검. ⑤ 애널리스트 목표가 추가 상향/커버리지 개시 여부 — 현재 목표가(110~125달러)가 현재가를 하회하는 상태의 해소 여부.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — FY2027 +160~200% 성장 가이던스, 사상 최대 수주잔고, AI 광인터커넥트라는 신규 성장 서사 등 펀더멘털 모멘텀은 매우 강하나, 이미 연초 대비 +426% 급등했고 애널리스트 목표가(110~125달러)를 현재 진입가(138.39달러)가 상회하는 등 밸류에이션이 확장된 상태에서의 2차 돌파 진입이라는 점에서 리스크 관리가 필요하다. 사이징 티어 ×1(RVOL 2.68배)로 보수적으로 접근한 것은 이러한 확장 리스크를 감안할 때 적절한 판단으로 보인다.</div></div>
+<h3>📉 매도 분석 — 2026-08-15</h3>
+<div class="card"><b>하락/청산 원인</b><div class="section-body">AEHR는 2026년 8월 14일 제프리스(Jefferies)가 매수 등급과 목표주가 175달러로 커버리지를 개시하며 장중 최대 약 9~10%까지 급등, 직전 52주 신고가 133.35달러를 재차 돌파하는 강한 모멘텀 장세를 연출했다. 평균 매수가 138.39달러는 이 급등 국면 중 상단부에서 체결된 것으로 추정되며, 이후 차익실현 매물과 신고가 부근에서의 통상적인 되돌림으로 주가가 132.76달러까지 밀리며 -4% 고정 손절선(FLAT -4%)이 발동했다. 8월 3~4일 실적 발표(어닝 서프라이즈, 분기 예약 6070만 달러 기록)와 리드 고객사向 팹옵틱스(FOX-XP) 추가 수주 소식으로 한 달간 +79.5%, 연초 대비 +510.7% 폭등한 종목 특성상 단기 변동성이 매우 컸다. 실제로 매도 이후 같은 날 종가는 134.74달러(+9.15%)로 마감해, 매도 시점의 하락이 추세 전환이 아닌 신고가 경신 과정에서의 일시적 눌림목이었음이 확인된다. 즉 뉴스發 급등에 뒤늦게 진입한 뒤 정상적인 변동성 구간에서 손절이 발동된 &#x27;휩쏘(whipsaw)&#x27; 성격이 짙다.</div></div>
+<div class="card"><b>당일 시장 상황</b><div class="section-body">매도 전일인 8월 13일(현지시간) 뉴욕 증시는 물가 압력 완화 지표에 힘입어 기술주·반도체주가 전반적으로 강세를 보였고, 필라델피아 반도체지수(SOX)를 포함한 반도체 섹터가 동반 상승하는 우호적 환경이었다. AI 반도체 테스트 수요 확대 테마로 AEHR을 비롯한 관련 종목들이 실적 시즌 랠리에 편승해 동반 급등하는 흐름이 이어지고 있었으며, 8월 14일 역시 반도체 섹터 전반이 견조한 가운데 AEHR 개별 재료(제프리스 커버리지 개시)가 추가 상승 동력을 제공한 날이었다.</div></div>
+<div class="card"><b>시스템 판단 평가</b><div class="section-body">-4% 고정 손절 규칙은 미너비니 방식의 표준적인 리스크 관리 원칙에 부합하지만, AEHR은 베타 4.41, 일간 변동성 18% 이상으로 알려진 초고변동성 종목이며 당일이 실적 후 애널리스트 커버리지 개시로 인한 급등일이었다는 점을 고려하면 고정 -4% 손절폭은 이 종목의 정상적인 노이즈 범위보다 좁았을 가능성이 크다. 실제로 손절 발동 이후 같은 날 종가가 매수가(138.39)보다는 낮지만 매도가(132.76) 대비 크게 반등해 마감했다는 점은, 시스템이 추세 붕괴가 아닌 단기 눌림목에서 기계적으로 반응했음을 시사한다. 다만 신고가 돌파 당일 상단부 추격 매수 자체가 진입 리스크를 키운 선행 요인이며, 손절 규칙 자체는 계좌 보호라는 본연의 목적은 충실히 수행했다고 평가할 수 있다.</div></div>
+<div class="card"><b>대안 검토</b><div class="section-body">동일한 규칙 체계 안에서도 변동성 조정형 손절(ATR 기반) 혹은 당일 저점/직전 지지선(피벗 포인트) 기준 손절을 적용했다면 이 종목의 고베타 특성상 손절 폭이 -4%보다 넓게 설정되어 당일 눌림목을 견뎌내고 종가 반등분(+9%대)까지 보유했을 가능성이 있다. 다만 이는 사후적으로만 확인 가능한 결과이며, 신고가 추격 진입 자체를 지양하고 눌림목이나 베이스 재형성 후 진입했다면 애초에 이런 휩쏘 손절을 피할 수 있었을 것이다.</div></div>
+<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">AEHR은 AI 반도체 테스트 수요 확대라는 강한 펀더멘털 스토리와 제프리스 등 기관의 목표주가 상향(175달러)이 뒷받침되는 종목으로, 이번 손절은 추세 훼손이 아닌 단기 변동성에 따른 이탈로 판단된다. 재진입 관점에서는 132~135달러 구간에서 며칠간의 베이스(손잡이 달린 컵 또는 타이트한 플래그) 형성 여부와 거래량 감소를 동반한 안정화를 확인하는 것이 우선이며, 신고가 부근에서의 낮은 변동성 좁은 레인지 돌파(VCP 후반부 패턴)를 관망 리스트 편입 조건으로 삼아야 한다. 다만 연초 대비 510% 이상 급등한 고밸류에이션 종목 특성상 추가 실적/수주 모멘텀이 확인되지 않으면 급격한 되돌림 리스크도 상존하므로, 재진입 시에는 손절폭을 종목 변동성에 맞게 확대하거나 포지션 사이즈를 축소하는 방식의 리스크 조정이 필요하다.</div></div>
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
