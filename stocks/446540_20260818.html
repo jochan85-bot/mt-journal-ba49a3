@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>446540 — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>446540 ☀️ <span class="dim" style="font-size:1rem">메가터치</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2e (0.33yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>8,668원</b>
+
+· 수익률 <span class="neg">-0.32%</span>
+· 보유 402주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260814 기준)</span></div>
+<div class="dim">2026-08-18 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 402주 @ 8,668원
+<div class="dim">2026-08-18 09:10 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">국내 2차전지 3사(삼성SDI·LG에너지솔루션·SK온) 충·방전 테스트 핀을 사실상 독점 공급하며 4680 원통형 배터리·파나소닉向 테슬라 공급망 확장 모멘텀을 보유한 코스닥 부품주.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">메가터치는 2차전지 활성화(충·방전) 공정에 쓰이는 테스트 핀과 반도체 검사용 핀을 개발·제조하는 정밀부품 기업이다. 국내 배터리 3사(삼성SDI, LG에너지솔루션, SK온) 대상 충·방전 테스트 핀 시장 점유율이 사실상 100%로 알려져 있어 국내 배터리 셀 생산능력 증설의 직접 수혜 구조를 갖고 있다. 최근 4680 원통형 배터리용 테스트 핀을 LG에너지솔루션·삼성SDI에 공급 중이며, 일본 파나소닉向 4680 테스트 핀 개발을 완료해 테슬라 공급망 진입 기대감이 형성되어 있다. 매출 구성은 2차전지向 테스트 핀이 주력이며 반도체 검사용 핀 사업도 병행하고 있다. 경쟁사 대비 독점적 지위를 보유했다는 점이 핵심 투자 포인트이나, 고객사가 소수 대형 배터리사에 집중돼 매출 변동성이 고객사 CAPEX 사이클에 크게 좌우되는 구조다. 2023년 코스닥 신규 상장 종목으로 시가총액이 작아 수급 변동성이 큰 소형주에 해당한다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2025년 상반기(2분기 누적) 별도기준 매출액은 전년동기 대비 10.4% 감소했고, 영업이익과 당기순이익은 모두 적자전환한 것으로 확인된다. 이는 배터리 3사의 공급과잉에 따른 신규 라인 가동 지연, 미국 IRA 정책 및 유럽 규제 변화로 인한 고객사 CAPEX 집행 불확실성이 직접적 원인으로 지목된다. 참고로 2023년 연결기준 매출액은 약 529.9억원(전년 대비 +5.68%), 영업이익 약 39.96억원으로 흑자 기조였던 것과 비교하면 2025년 실적은 뚜렷한 다운턴 구간이었다. 애널리스트 커버리지가 없는 소형주로 공식 컨센서스나 가이던스는 확인되지 않으며, 다음 분기(2026년 2분기~반기) 실적 발표는 통상 8월 중순 전후로 예상되나 정확한 공시일은 전자공시(DART)에서 별도 확인이 필요하다. 최근 주가 급등은 실적 개선 확인보다는 4680 배터리·테슬라 공급망 진입, 전고체·나트륨이온 배터리 등 테마성 기대감에 기반한 선반영 성격이 강하다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2025년 2월 LG에너지솔루션의 4680 배터리 양산·테슬라 납품 소식과 함께 메가터치의 테스트 핀 독점 공급 사실이 부각되며 1차 특징주 흐름이 시작됐다. 이후 파나소닉向 4680 테스트 핀 공급 계획(디일렉 보도)이 알려지며 테슬라 글로벌 배터리 공급망 진입 기대가 추가됐다. 최근에는 중국 CATL의 2세대 나트륨이온 배터리 &#x27;낙스트라(Naxtra)&#x27; 연내 양산 소식과 삼성전기의 전고체 배터리 개발 기대감이 겹치며 차세대 배터리 관련 테마 매수세가 유입됐다. 여기에 테슬라의 분기 인도량이 예상치를 상회하며 미국 증시에서 테슬라 주가가 10% 이상 급등, 국내 배터리 밸류체인 전반에 온기가 확산된 점도 촉매로 작용했다. 이런 흐름 속에서 2026년 8월 18일 장 초반 거래량이 평균 대비 5.36배 급증하며 직전 저항선이던 8,500원 피벗을 강한 거래량 동반으로 상향 돌파했고, 진입 시점 가격은 피벗 대비 +1.18% 확장된 8,668원으로 신규 매수세가 뚜렷하게 유입된 모습이다. 52주 고점(10,990원)에 근접한 구간에서의 돌파라는 점에서 신고가 갱신 기대감도 수급을 뒷받침한 것으로 판단된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">2차전지 업종은 2024년을 저점으로 유럽 BEV 판매 회복(2025년 289만대, +20% YoY, 2026년 2월 누적 +15% YoY)을 중심으로 반등 국면에 진입했으며, 2026년 8월 기준 업계는 자동차·2차전지 섹터에 대해 비중확대(Overweight) 의견이 우세하다. 4분기 2025 이후 메탈 가격 상승으로 2H26부터 판가 인상 효과가 본격화될 것으로 전망되어 셀 제조사들의 실적 개선 가시성이 높아지는 구간이다. 다만 업종 평가축이 단순 EV 성장률에서 ESS·LFP·북미 생산능력·수주 잔고로 다변화되고 있어, 메가터치처럼 셀 3사 CAPEX에 종속된 부품·소재 기업은 대형 셀 업체의 라인 증설 재개 시점에 따라 실적 반영 시차가 존재한다. 동사는 독점적 지위(점유율 100%)라는 강점이 있으나, 최근 2년간 실적이 셀 3사의 가동률 부진에 연동해 적자전환한 이력이 있어 업황 회복이 매출로 전이되는 속도가 관건이다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">장기간 4,000~9,000원대 박스권에서 등락하던 주가가 8,500원 피벗을 5.36배의 강한 거래량 동반 돌파로 상향 돌파, 미너비니식 VCP 브레이크아웃 요건(RVOL 5배 이상, 확장폭 2% 이내)을 충족하는 양호한 진입 신호다. 진입가 8,668원은 피벗 대비 +1.18% 확장에 그쳐 추격매수 부담이 크지 않은 구간이며, 52주 신고가(10,990원)까지 약 27% 여유가 있어 위쪽 매물대가 상대적으로 가볍다. 반면 52주 저점(3,245원) 대비로는 이미 167% 이상 상승한 상태로 베이스 자체가 짧고 변동성이 큰 편이라 눌림 시 8,500원 피벗선이 1차 지지, 그 아래 이전 저항이었던 구간이 2차 지지로 작용할 가능성이 높다. 소형주 특성상 거래량 급증이 테마 뉴스에 기반한 단기 수급일 가능성이 있어 돌파 후 거래량 지속성 확인이 중요하다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">파나소닉向 4680 테스트 핀 공급이 실제 수주·매출로 가시화되고 테슬라 공급망 진입이 공식 확인될 경우 실적 턴어라운드와 함께 주가 재평가가 가능하다. 2H26 배터리 3사의 판가 인상 및 CAPEX 재개가 본격화되면 독점 공급사인 동사의 매출·수주 회복이 뒤따를 수 있으며, 전고체·나트륨이온 등 차세대 배터리 라인 확대 시 신규 테스트 핀 수요도 추가로 발생할 수 있다. 애널리스트 공식 커버리지가 없어 컨센서스 목표주가는 확인되지 않으나, 52주 고점(10,990원)을 1차 저항 겸 목표 구간으로 볼 수 있으며 이를 돌파할 경우 상장 이후 신고가 영역에 진입하게 된다. 테마성 순환매(2차전지 밸류체인 전반)가 지속될 경우 단기 모멘텀 트레이딩 관점에서 추가 상승 여력이 존재한다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 실적 리스크: 2025년 상반기 매출 감소·영업적자 상태가 지속될 경우, 테마성 상승 이후 실적 공백이 확인되면서 급격한 되돌림이 발생할 수 있다(다음 분기 실적 발표 시 확인 필요). ② 고객 집중 리스크: 매출이 배터리 3사 CAPEX 사이클에 절대적으로 의존하는 구조라, 셀 업체의 증설 지연이나 발주 축소가 재발하면 실적 회복이 다시 미뤄질 수 있다. ③ 테마 변동성 리스크: 최근 상승이 CATL 나트륨이온·삼성전기 전고체·테슬라 인도량 등 외부 뉴스 플로우에 크게 의존하고 있어, 관련 뉴스가 소강되거나 기대에 못 미치는 발표가 나올 경우 차익실현 매물로 급락할 수 있다. ④ 유동성·수급 리스크: 코스닥 소형주 특성상 시가총액이 작아 RVOL 5배 이상의 급등 이후 변동성이 확대되기 쉽고, 대량 매물 출회 시 슬리피지가 클 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 2분기(또는 상반기) 실적 발표: 통상 8월 중순 전후 공시 예정이므로 매수 직후 실적 확인 필수(적자 지속 여부 체크). ② 파나소닉向 4680 테스트 핀 공급 계약/납품 관련 추가 공시 여부. ③ 삼성SDI·LG에너지솔루션·SK온의 하반기 CAPEX 및 4680 라인 가동률 관련 뉴스. ④ CATL 나트륨이온 배터리 연내 양산 진행 상황 및 국내 셀사의 대응 발표. ⑤ 테슬라 분기 인도량 및 배터리 조달 관련 뉴스(9월 초 예상). ⑥ 주가가 52주 고점(10,990원) 접근 시 저항 돌파 여부와 거래량 지속성.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — RVOL 5.36배, 확장폭 +1.18%의 기술적 돌파 품질은 미너비니 기준으로 양호하나, 직전 상반기 실적이 매출 감소·영업적자였고 애널리스트 공식 커버리지가 부재한 테마 중심 소형주라는 점이 리스크다. 4680/테슬라 공급망 모멘텀과 2H26 업황 개선 기대가 유효하나, 실적으로 확인되기 전까지는 뉴스 플로우 의존적 변동성 장세로 판단해 포지션 관리(손절 라인·비중)에 유의할 필요가 있다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

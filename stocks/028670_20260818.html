@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>028670 — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>028670 ☀️ <span class="dim" style="font-size:1rem">팬오션</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.17yr, B2)</span></div>
+
+<div class="card">
+평균 매수가 <b>6,090원</b>
+
+· 수익률 <span class="neg">-0.82%</span>
+· 보유 569주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260814 기준)</span></div>
+<div class="dim">2026-08-18 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 569주 @ 6,090원
+<div class="dim">2026-08-18 09:14 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">하림그룹 계열의 국내 1위 벌크선사로, 드라이벌크 중심에서 탱커·LNG선으로 사업 포트폴리오를 넓히며 다각화된 해운 실적 성장을 보여주는 종목이다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">팬오션은 하림그룹 계열의 종합 해운사로 드라이벌크(철광석·석탄·곡물 등 원자재 운송)를 핵심 축으로 하되, 탱커(원유·석유제품), LNG선, 컨테이너선, 그리고 자회사 Nova Trans를 통한 곡물 트레이딩·유통 사업까지 영위하는 다각화된 사업 구조를 갖고 있다. 2026년 2분기 기준 부문별 영업이익은 드라이벌크 847억원, LNG 497억원, 탱커 437억원, 컨테이너 145억원으로, 과거 벌크 단일 의존도가 높았던 구조에서 탱커·LNG 비중이 빠르게 확대되고 있다. 주요 고객은 포스코, 한국전력 등 국내 대형 화주와 장기 운송계약(COA) 체결 물량이 상당 부분을 차지해 안정적 캐시플로우를 확보하고 있다. 벌크선 부문에서는 국내 최대 선대 규모를 바탕으로 경쟁 우위를 갖고 있으며, 최근 VLCC(초대형원유운반선) 등 탱커 자산 확보를 통해 지정학적 리스크 국면에서 수혜를 보는 구조로 전환 중이다. 곡물사업은 남미·기니 등 신흥 물동량 확대와 연계되어 매출 성장에 기여하고 있다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기 연결 매출은 1조9,137억원으로 전년 동기 대비 47.9% 증가했고, 영업이익은 1,937억원으로 57.4% 급증했다. 1분기에는 매출 8.3%, 영업이익 24.4%, 순이익 31.2% 증가하며 이미 개선 흐름이 확인됐던 만큼, 2분기 실적은 시장 기대치를 상회한 것으로 평가된다(LS증권 등 기대 이상 실적 코멘트). 부문별로는 탱커 영업이익이 165.7% 급증하며 성장을 견인했고, LNG(+33.6%), 드라이벌크(+59.8%)도 고르게 개선된 반면 컨테이너선만 -5.2%로 부진했다. 하나증권 추정 기준 3분기 매출은 전년비 14% 증가한 1조4,500억원, 영업이익은 1% 증가한 1,288억원으로 전망되며(벌크 -18%, 컨테이너 -45% vs 탱커·LNG 개선), 3분기 실적 발표는 통상 11월 초로 예상된다. 현재 12개월 선행 PER 약 6배, PBR 0.3배 수준으로 밸류에이션 부담은 낮은 편이다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 1분기(4월)부터 실적 서프라이즈가 이어지며 시장의 재평가가 시작됐고, 4월 알파스퀘어는 목표주가를 6,200원에서 7,000원으로 상향하며 VLCC 등 탱커 자산 확보를 긍정적으로 평가했다. 6월 8일 한국투자증권이 신규 매수 리포트를 내며 목표가 7,500원을 제시, &#x27;주가만 빼고 모든 게 좋은 상황&#x27;이라는 표현으로 실적 대비 저평가를 지적했다. 7월 31일 2분기 실적이 발표되며 영업이익 1,937억원(+57.4% YoY)으로 컨센서스를 상회했고, 탱커·곡물사업 호조가 부각됐다. 이후 8월 들어 실적 모멘텀과 저평가 매력이 재확인되며 수급이 개선, 8월 18일 6,060원 피벗을 돌파거래량 3.47배의 강한 거래 동반 속에 6,090원(+0.5% 확장)으로 신규 진입이 발생했다. 이는 실적 발표 후 약 2~3주 시차를 두고 기관·개인 수급이 뒤늦게 유입되는 전형적인 실적 모멘텀 후속 베이스 돌파 패턴으로 해석된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">드라이벌크 업황은 2026년 상반기 BDI 평균 1,290.3으로 전년비 29.7% 낮은 수준을 기록하며 부진했고, 선복량 증가율(3%)이 물동량 증가율(1%)을 상회해 하반기에도 벌크 운임 자체의 뚜렷한 개선은 어려운 구조다. 반면 탱커 부문은 지정학적 리스크 장기화로 견조한 시황이 유지되고 있고, LNG선은 동북아·유럽 수요 증가로 성장 사이클에 진입해 팬오션의 포트폴리오 다각화 전략이 업황 약세를 상쇄하는 구도다. 국내 피어(HMM 등 컨테이너 중심사)와 달리 팬오션은 장기계약 기반 비중이 높아 스팟 운임 변동성에 대한 방어력이 상대적으로 우수하다는 평가를 받는다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">6,060원 피벗을 3.47배의 강한 상대거래량을 동반하며 돌파, 확장폭은 +0.5%로 피벗 근접 진입에 성공해 초기 리스크 대비 유리한 진입가를 확보했다. 다만 52주 고점이 6,600원 부근(7월 초 기준)으로 파악되는 만큼 6,600원 근방이 단기 매물대·저항으로 작용할 가능성이 있다. 실적 발표(7월 31일) 이후 베이스를 형성한 뒤 거래량을 동반한 돌파라는 점에서 미너비니 관점의 &#x27;펀더멘털+기술적 컨퍼런스&#x27; 요건을 충족하는 편이며, 피벗(6,060원)이 1차 지지선 역할을 하게 된다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">탱커·LNG 부문 실적 기여가 계속 확대되며 3분기 이후에도 벌크 업황 부진을 상쇄하는 흐름이 이어질 경우, 6,600원 전고점 돌파 후 한국투자증권 목표가 7,500원(현재가 대비 약 23% 상승여력)까지 추세적 상승이 가능하다. 애널리스트 목표가는 5,600~6,500원(보수적 컨센서스)에서 7,500원(한투 최상단)까지 넓게 분포하며, 현재 밸류에이션(PER 6배, PBR 0.3배)이 실적 개선을 충분히 반영하지 못했다는 시각이 트리거가 될 수 있다. 지정학적 리스크(중동·해상봉쇄 등) 지속으로 탱커 스팟 운임이 추가 강세를 보이거나, VLCC 등 신규 자산 가동률이 예상보다 빠르게 상승할 경우 3분기 실적이 컨센서스(영업이익 1,288억원)를 재차 상회하며 재평가가 가속화될 수 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 벌크 선복량 증가율(3%)이 물동량 증가율(1%)을 웃도는 구조적 공급과잉이 지속되면 BDI가 추가 하락, 벌크 부문 영업이익이 하나증권 추정치(-18% YoY)보다 더 악화될 수 있다. ② 컨테이너선 부문은 이미 -45%(3분기 추정) 부진이 예상되는 가운데, 글로벌 물동량 둔화나 중국 경기부진이 심화되면 전사 실적에 추가 하방 압력으로 작용한다. ③ 지정학적 리스크(중동 정세)가 완화되며 탱커 스팟 운임이 정상화될 경우, 최근 실적 성장의 핵심 동력이었던 탱커 부문 이익이 급감하며 어닝 모멘텀이 꺾일 수 있다. ④ 원/달러 환율 급변동이나 유가 급등은 연료비·환산손익 측면에서 수익성에 직접적 영향을 미칠 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">3분기 실적 발표(통상 11월 초 예상, 하나증권 추정 매출 1조4,500억원·영업이익 1,288억원)에서 탱커·LNG 부문의 이익 기여도 지속 여부를 확인해야 한다. 매월 발표되는 BDI(발틱운임지수) 및 벌크선 스팟 운임 동향, 그리고 VLCC 등 탱커 자산 가동률·계약 현황도 주요 체크포인트다. 아울러 6,600원 전고점 돌파 여부와 거래량 동반 여부를 통해 추가 상승 모멘텀의 지속성을 판단해야 하며, 지정학적 리스크(중동 정세) 관련 뉴스플로우도 탱커 운임에 직결되므로 지속 모니터링이 필요하다.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 2분기 실적 서프라이즈(+57.4% YoY)와 목표가 상향(한투 7,500원) 등 펀더멘털 개선이 뚜렷하고 거래량(RVOL 3.47배)을 동반한 견고한 피벗 돌파가 확인되어 기술적 셋업은 우수하다. 다만 벌크 업황 자체는 구조적 공급과잉으로 여전히 약세이고 3분기 벌크·컨테이너 부문 이익 감소가 예상되는 등 업황 전체의 방향성보다는 탱커·LNG 다각화 스토리에 의존한 상승이라는 점에서 확신도는 강한 확신보다 한 단계 낮게 평가한다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
