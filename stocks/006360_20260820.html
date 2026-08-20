@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>006360 — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>006360 ☀️ <span class="dim" style="font-size:1rem">GS건설</span></h1>
+<div><span class="badge closed">청산 완료</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.44yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>36,450원</b>
+· 평균 매도가 <b>35,600원</b>
+· 수익률 <span class="neg">-2.33%</span>
+
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260814 기준)</span></div>
+<div class="dim">2026-08-20 진입 → 2026-08-20 청산</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 47주 @ 36,450원
+<div class="dim">2026-08-20 09:29 </div>
+</div><div class="tl-item buy">
+<b>REBAL_BUY</b> · None주 @ 35,500원
+<div class="dim">2026-08-20 15:00 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 96주 @ 35,600원
+<div class="dim">2026-08-20 15:10  — 가짜돌파 당일 정리: 환산 거래량 0.81x &lt; 1.0x (마감 전 검증)</div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">국내 정비사업(재건축·재개발) 수주 회복과 GS이니마 매각을 통한 재무구조 개선을 양대 축으로, 본업 주택마진 정상화 국면에 진입한 국내 대형 건설사 GS건설</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">GS건설은 건축·주택사업본부(자이 브랜드 중심 아파트 시공·정비사업), 플랜트사업본부(석유화학·에너지 플랜트), 인프라사업본부(토목·SOC)의 3대 본부 체제로 운영되며, 2026년 2분기 기준 건축·주택 매출이 1조5368억원으로 전체의 절반 이상을 차지하는 주택 중심 사업구조입니다. 플랜트사업본부 매출 4020억원, 인프라사업본부 매출 3965억원으로 두 부문이 보완적 역할을 합니다. 과거 신사업으로 육성하던 스페인 수처리 자회사 GS이니마(글로벌워터솔루션)를 2025년 8월 UAE 국영 에너지기업 TAQA에 약 1조7000억원에 매각하며 사업구조를 국내 주택·정비사업 중심으로 재편 중입니다. 국내 도시정비사업(재건축·재개발) 시장에서 자이(Xi) 브랜드 인지도를 바탕으로 대형 건설사 중 상위권 수주 지위를 유지하고 있으며, 2026년 2분기 신규수주가 5조2242억원으로 전년 동기 대비 61.7% 급증한 것도 정비사업 수주 확대에 힘입은 결과입니다. 주요 고객은 정비사업조합, 민간 시행사, 정부·공공기관 발주 인프라 프로젝트 등으로 구성됩니다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기(4~6월) 연결 매출은 2조7799억원으로 전년 동기 대비 13.0% 감소했으나, 직전 분기(1분기) 대비로는 완만한 개선 흐름을 보이고 있습니다. 영업이익은 914억원으로 전년 동기 대비 43.6% 큰 폭 감소했지만 당기순이익은 흑자 전환에 성공했습니다. 건축·주택 매출은 1조5368억원으로 착공현장 감소 영향에 전년 동기(2조1484억원) 대비 28.5% 줄었지만, 직전 분기(1조4213억원) 대비로는 8.1% 증가하며 저점을 지나는 모습입니다. 핵심 포인트는 마진 구조로, 과거 저가 수주 현장의 원가 손실 반영이 마무리되고 정비사업 위주 고마진 현장 매출 비중이 늘면서 주택 부문 매출총이익률(GPM)이 14~17%대까지 회복 중이며, 시장에서는 2026년 연간 영업이익이 5,100억원 이상까지 회복될 것으로 전망하고 있습니다. 다음 분기(3분기, 7~9월) 실적 발표는 통상 11월 초·중순경 예정입니다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2025년 8월 GS이니마 매각(약 1조7000억원) 발표로 재무구조 개선 기대가 형성된 이후, 2026년 상반기 내내 저가 주택 현장 손실 반영 마무리와 정비사업 마진 회복 스토리가 시장에 서서히 반영되어 왔습니다. 2026년 5월 삼성증권이 1분기 리뷰에서 목표가 45,000원(상저하고 실적 전망)을 제시했고, 7월 30일 교보증권이 2분기 리뷰 리포트에서 &#x27;본업인 주택에 관심을 갖자&#x27;며 목표가 34,000원(매수)을 제시하는 등 증권가의 시선이 점차 본업 정상화 쪽으로 이동했습니다. 2분기 실적(영업이익 914억원, YoY -43.6%)은 표면적으로 부진했지만 신규수주가 전년 대비 61.7% 급증(5조2242억원)하고 순이익이 흑자 전환하면서 &#x27;실적 저점 통과&#x27; 내러티브가 강화됐습니다. 최근 1주일 +11.56%, 1개월 +21.1%, 1년 +52.76% 상승하며 기관·외국인의 동시 순매수세가 유입되었고, 8월 20일 36,000원 피벗을 RVOL 1.43배(평시 대비 다소 높은 수준)의 거래량을 동반해 돌파했습니다. 종합하면 이번 돌파는 단일 뉴스보다는 재무구조 개선(GS이니마 매각) + 실적 저점 통과 + 정비사업 수주 모멘텀이 누적되어 나타난 구조적 재평가(re-rating) 흐름의 연장선으로 해석됩니다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">국내 건설경기는 2025년 약 -9% 위축 이후 2026년 정부 재정 투입 확대와 금리인하 기대감에 힘입어 소폭(+2% 내외) 회복 국면에 진입했다는 평가입니다. 특히 이재명 정부의 재건축·재개발 용적률 상향, 분담금 완화 등 정비사업 활성화 공약이 구체화되며 2026년 2월 민간 수주가 정비사업 확대 영향으로 전년 동월 대비 11.1% 증가하는 등 선행지표가 개선되고 있습니다. 다만 착공물량 감소 등 일부 선행지표 악화와 민간 부문 침체는 여전히 회복의 걸림돌로 지적됩니다. 이런 환경에서 GS건설은 자이 브랜드의 정비사업 수주 경쟁력을 바탕으로 업황 회복의 direct beneficiary로 부각되고 있으며, 부채비율 253%를 45%p 낮추는 재무구조 개선 작업까지 겹치면서 동종 건설사 대비 밸류에이션 리레이팅 여지가 크다는 평가를 받고 있습니다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">매수 시점 진입가 36,450원은 피벗(36,000원) 대비 +1.11% 확장 수준으로, 돌파 초기 단계에서 큰 갭 없이 진입한 통제된 확장폭입니다. 진입 시점 RVOL은 1.43배로 폭발적 수준은 아니지만 평시 대비 유의미하게 증가한 거래량이며, 이에 따라 사이징 티어도 ×0.5로 축소 적용되었습니다. 최근 1개월간 +21.1%, 1년간 +52.76% 상승한 이후의 돌파이기 때문에 이미 상당한 베이스 상승을 거친 구간에서의 추가 돌파로, 저항대보다는 신고가 영역에서의 모멘텀 지속 여부가 관건입니다. 뚜렷한 매물 저항선은 추가 확인이 필요하나, 신고가 갱신 구간 진입인 만큼 단기 지지선은 피벗(36,000원) 부근이 될 것으로 판단됩니다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">3분기 이후 정비사업 고마진 현장 매출 비중이 계속 늘면서 주택 GPM이 17% 이상으로 추가 개선되고, 2026년 연간 영업이익 5,100억원 이상 가이던스가 현실화될 경우 추가 리레이팅이 가능합니다. GS이니마 매각 대금 유입에 따른 부채비율 45%p 하락, ROE 8.7% 달성이 확인되면 밸류에이션 프리미엄이 부여될 수 있습니다. 증권가 목표주가는 교보증권 34,000원부터 삼성증권 45,000원, 컨센서스 상단 52,000원까지 폭넓게 분포되어 있어, 실적 서프라이즈 시 상단 목표가 방향으로 트리거가 형성될 여지가 있습니다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 영업이익이 여전히 전년 동기 대비 43.6% 감소한 상태로, 마진 회복 속도가 시장 기대(연간 5,100억원)에 미치지 못할 경우 실적 실망에 따른 되돌림 리스크가 있습니다. ② GS이니마는 과거 영업이익의 상당 부분을 차지하던 핵심 자회사였기 때문에, 매각 이후 이익 기여 공백이 국내 본업 개선 속도보다 빠르게 나타나면 신용등급·이익 체력에 부담이 될 수 있습니다. ③ 주택시장은 수도권과 지방 간 양극화(수도권 +2~3%, 지방 보합~-1%)가 심화되는 구조로, 지방 현장 비중이 높은 미착공 물량에서 추가 손실이 발생할 경우 마진 회복 스토리가 훼손될 수 있습니다. ④ 이미 1년간 +52.76%, 1개월 +21.1% 급등한 이후의 진입이므로, RVOL 1.43배의 다소 완만한 거래량 상태에서 차익실현 매물이 출회되면 피벗(36,000원) 이탈 및 단기 조정 리스크가 존재합니다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 3분기(7~9월) 실적 발표(통상 11월 초·중순) — 주택 GPM 17% 이상 지속 여부, 연간 영업이익 5,100억원 가이던스 궤도 확인. ② GS이니마 매각 대금(약 1조7000억원) 유입 및 부채비율 45%p 하락 반영 시점(2026년 하반기 재무제표). ③ 정부 재건축·재개발 용적률 상향 등 정비사업 관련 정책 발표 및 국토부 주택 통계(월간 착공·인허가 실적) 발표 일정. ④ 신용평가사(나이스신용평가 등)의 GS이니마 매각 후속 신용등급 리뷰 결과. ⑤ 신규수주 누적치(2분기 5조2242억원) 추세가 3분기에도 이어지는지 여부.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 재무구조 개선(GS이니마 매각)과 정비사업 수주 확대(+61.7% YoY)라는 구조적 개선 스토리는 뚜렷하지만, 2분기 영업이익이 여전히 전년 대비 43.6% 감소한 상태이고 RVOL 1.43배로 돌파 거래량이 폭발적이지 않아 사이징도 ×0.5로 축소 적용되었습니다. 이미 1개월 +21%, 1년 +52% 급등한 이후의 진입인 만큼 추격 매수 리스크를 감안해 보통 수준의 확신으로 판단합니다.</div></div>
+<h3>📉 매도 분석 — 2026-08-20</h3>
+<div class="card"><b>하락/청산 원인</b><div class="section-body">GS건설은 8월 들어 GS그룹의 동해 AI 데이터센터(1단계 1.2GW, 총 10조원 시공물량 추정) 및 베트남 원전, 주택정비사업 회복이라는 &#x27;삼각 모멘텀&#x27;을 타고 8월 4~5일 하루 만에 18.56%, 8.87% 급등하는 등 8월 누적 약 52.24% 상승했다. 이런 급등 흐름 속에서 2026-08-20 당일 VCP 피벗 돌파를 시도하며 평균 36,450원에 신규 진입했으나, 장중 매수세가 이어지지 못하며 마감 전 환산 거래량이 최근 평균 대비 0.81배에 그쳐 돌파를 뒷받침하지 못했다. 결국 종가 기준 35,600원까지 밀리며 진입가 대비 -2.3% 손실로 당일 청산됐다. 이는 거래량 동반 없이 피벗을 소폭 상회했다가 되밀린 전형적인 &#x27;가짜돌파(false breakout)&#x27; 패턴이며, 월간 +52%에 달하는 급등 이후 단기 차익실현 매물이 출회된 영향도 배경으로 추정된다.</div></div>
+<div class="card"><b>당일 시장 상황</b><div class="section-body">매도 당일 코스피 지수는 8월 들어 5% 이상 하락하는 약세 흐름을 보인 반면, 건설업종 지수는 같은 기간 약 24.76% 급등하며 KRX 전체 업종 중 상승률 1위를 기록하는 극명한 디커플링을 보였다. 대우건설(+43.97%), DL이앤씨(+25.64%), 현대건설(+20%대), 삼성E&amp;A(+11.87%) 등 동종 건설주들도 AI 데이터센터·원전 테마로 동반 강세였으나, 지수 대비 과열된 섹터 특성상 개별 종목 단위에서는 거래량 동반 없는 상승 후 되밀림이 나타나기 쉬운 환경이었다.</div></div>
+<div class="card"><b>시스템 판단 평가</b><div class="section-body">시스템의 &#x27;가짜돌파 당일 정리&#x27; 룰은 미너비니식 VCP 돌파 매매의 핵심 원칙인 &#x27;돌파 시 거래량 확인&#x27;을 마감 전 시점에 재검증하는 안전장치로, 거래량이 뒷받침되지 않는 돌파는 기관 수급 없는 개인 주도 상승일 가능성이 높아 익일 갭하락 리스크를 사전에 차단하려는 취지다. 실제로 환산 거래량 0.81배는 기준선 1.0배에 못 미쳐 룰이 정상 작동했고, -2.3% 손실로 통상적인 손절 폭(-7~8%)에 이르기 전 조기 청산되어 손실이 최소화됐다. 다만 진입 당일 곧바로 매도까지 이어진 점을 감안하면, 피벗 자체가 콘솔리데이션 베이스가 충분히 다져지지 않은 상태에서 다소 이른 시점에 인식됐을 가능성이 있어 진입 시 베이스 성숙도 점검이 병행될 필요가 있다.</div></div>
+<div class="card"><b>대안 검토</b><div class="section-body">룰 체계 내에서는 거래량 조건을 마감 확정치가 아닌 30분~1시간 전 시점의 환산치로만 확인하기보다, 돌파 후 피벗선 재이탈 여부를 함께 보는 이중 확인 로직을 추가했다면 좀 더 데이터에 기반한 판단이 가능했을 것이다. 다만 8월 건설업종 전반이 지수 대비 과열된 국면이었던 점을 감안하면 대안 로직을 적용했어도 결과가 크게 달라졌을 가능성은 낮고, 오히려 청산이 지연됐다면 손실이 확대됐을 여지가 크다.</div></div>
+<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">GS건설은 AI 데이터센터(동해 1.2GW 프로젝트 건축허가 진행 중) 및 베트남 원전 수주 모멘텀이 여전히 유효해 중장기 상승 추세 자체가 훼손된 것은 아니다. 다만 8월 한 달간 50%를 상회하는 급등 이후인 만큼 추가 상승을 위해서는 거래량을 동반한 재베이스(재응축) 구간이 선행될 필요가 있다. 재진입 관점에서는 35,600~36,450원 구간에서 손 바뀜이 이뤄지며 수일~수주간 조정·횡보하는 새로운 VCP 피벗이 형성되는지, 재돌파 시 환산 거래량이 1.0배를 넉넉히 상회하는지를 핵심 조건으로 지켜봐야 한다. 데이터센터 관련 구체적 수주 공시나 원전 프로젝트 진척 뉴스가 나올 경우 거래량을 동반한 재돌파가 나타날 가능성이 높다.</div></div>
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
