@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>TBBB — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>TBBB <span class="dim" style="font-size:1rem">비비비 푸즈</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.82yr, B2)</span></div>
+
+<div class="card">
+평균 매수가 <b>$49.85</b>
+
+· 수익률 <span class="pos">+3.63%</span>
+· 보유 60주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260815 기준)</span></div>
+<div class="dim">2026-08-21 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 60주 @ $49.85
+<div class="dim">2026-08-21 02:54 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $49.67
+<div class="dim">2026-08-21 02:55 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $49.68
+<div class="dim">2026-08-21 03:02 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $50.15
+<div class="dim">2026-08-21 22:55 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $50.26
+<div class="dim">2026-08-21 22:58 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $50.37
+<div class="dim">2026-08-21 23:00 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $50.01
+<div class="dim">2026-08-21 23:06 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $49.80
+<div class="dim">2026-08-21 23:15 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $50.19
+<div class="dim">2026-08-21 23:33 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $50.34
+<div class="dim">2026-08-22 01:12 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $50.71
+<div class="dim">2026-08-22 03:20 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $50.73
+<div class="dim">2026-08-22 03:31 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">멕시코 하드디스카운트 식료품 체인 &#x27;티엔다스 3B&#x27;를 운영하며 언더펜트레이션된 시장에서 공격적 신규 출점으로 고성장을 구가하는 소매업체.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">BBB Foods(TBBB)는 멕시코 전역에서 소형 포맷의 하드디스카운트 식료품점 &#x27;티엔다스 3B(Tiendas 3B)&#x27;를 운영하며, 2026년 2분기 기준 매장 수는 3,624개, 유통센터는 21개에 달한다. 사업모델은 제한된 SKU 구성, PB(자체브랜드) 비중이 높은 상품 믹스, 구조적으로 낮은 운영비를 기반으로 한 &#x27;알디(Aldi)형&#x27; 저가 소매 전략으로, 애널리스트들 사이에서 &#x27;라틴아메리카의 알디&#x27;로 불린다. 매출은 사실상 전량 식료품·생활용품 소매에서 발생하며 별도 사업부문 구분은 크지 않다. 경쟁 구도상 월마트 멕시코(Walmex), Soriana, Chedraui 등 대형 슈퍼마켓 체인 및 전통 소규모 상점(mom-and-pop)이 주요 경쟁자이나, 하드디스카운트 채널은 멕시코 소매시장에서 아직 약 3% 수준의 침투율에 불과해(폴란드 38%, 터키 25%, 독일 24% 대비) 구조적 성장 여력이 크다는 평가를 받는다. 연간 500~600개 신규 매장을 순증시키는 공격적 출점 전략이 매출 성장의 핵심 동력이며, 저소득~중산층 소비자를 주 타깃으로 한다. 뚜렷한 대형 B2B 고객이나 파트너십보다는 자체 매장망 확장이 성장 전략의 중심이다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기(6월 마감) 매출은 전년 동기 대비 38.7%~39% 증가한 260억 페소(달러 환산 약 15억 달러)를 기록해 시장 컨센서스(약 249억 페소)를 상회했으며, 동일점포매출(SSS)은 20% 증가해 ANTAD 업계 평균 대비 20%포인트 이상 아웃퍼폼했다. 조정 EBITDA(비현금 주식보상 제외)는 44% 증가한 16억 페소, 마진은 전년 대비 21bp 확대됐고 매출총이익률도 54bp 개선됐다. 다만 EPS는 -0.19달러로 전년 -0.13달러 대비 적자폭이 확대돼 시장 예상(-5.56% 서프라이즈)을 하회했는데, 이는 신규 유통센터 투자 및 급격한 출점 확대에 따른 비용 증가가 원인이다. 회사는 2026년 매출 성장률 가이던스를 29~32%로 제시했으며, 3분기 중 신규 유통센터 3곳 추가 오픈을 계획하고 있다. 2분기 실적은 2026년 8월 13일 발표됐으며, 다음 분기(3분기) 실적은 통상적 발표 주기를 감안할 때 2026년 11월 초중순으로 예상된다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 8월 13일 2분기 실적 발표에서 매출 39% 급증, 동일점포매출 20% 성장이라는 어닝 서프라이즈가 나오자 주가는 당일 약 14% 급등했다. 이후 8월 4일 UBS가 목표가 51달러로 상향(Hold→Buy), 7월 31일 Citi가 목표가 49달러로 커버리지 개시, JPMorgan도 Overweight·목표가 48달러를 제시하며 실적 발표 전후로 애널리스트들의 연쇄 상향이 이어졌다. 실적 서프라이즈와 잇단 매수 의견 발표가 8월 중순 이후 주가에 지속적인 매수세를 유입시켰고, 이번 매수 시점(8월 21일)은 실적 발표 후 약 1주일이 지난 시점으로 초기 갭업 이후 눌림목을 소화하고 재차 상승 동력을 확보하며 피벗(49.33달러)을 돌파하는 2차 돌파(follow-through breakout) 국면으로 판단된다. 회사가 별도로 3,764만 주 규모의 자사주/스톡플랜 관련 셸프등록(15.3억 달러)을 제출한 점도 유동성·물량 이슈로 시장이 주목한 뉴스였다. RVOL 1.4배, 피벗 대비 확장 +0.83%라는 진입 데이터는 폭발적 거래량 동반 돌파는 아니지만, 실적 모멘텀이 이어지는 가운데 완만하지만 견조한 수급으로 신고가 영역을 재차 테스트하는 흐름을 보여준다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">멕시코 소매업 전반은 2026년 상반기 동일점포매출 성장률 1.5%에 그치는 등 소비 둔화 국면(ANTAD 7월 기존점 매출 +1.0%, 총매출 +3.4%)에 있으나, 하드디스카운트 채널만은 최근 12개월(2026년 2월 기준) 소비 지출이 23.3% 급증하며 전체 소매 포맷 중 가장 강한 성장세를 보였다. 이는 페소화 구매력 정체와 소비자들의 &#x27;가성비&#x27; 채널 이동이 겹치며 나타난 구조적 반사이익으로, 경기 둔화가 오히려 BBB Foods 같은 하드디스카운터에는 우호적 환경을 제공하고 있다. 피어 대비로는 Walmex 등 대형 슈퍼마켓 체인이 한 자릿수 성장에 머무는 반면 BBB Foods는 30%대 후반 매출 성장을 기록해 업종 내 독보적 성장주로 자리매김했다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">실적 발표(8/13) 후 약 14% 갭업 이후 단기 눌림목을 형성하며 베이스를 다진 뒤, 49.33달러 피벗을 돌파하는 흐름으로 판단된다. 진입 시점 RVOL은 1.4배로 폭발적 수준은 아니지만 평균 이상의 수급이 확인됐고, 피벗 대비 확장폭 +0.83%는 추격매수 부담이 크지 않은 초입 구간에서의 진입임을 시사한다. 신규 진입(경로) 기준 사이징 티어 ×1로 표준 포지션 규모가 적용됐으며, 이는 확신도(conviction 6점)가 중간 수준임을 반영한다. 상단으로는 8/13 갭업 고점 부근이 단기 매물대로 작용할 수 있고, 하단 지지는 이번 피벗(49.33달러) 및 그 아래 갭업 시작가 구간이 1차 방어선이 될 것으로 보인다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">가장 유력한 상승 트리거는 3분기 신규 유통센터 3곳 가동 완료에 따른 출점 가속화와 이에 따른 4분기(11월경) 실적에서의 매출 성장률 재확인이다. 하드디스카운트 채널의 구조적 침투율 상승(현재 3%→선진국 수준 20%대 목표)이 지속되면 연 500~600개 신규 매장 개설을 통한 장기 복리 성장 스토리가 유효해진다. 애널리스트 목표가는 UBS 51달러, Citi 49달러, JPMorgan 48달러 등 매수 의견 진영에서 47~51달러 밴드를 형성하고 있어, 현재 매수가(49.85달러) 기준으로도 추가 상승 여력이 목표가 상단까지 열려있다고 볼 수 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 순손실 확대 리스크: 공격적 출점에 따른 초기 비용 부담으로 EPS 적자가 지속·확대될 경우(2분기 -0.19달러, 컨센 하회) 수익성에 대한 시장 신뢰가 흔들리며 밸류에이션 재평가(주가 하락) 압력이 커질 수 있다. ② 멕시코 소비 둔화 심화 리스크: ANTAD 전체 동일점포매출 성장률이 1%대로 정체된 상황에서 페소 약세나 정책 불확실성(관세, 대미 무역 이슈 등)으로 소비 심리가 추가 위축되면 하드디스카운트 채널의 반사이익도 희석될 수 있다. ③ 물량 출회 리스크: 회사가 제출한 15.3억 달러 규모 셸프등록(최대 3,764만 주, 스톡플랜 관련)이 실제 매도 물량으로 현실화될 경우 단기 수급에 부담을 줄 수 있다. ④ 밸류에이션 부담: 급등 이후 목표가(47~51달러) 밴드 상단에 근접한 상태에서 진입하는 만큼, 차기 실적(11월경)이 컨센서스를 하회하거나 SSS 성장률이 둔화 조짐을 보일 경우 되돌림 폭이 클 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 3분기 실적 발표(예상 11월 초중순): 매출 성장률 29~32% 가이던스 달성 여부 및 EPS 적자 개선 여부 확인 필요. ② 신규 유통센터 3곳 가동 진행 상황(3분기 중): 출점 속도와 물류 효율화가 계획대로 이뤄지는지 체크. ③ ANTAD 월간 소매판매 지표(매월 초 발표): 멕시코 전체 소비 트렌드 및 하드디스카운트 채널 상대 강도 지속 여부 모니터링. ④ 15.3억 달러 셸프등록 관련 실제 주식 발행/매도 공시 여부. ⑤ 추가 애널리스트 리포트 및 목표가 조정(UBS/Citi/JPMorgan 외 신규 커버리지 개시 여부).</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 하드디스카운트 채널의 구조적 성장 스토리와 실적 서프라이즈에 이은 애널리스트 연쇄 상향이라는 강한 펀더멘털 모멘텀은 확인되나, RVOL 1.4배·확장폭 0.83%로 돌파 강도 자체는 폭발적이지 않고 EPS 적자 확대와 목표가 상단 근접이라는 리스크가 공존한다. 리포트 AI의 conviction 6점·사이징 ×1 판정과 부합하는 중간 확신도의 진입으로 판단된다.</div></div>
+<h3>📉 매도 분석 — 2026-08-21</h3>
+<div class="card"><b>하락/청산 원인</b><div class="section-body">TBBB(비비비 푸즈)는 8월 13일 발표한 2분기 실적에서 매출 38.7%(YoY, 260억 페소) 증가, 동일점포매출(SSS) 20% 성장, 총마진 54bp 개선을 기록하며 주가가 8/12 종가 42.30달러에서 8/13 종가 49.08달러(장중 고점 49.77달러)까지 급등했고, 이후 UBS(매수, 목표가 51달러)·씨티·JP모건(매수/비중확대, 목표가 48~49달러) 등 투자은행들의 상향 리포트가 이어졌다. 이후 약 1주일간 47~50달러 박스권에서 눌림목을 형성했고, 시스템은 8/20(미 동부시각, KST 8/21 새벽) 이 박스권 상단이자 8/13 장중 고점(49.77달러) 부근인 평균 49.85달러에 돌파 진입을 시도했다. 그러나 진입 직후 주가가 49.67달러까지 밀리며 매수가를 하회, -0.4%의 얕은 손절선이 즉시 발동됐다. 이날 TBBB 관련 개별 악재 뉴스는 확인되지 않았으며, 실적 발표 후 약 17% 랠리에 따른 차익실현 매물과 8/6 클래스C 주식 락업 해제(클래스A 전환)에 따른 잠재 유통물량 부담이 복합적으로 작용한 것으로 판단된다.</div></div>
+<div class="card"><b>당일 시장 상황</b><div class="section-body">매도 당일(2026-08-20 미 증시 기준) S&amp;P500 -0.87%(7,641.16), 나스닥 -1.00%(26,067.17), 다우 -1.32%(-703.84p, 52,759.21)로 급락했다. 국채 재무부의 대규모 바이백에도 국채금리가 재차 급등하며 위험자산 전반이 눌렸고, 특히 다우 지수는 월마트(WMT)가 6년래 최저 매출 성장에 -9% 급락하며 낙폭을 키웠다(타겟은 실적 호조로 가이던스 상향). TBBB는 월마트·타겟과 같은 소비재/유통(할인 리테일) 섹터에 속해 있어, 자체 악재 없이도 섹터 전반의 리스크오프 흐름에 동반 하락한 것으로 보인다.</div></div>
+<div class="card"><b>시스템 판단 평가</b><div class="section-body">-0.4%라는 매우 타이트한 손절은 미너비니 SEPA 원칙상 &#x27;피벗 돌파 직후 실패 시 즉시 손절&#x27;하는 규칙에 부합하며, 진입가가 이미 실적 발표 후 약 17% 랠리한 저항대(8/13 고점 49.77달러) 근처였다는 점에서 소자본 손실로 리스크를 최소화한 것은 적절한 자본 보호 조치였다. 다만 진입 시점 자체가 다우 -700p, 국채금리 급등으로 시장 전체가 하방 압력을 받던 날이었고 소비재/리테일 섹터가 특히 취약했던 만큼, 매도 규칙의 작동 자체는 정상이었지만 매수(진입) 시점의 시장 환경 필터링이 다소 미흡했다고 볼 수 있다. 결과적으로 손절 규칙은 의도대로 작동해 큰 손실을 방지했다.</div></div>
+<div class="card"><b>대안 검토</b><div class="section-body">박스권 상단 돌파를 하루 이틀 늦춰 거래량 감소와 함께 좀 더 타이트한 손잡이(handle)가 형성되는 것을 확인한 뒤 진입했거나, 혹은 시장 전체가 국채금리 급등으로 약세를 보이던 당일 신규 진입을 보류했다면 이번 휩쏘(whipsaw)를 피할 수 있었을 가능성이 있다. 다만 실적 갭업 이후 아직 완전한 VCP 저변동성 구간이 형성되지 않은 상태였고, 손실 자체가 -0.4%로 미미했기 때문에 결과에 큰 차이는 없었을 것으로 판단된다.</div></div>
+<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">매출 39%·SSS 20% 성장, 순증 155개 신규 점포(총 3,624개) 등 펀더멘털 모멘텀은 여전히 견조하며, UBS·씨티·JP모건의 목표가(48~51달러)도 현재가 부근에 형성돼 있어 하방보다는 상방 여지가 남아있다. 재진입 관전 포인트는 ① 8/13 이후 형성된 47~47.70달러 저점 지지 여부, ② 거래량이 마르며 50달러 부근에서 새로운 저변동성 손잡이(타이트 VCP)가 형성되는지, ③ 8/6 클래스C 락업 해제 물량의 소화 여부, ④ 국채금리·소비재 섹터(월마트발 약세) 안정화 여부다. 이 조건들이 충족되며 거래량을 동반한 신규 피벗을 돌파할 경우 관심종목(watch list)으로서 재진입을 검토할 만하다.</div></div>
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>OSCR — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>OSCR ☀️ <span class="dim" style="font-size:1rem">오스카 헬스</span></h1>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.26yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$33.38</b>
+· 평균 매도가 <b>$31.15</b>
+· 수익률 <span class="neg">-6.68%</span>
+
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260815 기준)</span></div>
+<div class="dim">2026-08-20 진입 → 2026-08-21 청산</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 20주 @ $33.38
+<div class="dim">2026-08-20 23:33 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 20주 @ $31.15
+<div class="dim">2026-08-21 22:31  — 돌파 실패 — 확정 종가 32.30 &lt; 피벗 33.27 (D+1)</div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">AI 기반 기술 플랫폼으로 ACA(오바마케어) 개인건강보험 시장을 공략하는 신생 보험사로, 2026년 2분기 사상 최대 실적을 내며 업계 컨센서스를 뒤집은 턴어라운드 스토리의 주인공이다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">오스카 헬스는 2012년 설립된 기술 기반 건강보험사로, 자체 개발한 &#x27;Oscar Platform&#x27;과 AI 언더라이팅·클레임 처리 시스템을 통해 ACA 개인보험시장(Health Insurance Marketplace)에 특화된 상품을 판매한다. 매출의 대부분(약 95% 이상)이 개인 마켓플레이스 플랜 프리미엄에서 발생하며, 2026년 기준 미국 20개 주에서 사업을 운영해 UnitedHealth(30개 주), Centene(29개 주)에 이어 규모 면에서 업계 4~5위권에 위치한다. 최근에는 +Oscar라는 기술 플랫폼을 제3자 보험사·프로바이더에 라이선싱하는 B2B 사업도 확대 중이며, 이는 향후 마진 다변화의 축이 될 잠재력이 있다. 경쟁사인 Centene, Molina, Cigna가 2026~2027년 ACA 손실 확대로 주(state) 철수와 대폭적인 보험료 인상(Molina 평균 +30%)에 나서는 반면, 오스카는 오히려 신규 주 진출을 이어가며 점유율을 넓히고 있다. 고객은 대부분 Healthcare.gov를 통해 가입하는 개인·가구 단위 소비자이며, 대형 고용주 그룹 계약 비중은 미미하다. 회사는 언더라이팅 정밀도와 SG&amp;A 효율화를 핵심 경쟁력으로 내세우며, 데이터 기반 리스크 조정(Risk Adjustment) 대응 능력을 차별화 포인트로 강조한다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기 매출은 48.8억 달러로 전년 대비 +70.4% 급증하며 컨센서스(47.3억 달러)를 크게 상회했고, 조정 EPS는 1.10달러로 시장 예상치 0.37달러를 3배 가까이 웃돌았다. 순이익은 3억 6,180만 달러 흑자 전환했으며, 영업이익은 전년 대비 6.19억 달러 개선된 3.89억 달러를 기록했다. 핵심 수익성 지표인 의료손해율(MLR)은 79.2%로 전년 대비 개선됐고, SG&amp;A 비율은 450bp 개선돼 사상 최저 수준인 14.2%까지 낮아졌다. 이를 근거로 회사는 2026년 연간 매출 가이던스를 187억~190억 달러로 유지하면서, 영업이익 가이던스는 기존 2.5억~4.5억 달러에서 5억~7억 달러로 대폭 상향했다. 다음 실적 발표(3분기)는 통상 11월 초로 예상되며, 그 사이 9월 16일 인베스터 데이 이벤트가 예정돼 있어 중간 점검 포인트가 될 전망이다. 2025년 3분기까지만 해도 순손실(-1.37억 달러)을 기록했던 만큼, 이번 2분기 실적은 뚜렷한 펀더멘털 반전(inflection)으로 해석되고 있다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 8월 6일 발표된 2분기 실적이 매출·EPS 모두 시장 예상을 압도적으로 상회하면서 주가가 당일 +11.8% 급등했고, 이는 이번 돌파 랠리의 최초 트리거가 됐다. 실적 발표 직후 UBS, Baird(8/7)에 이어 8월 17일 Goldman Sachs($22→$30), Wells Fargo($20→$27), Piper Sandler($26→$36), Bank of America($13→$25) 등 다수 IB가 목표가를 일제히 상향하며 2주에 걸친 순차적 매수세 유입을 이끌었다. 여기에 백악관이 ACA 보조금(subsidy)을 2년 연장하는 방안을 제안했다는 뉴스가 겹치며 개별 종목 뉴스(+13.7% 반응 기록)로도 확인되듯 정책 불확실성 완화가 추가 상승 동력을 제공했다. 동종업계인 Centene, Molina, Cigna가 손실 확대로 주(state) 철수와 대규모 보험료 인상에 나선 것과 대조적으로, 오스카만 실적 개선과 사업 확장을 동시에 보여주며 &#x27;업계 내 유일한 승자&#x27;라는 내러티브가 형성됐다. 이러한 흐름 속에 주가는 8월 20일 33.27달러의 피벗(52주 신고가 부근)을 RVOL 1.56배의 거래량 동반 속 돌파했고, 자동매매 시스템은 피벗 대비 +0.32% 확장 시점인 33.38달러에 신규 진입했다. 다만 직전 거래일(8/17)에는 -3.7% 조정을 보인 바 있어, 이번 돌파는 단기 조정 후 재상승을 시도하는 국면으로 볼 수 있다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">ACA 개인보험시장은 2026년 들어 리스크 스코어 상승과 보조금 불확실성으로 업계 전반이 몸살을 앓고 있으며, KFF 집계 기준 마켈이스 가입자의 약 21%가 연중 이탈하는 등 전체 파이는 축소되는 추세다. Molina는 2027년 마켓플레이스 운영 주를 14개에서 6개로 줄이고, Cigna는 11개 주에서 철수하는 등 대형 경쟁사들이 몸집을 줄이는 &#x27;옥석 가리기&#x27; 국면이 진행 중이다. 이런 환경에서 오스카는 오히려 리스크 조정 대응(2026년 요율 평균 +22% 인상)과 SG&amp;A 효율화를 통해 손익분기점을 넘어서는 데 성공했고, 이는 업계 내 상대적 강점으로 부각된다. 다만 업계 전체의 구조적 리스크(보조금 만료, 리스크 풀 악화)는 오스카에도 동일하게 노출돼 있어, 섹터 전반의 정책 리스크가 완전히 해소된 것은 아니다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">오스카는 실적 급등(8/6, +11.8%) 이후 형성된 상승 베이스에서 33.27달러의 52주 신고가 부근 피벗을 돌파했으며, RVOL 1.56배는 평균적인 수준의 거래량 동반 돌파로 폭발적이진 않지만 무난한 수급 확인 신호로 볼 수 있다. 피벗 대비 +0.32%의 좁은 확장폭에서 진입이 이뤄져 초기 손절 라인 설정이 용이한 편이나, 직전 거래일(8/17) -3.7% 조정이 있었던 만큼 베이스가 아직 완전히 안정화됐다고 보기는 이르다. 위쪽으로는 뚜렷한 매물대가 없는 52주 신고가 돌파 구간이라 저항이 제한적인 반면, 아래로는 33.27달러 피벗 라인 자체가 1차 지지선, 그 아래 8월 중순 저점(31.5달러대)이 2차 지지선 역할을 할 것으로 판단된다. 신고가 돌파 특유의 &#x27;진공 구간&#x27; 특성상 추세 추종형 매수에는 유리하나, 변동성도 함께 확대될 수 있어 포지션 관리가 중요하다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">가장 유력한 상승 트리거는 9월 16일 인베스터 데이에서의 추가 실적 가이던스 상향 또는 신규 성장 전략(+Oscar B2B 라이선싱 확대 등) 발표이며, 이 경우 3분기 실적 발표(11월 예상)까지 모멘텀이 이어질 수 있다. 현재 애널리스트 목표가는 Wells Fargo $27, Goldman Sachs $30, UBS·Baird $26~27 등 보수적인 곳부터 Piper Sandler $36, Barclays $39까지 폭넓게 분포하며, 컨센서스는 약 $28~30선이나 최근 상향 흐름이 지속되고 있어 추가 상향 여지가 남아있다. ACA 보조금 2년 연장안이 실제 입법으로 확정될 경우 2027년 가입자 기반이 최대 3,100만 명까지 확대될 수 있다는 회사 측 추정이 현실화되며 밸류에이션 리레이팅의 근거가 될 수 있다. 경쟁사들의 시장 철수로 반사이익을 누리며 점유율을 추가 확보할 가능성도 상승 시나리오의 한 축이다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① ACA 보조금 만료/축소 리스크 — 만약 2026년 말까지 의회에서 보조금 연장 합의가 불발되면 2027년 가입자 이탈이 급증(회사 추정 3,100만→2,400만 명)하며 매출 가이던스 자체가 재하향될 수 있다. ② 리스크 조정(Risk Adjustment) 스코어 추가 악화 — 2분기 리스크 조정 리포트에서 이미 업계 전반 리스크 스코어가 예상보다 높게 나타난 바 있어, 향후 분기에 추가로 상향 조정될 경우 MLR이 79.2%에서 재차 악화되며 이익 서프라이즈가 역전될 수 있다. ③ 밸류에이션 과열 리스크 — 현재 주가($33.38)가 대다수 애널리스트 목표가(Wells Fargo $27, Goldman $30 등)를 이미 상회하고 있어, 추가 호재가 없을 경우 차익실현 매물에 취약하며 8/17의 -3.7% 조정처럼 단기 변동성이 커질 수 있다. ④ 경쟁 심화 및 요율 규제 리스크 — 2026년 평균 22% 보험료 인상이 주(state) 규제당국 승인 과정에서 삭감되거나, 경쟁사 철수로 인한 반사이익이 예상보다 제한적일 경우 성장 스토리의 신뢰도가 훼손될 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 9월 16일 — 오스카 헬스 인베스터 데이(전략·가이던스 업데이트 여부 확인). ② 2026년 11월 초순(예상) — 3분기 실적 발표 및 4분기·2027년 가이던스 첫 언급. ③ 2026년 11월~12월 — ACA 2027년도 개방등록(Open Enrollment) 기간 시작, 초기 가입자 추이 데이터 발표. ④ 연중 수시 — ACA 보조금 연장 관련 의회 입법 동향(정책 리스크 헤드라인 모니터링). ⑤ 분기별 리스크 조정(Risk Adjustment) 데이터 발표 시점 — MLR 추정치 변동 여부 확인.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 2분기 실적 서프라이즈와 다수 IB의 연쇄적 목표가 상향, 경쟁사 대비 차별화된 실행력 등 펀더멘털 모멘텀은 뚜렷하나, 현재 주가가 이미 상당수 애널리스트 목표가를 넘어선 상태이고 RVOL 1.56배의 다소 평범한 거래량 돌파, ACA 보조금이라는 정책 변수가 여전히 해소되지 않은 리스크로 남아있어 강한 확신 단계로 보기는 이르다. 9월 인베스터 데이 전까지는 변동성 관리에 무게를 둔 보유가 적절해 보인다.</div></div>
+<h3>📉 매도 분석 — 2026-08-21</h3>
+<div class="card"><b>하락/청산 원인</b><div class="section-body">OSCR는 2026년 8월20일 피벗 33.27달러 부근에서 돌파 시도가 나왔고 평단 33.38달러에 진입되었으나, 정작 그날 종가는 32.30달러로 피벗을 다시 하회하며 마감해 &#x27;돌파 실패&#x27; 신호가 확정됐다. 이는 8월6일 2분기 실적 발표 이후(순이익 흑자전환·가이던스 상향에도 불구하고 하반기 ACA 회원 이탈(churn) 경고로 주가가 당일 약 -10~13% 급락한 여진이 완전히 해소되지 않은 상태에서 나온 반등성 돌파였음을 시사한다. 시스템 룰에 따라 익일(8월21일) 개장 직후 매도가 집행됐는데, 전일 종가 32.30달러 대비로도 개장가가 31.15달러까지 추가로 갭다운해 손실이 확대됐다. 즉 종목 자체 요인은 (1) 실적 서프라이즈에도 불구한 ACA 마켓플레이스 가입자 이탈 우려 지속, (2) 강화된 보험료 세액공제(enhanced subsidy) 미연장에 따른 2026년 마켓플레이스 등록자 수 전년比 12~26% 감소 전망이라는 구조적 오버행이 겹치며 반등 강도가 부족했던 것으로 판단된다. 골드만삭스·웰스파고 등이 8월17일 목표주가를 각각 30달러, 27달러로 상향했음에도 여전히 진입가(33.38달러)보다 낮아, 밸류에이션 부담도 반등 지속력을 제한한 요인으로 볼 수 있다.</div></div>
+<div class="card"><b>당일 시장 상황</b><div class="section-body">매도가 집행된 8월21일 직전 거래일인 8월20일, 헬스케어 섹터는 모더나 급등과 국채금리 안정에 힘입어 S&amp;P500 헬스케어 지수가 하루 만에 +3.5%(2025년 4월 이후 최대 상승폭) 뛰며 사상 최고치를 경신했고, UNH +4%, ELV +2.8%, OSCR도 장중 한때 +2% 근방까지 동반 상승했다. 즉 매크로·섹터 환경 자체는 우호적이었음에도 OSCR은 종가 기준으로 피벗을 재이탈했다는 점에서, 이번 실패는 시장·섹터 리스크가 아닌 종목 고유의 펀더멘털(ACA 가입자 감소·이탈 우려) 리스크가 지배적이었음을 보여준다. 동종 대형 보험사(UNH, ELV, CI)는 메디케어 어드밴티지 등 상대적으로 정책 리스크가 낮은 사업 비중이 커 섹터 랠리 수혜를 더 온전히 누린 반면, OSCR은 ACA 마켓플레이스 순수 노출 종목이라 상대적 약세(관계열위, relative weakness)를 보였다.</div></div>
+<div class="card"><b>시스템 판단 평가</b><div class="section-body">이번 매도는 미너비니식 &#x27;돌파 후 D+1 종가 재이탈 시 즉시 손절&#x27; 룰이 취지대로 작동한 사례다. 피벗 위에서 진입했다가 당일 종가가 피벗 아래로 밀리는 것은 전형적인 &#x27;가짜 돌파(bull trap)&#x27; 패턴이며, 이를 익일 초입에 신속히 정리한 것은 추가 하락(실제로 이후 저가 30.60달러까지 하락)을 피했다는 점에서 규칙 자체는 합리적이다. 다만 신호 확정(종가 32.30) 시점과 실제 체결(익일 시가 31.15) 사이에 약 -3.6%p의 추가 갭다운 슬리피지가 발생해, 손실의 상당 부분이 &#x27;피벗 이탈&#x27; 자체보다는 &#x27;익일 시가 갭&#x27;에서 비롯됐다는 점은 한계로 지적할 수 있다. 원래 손절 폭(33.38→32.30, 약 -3.2%)보다 실현 손실(-6.7%)이 두 배 이상 커진 것은 오버나잇 갭 리스크를 룰이 충분히 통제하지 못했음을 보여준다. 전체적으로 매도 판단 자체(피벗 실패 시 손절)는 타당했으나, 집행 타이밍(당일 종가 vs 익일 시가) 설계에는 개선 여지가 있다.</div></div>
+<div class="card"><b>대안 검토</b><div class="section-body">규칙 범위 내에서 종가(32.30달러) 확정 즉시 MOC(시장가 종가) 주문으로 당일 청산했다면 갭다운 리스크를 피해 손실을 약 -3.2%(33.38→32.30) 수준으로 줄일 수 있었을 것이다. 또한 애초에 8월6일 실적 발표 후 회원 이탈 경고로 급락한 지 채 2주가 되지 않은 시점(변동성이 충분히 수렴되지 않은 베이스)에서의 피벗 돌파 진입 자체가 미너비니 원칙(어닝 쇼크 직후 불안정한 베이스에서의 성급한 진입 지양) 관점에서 다소 이른 진입이었을 가능성이 있다. 다만 두 경우 모두 결과적으로 손절 자체는 불가피했을 것으로 보이며, 차이는 손실 폭 축소 여부에 그친다.</div></div>
+<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">OSCR은 흑자전환·가이던스 상향 등 펀더멘털 개선 모멘텀과 ACA 보조금 미연장에 따른 가입자 이탈이라는 구조적 리스크가 팽팽히 맞서는 국면으로, 당분간 방향성 없는 변동성 장세가 이어질 가능성이 높다. 재진입을 고려한다면 (1) 8월6일 실적 갭 이후 최소 6~8주 이상의 거래량 수축(VCP)형 신규 베이스 형성, (2) 33.27달러 피벗을 거래량 동반 종가 기준으로 재돌파·안착하는지 여부, (3) ACA 강화 세액공제 연장 관련 입법 진전으로 가입자 이탈 우려가 완화되는지, (4) UNH·ELV 등 동종 대형 보험주 대비 상대강도(RS)가 재차 우위로 전환되는지를 확인 지표로 삼아야 한다. 이 조건들이 충족되기 전까지는 워치리스트에 두고 관망하는 것이 합리적이다.</div></div>
+<h3>🏁 거래 종합 리뷰</h3>
+<div class="card"><b>요약</b><div class="section-body">OSCR는 2026년 8월 6일 발표된 2분기 실적(순이익 3억6,181만 달러 흑자전환, 매출 70% 성장, 회원수 46% 증가)과 2026년 가이던스 상향(매출 187~190억 달러, 영업이익 5~7억 달러)을 동력으로 급등하며 VCP 피벗 33.27달러를 형성했고, 2026-08-20 33.38달러에 20주를 매수해 돌파를 시도했다. 그러나 이미 실적 발표 후 주가는 2H 의료비 상승 및 회원 이탈 우려로 조정을 받고 있던 국면이었고, CFO Richard Scott Blackley가 같은 날(8/20) 18,750주(약 59만5,125달러)를 매도하는 내부자 매도 이슈까지 겹쳤다. D+1(8/21) 확정 종가가 32.30달러로 피벗 33.27달러를 하회하며 돌파 실패로 판정, 익일 31.15달러에 전량 청산해 -6.68% 손실로 마감했다.</div></div>
+<div class="card"><b>진입 평가</b><div class="section-body">셋업 자체는 대형 실적 서프라이즈와 애널리스트 상향(8/17 골드만삭스 22→30달러, 웰스파고 20→27달러)이라는 강한 펀더멘털 촉매를 갖추고 있었으나, 진입 시점은 실적 발표(8/6) 이후 이미 2주가량 지난 시점이자 주가가 8/17~21 구간에서 11.9% 급락하며 조정 중이던 시점이었다. 즉 신선한 브레이크아웃이 아니라 이미 과열·차익실현이 진행 중인 종목의 반등 시도에 올라탄 형국으로, 돌파 시점 선택이 다소 늦었다. 거래량 확인 여부는 데이터상 명시되지 않았으나, 같은 날 CFO의 대규모 내부자 매도가 있었다는 점에서 스마트머니 신호와 진입 방향이 상충했다.</div></div>
+<div class="card"><b>청산 평가</b><div class="section-body">매도 규칙(D+1 확정 종가가 피벗 이하로 마감 시 손절)은 이 케이스에서 명확히 득이었다 — 실제로 주가는 8/21 30.60~32.06달러 레인지에서 거래되며 피벗 33.27달러 회복에 실패했고, 손실을 -6.68%로 빠르게 제한했다. 규칙이 없었다면 주가가 추가 하락하는 조정 국면(2H 의료비·회원이탈 우려)에 그대로 노출될 위험이 있었다. 청산 실행 자체(31.15달러)는 D+1 종가(32.30달러)보다 낮은 가격에 체결되어 슬리피지가 있었으나, 원칙에 따른 신속한 손절이라는 점에서 청산 품질은 양호했다.</div></div>
+<div class="card"><b>시장 환경</b><div class="section-body">보유 기간(8/20~8/21) 동안 OSCR는 실적 서프라이즈 랠리의 되돌림 국면에 있었고, 시장은 강한 가이던스 상향에도 불구하고 2H 의료비 상승 및 회원 이탈이라는 리스크에 더 민감하게 반응해 주가가 조정받고 있었다. 이런 &#x27;뉴스는 좋은데 주가는 빠지는&#x27; 괴리 국면은 통상 VCP 브레이크아웃 성공률을 떨어뜨리는 환경이며, 실제로 돌파는 실패로 끝났다.</div></div>
+<div class="card"><b>잘된 점</b><div class="section-body">D+1 확정 종가 기준 피벗 이탈이라는 명확한 규칙을 하루 만에 정확히 적용해 손실을 -6.68%로 조기에 제한한 점이 가장 잘된 부분이다. 감정적 보유나 물타기 없이 시스템 신호에 따라 신속히 청산해 추가 하락 리스크(주가는 30달러대까지 저점을 확인)를 회피했다.</div></div>
+<div class="card"><b>아쉬운 점</b><div class="section-body">진입 시점이 실적 발표 후 2주가 지나 이미 조정 국면에 들어선 시점이었다는 점, 그리고 같은 날 CFO의 대규모 내부자 매도라는 역방향 신호가 존재했음에도 이를 필터링하지 못한 점이 아쉽다. 향후 시스템 규칙에 실적 발표 후 경과일수 또는 최근 인사이더 매도 이력을 스크리닝 조건으로 추가하면 이런 &#x27;고점 되돌림 구간 돌파 시도&#x27;를 줄일 수 있을 것이다.</div></div>
+<div class="card"><b>교훈</b><div class="section-body">실적 서프라이즈로 이미 큰 폭 상승 후 조정 중인 종목의 재돌파는, 펀더멘털 헤드라인이 아무리 좋아도 가격 액션(연속 하락 캔들, 내부자 매도)이 우선하는 신호임을 다시 확인시켜준 사례다.</div></div>
+<div class="card"><b>등급</b><div class="section-body">B: 손실이 났지만 셋업 판단은 실적 촉매에 근거해 합리적이었고, D+1 규칙을 정확히 지켜 손실을 6.68%로 제한한 과정 관리는 훌륭했다. 다만 진입 타이밍이 조정 국면 후반부였고 CFO 내부자 매도 신호를 사전에 걸러내지 못한 점에서 A는 아니다.</div></div>
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

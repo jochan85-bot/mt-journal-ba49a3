@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LB — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>LB <span class="dim" style="font-size:1rem">랜드브릿지</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.47yr, B2)</span></div>
+
+<div class="card">
+평균 매수가 <b>$86.87</b>
+
+· 수익률 <span class="pos">+3.60%</span>
+· 보유 34주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#2ecc71;color:#fff;font-size:0.8rem;font-weight:700">매수 고려</span> <span class="dim">conv 8점 (20260815 기준)</span></div>
+<div class="dim">2026-08-21 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 34주 @ $86.87
+<div class="dim">2026-08-21 03:02 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $86.55
+<div class="dim">2026-08-21 03:02 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $88.63
+<div class="dim">2026-08-21 22:55 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $88.65
+<div class="dim">2026-08-21 23:00 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $89.46
+<div class="dim">2026-08-21 23:06 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $90.22
+<div class="dim">2026-08-21 23:32 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $90.87
+<div class="dim">2026-08-22 01:12 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">퍼미안 분지 델라웨어 베이슨의 광대한 표면 부지를 소유하며 지표사용료·생산수 처리·오일가스 로열티에 더해 AI 데이터센터·전력 임대라는 새로운 수익원까지 확보해가는 텍사스 랜드 로열티 기업, LandBridge(LB).</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">LandBridge는 텍사스·뉴멕시코 델라웨어 베이슨(퍼미안 분지) 내 약 27만 에이커 이상의 표면 토지를 보유·관리하며 직접 시추하지 않고 토지 사용권을 임대해 수익을 얻는 &#x27;랜드 로열티&#x27; 비즈니스 모델을 갖고 있다. 주요 수익원은 표면사용료(surface use royalties), 생산수(produced water) 처리·재사용·매각 로열티, 오일·가스 로열티, 지역권(이지먼트) 및 사토·자갈 등 골재 판매로 구성되며, 특히 생산수 관련 매출 비중이 최근 빠르게 확대되고 있다. 최근에는 엑슨모빌, 셰브론 등 대형 E&amp;P 업체 및 미드스트림 사업자들이 주요 임차인이며, 여기에 더해 AI 데이터센터·전력 발전 사업자들이 새로운 잠재 고객군으로 부상하고 있다. 경쟁 구도상 순수 표면 토지 소유·임대 모델로 상장된 회사는 많지 않으며, 2026년 5월 상장한 EagleRock(EROK, 시총 약 30억 달러)이 유사 사업 모델의 경쟁사로 꼽힌다. LandBridge는 델라웨어 베이슨 내 압도적인 연속 토지 보유 규모와 자산 위치의 우수성을 경쟁 우위로 내세우고 있다. 사업 특성상 원자재 가격 변동에 직접 노출되지 않으면서도 퍼미안 분지 시추·생산 활동에 연동되는 준(準) 로열티형 현금흐름을 창출한다는 점이 투자 매력으로 부각된다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기(8월 6일 실적 발표, 8월 13일 컨퍼런스콜) 매출은 6,680만 달러로 사상 최대치를 기록했으며 전년 동기 대비 +41%, 전분기 대비 +31% 성장했다. 순이익은 3,100만 달러(순이익률 46%), 조정 EBITDA는 5,980만 달러, 주당순이익은 약 0.4993달러였다. 성장의 주된 동력은 생산수 관련 활동 증가, 표면사용료 확대, 그리고 유가 상승에 따른 오일·가스 로열티 증가였다. 회사는 2026 회계연도 조정 EBITDA 가이던스 2억1,000만~2억3,000만 달러를 재확인했으며, 순차입비율은 2.5배로 관리되는 가운데 리볼빙 신용한도를 3억7,500만 달러로 확대하고 조달비용을 낮췄다. 분기 배당금은 주당 0.12달러로 유지됐다. 다음 실적 발표일은 3분기 실적 기준 2026년 11월 초~중순경으로 예상된다(직전 분기 발표 패턴 기준 추정치).</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 8월 6일 발표된 2분기 실적에서 매출·이익 모두 시장 예상을 상회하는 서프라이즈를 기록했고, 8월 13일 컨퍼런스콜에서 7개 잠재 거래처와 10GW 이상 규모의 전력발전·데이터센터 부지 임대 협상이 &#x27;진전 단계&#x27;에 있으며 일부는 2027년 말부터 임대료 수익화가 시작될 수 있다는 구체적 가이드가 제시되며 스토리의 신뢰도가 높아졌다. 발표 직후인 8월 9일경 일부 매체는 &#x27;6% 하락&#x27;을 보도하며 단기 변동성을 겪었으나, 이는 오버행 해소 과정으로 해석되며 이후 주가는 재차 상승 전환했다. 8월 20일에는 &#x27;강한 마진이 트레이더들의 관심을 끌며 주가가 상승&#x27;했다는 헤드라인과 함께 52주 신고가(85.7달러)를 경신했다. 여기에 델라웨어 LLC에서 텍사스 법인으로의 전환 승인 소식이 더해지며 향후 S&amp;P·러셀 등 주요 지수 편입 가능성이라는 신규 유동성 유입 기대감이 형성됐다. 이런 흐름 속에서 8월 21일 진입 시점(매수가 86.87달러)은 피벗 82.48달러 대비 +4.91% 확장, RVOL 2.07배로 실적 서프라이즈와 데이터센터 스토리, 지수 편입 기대감이 겹친 거래량 동반 돌파로 판단된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">퍼미안 분지는 AI 데이터센터의 전력·용수 확보처로 새롭게 주목받고 있으며, 셰브론이 2025년 11월 서부 텍사스에서 2.5GW(확장 시 5GW) 규모 가스발전 프로젝트를 발표하는 등 대형 에너지 기업들의 데이터센터向 전력 인프라 투자가 이어지고 있다. 생산수 재활용이 데이터센터 냉각수 공급원으로 검토되는 등 &#x27;생산수-전력-데이터센터&#x27;의 신규 밸류체인이 형성되는 국면으로, 이는 LandBridge와 같은 표면 토지 소유 기업의 자산 가치를 재평가받게 하는 구조적 순풍이다. 동종업계 피어인 EagleRock(EROK, 2026년 5월 상장)도 데이터센터·재생에너지·탄소포집·암호화폐 채굴 등을 신규 로열티원으로 제시하며 유사한 내러티브를 공유하고 있어 섹터 전반의 재평가 흐름이 확인된다. LandBridge는 델라웨어 베이슨 내 최대 규모의 연속 토지 보유라는 자산 우위를 바탕으로 이 섹터 내 선도적 지위를 점하고 있으나, 유가·시추 활동 둔화 시 기존 핵심 로열티 매출(표면사용료, 오일가스 로열티)의 민감도가 높다는 점은 상대적 약점이다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">베이스 형태는 8월 초 실적 발표 전후 조정(52주 신고가 부근에서의 눌림) 이후 재차 신고가를 경신하는 &#x27;플래그형 재돌파&#x27; 패턴에 가깝다. 피벗 82.48달러를 RVOL 2.07배의 거래량을 동반해 돌파했고, 진입가 86.87달러는 피벗 대비 +4.91% 확장으로 미너비니 기준 8% 이내의 &#x27;허용 가능한 확장 범위&#x27;에 위치한다. 위쪽으로는 뚜렷한 매물대 저항이 크지 않은 신고가 영역이며, 아래쪽 1차 지지는 피벗 82.48달러, 2차 지지는 8월 초 실적 발표 후 조정 저점(약 76~78달러대 추정) 부근으로 판단된다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">10GW 이상 규모의 데이터센터·전력발전 임대 협상 중 일부라도 2026년 하반기~2027년 초 사이 바인딩 계약으로 전환·발표될 경우, 시장은 신규 수익원의 현재가치를 반영해 밸류에이션 재평가(리레이팅)에 나설 가능성이 높다. 여기에 텍사스 법인 전환이 완료되고 주요 지수(S&amp;P/러셀) 편입이 현실화되면 패시브 자금 유입에 따른 추가 상승 동력이 발생할 수 있다. 다만 현재 애널리스트 평균 목표주가는 79.20달러(9개 기관, Hold 컨센서스, 매수 2/보유 6/매도 1)로 진입가 86.87달러를 밑돌고 있어, 강세 시나리오가 현실화되려면 목표주가의 상향 조정이 선행되어야 한다. 일부 강세론자(8월 6일 매수 의견, 목표가 84달러 유지)와 파이퍼 샌들러(7월 15일 목표가 66→80달러 상향)의 최근 상향 추세는 긍정적 모멘텀을 뒷받침한다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 밸류에이션 리스크: 진입가(86.87달러)가 애널리스트 평균 목표주가(79.20달러)를 상회하고, InvestingPro는 LB를 &#x27;고평가 관심종목&#x27;으로 분류하고 있어 실적 모멘텀이 둔화될 경우 목표가 수렴 과정에서 조정 압력이 발생할 수 있다. ② 데이터센터 계약 실행 리스크: 10GW 이상 협상은 아직 &#x27;진전 단계(advanced discussions)&#x27;로 바인딩 계약이 아니며, 일부 수익화는 2027년 말에나 시작될 예정이어서 계약 지연·무산 시 스토리 기반 프리미엄이 급격히 축소될 수 있다. ③ 유가·시추활동 둔화 리스크: 핵심 매출(표면사용료, 오일·가스 로열티, 생산수 활동)이 퍼미안 분지 E&amp;P 시추·생산 활동에 연동돼 있어 유가 하락이나 자본지출 축소 국면에서는 로열티 매출 성장세가 꺾일 수 있다. ④ 레버리지·금리 리스크: 순차입비율 2.5배, 리볼빙 신용한도 3억7,500만 달러 규모로 신용시장 경색이나 금리 상승 시 조달비용 부담이 확대될 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 3분기 실적 발표(2026년 11월 초~중순 예상): 조정 EBITDA 가이던스(2.1억~2.3억 달러) 궤도 유지 여부 확인. ② 10GW+ 데이터센터·전력 임대 협상: 7개 카운터파티 중 바인딩 계약 체결·발표 시점(2027년 말 수익화 목표) 모니터링. ③ 텍사스 법인 전환 완료 및 S&amp;P/러셀 등 지수 편입 여부 발표. ④ 분기 배당(주당 0.12달러) 지급 및 배당 정책 변경 여부. ⑤ WTI 유가 및 퍼미안 분지 시추리그 수 추이 — 선행지표로서 로열티 매출 방향성 확인. ⑥ 애널리스트 목표주가 컨센서스 변화(현재 평균 79.20달러, Hold 우세) — 상향 조정 전환 여부.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 실적 서프라이즈, 10GW 이상 데이터센터·전력 임대라는 구조적 신규 성장 스토리, RVOL 2.07배를 동반한 신고가 돌파 등 기술적·펀더멘털 모멘텀은 뚜렷하지만, 진입가(86.87달러)가 애널리스트 평균 목표주가(79.20달러)를 이미 상회하고 &#x27;Hold&#x27; 컨센서스 및 InvestingPro의 고평가 경고가 존재해 밸류에이션 부담이 확인된다. 데이터센터 계약이 아직 협상 단계에 머물러 있다는 점에서 스토리가 현실화될 때까지는 상승 여력과 하방 리스크가 팽팽히 공존하는 구간으로 판단된다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

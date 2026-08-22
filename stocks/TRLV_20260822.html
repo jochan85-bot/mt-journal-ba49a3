@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>TRLV — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>TRLV <span class="dim" style="font-size:1rem">트루리브 캐너비스</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.30yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$10.66</b>
+
+· 수익률 <span class="pos">+4.03%</span>
+· 보유 69주
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div class="dim">2026-08-22 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 69주 @ $10.66
+<div class="dim">2026-08-22 00:55 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $10.62
+<div class="dim">2026-08-22 01:12 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $10.91
+<div class="dim">2026-08-22 03:20 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $10.93
+<div class="dim">2026-08-22 03:31 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">미국 최대 의료용 대마초 운영사(MSO)이자 최초로 뉴욕증권거래소(NYSE)에 상장된 대마초 기업으로, 마리화나 스케줄 III 재분류 기대감을 타고 상승 중인 트루리브 캐너비스.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">트루리브(Trulieve, TRLV)는 미국 최대 규모의 복수주정영업(MSO) 대마초 기업으로, 플로리다주에서 압도적 1위 의료용 대마초 사업자 지위를 보유하고 있으며 조지아·펜실베이니아·애리조나·텍사스 등으로 확장 중이다. 2026년 2분기 기준 207개 디스펜서리(직영 소매점)를 운영하며, 매출의 94%가 소매(리테일) 채널에서 발생한다. 매출 구성은 의료용 판매 비중이 크며 2분기 의료 전용 매출은 2.22억 달러로 전체 매출(2.71억 달러)의 약 82%를 차지한다. 재배·가공·소매를 아우르는 수직계열화(vertical integration) 모델로 원가 통제력을 확보하고 있으며, 경쟁사인 큐라리프(Curaleaf), 그린섬(Green Thumb Industries) 등과 함께 업계 상위권을 형성한다. 2026년 6월 하비스트헬스(Harvest) 지분 탈연결(deconsolidation) 등 사업 구조조정을 진행 중이며, 6월 10~11일 미국 대마초 기업 최초로 NYSE 상장(TRLV)에 성공해 기관투자자 접근성을 확대했다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 8월 7일 발표된 2분기 실적에서 매출은 2억 7,100만 달러로 전년 동기 대비 10% 감소했으나, 의료 전용 매출은 전분기 대비 4% 증가한 2억 2,200만 달러를 기록했다. 총이익률은 전사 60%, 의료 부문만 놓고 보면 63%로 안정적 마진을 유지했다. 조정 EBITDA는 9,800만 달러(매출 대비 36%)였고, 조정 주당순이익(EPS)은 0.11달러로 시장 컨센서스 0.06달러를 37.5% 상회하는 어닝 서프라이즈를 기록했다. 다만 하비스트 탈연결에 따른 일회성 손실로 GAAP 기준 순손실은 4억 600만 달러에 달했다. 영업현금흐름은 5,300만 달러, 잉여현금흐름(FCF)은 3,200만 달러였고, 분기 말 현금 3억 2,500만 달러, 부채 2억 8,900만 달러로 재무 여력은 양호하나, 연간 현금흐름 가이던스 하향 조정으로 실적 발표 직후 주가가 일시적으로 8.74달러까지 밀렸다. 다음 분기(3Q26) 실적은 통상적인 발표 패턴상 11월 초순 발표가 예상된다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 4월 23일 법무부(DOJ)/DEA가 의료용 마리화나를 스케줄 I에서 스케줄 III로 재분류하는 최종 규칙을 발효시키며 대마초 섹터 전반에 첫 번째 촉매가 발생했다. 이어 6월 10~11일 트루리브가 미국 대마초 기업 최초로 NYSE에 상장(TRLV)했으나, CEO 킴 리버스(Kim Rivers)가 6월 17~26일 사이 약 170만주(500만 달러 이상)를 매도하면서 상장 직후 주가가 오히려 약 25% 급락하는 조정을 겪었다. 이후 6월 29일부터 시작된 DEA의 전면적 스케줄 III 재분류 청문회가 7월 15일 종료됐고, 후속 의견서(post-hearing brief) 제출 마감일이 8월 17일로 설정되면서 8월 중순부터 최종 명령(final order) 발표 임박 기대감이 확산됐다. 8월 7일 발표된 2분기 실적은 EPS 서프라이즈로 초기 반등을 이끌었고, 이후 대마초 섹터 대표 ETF인 MSOS가 2026년 신고가를 경신하며(트루리브가 MSOS 내 최대 비중 종목, 약 30%) 섹터 전반에 자금 유입이 관찰됐다. 이런 흐름 속에 TRLV는 8월 5일 8.34달러 수준에서 반등해 8월 22일 피벗 10.15달러를 거래량 동반(RVOL 1.41배) 돌파, 10.66달러까지 확장하며 VCP형 신고가 돌파가 나타났다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">대마초 섹터는 2026년 들어 스케줄 III 재분류 기대감으로 강한 상승 사이클에 진입했으며, MSOS ETF는 5월 31일 기준 최근 1년 NAV 수익률 103.7%로 S&amp;P500(29.8%)을 크게 상회했다. 4월 23일 의료용 대마초 280E 세금 감면 발효에 이어 전면 재분류 최종 결정이 임박한 것이 섹터 전체의 재평가(re-rating) 동력이다. 트루리브는 플로리다 의료용 시장의 압도적 1위 사업자로서 스케줄 III 시행 시 280E 세제 혜택과 은행 서비스 접근성 개선의 최대 수혜주로 꼽히며, MSOS 내 최대 비중(약 30%) 종목이라는 점에서 섹터 자금 유입의 직접적 수혜를 받는 위치에 있다. 다만 경쟁사 큐라리프·그린섬 대비 매출 성장률(YoY -10%)이 부진해 시장 점유율 방어가 관건이다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">8월 5일 8.34달러 수준에서 형성된 저변동성 베이스 위에서 피벗 10.15달러를 상향 돌파했으며, 진입 시점 상대거래량(RVOL) 1.41배로 평균 대비 소폭 높은 수급이 동반됐으나 폭발적 수준은 아니다. 피벗 대비 확장폭 +4.98%로 이미 돌파 초입에서 다소 확장된 위치에서 진입이 이뤄져, 단기 눌림 리스크가 존재하는 구간이다. 52주 최고가 13.28달러가 상단 매물대로 남아있어 추가 상승 시 저항으로 작용할 가능성이 있으며, 하방으로는 돌파 피벗 10.15달러와 8.74달러(2분기 실적 발표 직후 저점) 부근이 1차·2차 지지선 역할을 할 것으로 예상된다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">가장 강력한 상승 트리거는 DEA의 전면적 스케줄 III 재분류 최종 명령 발표로, 8월 17일 후속 의견서 마감 이후 2026년 내 발표가 예상되는 만큼 시점이 임박했다는 점이 핵심이다. 최종 명령이 우호적으로 확정될 경우 280E 세제 혜택 확대, 은행 서비스 접근성 개선, 기관자금 추가 유입이 이어지며 52주 고점(13.28달러) 재시도 및 돌파 가능성이 있다. 애널리스트 컨센서스는 강력 매수(Strong Buy) 우위(매수 7명, 매도 0명)이며, 캔터 피츠제럴드는 비중확대(Overweight)에 목표주가 15달러를 제시, 평균 12개월 목표주가는 18.18~18.65달러 수준으로 현재가 대비 상당한 상승여력을 반영하고 있다. 2분기 EPS 서프라이즈와 의료 부문 매출 성장 지속이 추가 확인될 경우 밸류에이션 재평가 흐름이 강화될 수 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① DEA 최종 재분류 명령 지연·좌초 리스크: 후속 의견서가 8월 17일 마감됐지만 최종 명령 발표 시점은 여전히 불확실하며, 법적 이의제기나 정치적 변수로 지연되거나 부정적으로 결론날 경우 섹터 전반의 급락과 함께 TRLV도 되돌림 압력을 받을 수 있다. ② 내부자 매도 리스크: CEO 킴 리버스가 6월 상장 직후 500만 달러 이상 지분을 매도한 전례가 있어, 향후 추가 내부자 매도(Form 4 공시)가 확인될 경우 투자심리 위축과 함께 주가 하방 압력으로 작용할 수 있다. ③ 실적 가이던스 하향 및 구조조정 리스크: 하비스트 탈연결로 인한 대규모 GAAP 순손실(4.06억 달러)과 연간 현금흐름 가이던스 하향이 재확인될 경우, 2분기와 유사하게 실적 발표 직후 단기 급락(-2.94% 사례)이 재현될 수 있다. ④ 매출 감소 및 경쟁 심화: 전사 매출이 YoY -10% 감소한 상태에서 큐라리프·그린섬 등 경쟁사 대비 성장 모멘텀이 약화될 경우, 재분류 호재가 실현되더라도 펀더멘털 부진이 주가 상단을 제한할 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① DEA 스케줄 III 전면 재분류 최종 명령 발표 시점(8월 17일 후속 의견서 마감 이후 2026년 내 예상, 발표일 확정 시 최우선 모니터링). ② 3분기(2026년) 실적 발표 — 통상 11월 초순 예상, 가이던스 재확인 여부 주목. ③ 내부자 거래(Form 4) 공시 — CEO 및 경영진 추가 매도 여부. ④ MSOS ETF 자금 흐름 및 리밸런싱 동향 — 트루리브 비중 변화 시 수급 영향. ⑤ SAFE Banking Act 등 연방 은행 접근 관련 입법 진행 상황.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 스케줄 III 전면 재분류라는 명확하고 임박한 촉매, 애널리스트 강력매수 컨센서스, 2분기 EPS 서프라이즈는 긍정적이나, RVOL 1.41배는 폭발적 수준이 아니고 피벗 대비 +4.98% 확장된 상태에서의 진입, 최근 CEO 대량 매도 전력, 매출 YoY 감소 등 리스크가 병존한다. 촉매 실현 시 상단이 열려있지만 재분류 결정이 지연되거나 실망스러울 경우 되돌림 폭도 클 수 있어, 사이징 티어(×0.5) 수준의 보수적 접근이 합리적이다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

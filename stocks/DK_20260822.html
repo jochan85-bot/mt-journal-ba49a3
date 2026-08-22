@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>DK — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>DK <span class="dim" style="font-size:1rem">델렉 유에스 홀딩스</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.20yr, B2)</span></div>
+
+<div class="card">
+평균 매수가 <b>$71.40</b>
+
+· 수익률 <span class="pos">+0.21%</span>
+· 보유 10주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260815 기준)</span></div>
+<div class="dim">2026-08-22 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 10주 @ $71.40
+<div class="dim">2026-08-22 03:30 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">정제마진 슈퍼사이클과 자체 원가절감(EOP) 효과가 겹치며 실적 턴어라운드를 증명 중인 텍사스·아칸소·루이지애나 4개 정유공장 보유 독립계 정유·물류 기업</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">델렉 유에스 홀딩스는 텍사스 타일러·빅스프링, 아칸소 엘도라도, 루이지애나 크로츠스프링스에 위치한 4개 정유공장(합산 원유처리능력 약 30.2만 배럴/일)을 운영하며 휘발유, 디젤, 항공유, 아스팔트 등을 생산하는 정유(Refining) 부문과, 뉴욕증시에 별도 상장된 자회사 델렉 로지스틱스 파트너스(DKL)를 통해 원유·정제제품 파이프라인 수송, 저장, 폐수 처리 서비스를 제공하는 물류(Logistics) 부문 2개로 재편되어 있다. 2024년 249개 소매 주유소·편의점 사업을 매각하며 정유·물류 두 축에 집중하는 구조로 전환했다. 최근 12개월 매출은 약 107억 달러 규모이며, DKL 지분(GP·LP 지분 보유)에서 나오는 안정적 배당형 현금흐름이 정유 부문의 변동성을 상쇄하는 구조다. PADD 3(걸프코스트) 지역 내륙 정유사로서 서부텍사스 원유(WTI 미들랜드) 접근성이 좋아 상대적으로 저렴한 원료를 사용할 수 있는 지리적 우위를 가지며, 밸레로·마라톤페트롤리엄·필립스66 등 대형 정유사 대비 규모는 작지만 자산 효율화(EOP, Enterprise Optimization Plan)로 마진 개선에 집중하고 있다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기(8월 5일 발표) 매출 40억 8,700만 달러로 전년 동기 27억 6,460만 달러 대비 47.8% 증가했고, 순이익 1억 6,950만 달러(전년 동기 순손실 1억 640만 달러)로 흑자전환했다. 조정 EPS 5.48달러로 컨센서스 2.82달러를 2.66달러 큰 폭 상회했으며, 조정 EBITDA는 약 6억 3,900만 달러를 기록했다. 물류 부문(DKL)은 분기 조정 EBITDA 약 1억 4,400만 달러로 사상 최대 실적을 냈고 2026년 연간 EBITDA 가이던스 5.2억~5.6억 달러를 재확인했다. 자체 비용절감 프로그램 EOP는 2분기에만 약 6,000만 달러의 손익 기여를 했고, 회사는 3분기 정유 처리량 가이던스를 29.6만~31.6만 배럴/일로 상향 제시했다. 다음 실적 발표는 3분기 실적으로 2026년 11월 초(직전 분기 패턴상 11월 4~5일경 예상)로 추정된다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 3~7월 사이 정제마진(3-2-1 크랙 스프레드)이 다년간 최고 수준으로 치솟으면서(포브스 7/23 보도, EIA도 2026년 연말까지 고마진 지속 전망) 정유주 전반이 랠리했고, 8월 5일 델렉의 2분기 실적이 EPS·매출 모두 컨센서스를 큰 폭 상회하며 흑자전환을 확인시켰다. 8월 11일 미즈호가 목표가를 60달러에서 66달러로 상향했고, 8월 18일에는 골드만삭스가 목표가를 73달러에서 83달러로 대폭 상향하며 &#x27;매수&#x27; 의견을 재확인하자 주가가 하루 만에 10.5% 급등했다(직전 종가 64.04달러). 레이먼드제임스(60→70달러), TD코웬(홀드→매수, 50→58달러), 씨티(50→62달러) 등 연쇄 목표가 상향이 이어지며 기관 매수세가 유입됐고, 8월 22일 매수 시점 기준 68.38달러 피벗을 돌파해 71.4달러까지 확장(피벗 대비 +4.14%)했다. RVOL 1.41배로 평시 대비 다소 높은 거래량을 동반해 실적 서프라이즈+애널리스트 상향 랠리의 연장선상에서 돌파가 나온 구조다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">정유 섹터는 2026년 들어 정제설비 폐쇄에 따른 구조적 공급 축소와 지정학적 리스크(호르무즈 해협 긴장, 러시아 정유시설 드론 공격)로 크랙 스프레드가 2022~2024년 평균 대비 35~45% 높은 수준을 유지하며 업황 슈퍼사이클 국면에 있다. 업계 전반적으로 디젤·경유 수율을 높이는 쪽으로 포트폴리오를 조정 중이며, 연말까지 3~5건의 추가 폐쇄·소유권 변경이 예상되어 생존 정유사의 마진 집중도가 더 높아질 전망이다. 델렉은 마라톤페트롤리엄·발레로 등 대형사 대비 규모는 작지만 EOP를 통한 원가구조 개선과 PADD3 지역 저렴한 원유 접근성으로 최근 마진 개선 속도가 두드러지며, 다만 GuruFocus 등 일부 밸류에이션 모델은 최근 급등 이후 GF Score 47/100로 여전히 고평가 신호를 보낸다는 점은 유의할 부분이다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">직전 90일 주가수익률 +46.61%, 1년 수익률 +189.19%에 달하는 강한 상승 추세 속에서 8월 18일 골드만삭스 목표가 상향을 계기로 64달러 저점에서 급반등해 68.38달러 피벗을 형성했다. 진입 시점 RVOL 1.41배는 통상적인 강한 돌파(2배 이상)에는 못 미치는 다소 약한 거래량 동반이며, 피벗 대비 +4.14% 확장 상태에서 진입해 이미 초기 추격 매수 구간에 위치한다. 사이징 티어가 ×0.5로 축소 적용된 것도 이 RVOL 부족을 반영한 리스크 관리로 보이며, 위로는 뚜렷한 매물대 없이 애널리스트 목표가 83달러(골드만)까지 상단이 열려 있으나 아래로는 64달러 부근과 68.38달러 피벗이 1차·2차 지지선 역할을 할 것으로 판단된다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">정제마진 강세가 3분기까지 이어지고 델렉이 상향한 처리량 가이던스(29.6만~31.6만 배럴/일)를 충족하며 3분기 실적에서도 어닝 서프라이즈가 재현될 경우, EOP 추가 비용절감분까지 더해져 조정 EBITDA가 시장 기대를 상회하며 재상승 모멘텀을 얻을 수 있다. DKL 물류 부문이 사상 최대 실적 흐름을 이어가며 안정적 현금흐름 기반을 강화하는 것도 밸류에이션 리레이팅 요인이다. 애널리스트 목표가는 골드만삭스 83달러(매수), 레이먼드제임스 70달러(아웃퍼폼), 미즈호 66달러(아웃퍼폼), 씨티 62달러(중립), UBS 52달러(중립)로 분포하며, 최고가 83달러 기준 현재가(71.4달러) 대비 약 16% 추가 상승 여력이 존재한다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 크랙 스프레드 급락 리스크 — 현재 다년래 최고 수준인 정제마진이 지정학적 리스크 완화(호르무즈 긴장 해소 등)나 정유설비 재가동으로 정상화될 경우 델렉의 조정 EBITDA가 큰 폭 축소되며 주가 조정 압력이 커진다. ② 밸류에이션 부담 — GuruFocus GF Score 47/100로 이미 고평가 신호가 나온 상태에서 1년 +189% 급등 이후 진입이라 3분기 실적이 기대에 못 미치면 차익실현 매물이 대거 출회될 수 있다. ③ 정유설비 가동 리스크 — 4개 정유공장 중 하나라도 예기치 못한 가동 중단(화재, 정기보수 지연)이 발생하면 처리량 가이던스 미달과 함께 즉각적인 실적 훼손으로 이어진다. ④ 씨티·UBS의 중립 의견(목표가 각 62달러, 52달러)이 시사하듯 일부 기관은 이미 현재가 수준을 적정 또는 고평가로 판단하고 있어, 추가 상향 모멘텀이 둔화되면 단기 되돌림 리스크가 상존한다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 11월 초(예상) 3분기 실적 발표 — EPS·조정 EBITDA 및 3분기 처리량 가이던스(29.6만~31.6만 배럴/일) 달성 여부 확인. ② EIA 주간 정제마진·크랙 스프레드 지표(매주 수요일 발표) 추이 — 마진 급락 조짐 시 즉각 리스크 관리 필요. ③ DKL(델렉 로지스틱스) 별도 분기 실적 및 2026년 EBITDA 가이던스(5.2억~5.6억 달러) 재확인 여부. ④ 향후 배당 발표 일정(직전 분기배당 0.255달러, 지급일 2026-08-10, 기준일 2026-08-03) 및 차기 배당 공시. ⑤ 추가 애널리스트 목표가 조정(특히 씨티·UBS의 중립 의견 상향 여부) 모니터링.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 정제마진 슈퍼사이클과 압도적 실적 서프라이즈, 골드만삭스의 공격적 목표가 상향(83달러)이라는 강한 펀더멘털 뒷받침은 긍정적이나, 진입 시점 RVOL이 1.41배로 약해 사이징 티어가 ×0.5로 축소 적용됐고 피벗 대비 이미 +4.14% 확장된 추격 매수 구간이라는 점, 그리고 1년 +189% 급등 이후 GF Score 47/100의 고평가 경고가 동시에 존재해 확신 있는 강한 매수보다는 리스크 관리가 병행되어야 하는 보통 수준의 셋업으로 판단된다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

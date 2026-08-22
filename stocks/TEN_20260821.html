@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>TEN — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>TEN ☀️ <span class="dim" style="font-size:1rem">차코스 에너지 내비게이션</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.08yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$43.92</b>
+
+· 수익률 <span class="neg">-2.76%</span>
+· 보유 33주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260815 기준)</span></div>
+<div class="dim">2026-08-21 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 33주 @ $43.92
+<div class="dim">2026-08-21 23:32 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $43.90
+<div class="dim">2026-08-21 23:32 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $43.08
+<div class="dim">2026-08-22 00:55 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $42.43
+<div class="dim">2026-08-22 03:20 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">그리스계 독립 에너지 해운사로 원유·석유제품 탱커, LNG선, 셔틀탱커를 아우르는 64척의 다변화된 아이스클래스 선단을 보유한 탱커 랠리 수혜주</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">Tsakos Energy Navigation(TEN)은 세계 최대 독립 에너지 운송선사 중 하나로, VLCC·수에즈막스·아프라막스·파나막스·핸디사이즈/MR급 원유 및 석유제품 탱커에 더해 LNG 운반선과 DP2 셔틀탱커까지 총 64척의 이중선체 선단을 운용한다. 매출은 주로 원유·정제유 운송의 스팟 및 정기용선(타임차터) 계약에서 발생하며, 최근에는 장기 정기용선 비중을 늘려 현금흐름 안정성을 강화하는 전략을 취하고 있다. 세계 최대 아이스클래스 탱커 운영사 중 하나로 북유럽·러시아향 항로에서 경쟁 우위를 갖고 있으며, LNG 사업은 2007년 &#x27;Neo Energy&#x27; 인도로 진출한 이후 2016년 &#x27;Maria Energy&#x27; 등으로 확대됐다. 셔틀탱커 사업은 2013년 첫 DP2 수에즈막스 인도로 시작해 북해 등 해상 유전 지원 계약을 확보하고 있다. 주요 고객은 국영 석유회사 및 메이저 오일트레이더로, 장기계약과 스팟 노출을 병행해 업사이드와 방어력을 동시에 추구하는 구조다. 그리스 Tsakos 그룹의 오너십 아래 보수적 재무운용과 높은 배당성향으로도 알려져 있다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 1분기 순이익은 약 8,900만 달러로 전년 동기 대비 136% 급증했으며, EPS는 2.72달러로 시장 예상치를 상회했다. 선단 가동률은 98.3%로 매우 높은 수준을 유지했고, 지정학적 리스크(러시아 제재, 홍해 우회 항로)로 인한 톤마일 수요 증가가 실적을 견인했다. 3월 말 기준 현금성자산은 3억 2,140만 달러, 영업활동현금흐름은 9,720만 달러로 재무건전성이 견고하다. 배당 측면에서 2026년 상반기 주당 0.50달러에 이어 하반기 주당 1.00달러 반기배당을 선언, 2026년 연간 배당은 주당 1.50달러로 전년 대비 36% 증가했으며 이는 10년 만의 최고 수준이다. 다음 실적(2026년 2분기)은 회사의 과거 발표 패턴(1분기 실적을 5월 하순 발표) 감안 시 8월 말~9월 초 사이 발표될 것으로 예상되나 공식 일정은 아직 확정 공지되지 않았다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">주가는 최근 30일간 약 -9.47%의 조정을 거친 뒤 2026년 8월 11일 피벗 바텀에서 매수 신호가 발생, 이후 11.43% 반등하며 상승 전환의 초기 신호를 보였다. 이 조정-반등 흐름 위에 2월과 8월 두 차례 배당 상향(연 1.50달러, +36% YoY, 10년래 최고) 발표가 겹치며 주주환원 기대가 재부각됐고, 5월 발표된 1분기 실적(순이익 +136% YoY, EPS 2.72달러 서프라이즈)이 펀더멘털 재평가의 트리거로 작용했다. 여기에 2026년 2월 중동발 원유 운송비가 6년래 최고치를 기록하는 등 러시아 제재로 인한 &#x27;셰도우 플릿&#x27; 와해와 홍해 우회 항로 확대가 톤마일 수요를 구조적으로 밀어올리는 뉴스 흐름이 이어졌다. 이러한 배경 속에 8월 21일 주가가 피벗 42.95달러를 거래량 동반(RVOL 1.45배) 돌파, 43.92달러(피벗 대비 +2.21% 확장)에서 시스템이 신규 진입을 실행했다. 애널리스트들도 최근 목표주가를 41달러에서 46달러로 상향하며 이러한 흐름에 동조하고 있다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">탱커 섹터는 2025년 말 VLCC 운임이 일일 10만 달러를 상회하며 다년 최고치를 기록했고, EIA 데이터 기준 10년 평균 대비 60% 이상 높은 운임 수준을 보였다. 2026년 초 계절적 요인으로 페르시아만-아시아 VLCC 운임이 11월~1월 사이 43% 하락했으나, 러시아 제재로 인한 셰도우 플릿 선박 이탈과 항로 장기화(중국·인도의 중동·대서양권 수입 확대)로 상반기 운임 강세가 재차 유지되는 흐름이다. VLCC 선단 가동률은 2025년 89.5%에서 2026년 92%로 상승해 2019년 이후 최고 수준이 예상되며, 이는 업황 사이클의 후반부 강세 국면을 시사한다. 다만 2026년 하반기부터 2009년 이후 최대 규모의 신조선 인도가 예정돼 있어 운임 상단이 제한될 리스크가 존재하며, TEN은 이 중 장기계약 비중 확대와 아이스클래스·LNG·셔틀탱커 등 니치 부문 다각화로 피어 대비 현금흐름 변동성을 낮추는 위치에 있다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">주가는 30일간 약 -9.47% 조정을 거친 뒤 8월 11일 피벗 바텀에서 반등을 시작, 이후 8월 19일 42.60달러, 8월 20일 41.78~42.43달러 박스권을 거쳐 8월 21일 피벗선 42.95달러를 상향 돌파했다. 진입 시점 RVOL 1.45배는 통상적인 강한 돌파(2배 이상)에는 못 미치는 다소 미온적인 거래량 동반이며, 이에 따라 시스템도 사이징을 0.5배 티어로 축소 적용했다. 돌파 후 확장폭 +2.21%는 과도한 추격매수 구간은 아니나, 조정 이후 반등 초기 단계라는 점에서 베이스 자체의 견고함(우측 손잡이 형성 여부)은 추가 확인이 필요하다. 상단 저항은 뚜렷한 전고점 매물대가 확인되지 않으나, 애널리스트 목표가 상단인 50달러 부근과 52주 신고가대가 심리적 저항으로 작용할 수 있으며, 하방 지지는 돌파 피벗 42.95달러와 20일선 부근이 1차 방어선이다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">상반기 탱커 운임 강세(제재발 셰도우 플릿 이탈, 홍해 우회 항로 지속)가 3분기까지 이어지고 8월 말~9월 초 예정된 2분기 실적이 1분기(EPS 2.72달러, +136% YoY)에 이어 서프라이즈를 재현할 경우, 배당 확대 모멘텀과 맞물려 재평가가 가속화될 수 있다. 애널리스트 2인의 컨센서스는 &#x27;강력매수(Strong Buy)&#x27;이며 평균 목표가는 46달러(최근 41달러에서 상향), 목표가 범위는 42~50달러로 현재가 대비 5~14% 추가 상승 여력을 제시한다. 연간 배당 1.50달러(수익률 약 3%대)가 추가 상향될 경우 인컴 투자자 수요 유입도 기대할 수 있으며, 하반기 신조선 인도 우려에도 TEN의 높은 장기계약 비중이 실적 방어력을 뒷받침해 밸류에이션 프리미엄 요인이 될 수 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 하반기 신조선 대량 인도(2009년 이후 최대 규모 예정)로 공급 과잉이 현실화될 경우 VLCC/수에즈막스 운임이 급락해 스팟 노출 매출과 이익이 직접 타격받을 수 있다. ② 러시아-우크라이나 종전 협상이나 제재 완화 시 셰도우 플릿이 정상 시장으로 복귀하며 톤마일 수요 프리미엄이 축소되어 운임 하락 압력으로 이어질 수 있다. ③ 진입 시점 RVOL이 1.45배로 상대적으로 약해 돌파의 기관 수급 확신도가 낮으며, 이는 눌림목 재테스트나 가짜 돌파(false breakout) 가능성을 높인다. ④ 글로벌 경기 둔화나 유가 급락 시 원유 수요 자체가 위축되어 물동량 감소로 운임과 가동률이 동반 하락할 수 있으며, 지정학적 리스크(중동 확전 등)로 인한 항로 봉쇄나 보험료 급등도 비용 부담 요인이다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 2분기 실적 발표(8월 말~9월 초 예상, 공식 일정 미확정) — 순이익·EPS 서프라이즈 여부와 배당 추가 가이던스 확인. ② VLCC/수에즈막스 스팟 운임 및 페르시아만-아시아 운임 주간 데이터(Clarksons, Baltic Exchange 발표) — 셰도우 플릿 이탈 효과 지속 여부. ③ 러시아 제재 관련 지정학 뉴스(EU/미 추가 제재, 종전 협상 진전) — 톤마일 수요 프리미엄 변화의 선행지표. ④ 하반기 신조선 인도 일정 및 발주 잔량 데이터 — 공급 과잉 리스크 조기 감지. ⑤ 애널리스트 목표가 추가 조정(현재 42~50달러 범위) 및 보유 지속 여부 판단을 위한 42.95달러 피벗 재이탈 여부 모니터링.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 배당 확대(+36% YoY)와 1분기 실적 서프라이즈(EPS +136% YoY), 애널리스트 목표가 상향(41→46달러) 등 펀더멘털 모멘텀은 긍정적이나, 진입 시점 RVOL 1.45배로 거래량 동반이 약해 시스템도 0.5배 축소 사이징을 적용했다는 점에서 돌파의 기관 수급 확신도는 아직 검증 단계다. 하반기 신조선 대량 인도라는 구조적 공급 리스크가 예정돼 있어 2분기 실적과 운임 데이터 확인 전까지는 보통 확신 수준의 포지션 관리가 적절하다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

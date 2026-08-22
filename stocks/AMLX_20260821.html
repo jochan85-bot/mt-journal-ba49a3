@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AMLX — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>AMLX <span class="dim" style="font-size:1rem">아밀릭스 파마슈티컬스</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.79yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$40.61</b>
+
+· 수익률 <span class="neg">-2.31%</span>
+· 보유 36주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 4점 (20260815 기준)</span></div>
+<div class="dim">2026-08-21 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 36주 @ $40.61
+<div class="dim">2026-08-21 22:59 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $40.29
+<div class="dim">2026-08-21 23:00 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $40.25
+<div class="dim">2026-08-21 23:06 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $40.25
+<div class="dim">2026-08-21 23:15 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $39.74
+<div class="dim">2026-08-22 00:55 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $38.81
+<div class="dim">2026-08-22 03:20 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">ALS 신약 릴리브리오 참패 후 파산한 에이거로부터 인수한 아벡시타이드로 재기에 성공, 비만수술 후 저혈당증(PBH) 1등 신약을 노리는 턴어라운드 바이오텍</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">아밀릭스는 2022년 ALS 치료제 릴리브리오(AMX0035)를 FDA 승인받았으나 2024년 3월 확증 3상 PHOENIX에서 위약 대비 유의한 개선을 입증하지 못해 같은 해 4월 시장에서 자진 철수하고 인력을 약 70% 감축한 전력이 있다. 이후 회사는 2024년 7월 파산 절차를 밟던 에이거 바이오파마슈티컬스로부터 3상 준비 단계의 GLP-1 수용체 길항제 &#x27;아벡시타이드&#x27;를 약 3,500만 달러에 인수하며 전면 피벗했다. 아벡시타이드는 비만수술 후 발생하는 심각한 저혈당 합병증인 &#x27;비만수술 후 저혈당증(PBH)&#x27;을 표적으로 하며, 현재 FDA 승인 치료제가 전무한 적응증으로 사실상 독점적 시장 진입 기회를 갖는다. FDA로부터 혁신치료제(Breakthrough Therapy) 지정을 받아 신속심사 트랙을 확보한 상태다. 릴리브리오 철수 이후 상업 매출은 사실상 없으며, 현재는 순수 임상단계 파이프라인 기업으로 아벡시타이드 상용화 이전까지는 매출이 발생하지 않는 구조다. 주 고객·파트너는 향후 출시 시 비만대사수술 전문의 및 내분비내과 네트워크가 될 전망이며, 별도의 상업 파트너십은 아직 공개되지 않았다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 8월 6일 발표된 2분기 실적에서 순손실 4,340만 달러(주당 -0.39달러, 컨센서스 -0.37달러 대비 악화), 총영업비용 4,570만 달러(전년 동기 대비 +7%)를 기록했다. R&amp;D 비용은 2,380만 달러로 전년 동기(2,720만 달러) 대비 12.5% 감소해 릴리브리오 관련 지출 축소가 반영됐다. 현금 및 유가증권은 2분기 말 2억 5,080만 달러로 1분기 말(2억 7,980만 달러) 대비 약 2,900만 달러(-10.4%) 감소했으며, 당시 가이던스는 &#x27;2028년까지 현금 소진 없음&#x27;이었다. 이후 8월 18일 3,500만 주(1,409만 주, 주당 35.50달러) 규모의 3억 5,000만 달러 유상증자를 단행하며(옵션 행사 시 최대 4,025만 달러 추가) 현금 여력을 대폭 확충, NDA 제출 및 출시 준비 자금을 확보했다. 매출은 현재 사실상 전무한 순수 개발단계 기업이며, 다음 실적 발표(3분기)는 2026년 11월 초로 예상된다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">8월 6일 2분기 실적은 예상보다 큰 순손실로 다소 부진했으나 시장의 관심은 이미 임박한 아벡시타이드 3상 결과에 쏠려 있었다. 8월 17일 발표된 3상 LUCIDITY 결과가 분수령이 됐다—1차 및 모든 2차 평가변수를 충족했고, 위약 대비 저혈당 사건 55% 감소(p=0.000003)라는 매우 강력한 통계적 유의성을 기록했다. 이 소식에 8월 18일 주가는 35.11달러까지 폭등했고 거래량 2,360만 주로 약 4년 만에 최대 거래일을 기록했다. 같은 날 회사는 신속하게 주당 35.50달러(거의 시장가) 조건으로 3억 5,000만 달러 규모 유상증자를 발표해 NDA 제출·출시 자금을 선제적으로 확보했다. 8월 19~20일 스티펠(21→45달러), 베어드(28→52달러), 구겐하임(40→55달러), 미즈호(30→42달러), HC 웨인라이트(34→55달러) 등 다수 증권사가 목표주가를 대폭 상향하며 데이터의 상업적 가치와 리스크 완화를 재확인했다. 이런 흐름 속에 8월 21일 주가는 주간 기준 약 79% 상승하며 피벗 39.07달러를 돌파해 40.61달러에 진입, 초기 급등 이후에도 매수세가 이어지는 양상을 보였다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">GLP-1 계열 비만치료제 처방 확대로 비만대사수술 건수 자체는 다소 둔화됐지만, 기존 수술 환자군 누적으로 PBH 잠재 환자 풀은 꾸준히 증가하는 추세이며 현재 승인된 치료제가 전무해 미충족 수요가 뚜렷하다. 아밀릭스는 아벡시타이드로 이 틈새시장에 최초이자 유일한 진입자로 자리매김하고 있어 일반적인 경쟁 바이오텍 대비 차별화된 포지션을 갖는다. 다만 동사는 릴리브리오 3상 실패·시장 철수라는 트랙레코드를 안고 있어, 신약 데이터 신뢰도 측면에서 투자자들의 재검증 대상이 되고 있다는 점은 동종 업계 대비 약점으로 남는다. 임상 성공 후 대규모 유상증자로 자금을 선제 확보한 점은 소형 바이오텍의 전형적 리스크(자금 부족)를 조기에 해소했다는 점에서 긍정적이다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">이번 진입은 피벗 39.07달러를 3.97% 상회한 40.61달러에서 이뤄져 다소 확장된 자리이며, 상대거래량은 1.41배로 8월 18일 폭등일(약 10배 이상 추정)에 비해 크게 진정된 수준이다. 이는 뉴스발 수직 리레이팅 이후 전형적인 VCP형 베이스 없이 &#x27;갭 앤 고&#x27; 형태로 상승이 지속되는 국면임을 시사하며, 거래량이 줄어들면서도 우상향이 이어지는 점은 매도 압력이 크지 않다는 긍정적 신호이나 폭발적 신규 매수 유입은 아니라는 한계도 있다. 하방 1차 지지선은 8월 18일 유상증자 발행가 35.50달러 부근이며, 그 아래 갭 발생 초입 구간인 30~32달러가 2차 지지대로 작용할 가능성이 있다. 뚜렷한 상단 매물대는 없으나 최근 급등에 따른 단기 과열 부담은 상존한다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">연내(2026년 말) NDA 제출이 예정대로 진행되고 혁신치료제 지정에 따른 우선심사(표준 10개월 대비 단축)가 부여되면 2027년 상업 출시가 가시화될 수 있으며, 무경쟁 PBH 시장에서 첫 진입자 프리미엄을 누릴 수 있다. 증권사 목표주가는 42~55달러 구간에 집중돼 있으며(스티펠 45달러, 미즈호 42달러, 베어드 52달러, 구겐하임·HC웨인라이트 55달러) 현재 진입가 40.61달러 대비 추가 상승 여력을 시사한다. NDA 정식 제출 확인이나 FDA 우선심사 지정 발표가 나올 경우 추가 리레이팅 트리거가 될 수 있다. 장기적으로는 아벡시타이드의 선천성 고인슐린혈증 등 추가 적응증 확장 가능성도 잠재 업사이드로 거론된다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 희석 오버행: 8월 18일 1,409만 주(옵션 포함 최대 약 1,650만 주) 유상증자가 주당 35.50달러에 이뤄져, 현 주가(40.61달러)가 발행가를 상회하는 만큼 추가 매물 출회나 향후 재차 자금조달 가능성이 상승을 제한할 수 있다. ② 규제 리스크: 혁신치료제 지정에도 불구하고 NDA 제출 후 FDA 심사 과정에서 보완요구서한(CRL) 등 예상치 못한 이슈가 발생하면 2027년 출시 일정이 지연되고 주가는 급락할 수 있다. ③ 과거 트랙레코드 리스크: 릴리브리오가 확증 3상에서 실패해 시장 철수한 전례가 있어, 아벡시타이드의 장기 안전성·내약성 데이터나 후속 분석에서 문제가 발견될 경우 투자자 신뢰가 재차 흔들릴 수 있다. ④ 밸류에이션·모멘텀 리스크: 진입 시점이 이미 주간 기준 79% 급등한 이후 피벗 대비 +3.97% 확장된 자리이며 RVOL도 1.41배로 강한 신규 매수세 확인 없이 진입한 추격매수 성격이 강해, 단기 차익실현에 따른 되돌림 가능성이 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① NDA 제출: 2026년 말까지로 예정, 실제 제출일 및 FDA 접수(우선심사 지정 여부) 확인 필요. ② 3분기 실적 발표: 2026년 11월 초 예상, 현금 소진 속도 및 출시 준비 비용 가이던스 확인. ③ 유상증자 언더라이터 30일 옵션 만기: 2026년 9월 중순(8월18일+30일) 전후 추가 물량 행사 여부 점검. ④ LUCIDITY 상세 데이터 발표: 학회 발표나 논문 게재 등을 통한 전체 데이터셋 공개 시점. ⑤ FDA 승인/PDUFA 목표일: NDA 접수 후 확정될 예정이므로 접수 시점에 재확인 필요.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 아벡시타이드 3상 데이터는 통계적으로 매우 강력하고 무경쟁 시장이라는 펀더멘털은 명확히 개선됐으나, 진입 시점 자체가 주간 79% 급등 이후 피벗 대비 3.97% 확장, RVOL 1.41배라는 다소 약한 거래량 확인 속 추격 매수 구간이며 직전 유상증자 발행가(35.50달러) 대비 상당히 위에서 진입한 점이 부담이다. 사전 리포트의 &#x27;관망(4점)&#x27; 판정은 8월15일 기준으로 촉매 이전 데이터이므로 현재는 기초체력상 유효성이 떨어지지만, 사이징을 0.5배로 축소한 보수적 접근은 여전히 합리적이다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

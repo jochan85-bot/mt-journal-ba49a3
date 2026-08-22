@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ILMN — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>ILMN <span class="dim" style="font-size:1rem">일루미나</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.85yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$211.98</b>
+
+· 수익률 <span class="pos">+3.33%</span>
+· 보유 14주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260815 기준)</span></div>
+<div class="dim">2026-08-20 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 12주 @ $211.92
+<div class="dim">2026-08-20 22:55 </div>
+</div><div class="tl-item buy">
+<b>매수</b> · 2주 @ $212.37
+<div class="dim">2026-08-20 22:59 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $210.08
+<div class="dim">2026-08-20 23:12 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $209.95
+<div class="dim">2026-08-20 23:34 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $215.93
+<div class="dim">2026-08-21 01:06 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $214.73
+<div class="dim">2026-08-21 02:55 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $214.84
+<div class="dim">2026-08-21 03:02 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $210.31
+<div class="dim">2026-08-21 23:00 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $216.45
+<div class="dim">2026-08-22 01:12 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">차세대 시퀀싱(NGS) 시장의 절대 강자 일루미나가 중국발 리스크를 딛고 임상 시퀀싱 수요 회복과 NovaSeq X 확산에 힘입어 실적 가이던스를 상향하며 52주 신고가 돌파를 시도하고 있다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">일루미나는 DNA 시퀀싱 장비와 소모품(시약 키트)을 판매하는 유전체 분석 플랫폼 기업으로, 매출의 상당 부분이 소모품(consumables) 재구매 매출에서 발생하는 &#x27;면도기-면도날&#x27; 모델을 갖고 있다. 핵심 제품은 대량 처리용 NovaSeq X/X Plus 시리즈이며, 임상 진단(암 스크리닝, 유전병 검사), 종양학 동반진단(companion diagnostics), 신약개발용 연구시장(academic/pharma) 세 축으로 매출이 구성된다. 글로벌 NGS 장비 시장 점유율에서 압도적 1위를 유지하고 있으나 PacBio(롱리드), MGI/BGI(DNBSEQ, 저가 숏리드), 로슈의 신규 시퀀서 등 경쟁이 심화되고 있다. 2024년 6월 암 조기진단 자회사 GRAIL을 완전 분사(스핀오프)하며 지분 14.5%만 보유하는 순수 시퀀싱 플랫폼 기업으로 재편했다. 주요 고객은 병원·진단검사실(임상), 제약사·바이오텍(연구), 학술기관이며, 2025년 3월 중국의 일루미나 시퀀서 수입 금지 조치로 중국 매출이 크게 위축된 상태다. 미국·캐나다 및 유럽 임상 시장이 현재 성장의 주된 동력으로 부상했다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기(7월 30일 발표) 매출은 11억6,000만 달러로 전년 동기 대비 +9.5% 성장했으며, 중국·통화·인수효과를 제외한 나머지 지역 유기적 성장률은 +8.1%를 기록했다. GAAP 영업이익률 21.1%, 비GAAP 영업이익률 22.5%로 마진이 개선세를 보였고, 임상용 소모품 매출은 중국 제외 기준 +15%, 미국·캐나다는 +20% 이상 성장했다. NovaSeq X는 2분기에만 95대 이상 신규 설치되며 플랫폼 전환이 가속화되고 있다. 이 실적을 바탕으로 회사는 2026 회계연도 매출 가이던스를 46.0억~46.4억 달러로, EPS 가이던스를 5.30~5.40달러로 상향했으며 3분기 매출 가이던스는 11.4억~11.6억 달러다. 다음 실적 발표(3분기)는 2026년 10월 말~11월 초로 예상된다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">7월 30일 2분기 실적에서 매출 성장 가속과 가이던스 상향이 확인되며 주가가 상승 모멘텀을 얻기 시작했고, 이후 8월 13일 10억 달러 규모의 신규 무담보 리볼빙 크레딧 라인(2031년 만기) 체결과 8월 중 2029년 만기 2억9,990만 달러 규모 시니어노트 발행으로 재무 유연성 우려가 완화됐다. 이런 흐름 속에 8월 19일 주가가 8.9% 급등하며 종가 205달러로 52주 신고가(207달러)에 근접했고, 임상 소모품 고성장과 NovaSeq X 설치 확대가 재확인되며 시장의 재평가가 이어졌다. 이 여세를 몰아 8월 20일 207.0달러 피벗을 상대거래량(RVOL) 1.42배를 동반하며 돌파, 211.92달러(피벗 대비 +2.25% 확장)에서 신규 매수 신호가 발생했다. 이는 2025년 3월 중국 수출 금지 충격 이후 약 1년 5개월 만에 형성된 베이스를 벗어나는 구조적 전환점으로, 실적·재무·수급 삼박자가 맞물린 결과로 해석된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">유전체 시퀀싱 업황은 임상 응용(액체생검, 유전질환 진단, 감염병 시퀀싱) 수요 확대로 회복 국면에 진입했으며, 일루미나의 임상 소모품 성장률(+15~20%)이 이를 뒷받침한다. 다만 중국 시장은 정책 리스크로 사실상 봉쇄되어 있고, MGI/BGI의 DNBSEQ가 저가 숏리드 시장에서, PacBio의 SPRQ-Nx 화학기술(2026년 상용화 예정)이 롱리드 시장에서 각각 점유율을 잠식하고 있다. 그럼에도 일루미나는 NovaSeq X 플랫폼의 처리량·비용 우위와 방대한 설치기반(installed base)을 바탕으로 여전히 글로벌 NGS 시장 점유율 1위를 유지하며, 최근 실적은 업계 평균 대비 견조한 성장을 시현하고 있다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">일루미나는 2025년 3월 중국 수출 금지 충격 이후 장기 하락·횡보 베이스를 형성했고, 이번 실적 시즌을 거치며 207달러(52주 고점 부근) 저항선을 상단 피벗으로 하는 컵형 베이스를 완성했다. 8월 20일 RVOL 1.42배의 준수한 거래량을 동반해 피벗을 돌파했으며, 진입가 211.92달러는 피벗 대비 +2.25% 확장에 그쳐 추격매수 부담이 크지 않은 양호한 진입 지점으로 평가된다. 다만 돌파 직후 신고가 영역이라 위쪽에 뚜렷한 매물대는 없는 대신, 아래로는 207달러(피벗)와 8월 19일 종가 205달러가 1차 지지선, 그 아래 200달러 심리적 지지선이 존재한다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">3분기(가이던스 11.4억~11.6억 달러) 및 4분기 실적에서 임상 소모품 고성장과 NovaSeq X 설치 확대가 지속 확인될 경우, 200달러 안팎에 몰려 있던 애널리스트 목표가(JP모건 230달러·Buy 등급 상향, 구겐하임 226달러·Buy, 리링크 210달러·Outperform, 에버코어ISI 200달러·Outperform)가 추가로 상향 조정되며 주가 재평가가 이어질 수 있다. 중국 외 지역(미국·유럽) 임상 파이프라인 확대와 신제품(예: 저가형 시퀀서) 출시가 추가 촉매가 될 수 있으며, 11월 2일 델라웨어 법원의 GRAIL 관련 화해안 승인이 소송 불확실성을 해소하는 트리거가 될 수 있다. 목표가 상단(230달러) 도달 시 현재가 대비 약 8~10%의 추가 상승 여력이 존재한다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 중국 매출 회복 지연: 수출 금지가 장기화될 경우 이미 반영된 1억 달러 비용절감 효과를 넘어서는 추가 실적 훼손 가능성. ② 경쟁 심화: MGI/BGI의 저가 DNBSEQ 플랫폼과 PacBio의 SPRQ-Nx(2026년 상용화), 로슈 신규 시퀀서가 가격/기술 경쟁을 촉발해 마진 압박으로 이어질 위험. ③ GRAIL 관련 소송 불확실성: 11월 2일 델라웨어 법원 화해안 승인이 불발되거나 조건이 불리하게 변경될 경우 재무·평판 리스크 재부각. ④ 내부자 매도: 최근 12개월간 순매도 3억460만 달러 규모로, 밸류에이션 부담(52주 신고가 근접) 속 추가 내부자 매도가 나올 경우 단기 수급 악화 가능성.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">3분기 실적 발표(2026년 10월 말~11월 초 예상, 매출 가이던스 11.4억~11.6억 달러 달성 여부), 2026년 11월 2일 델라웨어 형평법원의 GRAIL 관련 화해안 승인 심리, 중국 수출입 정책 변화 관련 뉴스, NovaSeq X 분기별 신규 설치 대수 추이, 임상 소모품 성장률(전분기 미국·캐나다 +20%대) 지속 여부, 경쟁사(PacBio SPRQ-Nx 상용화, MGI 국제 확장) 신제품 출시 동향을 지속 모니터링해야 한다.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 실적 가이던스 상향과 임상 소모품 고성장, 재무구조 개선(신규 크레딧라인)이 돌파 매매 논리를 뒷받침하고 애널리스트 목표가도 대체로 상향 중이나, 52주 신고가 근접 구간에서의 진입인 데다 중국 리스크·경쟁 심화·GRAIL 소송 불확실성 등 해소되지 않은 리스크가 다수 남아있어 강한 확신 단계로 보기는 이르다. RVOL 1.42배·확장폭 +2.25%는 무난한 돌파 품질이나, 위쪽 매물대가 없는 신고가 영역이므로 207달러 피벗 이탈 시 손절 원칙을 엄격히 지켜야 한다.</div></div>
+<h3>📉 매도 분석 — 2026-08-20</h3>
+<div class="card"><b>하락/청산 원인</b><div class="section-body">ILMN은 2026년 2분기 매출 11.6억 달러(컨센서스 11.3억 달러 상회)와 기관 매수세 유입을 배경으로 8월19일 하루 만에 +8.9% 급등하며 52주 신고가(207.10달러) 근접권까지 도달했고, 8월20일 이 모멘텀을 이어받아 211.98달러(직전 고점 대비 약 +2.4%) 부근에서 신고가 돌파 매수가 체결됐습니다. 그러나 진입 당일 미 국채 금리가 급반등하면서 위험자산 전반이 위축됐고, 전날 급등의 되돌림(차익실현) 매물이 겹치며 주가가 빠르게 210.08달러까지 밀려 매수가 대비 -0.9% 손실 구간에서 트레일링/이탈 조건이 발동해 매도됐습니다. 매도 시점(한국시간 23:12, 뉴욕시간 오전 10시경)은 진입 당일 개장 초반대로, 돌파 후 시가 대비 재차 하방 이탈하는 &#x27;실패한 돌파(failed breakout)&#x27; 패턴에 해당합니다. 즉 종목 고유의 악재 뉴스는 확인되지 않으며, 전일 급등에 따른 자연스러운 차익실현과 거시(금리) 충격이 복합적으로 작용한 결과입니다.</div></div>
+<div class="card"><b>당일 시장 상황</b><div class="section-body">8월20일 S&amp;P500 -0.87%(7,641.16), 나스닥 -1.00%(26,067.17), 다우 -1.32%(52,759.21)로 3대 지수가 동반 급락했으며, 전일 미 재무부의 국채 바이백 확대 발표로 급락했던 장기 금리가 재반등하며 랠리 되돌림 우려가 시장을 짓눌렀습니다. 바이오테크/헬스케어 섹터(XBI, XLV)는 8월19일 국채 바이백 및 모더나 mRNA 항암제 뉴스로 최대 상승 섹터였으나, 8월20일 금리 재상승과 함께 시장 전반의 위험회피 심리가 확산되며 전일 주도 섹터의 상승분이 되돌려지는 흐름을 보였습니다. ILMN의 하락은 개별 악재라기보다 이러한 섹터·지수 동반 조정의 연장선으로 해석됩니다.</div></div>
+<div class="card"><b>시스템 판단 평가</b><div class="section-body">미너비니 SEPA 원칙상 신고가 돌파 매수 후 즉시 돌파선 아래로 되밀리면 &#x27;손실은 짧게&#x27;라는 원칙에 따라 신속히 손절하는 것이 정석이며, 이번 -0.9%라는 매우 작은 손실폭에서 당일 청산된 것은 자본 보존 관점에서 적절한 대응입니다. 다만 진입가(211.98)가 8.9% 단일 일봉 급등 직후, 즉 정상적인 VCP 피벗(변동성 수축 후 저거래량 구간)이 아닌 확장 갭 구간에서 이뤄졌다는 점은 애초에 진입 타이밍 자체가 이상적인 피벗 매수 지점에서 벗어나 있었음을 시사합니다. 시스템의 매도 실행 자체는 규칙대로 정확히 작동했으나, 그 전 단계인 진입 필터(확장도 제한)가 다소 느슨했을 가능성이 있습니다. 결과적으로 시스템은 &#x27;빠른 손절&#x27;이라는 방어 기능은 제대로 수행했지만, &#x27;무리한 추격 매수를 걸러내는 기능&#x27;에서는 개선 여지가 있습니다.</div></div>
+<div class="card"><b>대안 검토</b><div class="section-body">규칙 범위 내에서는 전일 8.9% 급등 이후 진입을 하루 유예하거나 눌림목(pullback)에서 이동평균선 지지를 확인 후 진입하는 옵션이 있었을 것이나, 이 경우 8월20일 시장 전체가 급락했으므로 어차피 비슷하거나 더 큰 손실 없이 관망만 하는 결과가 됐을 가능성이 높습니다. 반대로 손절폭을 당일 변동성 대비 조금 더 넓게 설정했다면 이번 급락은 하루 만에 되돌려질 단기 충격이었으므로 손실을 피했을 수도 있으나, 이는 사후적 판단이며 규칙의 일관성을 해치는 선택입니다.</div></div>
+<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">ILMN의 펀더멘털(실적 서프라이즈, 기관 매수 유입, 파이프라인 모멘텀)은 여전히 견조하며, 이번 조정은 금리發 시장 전반의 단기 충격에 가까워 추세 자체가 훼손됐다고 보기는 어렵습니다. 재진입을 고려한다면 210~207달러 구간에서 거래량 감소를 동반한 손잡이(handle) 또는 타이트한 재수축(VCP) 패턴이 형성되는지, 그리고 나스닥/S&amp;P가 다시 상승 추세(50일선 위)로 복귀하며 분산일(distribution day) 수가 줄어드는지를 확인해야 합니다. 특히 국채 금리 안정 및 XBI/XLV의 상대강도 재확인이 재돌파 시도의 신뢰도를 높이는 핵심 전제 조건이며, 확장 갭 없이 정상적인 피벗선(약 207~212달러) 재돌파와 거래량 증가가 동반될 때 재진입을 검토할 만합니다.</div></div><h3>📉 매도 분석 — 2026-08-20</h3>
+<div class="card"><b>하락/청산 원인</b><div class="section-body">ILMN은 2026년 7월 30일 2분기 실적에서 매출 11.6억 달러(컨센서스 11.3억 달러 상회), EPS 1.31달러(컨센서스 1.23달러 상회)를 기록하며 8월 들어 52주 신고가(207~214달러 구간) 부근에서 강한 상승 모멘텀을 보였고, YTD 수익률이 약 91%에 달하는 극도로 확장된 종목이었습니다. 8월 20일 진입 시점(평균단가 211.98달러)은 이 52주 신고가 돌파 시도 구간에서의 브레이크아웃 매수였던 것으로 보이며, 장중 214달러대까지 찍었으나 이후 매수세가 이어지지 못하고 되밀리며 209.95달러에서 손절 트리거가 발동했습니다. 종목 자체의 악재 뉴스는 확인되지 않아, 실적 발표 후 단기 급등(5일간 +8.91%)에 따른 차익실현 매물과 장중 피벗 돌파 실패(failed breakout)가 하락의 주된 원인으로 판단됩니다. 진입 당일 즉시 손절된 것은 전형적인 &#x27;피벗 매수 후 당일 되돌림&#x27; 패턴으로, 보유 하루 만에 -1.0% 손실로 청산되었습니다.</div></div>
+<div class="card"><b>당일 시장 상황</b><div class="section-body">매도 당일(8월 20일) S&amp;P500은 -0.87%(7641.16), 나스닥은 -1.0%(26067.17), 다우는 월마트 실적 쇼크(-9%) 여파로 -1.32%(703.84포인트) 급락하는 등 시장 전반이 위험회피 국면이었습니다. 10년물 국채금리가 4.70%까지 치솟고 VIX가 7% 이상 급등하며 투자심리가 급격히 위축됐습니다. 바이오텍 섹터는 상대적으로 견조했으나(XBI YTD +31% 수준 유지) IBB는 약세를 보이는 등 엇갈린 흐름을 보여, ILMN도 개별 호재에도 불구하고 시장 전체의 리스크오프 압력을 피하지 못했습니다.</div></div>
+<div class="card"><b>시스템 판단 평가</b><div class="section-body">미너비니 규칙상 신규 피벗 돌파 매수 후 당일 되돌림이 발생하면 손실을 짧게 자르는 것이 원칙이며, 이번 손절폭(약 -1.0%)은 이 원칙에 부합하는 타이트한 대응이었습니다. 다만 ILMN은 이미 YTD +91%, 최근 5일 +8.91%로 극단적으로 확장된(overextended) 상태였고, 게다가 국채금리 급등·VIX 급등이라는 매크로 리스크가 겹친 날 브레이크아웃을 추격 매수한 측면이 있어, 진입 자체의 타이밍 리스크가 높았습니다. 즉 손절 실행은 적절했으나, 매수 시점 선정에서 확장도와 매크로 변동성을 좀 더 감안했다면 애초에 회피 가능한 거래였을 수 있습니다.</div></div>
+<div class="card"><b>대안 검토</b><div class="section-body">규칙 범위 내에서는 장중 즉시 매수 대신 종가 기준 피벗 돌파 확인 후 익일 매수하는 방식이 가능했을 것이며, 이 경우 8월 20일 급락장에 노출되지 않았을 가능성이 있습니다. 다만 시장 전체가 다음날 이후에도 금리 상승 압박을 받았다면 다른 시점에도 유사한 손절이 발생했을 수 있어, 결과가 크게 달라졌을지는 불확실합니다. 포지션 크기를 축소했다면 손절 자체는 동일하게 발생했겠지만 손실 금액은 줄었을 것입니다.</div></div>
+<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">ILMN의 펀더멘털은 여전히 견고합니다(2분기 어닝비트, 시퀀싱 수요 회복, 기관 매수세 유입). 이번 손절은 종목 악재가 아닌 시장 전체의 금리·변동성 충격에 의한 것으로, 셋업 자체가 훼손되었다고 보기는 어렵습니다. 재진입 관점에서는 200~207달러 구간에서 베이스(손잡이 컵형 또는 좁은 VCP 조정)가 재형성되는지, 그리고 10년물 금리가 안정되고 VIX가 진정되는 등 매크로 환경이 개선되는지를 확인해야 합니다. 거래량을 동반한 신규 피벗 돌파와 함께 시장 전반의 되돌림 리스크가 완화될 때 재진입을 검토하는 것이 바람직합니다.</div></div><h3>📉 매도 분석 — 2026-08-21</h3>
+<div class="card"><b>하락/청산 원인</b><div class="section-body">ILMN은 8/20 강력한 2분기 실적(매출 11.6억달러, YoY +9.5%, 비GAAP EPS 1.31달러로 컨센서스 1.23달러 상회) 모멘텀과 기관 매수세 유입을 바탕으로 종전 52주 신고가 피벗($207.10)을 돌파하며 진입가 211.98에 매수 체결됐다. 이후 같은 날 장중 랠리가 지속되며 214.30달러대 프린트를 거쳐 매도 시점 215.93달러까지 급등, 진입일 당일(하루도 채 안 되는 시간) 만에 +1.9% 수익 구간에서 시스템 매도가 트리거됐다. 이는 종목 개별 악재나 실적 실망이 아니라, 피벗 돌파 후 하루 만에 과도하게 확장(extended)된 가격 움직임에 대한 변동성 기반 트레일링/락인 매도로 판단된다. 8/20 하루 거래범위가 205→214~216달러로 매우 넓었다는 점에서, 브레이크아웃 초기 특유의 높은 변동성이 매도 트리거를 조기에 작동시킨 것으로 보인다.</div></div>
+<div class="card"><b>당일 시장 상황</b><div class="section-body">매도 당일(8/20) 뉴욕증시는 국채금리 상승, 월마트 실적 쇼크(-9%), 유가 상승 우려로 S&amp;P500 -0.87%, 나스닥종합 -1.00%, 다우 -1.32% 급락 마감했다. 바이오텍 대표지수인 NASDAQ Biotechnology Index(NBI)는 -2.92% 하락하며 헬스케어/바이오 섹터 전반이 시장보다 더 큰 약세를 보였다. ILMN은 이러한 시장·섹터 역풍 속에서도 실적 모멘텀에 힘입어 나홀로 강세(장중 +4.5% 이상)를 보인 디커플링 종목으로, 상대강도(RS)는 돋보였지만 그만큼 시장 반전 시 되돌림 리스크도 내포하고 있었다.</div></div>
+<div class="card"><b>시스템 판단 평가</b><div class="section-body">미너비니 SEPA 관점에서 피벗 돌파 당일 신고가 갱신 + 시장/섹터 지수 동반 약세라는 다이버전스가 존재했던 만큼, 확장 구간에서 이익을 일부라도 확정한 판단 자체는 리스크관리 취지에 부합한다. 다만 진입(8/20)과 청산(같은 날 정오 무렵)이 사실상 당일 스캘핑 수준으로 짧았고, 실적 촉매·거래량 동반·피벗 돌파라는 SEPA 매수 요건을 모두 충족한 종목치고는 +1.9%라는 매우 작은 이익만 확정하고 청산했다는 점에서, 손절 룰이 아닌 변동성 기반 트레일링 스탑이 초기 브레이크아웃의 정상적 &#x27;노이즈&#x27;까지 걸러내지 못하고 과민하게 작동했을 가능성이 있다.</div></div>
+<div class="card"><b>대안 검토</b><div class="section-body">트레일링 폭을 ATR 등 변동성 기준으로 더 넓게 설정하거나, 실적 촉매를 동반한 신고가 브레이크아웃 종목에 한해 최소 1~2일의 보유기간을 두고 스탑을 적용했다면 당일 장중 변동을 견디고 이후 추세 지속에 더 오래 올라탈 수 있었을 가능성이 있다. 다만 시장 전체와 바이오텍 섹터가 동반 급락 중이었던 점을 감안하면 전량 청산 대신 절반만 익절하고 나머지를 트레일링으로 홀딩하는 부분 청산 전략이 위험과 수익 기회의 균형 측면에서 더 합리적이었을 수 있다.</div></div>
+<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">ILMN은 견조한 실적 성장(매출 YoY +9.5%)과 기관 매수세를 바탕으로 52주 신고가를 새로 쓰는 등 펀더멘털·모멘텀 모두 우호적이나, 최근 1년 +92% 급등에 따른 밸류에이션 부담과 애널리스트 평균 목표주가(180달러대 후반)가 현재가를 밑돈다는 점은 추가 상승 여력에 신중론을 요구한다. 재진입 관점에서는 215달러 부근 신고가 돌파 후 거래량 감소를 동반한 손잡이(handle)나 타이트한 VCP 눌림목이 형성되는지, 50일선 위에서 지지가 유지되는지를 확인해야 한다. 국채금리·잭슨홀 연설 등 매크로 리스크와 바이오텍 섹터 변동성(NBI -2.92%)이 진정되고 ILMN이 신고가 부근에서 낮은 변동성의 눌림목을 며칠간 형성한다면, 재돌파 시 워치리스트 관점에서 재진입을 검토할 만하다.</div></div><h3>📉 매도 분석 — 2026-08-21</h3>
+<div class="card"><b>하락/청산 원인</b><div class="section-body">ILMN은 8월 19일 2분기 실적(매출 11.6억달러, 전년비 +9.5%, 비-GAAP EPS 1.31달러로 컨센서스 1.23달러 상회) 발표 후 하루 만에 +8.9% 급등하며 188.29달러(8/18 종가)에서 205달러(8/19 종가)로 점프했고, 8월 20일 장중 신고가 220.32달러(52주 신고가)까지 치솟았습니다. 진입은 8/20 평균 211.98달러로, 이미 실적 갭업이 상당 부분 진행된 이후의 눌림목/추격 매수였습니다. 이후 주가는 장중 고점 220.32달러에서 되밀리며 매도 시점(214.73달러) 근처로 되돌아왔는데, 이는 종목 고유의 악재보다는 이틀간 이어진 급등(전년비 +92%~101%대 상승 구간)에 따른 차익실현·눌림 매물 출회로 해석됩니다. 결과적으로 매도는 신고가 형성 직후 되돌림 국면에서 트레일링 스탑성 트리거가 작동한 케이스로 보입니다.</div></div>
+<div class="card"><b>당일 시장 상황</b><div class="section-body">매도 당일(8/20) 미국 증시는 S&amp;P500 -0.17%, 다우 -0.20%, 나스닥 -0.28%로 약세 마감했고, 10년물 국채금리가 4.70%로 반등하며 전일 국채랠리를 되돌린 점이 부담으로 작용했습니다. 섹터별로는 필수소비재·임의소비재가 하락을 주도한 반면 에너지가 유가 상승에 힘입어 강세를 보였고, 헬스케어/생명과학 툴 섹터 전반도 금리 상승 국면에서 성장주 색채가 강한 종목들이 상대적으로 눌리는 흐름을 보였습니다.</div></div>
+<div class="card"><b>시스템 판단 평가</b><div class="section-body">ILMN은 실적 발표 이후 단 이틀 만에 신고가를 경신할 정도로 극단적으로 확장된(extended) 상태에서 진입이 이루어졌고, 신고가 대비 되돌림이 발생하자 시스템이 +1.3% 수준에서 빠르게 이익을 확정한 점은 손익비 관리 측면에서 합리적입니다. 특히 금리 급등이라는 시장 역풍이 겹친 날 신고가 실패 패턴(장중 고점 대비 하락 마감)을 잡아낸 것은 트레일링/피벗 실패 룰의 취지(추격 매수 후 되돌림 시 조기 리스크 관리)에 부합합니다. 다만 진입 자체가 이미 갭업 이후 확장 구간에서 이루어져 매매의 손익비가 애초에 크지 않았던 한계가 있어, 규칙이 &#x27;잘못&#x27;된 것이라기보다 진입 타이밍의 태생적 제약이 수익 폭을 제한한 측면이 큽니다.</div></div>
+<div class="card"><b>대안 검토</b><div class="section-body">실적 갭업 직후 진입인 만큼 손절/트레일링 폭을 돌파일 저가나 좀 더 넓은 %버퍼에 앵커링했다면 자연스러운 1~2일 눌림을 버텨내고 이후 재상승 가능성을 노려볼 여지는 있었습니다. 그러나 당일 금리 급등이라는 매크로 역풍과 이미 90%대 넘게 오른 종목의 과열 리스크를 감안하면, 폭을 넓혔다가 수익이 손익분기 또는 손실로 반전될 위험도 상존했기에 현재의 조기 익절이 크게 잘못된 선택은 아니었습니다.</div></div>
+<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">ILMN은 실적 서프라이즈와 3억달러 규모 채무 리파이낸싱 등으로 펀더멘털이 견고하고 52주 신고가권에 위치해 있어, 이번 되돌림은 급등 후 자연스러운 눌림/베이스 형성 과정일 가능성이 있습니다. 재진입 관전 포인트는 205~210달러(직전 갭업 구간) 지지 여부와 거래량 동반 여부이며, 이 구간을 지지하며 좁은 손잡이(handle)형 베이스를 형성한 뒤 220.32달러 전고점을 거래량 증가와 함께 재돌파할 때 유효한 VCP 재돌파 신호로 볼 수 있습니다. 반대로 금리 상승 압력이 지속되며 200달러 아래로 밀릴 경우 193달러 부근까지의 되돌림 리스크도 함께 감안해야 합니다.</div></div>
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

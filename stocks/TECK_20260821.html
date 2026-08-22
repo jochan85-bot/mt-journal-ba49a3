@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>TECK — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>TECK <span class="dim" style="font-size:1rem">텍 리소시스</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.84yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$69.31</b>
+
+· 수익률 <span class="pos">+0.01%</span>
+· 보유 21주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260813 기준)</span></div>
+<div class="dim">2026-08-21 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 21주 @ $69.31
+<div class="dim">2026-08-21 22:57 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $69.27
+<div class="dim">2026-08-21 22:58 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $69.25
+<div class="dim">2026-08-21 22:59 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $68.81
+<div class="dim">2026-08-21 23:15 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $68.41
+<div class="dim">2026-08-22 00:55 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">캐나다 최대 다각화 광산기업 텍 리소시스는 앵글로 아메리칸과의 합병(Anglo Teck)을 앞두고 사상 최대 구리 실적을 기록 중인 원자재 슈퍼사이클 수혜주다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">텍 리소시스는 캐나다 밴쿠버에 본사를 둔 다각화 채굴기업으로 구리, 아연, 제강용 석탄(2024년 매각 완료 후 현재는 사실상 구리·아연 중심)을 주력으로 한다. 2026년 2분기 기준 구리 부문이 총이익의 절대적 비중을 차지하며 매출총이익률 65%를 기록해 캐시카우 역할을 하고 있다. 칠레의 Quebrada Blanca(QB2), 페루의 Antamina, 캐나다 Highland Valley 등 아메리카 대륙에 핵심 구리 광산 포트폴리오를 보유하고 있으며, 아연은 캐나다 Red Dog·Trail 제련소를 통해 생산한다. 경쟁 지위는 프리포트-맥모란·서던코퍼·BHP 등 글로벌 대형 구리업체 대비 중형 규모지만, QB2 확장으로 구리 생산량이 빠르게 증가하는 성장형 프로필을 갖는다. 주요 고객은 아시아·북미 제련소 및 산업재 바이어이며, 최근 앵글로 아메리칸과의 &#x27;동등 합병(merger of equals)&#x27;을 통해 남미·아프리카 자산을 아우르는 글로벌 구리 메이저 &#x27;Anglo Teck&#x27;으로 재편되는 과정에 있다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기 매출은 36.1억 달러로 컨센서스 32.7억 달러를 상회했고, 주당순이익은 1.93달러로 예상치 1.15달러를 크게 웃돌았다. 조정 EBITDA는 22억 캐나다달러로 전년 동기 대비 거의 3배 증가했으며, EBITDA 마진은 사상 최고인 61%를 기록했다. 구리 부문 총이익은 18억 달러로 두 배 이상 늘었고, 구리 생산량은 전년 동기 대비 25% 증가, 파운드당 순현금원가는 2.02달러에서 1.64달러로 19% 개선됐다. 6월 30일 기준 유동성은 103억 달러(현금 61억 달러 포함)로 매우 견조하며, 2026년 구리 생산 가이던스(45.5만~53만 톤)와 아연 생산 가이던스(41만~46만 톤)를 유지했다. 다음 실적 발표(3분기)는 통상적인 분기 발표 패턴상 2026년 10월 말~11월 초로 예상된다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 7월 발표된 2분기 실적에서 구리 가격 강세와 생산량 증가가 맞물려 어닝 서프라이즈가 발생하며 주가 재평가의 기반이 마련됐다. 8월 11일에는 텍이 미상환 채권의 과반수 보유자로부터 동의를 확보(컨센트 솔리시테이션 성사)하며 앵글로 아메리칸과의 합병 관련 부채 구조조정 유연성을 확보했다는 뉴스가 나왔고, 이는 합병 실행 리스크를 낮추는 긍정적 신호로 작용했다. 앞서 2025년 12월 9일 주주총회에서 합병안이 압도적 찬성으로 가결되었고, 이제 중국·한국 등 잔여 규제 승인만 남은 상태로 합병 완료 목표 시점(2026년 9월~2027년 3월)이 가시권에 들어오면서 불확실성이 점차 해소되는 흐름이다. 여기에 8월 들어 데이터센터·AI 인프라발 구리 수요 기대와 프리포트 그래스버그·카모아카쿨라 등 글로벌 주요 광산의 공급 차질 뉴스가 겹치며 구리 관련주 전반에 수급 개선 기대가 유입됐다. 이러한 펀더멘털 개선과 M&amp;A 불확실성 완화가 동시에 작용하며 주가가 피벗 66.46달러를 거래량을 동반해(RVOL 1.41배) 돌파했고, 진입 시점 확장폭은 +4.23%로 과열되지 않은 초기 돌파 구간으로 평가된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">구리 섹터는 그래스버그·카모아카쿨라 등 주요 광산 셧다운과 칠레 생산 차질(당초 +3.7% 성장 전망에서 -2% 감산 전환)로 구조적 공급 부족이 심화되는 국면이며, JP모건은 2026년 정련구리 시장에서 약 33만 톤의 공급부족을 전망한다. 골드만삭스는 2026년 구리 평균가격을 파운드당 5.17달러로 2025년(4.82달러) 대비 상향했고, 씨티그룹은 톤당 13,000~15,000달러 가능성까지 제시하는 등 전반적으로 강세 컨센서스가 형성돼 있다. 텍은 QB2 증산 사이클과 구리 순현금원가 19% 개선(파운드당 1.64달러)으로 피어 대비 원가경쟁력과 생산 성장성을 동시에 갖췄다는 점에서 섹터 내 상대적 강점을 보이며, 프리포트·서던코퍼 등 대형주와 함께 데이터센터·AI 인프라 수요 확대의 수혜 그룹으로 분류된다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">텍은 앵글로 아메리칸 합병 발표 이후 장기간 이벤트드리븐 박스권에서 등락하다 2분기 어닝 서프라이즈와 채권 컨센트 솔리시테이션 성사 뉴스를 계기로 66.46달러 피벗을 상향 돌파했다. RVOL 1.41배는 통상적인 강한 돌파(2배 이상) 대비 다소 약한 수급 확인이나, 확장폭 +4.23%는 피벗 근접 구간에서의 초기 진입으로 추격매수 리스크가 낮은 편이다. 위 매물대는 뚜렷한 저항 없이 최근 신고가권에 위치해 상단이 비교적 열려 있으며, 피벗 66.46달러 및 그 하단의 이전 베이스 저점이 1차 지지선 역할을 할 것으로 판단된다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">3분기에도 구리 가격 강세(파운드당 5달러 내외)와 QB2 증산이 지속되며 어닝 모멘텀이 이어지고, 앵글로 아메리칸 합병이 중국·한국 규제 승인을 통과해 2026년 9월~2027년 3월 사이 완료되면 통합 글로벌 구리 메이저로서 밸류에이션 리레이팅이 기대되는 시나리오다. 이 경우 합병 시너지(비용 절감, 자산 다각화)와 구리 슈퍼사이클 테마가 결합되며 추가 상승 여력이 생긴다. 다만 애널리스트 목표가는 편차가 매우 커서(CIBC 캐나다달러 85달러 vs JP모건 미국달러 47달러, S&amp;P 컨센서스 평균 52.8달러) 통화·거래소 표기 혼재를 감안해도 시장의 밸류에이션 합의가 아직 형성되지 않은 상태이며, 합병 완료 후 재산정이 필요하다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 합병 실행 리스크 — 중국·한국 규제 승인이 지연되거나 조건부로 나올 경우 2026년 9월~2027년 3월 완료 목표가 미뤄지며 불확실성 프리미엄이 재부각돼 주가가 조정받을 수 있다. ② 구리 가격 변동성 — 골드만삭스·씨티 등 전망치 편차가 크듯 중국 경기둔화나 달러 강세가 나타나면 구리 가격이 예상보다 빠르게 조정되어 텍의 이익 레버리지가 역방향으로 작용할 수 있다. ③ 낮은 RVOL(1.41배)에 따른 돌파 신뢰도 리스크 — 거래량 확인이 약한 돌파는 되돌림(false breakout) 가능성이 상대적으로 높아 피벗 66.46달러 재이탈 시 손절 요건이 될 수 있다. ④ 밸류에이션 불확실성 — 애널리스트 목표가가 47~86달러 수준으로 크게 벌어져 있어 합병 후 신주 교환비율 및 통합 재무구조가 확정되기 전까지 목표가 기반의 매매 판단이 어렵다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 3분기 실적 발표(10월 말~11월 초 예상) — 구리 생산량 및 원가 가이던스 달성 여부 확인. ② 앵글로 아메리칸 합병 관련 중국·한국 규제 승인 발표 시점 — 승인 완료 시 주가 재평가, 지연 시 리스크 요인. ③ 합병 종결 목표 구간(2026년 9월~2027년 3월) 내 공식 클로징 뉴스. ④ 구리 가격(LME/COMEX) 및 JP모건·골드만삭스 등 주요 IB의 분기별 전망 업데이트. ⑤ 주가의 66.46달러 피벗 및 직전 베이스 저점 재이탈 여부 — 지지선 붕괴 시 리스크관리 필요.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 구리 슈퍼사이클과 어닝 서프라이즈, 합병 리스크 완화(채권 컨센트 확보)라는 펀더멘털 호재가 뚜렷하나, 진입 시점 RVOL이 1.41배로 강한 돌파 확인에는 못 미치고 애널리스트 목표가 컨센서스도 크게 흩어져 있어 확신도를 낮춘다. 사이징 티어 ×0.5(레포트 conviction 6점)와 부합하는 절충적 포지션으로, 3분기 실적과 합병 규제 승인 진행 상황을 확인하며 비중을 조절하는 것이 적절하다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

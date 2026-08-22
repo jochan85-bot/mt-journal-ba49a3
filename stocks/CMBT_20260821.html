@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>CMBT — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>CMBT <span class="dim" style="font-size:1rem">CMB테크</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.77yr, B3)</span></div>
+
+<div class="card">
+평균 매수가 <b>$18.32</b>
+
+· 수익률 <span class="neg">-1.47%</span>
+· 보유 162주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260815 기준)</span></div>
+<div class="dim">2026-08-21 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 162주 @ $18.32
+<div class="dim">2026-08-21 22:45 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $18.33
+<div class="dim">2026-08-21 22:45 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $18.34
+<div class="dim">2026-08-21 22:55 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $18.35
+<div class="dim">2026-08-21 22:58 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $18.35
+<div class="dim">2026-08-21 22:59 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $18.34
+<div class="dim">2026-08-21 23:06 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $18.37
+<div class="dim">2026-08-21 23:14 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $18.50
+<div class="dim">2026-08-21 23:32 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $18.26
+<div class="dim">2026-08-22 00:55 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $18.29
+<div class="dim">2026-08-22 01:12 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $18.06
+<div class="dim">2026-08-22 03:20 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $18.10
+<div class="dim">2026-08-22 03:31 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">구 Euronav에서 사명을 바꾼 벨기에 해운사로, 초대형 유조선(VLCC)·수에즈막스 등 전통 탱커 사업의 사이클 초호황을 현금화하는 동시에 그린 수소·암모니아 추진선 전환에 베팅하는 &#x27;전통+미래&#x27; 이중 스토리 종목</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">CMB.TECH(구 Euronav)는 벨기에 안트베르펜에 본사를 둔 해운사로 Marine, H2 Infra, H2 Industry 세 개 사업부로 구성된다. Marine 부문은 VLCC(초대형 원유운반선), 수에즈막스, 벌크선, 컨테이너선, 화학운반선, 해상풍력 지원선(CSOV), 예인선, 페리 등 다각화된 대형 선단을 운영하며 매출의 핵심을 차지한다. H2 Infra는 그린 수소·암모니아 공급망을 확보·유통하는 사업이고, H2 Industry는 이를 활용한 산업용 듀얼퓨얼 솔루션을 제공한다. 창업자 겸 CEO 알렉산더 사버리스(Alexander Saverys)는 향후 5년간 30~50억 달러를 그린 수소·암모니아 자산에 투입하겠다고 밝혔으며, 현재 약 120척 규모의 대체연료 선박 파이프라인을 보유하고 있다. 주요 고객은 원유 메이저와 트레이딩하우스이며, 탱커 시황에 연동된 스팟·타임차터 혼합 계약구조를 취한다. 2025년 매출은 16.7억 달러로 전년 9.4억 달러 대비 77.2% 급증했으며, 시가총액은 2026년 8월 기준 약 51억 달러, 기업가치(EV)는 93억 달러로 부채비중이 높은 자산집약적 구조다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 1분기 순이익 3억 6,880만 달러(주당 1.27달러), EBITDA 5억 5,830만 달러, 매출 5억 1,960만 달러로 전년 동기 대비 2배 이상 증가했다. VLCC 일일 용선료(TCE)는 15만 6,601달러로 10년 평균 4만 6,504달러의 3배를 넘었고, 수에즈막스도 15만 2,067달러로 10년 평균(4만 4,565달러)을 크게 상회했다. 2분기 가이던스는 VLCC 물량의 80%가 18만 달러에 계약되어 있고 수에즈막스는 1분기 9만 1,000달러에서 2분기 대부분 물량이 12만 2,000달러로 예약되어, 전분기 대비 다소 둔화된 흐름을 시사한다. 선박 매각 차익도 실적에 크게 기여했는데(1분기 2억 6,700만 달러), 8월 들어 VLCC 도누사호 매각(4분기 약 7,440만 달러 차익 예상)과 수에즈막스 브리스톨호 매각(8월 11일, 약 5,690만 달러 차익)이 추가로 발표됐다. 계약 잔고(backlog)는 32억 6,000만 달러로 증가했고, 주당 0.64달러 배당을 발표했다. 다음 실적 발표일은 2026년 8월 27일(2분기 실적, 미 증시 개장 전) 이며, 상반기 보고서는 9월 3일 예정이다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">CMBT는 연초 대비 80.6%, 최근 1년 84.7% 급등한 강세 종목으로, 2026년 1분기(5월 19일 발표) &#x27;역대급&#x27; 실적 서프라이즈 이후 주가가 12% 급등하며 재평가 국면에 진입했다. 8월 6일 3.1% 상승해 16.41달러(52주 신고가 17.72달러 근접)를 기록했고, 8월 11일 수에즈막스 브리스톨호 매각으로 약 5,690만 달러 추가 차익이 확정되며 8월 14일 17.24달러까지 상승했다. 이후 VLCC 도누사호 매각(약 7,440만 달러 차익) 소식이 더해지며 매수세가 유입, 8월 21일 17.99달러 피벗을 RVOL 2.12배의 거래량 동반 돌파와 함께 52주 신고가 경신에 성공했다. 시장은 8월 27일 예정된 2분기 실적 발표를 앞두고 지속되는 탱커 초강세 시황과 선박 매각 차익 누적 기대를 선반영하는 흐름으로 해석된다. 진입가 18.32달러는 피벗 대비 +1.89% 확장에 그쳐 과열 없이 신선한 브레이크아웃 구간에서 매수가 체결됐다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">탱커 시황은 2026년 초 지정학적 리루팅(홍해 우회, 러시아 제재)과 그림자 선단(shadow fleet) 위축, 노후 선단 감소가 겹치며 사상 최고 수준의 초호황을 맞았다. MEG-중국 VLCC 벤치마크 운임은 3월 초 하루 약 42만 3,000달러까지 치솟았다가 월말 35만 6,000달러로 다소 조정됐고, 2026년 연간 평균 VLCC 운임 전망치는 5.5만~6.5만 달러 수준으로 낮아져 있어 현재 스팟 운임과의 괴리가 크다. 단기적으로는 아프라막스·수에즈막스가 VLCC보다 강세를 보이며, VLCC 강세 재개는 OPEC+ 증산 여부에 달려있다는 관측이 우세하다. CMBT는 VLCC·수에즈막스·벌크선을 아우르는 대형 혼합 선단과 그린수소 전환 스토리를 동시에 갖춰 프론트라인(Frontline), DHT 등 순수 탱커 피어 대비 밸류에이션 프리미엄을 받고 있으나, 그만큼 시황 되돌림 시 낙폭도 클 수 있다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">52주 저점 7.78달러에서 신고가 17.72달러까지 이어진 다개월 강세 베이스 이후, 8월 21일 피벗 17.99달러를 RVOL 2.12배의 유의미한 거래량 증가와 함께 돌파하며 신규 진입 신호가 발생했다. 진입가 18.32달러는 피벗 대비 확장폭 +1.89%로 추격매수 부담이 크지 않은 구간이며, 신고가 경신 돌파이므로 상단 매물대(오버헤드 저항)가 사실상 부재하다는 점이 기술적 강점이다. 1차 지지선은 돌파 피벗 17.99달러이며, 이보다 하방으로는 8월 6일 저항선이었던 16.41달러가 2차 지지 구간으로 작용할 가능성이 높다. 사이징 티어 ×1(RVOL 2.12배 환산) 적용은 뚜렷한 수급 개선이 확인되나 초고배율 확신 단계는 아님을 시사한다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">8월 27일 2분기 실적에서 1분기에 근접하거나 상회하는 EPS·EBITDA 서프라이즈가 재현되고, VLCC·수에즈막스 추가 매각 차익이 이어질 경우 밸류에이션 재평가와 함께 신고가 랠리가 연장될 수 있다. 애널리스트 목표주가는 12.82~19.45달러로 폭넓게 분포하며(12~14개 기관, 평균 16.59~17.01달러, 매수 비중 약 81%), 최근 3개월간 평균 목표가가 23.84% 상향 조정된 점은 긍정적 모멘텀을 뒷받침한다. 다만 현재가(18.32달러)가 이미 평균 목표가를 상회하고 있어, 추가 상승을 위해서는 실적 발표 후 목표가 상향 조정 랠리가 뒤따라야 한다. 그린수소 파이프라인(120척) 관련 신규 수주나 파트너십 발표도 밸류에이션 리레이팅 트리거가 될 수 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 탱커 운임 정상화 리스크: 현재 VLCC 스팟 운임(하루 15만~35만 달러대)이 2026년 연간 평균 전망치(5.5만~6.5만 달러)를 크게 웃돌고 있어, 운임이 평균회귀할 경우 EPS가 급격히 축소될 수 있다. ② 실적 발표 이벤트 리스크: 8월 27일 실적에서 2분기 수에즈막스 예약 운임(12만 2,000달러)이 1분기 실현치(15만 2,067달러)보다 낮아 성장 둔화가 확인되면 &#x27;뉴스에 팔기&#x27; 조정이 나올 수 있다. ③ 지정학적 리스크 반전: 러시아-우크라이나 종전 협상이나 제재 완화가 현실화되면 그림자 선단이 시장에 재진입해 공급 과잉과 운임 급락을 유발할 수 있다. ④ 수소 전환 실행·재무 리스크: 5년간 30~50억 달러 규모의 자본 배분 계획은 EV(93억 달러)가 시가총액(약 51억 달러) 대비 높은 현재의 레버리지 구조에서 추가 부채 또는 지분 희석 리스크를 수반하며, 수소 수요가 예상보다 더디게 성장할 경우 자산 수익성 저하로 이어질 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 8월 27일: 2분기 실적 발표(개장 전) — VLCC/수에즈막스 실현 TCE, 3분기 예약 운임률, 선박 매각 차익 규모 확인. ② 2026년 9월 3일: 상반기(H1) 종합 보고서 발표. ③ OPEC+ 산유량 결정 일정 — VLCC 물동량 및 하반기 운임 방향성에 직접 영향. ④ Baltic Exchange 등 주간 VLCC·수에즈막스 스팟 운임 지수 — 시황 모멘텀 유지 여부 트래킹. ⑤ 추가 선박 매각·발주 공시 및 그린수소·암모니아 선박 프로젝트 진행 뉴스.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — RVOL 2.12배를 동반한 신고가 돌파, 확장폭 +1.89%의 건전한 진입 구조, 강한 실적 모멘텀과 애널리스트 목표가 상향 추세는 긍정적이나, 진입 6일 후인 8월 27일 실적 발표라는 단기 이벤트 리스크가 임박해 있고 현재가가 이미 평균 목표주가를 상회해 밸류에이션 부담이 존재한다. 탱커 운임의 구조적 고점 논쟁과 실적 변동성을 감안할 때 포지션 사이징(×1)에 부합하는 신중한 확신 수준이 적절하다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

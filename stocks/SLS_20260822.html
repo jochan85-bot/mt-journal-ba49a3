@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>SLS — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>SLS <span class="dim" style="font-size:1rem">셀라스 라이프 사이언시스 그룹</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.30yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$14.97</b>
+
+· 수익률 <span class="pos">+3.21%</span>
+· 보유 48주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260815 기준)</span></div>
+<div class="dim">2026-08-22 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 48주 @ $14.97
+<div class="dim">2026-08-22 01:11 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $15.51
+<div class="dim">2026-08-22 03:20 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $15.06
+<div class="dim">2026-08-22 03:31 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">급성골수성백혈병(AML) 표적 후기임상 종양免역치료제(GPS, SLS009)를 보유한 임상단계 바이오텍으로, 마일스톤 이벤트 3상 데이터 발표 임박과 애널리스트 목표가 급상향이 겹치며 단기 급등한 종목</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">SELLAS Life Sciences Group은 매출이 없는 임상 단계 종양면역치료제(oncology immunotherapy) 개발 기업으로, 핵심 파이프라인은 WT1 항원 표적 펩타이드 백신 galinpepimut-S(GPS, 급성골수성백혈병 2차 관해 유지요법)와 CDK9 억제제 SLS009(AML 및 재발/불응성 환자 대상 2상)이다. GPS는 현재 2차 완전관해 후 유지요법으로서 피벗 3상 REGAL 임상을 진행 중이며 이것이 회사 시가총액의 대부분을 좌우하는 핵심 자산이다. SLS009는 CDK9 억제 계열에서 경쟁 파이프라인 대비 앞선 데이터를 보이고 있다는 평가를 받고 있으며(Alliance Global), AML 및 골수섬유증 등으로 적응증 확장을 시도 중이다. 상업화 제품이 없어 매출 구성은 사실상 전무하고, 파트너십 계약금·정부/재단 그랜트 등이 부수 수입원이다. 경쟁 지위는 CD33·CD123 표적 항체, 벤클렉스타 기반 병용요법 등 기존 AML 치료 축과는 차별화된 &#x27;면역백신+저분자 병용&#x27; 니치에 있으며, 최근 Moderna·Merck의 mRNA 개인맞춤형 암 백신(mRNA-4157) 3상 데이터가 유사 기전(백신 기반 면역치료) 검증 사례로 부각되며 간접적 후광 효과를 받고 있다. 주요 협력·자문 파트너는 기관투자자 중심이며 상업 파트너십은 아직 부재하다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 8월 11일 발표된 2분기 실적에서 순손실은 960만 달러(주당 -0.05달러)로 전년동기 660만 달러(주당 -0.07달러) 손실 대비 손실 규모는 커졌으나 희석 주식수 증가로 주당 손실은 개선됐다. 연구개발비는 630만 달러, 일반관리비는 440만 달러로 REGAL 3상 마무리 단계 비용 증가를 반영한다. 현금성 자산은 2025년 말 7,180만 달러에서 2026년 6월 30일 기준 1억 3,830만 달러로 급증했는데, 이는 상반기 중 유상증자(자본조달)를 통해 확보한 것으로 추정되며 회사는 이를 근거로 향후 캐시런웨이 연장을 강조하고 있다. 상업 매출은 없고 가이던스도 매출이 아닌 임상 마일스톤(REGAL 80번째 이벤트 도달 시점) 위주로 제시된다. 다음 정기 실적발표는 3분기 실적으로 통상 11월 초·중순 예정이나, 이보다 더 중요한 것은 비정기 공시로 나올 REGAL 3상 톱라인 결과 발표다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 3월 23일 Alliance Global이 목표가를 7.50달러에서 10달러로 상향했고, 5월 11일 1분기 실적 발표에서 REGAL 3상이 사전 규정된 80건의 사건(사망) 중 78건에 도달했다고 공개하며 데이터 락 임박 기대가 형성됐다. 7월 17일 같은 애널리스트가 목표가를 10달러에서 25달러로 대폭 상향(Buy 유지)하며 주가가 재차 주목받았고, 8월 11일 2분기 실적에서 현금 1억 3,830만 달러 확보가 확인되며 재무 우려가 완화됐다. 결정적으로 8월 21일(한국시간 8월22일 새벽 매수 시각 기준 미국 현지 21일 낮) Moderna·Merck의 개인맞춤형 mRNA 암백신 3상 데이터 호조 소식이 나오며 유사 면역치료 기전을 가진 SLS, IBRX 등 종목으로 자금이 유입되는 섹터 전반 랠리가 발생했고, SLS는 하루 만에 13.40달러에서 15.46달러로 +15.37%(일중 저점 13.26~고점 15.67, 거래대금 약 2억 3,415만 달러) 폭등했다. 이 흐름 속에서 담당 애널리스트는 목표가를 25달러에서 35달러(약 +200% 상단)로 재차 상향했고, 2주 누적 수익률은 +28.73%에 달했다. 매수는 이 급등 다음 거래일 피벗 14.29달러 돌파 이후 이루어진 것으로, 시장은 REGAL 톱라인 발표가 임박했다는 기대를 선반영하고 있다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">AML(급성골수성백혈병) 면역치료 섹터는 CD33/CD123 표적 항체·이중특이항체, 항CD47 제제, 그리고 mRNA 개인맞춤 암백신까지 다양한 기전이 경쟁하는 국면이며, 2026년 8월 Moderna·Merck의 대형 3상 성공 신호가 업계 전체에 대한 재평가를 촉발했다. SELLAS는 시가총액이 작은 임상단계 기업으로 대형 제약사의 검증 성공이 오히려 자사 백신 기반 GPS 자산의 신뢰도를 간접적으로 높여주는 &#x27;후광 수혜주&#x27;로 분류되고 있다. 동일 테마로 묶이는 ImmunityBio(IBRX) 등과 함께 거론되고 있으나, SELLAS는 자체 피벗 3상(REGAL)이 데이터 락 초읽기 단계라는 점에서 촉매 타이밍이 훨씬 임박해 있다는 차별점이 있다. 다만 상업화 트랙레코드나 승인 경험이 없어 대형 경쟁사 대비 규제·상업화 리스크는 상대적으로 높다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">이번 진입은 피벗 14.29달러 돌파 후 +4.62% 확장된 14.97달러에서 이루어졌으며, 진입 시점 RVOL은 1.44배로 전일(8/21) +15.37% 폭등·거래대금 2억 3,000만 달러 이상의 초과열 거래량 이후 나온 후속 돌파로 판단된다. 이는 단기간(2주 +28.73%) 급등 이후 나온 &#x27;연속 갭업형&#x27; 돌파로, 정석적인 장기 VCP 베이스보다는 이벤트 드리븐(임상 데이터 기대) 모멘텀 돌파에 가깝다. RVOL 1.44배는 표준 돌파 기준(통상 1.5~2배 이상 요구)에 못 미치는 수준이라 사이징 티어가 ×0.5로 축소 적용된 것이 타당하며, 위로는 뚜렷한 매물대가 없는 대신(52주 신고가 갱신 구간) 아래로는 전일 저점 13.26달러 및 돌파 피벗 14.29달러가 1차 지지선 역할을 한다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">가장 강력한 트리거는 REGAL 3상의 80번째 사건 도달에 따른 톱라인 발표로, 긍정적 생존기간 데이터(예: 중앙값 12.6개월 등 우호적 서사가 이미 시장에 회자)가 확인될 경우 FDA 가속승인 신청 경로로 이어지며 주가 리레이팅이 기대된다. Alliance Global의 James Molloy는 목표가를 25달러에서 35달러로 상향했으며, 이는 현재가(14.97달러) 대비 약 130%, 8/21 종가(13.40달러) 대비로는 약 160% 상단의 낙관적 시나리오를 반영한다. 부가적으로 SLS009(CDK9 억제제)의 2상 추가 데이터가 긍정적으로 나올 경우 파이프라인 다각화 프리미엄이 추가될 수 있고, Moderna·Merck발 섹터 랠리가 지속되면 동반 강세가 이어질 수 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① REGAL 3상은 이벤트 드리븐 방식으로 발표 시점을 회사도 통제할 수 없어, 예상보다 늦어지거나 톱라인이 부정적(생존기간 개선 실패)일 경우 무매출 임상단계 기업 특성상 주가가 단기간 50% 이상 폭락할 수 있는 전형적 바이너리 리스크다. ② 분기 순손실이 확대(960만 달러)되고 있어 1억 3,830만 달러 현금에도 불구, 주가 급등을 이용한 추가 유상증자(ATM/자산 발행)로 희석이 발생할 개연성이 있으며 이는 과거에도 현금 확충 방식으로 활용된 패턴이다. ③ 2주 만에 +28.73%, 하루 +15.37% 급등 이후 진입한 만큼 단기 과열에 따른 차익실현 되돌림 리스크가 상존하며, RVOL 1.44배로 매수세가 압도적이지 않은 점도 이를 뒷받침한다. ④ Moderna·Merck 등 대형 제약사가 유사 기전(mRNA 암백신)으로 AML 영역에 진입할 경우, 소형 바이오텍인 SELLAS의 상대적 경쟁력과 자금력 열위가 부각되며 밸류에이션 프리미엄이 축소될 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① REGAL 3상 80번째 사건 도달 및 톱라인 발표 공시(비정기, 수시 확인 필요 — 회사는 5/11 기준 78/80건 도달 공지) ② 3분기 실적 발표(예상 11월 초중순) 및 현금 소진 속도 점검 ③ SLS009 2상 추가 데이터 발표 일정 ④ Moderna·Merck mRNA-4157 관련 후속 뉴스(섹터 동반 모멘텀 지속 여부) ⑤ 애널리스트(Alliance Global 등) 추가 목표가 조정 여부 및 기관 보유 비중 변화(Seeking Alpha가 지적한 소유구조 변화) 모니터링.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — REGAL 3상 톱라인이라는 강력한 임박 촉매와 목표가 35달러(현재가 대비 +130%)라는 매력적 비대칭 구조는 긍정적이나, 이미 2주 만에 +28.73% 급등한 이후의 후행적 진입이고 RVOL 1.44배로 매수 강도가 표준 돌파 기준에 못 미쳐 사이징이 ×0.5로 축소된 점, 그리고 톱라인 발표 시점이 불확실한 바이너리 이벤트 리스크를 감안하면 강한 확신보다는 절제된 포지션 관리가 적절하다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
