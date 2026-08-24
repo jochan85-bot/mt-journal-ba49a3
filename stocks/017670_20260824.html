@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>017670 — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>017670 ☀️ <span class="dim" style="font-size:1rem">SK텔레콤</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2u (0.59yr, B2)</span></div>
+
+<div class="card">
+평균 매수가 <b>105,000원</b>
+
+· 수익률 <span class="neg">-2.48%</span>
+· 보유 33주
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div class="dim">2026-08-24 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 33주 @ 105,000원
+<div class="dim">2026-08-24 09:10 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">국내 1위 통신사로서 5G 코어 캐시카우 위에 AI 데이터센터(AIDC)와 자체 거대언어모델(에이닷엑스)을 얹어 &#x27;통신주에서 AI 인프라 성장주로&#x27; 재평가받고 있는 SK그룹 AI 전략의 핵심 축.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">SK텔레콤은 무선통신(MNO), 유선통신, B2B 엔터프라이즈, 그리고 AI/데이터센터(AIDC) 사업을 영위하는 국내 1위 이동통신사업자입니다. 매출의 절반 이상은 여전히 이동통신 서비스(MNO)에서 발생하며, 5G 가입자 기반과 결합상품(IPTV·초고속인터넷)이 안정적 현금흐름을 뒷받침합니다. 최근 성장 동력은 AI 데이터센터로 전환되고 있으며, 2026년 7월 AIDC 사업을 전담하는 자회사 &#x27;SK하이퍼&#x27;를 설립해 2029년까지 5GW 규모, 2030년까지 7,500억 원 투자 계획을 발표했습니다. 자체 초거대 AI 모델 &#x27;에이닷엑스(A.X)&#x27;를 통해 과학기술정보통신부 주관 &#x27;독자 AI 파운데이션 모델(독파모)&#x27; 프로젝트에 참여 중이며, 확장된 파라미터의 &#x27;에이닷엑스 케이투&#x27; 모델로 2차 평가에 도전하고 있습니다. 경쟁 지위 면에서는 KT, LG유플러스와 3강 구도이나, AIDC 성장률(2분기 전년비 +92.5%)에서 경쟁사(KT +19.8%, LGU+ +28.9%)를 크게 앞서며 가장 공격적인 증설 전략을 취하고 있습니다. 정재헌 대표가 &#x27;AIDC 얼라이언스&#x27;의 초대 민간 공동의장으로 선임되며 정부-민간 AI 인프라 협력체에서도 주도적 위치를 점하고 있습니다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기(연결) 매출 4조3,591억 원(전년 동기 대비 +0.5%), 영업이익 5,660억 원(전년 동기 대비 +67.3%, 전분기 대비 +5.3%), 당기순이익 4,660억 원을 기록해 컨센서스를 상회했습니다. 이익 급증의 핵심은 AIDC 매출이 1,362억 원으로 전년 동기 대비 92.5% 성장하며 가동률 확대 효과가 본격 반영된 데 있습니다. 2분기 주당 배당금은 1분기에 이어 830원으로, 배당 정상화 흐름이 재개된 점이 투자자 신뢰 회복에 긍정적으로 작용했습니다. 대신증권 등은 2026년을 통신 3사의 일회성 비용 소멸에 따른 &#x27;실적·배당 정상화 원년&#x27;으로 평가하고 있습니다. DB증권은 실적 호조와 AIDC 성장 반영해 목표주가를 기존 11만 원에서 12만5,000원으로 상향했고, 일부 증권사는 14만 원까지 제시했습니다. 3분기 실적 발표는 통상 10월 말~11월 초로 예정되어 있어 AIDC 매출 성장세 지속 여부가 다음 확인 포인트입니다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 7월 29일 과학기술정보통신부 주관 &#x27;AIDC 얼라이언스&#x27;가 출범하고 SK텔레콤이 민간 공동의장사로 참여한다는 소식이 첫 촉매가 되었습니다. 8월 4일 SK하이퍼 설립 및 5GW 증설 계획 발표와 &#x27;독파모&#x27; 2차 평가 진입 기대감이 겹치며 주가가 하루 만에 약 9~11% 급등(8만9,600원 부근)했습니다. 8월 5일 발표된 2분기 실적에서 영업이익이 전년 대비 67.3% 급증하며 시장 기대를 상회했고, DB증권이 목표주가를 12만5,000원으로 상향하는 등 셀사이드 리포트가 잇따랐습니다. 이후 주가는 8월 21일 종가 10만200원까지 지속 상승하며 단기 조정 없이 우상향했고, 8월 24일 장중 피벗 10만3,800원을 5.71배의 폭발적 상대거래량(RVOL)을 동반해 돌파, +1.16% 확장된 10만5,000원에서 신규 진입이 체결됐습니다. AI 인프라 테마 주도주로서 수급이 집중되며 통신주 특유의 저변동성 이미지에서 벗어나는 리레이팅 국면에 진입한 모습입니다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">국내 통신 3사는 2026년 데이터센터 신사업을 공통 성장 동력으로 삼아 &#x27;배당주에서 성장주로&#x27; 재평가받는 사이클에 진입했습니다. 2분기 DC 매출 성장률은 SK텔레콤 +92.5%, LG유플러스 +28.9%, KT +19.8% 순으로, SK텔레콤이 가장 가파른 성장세와 외부 자본 조달을 통한 공격적 증설(2029년까지 5GW) 전략으로 업종 내 주가 민감도가 가장 높습니다. 반면 KT와 LG유플러스는 6%대 주주환원수익률을 앞세운 방어적 매력이 부각되어 자금 성격에 따라 종목 선호가 갈리고 있습니다. R&amp;D 투자 규모는 SKT-KT-LGU+ 순으로, SK텔레콤이 AI 기술 리더십 확보에 가장 적극적입니다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">8월 초 AIDC 얼라이언스·SK하이퍼 발표를 기점으로 8~9만 원대에서 10만 원대로 레벨업하는 강한 상승 베이스가 형성되었고, 8월 21일 10만200원까지 눌림 없이 우상향한 뒤 8월 24일 10만3,800원 피벗을 거래대금 급증(RVOL 5.71배)과 함께 돌파했습니다. 피벗 대비 확장폭이 +1.16%로 크지 않아 추격 매수 부담이 제한적이며, 미너비니 기준 이상적 진입 범위(피벗+5% 이내) 안에서 체결된 저위험 진입입니다. 다만 52주 고점(13만9,500원)과의 거리, 그리고 유심 해킹 사태 이전 형성됐던 과거 매물대가 상단 저항으로 잔존할 수 있어 10만3,800원 피벗 라인이 1차 지지선 역할을 해야 구조가 유효합니다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">① AIDC 매출이 3~4분기에도 90%대 성장을 이어가며 SK하이퍼의 5GW 증설 로드맵이 가시화될 경우, DB증권 목표가 12만5,000원(+19% 여력) 및 일부 리포트의 14만 원(+33% 여력) 도달이 가능합니다. ② &#x27;독파모&#x27; 2차 평가에서 에이닷엑스 케이투가 선정되면 정부 지원과 AI 모델 사업화 기대가 추가 리레이팅 트리거가 될 수 있습니다. ③ 배당 정상화(2분기 연속 주당 830원)가 지속되며 성장주+배당주 이중 매력이 부각될 경우 기관 수급 유입이 이어질 전망입니다. ④ 일부 리포트는 앤트로픽 지분가치(약 4조 원) 반영 시 추가 34% 상승 여력을 제시하고 있습니다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 유심 해킹·개인정보 유출 사태 관련 리스크 — 개인정보보호위원회의 과징금 1,347.91억 원 취소소송이 진행 중이나 패소 시 비용 확정, 동시에 피해자 1만5,900명 규모 집단소송에서 배상 판결이 확정되면 대규모 일회성 비용 반영으로 이익 훼손 및 신뢰도 타격 가능. ② AIDC 투자 회수 지연 리스크 — 5GW 증설 계획이 고객사(엔터프라이즈) 확보 속도보다 앞서 진행될 경우 가동률 저조로 감가상각 부담이 커지며 마진 둔화 우려. ③ 밸류에이션 부담 — 단기 급등(8월 초 대비 +20% 내외)으로 AI 테마 기대감이 선반영된 상태이며, 실적이 컨센서스를 하회하거나 독파모 2차 평가에서 탈락할 경우 차익실현 매물 출회 가능. ④ 통신업 규제 리스크 — 정부의 통신비 인하 압박, 단통법 관련 규제 재논의 등 전통 MNO 사업의 정책 리스크가 상존.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">3분기 실적 발표(통상 10월 말~11월 초) - AIDC 매출 성장률 유지 여부 확인, &#x27;독파모&#x27; 2차 평가 결과 발표 일정(2026년 하반기 중 예상), 개인정보보호위원회 과징금 취소소송 및 집단소송 1심 진행 상황, SK하이퍼 5GW 증설 관련 신규 고객사·수주 공시, 배당 정책 발표(분기 배당 지속 여부), AIDC 얼라이언스 관련 정부 정책 발표.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통: 실적 개선(영업이익 +67.3% YoY)과 AIDC 고성장(+92.5%)이라는 명확한 펀더멘털 카탈리스트에 기술적 돌파(RVOL 5.71배, 낮은 확장폭)까지 동반되어 진입 타이밍 자체는 양호합니다. 다만 유심 해킹 관련 소송·과징금 리스크가 미해결 상태로 잔존하고 단기 급등에 따른 밸류에이션 부담이 있어, 다음 실적과 독파모 결과 확인 전까지는 &#x27;강한 확신&#x27;보다 한 단계 낮춰 접근하는 것이 합리적입니다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>028670 — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>028670 ☀️ <span class="dim" style="font-size:1rem">팬오션</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.18yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>6,290원</b>
+
+· 수익률 <span class="pos">+0.48%</span>
+· 보유 550주
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div class="dim">2026-08-24 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 550주 @ 6,290원
+<div class="dim">2026-08-24 09:13 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">하림그룹 계열의 국내 최대 벌크선사로, 드라이벌크·탱커·LNG·컨테이너를 아우르는 종합 해운사이며 현재 운임 슈퍼사이클의 최대 수혜주 중 하나입니다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">팬오션은 하림지주 산하의 종합 해운기업으로, 케이프사이즈·파나막스급 벌크선을 중심으로 철광석·석탄·곡물 등 원자재를 운송하는 드라이벌크 사업이 매출의 근간을 이룹니다. 최근 몇 년간 탱커선(원유·석유제품)과 LNG 운반선 사업으로 포트폴리오를 다각화하며 &#x27;벌크선사에서 에너지선사로&#x27; 체질 전환을 진행 중이며, 여기에 컨테이너선과 곡물 트레이딩(Pan Ocean Grain) 사업까지 겸영하는 국내 유일의 다각화된 해운사입니다. 2026년 2분기 기준 사업부문별 영업이익은 드라이벌크 847억원(+59.8% YoY), 탱커 437억원(+165.7% YoY), LNG 497억원(+33.6% YoY), 컨테이너 145억원(-5.2% YoY)으로 탱커·LNG 부문의 고성장이 눈에 띕니다. 최근 뉴캐슬막스급 벌크선 2척을 중국 조선소에 추가 발주하는 등 대형 벌크선 선대를 지속 확대하며 시황 상승기 수혜 극대화를 노리고 있습니다. 국내 벌크선 시장에서는 압도적 1위 사업자 지위를 보유하고 있으며, 글로벌 원자재 트레이더 및 해외 발전·제철사와 장기운송계약(COA)을 다수 보유해 실적 변동성을 일정 부분 완충하고 있습니다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기 연결 매출 1조9,137억원(+47.9% YoY), 영업이익 1,937억원(+57.4% YoY)을 기록하며 시장 기대치를 상회했습니다. 상반기 누적으로는 매출 3조4,226억원(+27.4% YoY), 영업이익 3,346억원(+41.6% YoY)이며, 1분기에는 매출 +8.3%, 영업이익 +24.4%, 순이익 +31.2% (YoY)로 분기를 거듭할수록 이익 개선 폭이 확대되는 흐름입니다. 하나증권은 2026년 연간 영업이익 전망치를 5,840억원(전년비 +18%)으로 상향 조정했으며, 탱커·LNG 부문 고마진 사업 비중 확대가 마진 개선의 핵심 동력으로 지목됩니다. 다음 실적 발표는 2026년 3분기(7~9월) 잠정실적으로, 전년 사례(2025년 11월 3일 공시)를 감안하면 2026년 11월 초중순으로 예상됩니다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 초부터 벌크선 시황이 기니 보크사이트·브라질 철광석·남미 곡물 물동량 견조와 중국 양하항 기상 악화에 따른 선박 공급 차질로 개선세를 보였고, 6월 8일 한국투자증권이 &#x27;주가만 빼고 모든 게 좋은 상황&#x27;이라며 목표가 7,500원의 매수 리포트를 발간해 저평가 논리가 부각되기 시작했습니다. 7월 31일 발표된 2분기 실적(영업이익 +57.4% YoY)이 시장 기대치를 상회하면서 실적 모멘텀이 재확인됐고, 3분기 들어 중국의 철광석 재고 확보 수요와 철강사 수익성 개선, 미국·중남미 곡물 작황 호조에 따른 운송수요 증가로 BDI가 급상승했습니다. 여기에 호르무즈 해협 통행료 부과 이슈 등 지정학적 리스크 장기화로 탱커 운임이 견조하게 유지되고, 상상인증권(4월 16일 목표가 7,100원 상향), NH투자증권(6,700원→7,200원 상향), 하나증권(7,000원) 등 연이은 목표주가 상향 리포트가 이어지며 매수 심리가 강화됐습니다. 8월 24일 진입 시점의 6,180원 피벗 돌파는 이러한 누적된 실적·운임 모멘텀이 거래량 급증(RVOL 4.24배)과 함께 가격에 반영되는 국면으로 해석됩니다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">해운 벌크선 업황은 2026년 3분기 들어 철광석·곡물·보크사이트 물동량 증가와 선박 공급 차질이 겹치며 BDI가 상반기 변동 구간(1000후반~2000초반)을 벗어나 상승 추세로 전환된 것으로 파악됩니다. 탱커 부문은 지정학적 리스크(중동 정세) 장기화로 고운임이 지속되고 있으며, LNG 부문은 동북아·유럽의 수요 증가로 구조적 성장이 전망됩니다. 팬오션은 국내 벌크선사 중 압도적 선단 규모와 다각화된 사업 포트폴리오(벌크+탱커+LNG+컨테이너)를 보유해 단일 시황 리스크에 대한 노출도가 피어 대비 낮다는 점이 강점이나, 유가·환율 등 매크로 변수에 대한 민감도는 업종 공통 약점으로 남아 있습니다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">피벗 6,180원을 돌파하며 진입가 6,290원(+1.78% 확장)으로 매수가 체결됐고, RVOL 4.24배로 평소 대비 거래대금이 4배 이상 급증한 강한 수급 확인 돌파입니다. 확장폭이 2% 이내로 절제되어 있어 추격매수 리스크는 제한적이나, 애널리스트 컨센서스 평균 목표가(약 5,700~6,100원대)에 이미 근접·상회하는 구간이라는 점은 유의할 필요가 있습니다. 신규 진입(사이징 ×1)인 만큼 초기 포지션이며, 상단 매물대는 최근 상향된 목표가 밴드 7,000~7,500원 구간에 형성되어 있어 해당 구간까지 여유가 있는 것으로 판단됩니다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">3분기 BDI 급등 및 탱커 운임 강세가 지속되며 3분기 실적이 2분기(영업이익 1,937억원)를 상회할 경우, 11월 초 실적 발표를 트리거로 추가 재평가가 가능합니다. 애널리스트 목표가는 상상인증권 7,100원, NH투자증권 7,200원, 하나증권 7,000원, 한국투자증권 7,500원으로 진입가(6,290원) 대비 11~19% 상단 여력이 제시되어 있습니다. 뉴캐슬막스 신조 발주로 대형선 선대 확대가 완료되는 2026년 하반기~2027년 초에는 벌크 운임 상승분의 이익 레버리지가 더 커질 것으로 기대됩니다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① BDI·운임 급락 리스크: 중국 철광석 수입 둔화나 계절적 곡물 물동량 감소 시 드라이벌크 부문 이익이 빠르게 축소되며 주가 조정 압력으로 작용할 수 있습니다. ② 지정학적 리스크 완화: 중동 정세 안정화나 호르무즈 통행료 이슈 해소 시 탱커 운임 프리미엄이 소멸되어 탱커 부문(+165.7% 고성장 부문) 성장 동력이 약화될 수 있습니다. ③ 신조 공급 과잉: 업계 전반의 대형 벌크선 신조 발주 증가(팬오션 포함)가 2027~2028년 인도되며 공급 과잉으로 이어질 경우 중장기 운임 하방 압력이 커질 수 있습니다. ④ 유가·환율 변동: 벙커유 가격 상승이나 원/달러 환율 급변동은 운항비·외화부채 평가손익에 부정적으로 작용해 단기 실적 변동성을 키울 수 있습니다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">1) 2026년 3분기 잠정실적 발표(예상 11월 초중순, 전년 2025년은 11월 3일 공시) — 탱커·LNG 부문 이익 지속 여부 확인. 2) 매주 발표되는 BDI(발틱운임지수) 및 케이프사이즈 운임 추이 모니터링. 3) 중동 지정학 리스크(호르무즈 해협 관련 뉴스) 진행 상황 — 탱커 운임 프리미엄 유지 여부에 직결. 4) 중국 철강·부동산 지표 및 곡물 수확기(9~11월 남미/북미) 물동량 동향. 5) 신조 발주 선박 인도 일정 및 추가 발주 공시 여부.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 2분기 실적 서프라이즈(+57.4% YoY)와 연이은 목표가 상향, RVOL 4.24배의 강한 거래량 돌파는 긍정적이나, 진입가가 이미 컨센서스 평균 목표가에 근접해 있고 BDI·지정학 리스크 등 시황 의존적 변수가 커 단기 상단 여력은 제한적일 수 있습니다. 3분기 실적과 운임 지표 확인 전까지는 보통 수준의 확신으로 포지션을 관리하는 것이 적절해 보입니다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
