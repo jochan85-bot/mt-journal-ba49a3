@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>HNGE — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>HNGE <span class="dim" style="font-size:1rem">힌지 헬스</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.24yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$91.51</b>
+
+· 수익률 <span class="neg">-0.65%</span>
+· 보유 32주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260815 기준)</span></div>
+<div class="dim">2026-08-24 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 32주 @ $91.51
+<div class="dim">2026-08-24 23:33 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $91.52
+<div class="dim">2026-08-24 23:33 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">미국 최대 디지털 근골격계(MSK) 치료 플랫폼 기업으로, 컴퓨터비전 기반 홈트레이닝과 물리치료사 코칭을 결합해 기업 복지 시장을 장악하며 고성장을 이어가고 있다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">Hinge Health는 웨어러블 센서와 컴퓨터비전 기술을 활용해 만성 요통, 관절염, 수술 전후 재활 등 근골격계(MSK) 질환을 원격으로 치료하는 디지털 헬스 플랫폼이다. 주 수익모델은 대기업·자가보험 고용주 및 건강보험사(플랜스폰서)와의 계약을 통한 구독형 B2B2C 방식으로, 직원(회원)이 앱을 통해 물리치료사·코치와 연결되어 통증 관리 프로그램을 이용한다. 2026년 2분기 기준 매출은 전년 대비 53% 성장한 2억1,300만 달러를 기록했으며, 최근에는 소화기(GI) 질환 관리 업체 Cylinder Health를 약 1억1,000만 달러에 인수하며 다중 만성질환(MCC) 플랫폼으로 사업을 확장하고 있다. 경쟁사인 Sword Health와 함께 디지털 MSK 시장의 과점 구도를 형성하고 있으며, 매출 규모 기준으로는 Sword의 연환산 매출 약 2.4억 달러를 크게 상회하는 업계 1위 사업자다. HingeSelect(현장 물리치료 네트워크 통합) 서비스를 미국 100개 이상 주요 대도시로 확대하며 순수 원격 치료를 넘어 하이브리드(디지털+대면) 케어로 진화 중이다. 주요 고객은 Fortune 500 대기업 및 대형 보험사이며, 미국 내 약 1.3조 달러 규모로 추정되는 MSK 질환 관련 의료비 지출 시장을 겨냥하고 있다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기(8월 4일 발표) 매출은 2억1,300만 달러로 전년동기 대비 53% 성장했으며, 회사 자체 가이던스(2억~2억200만 달러)를 큰 폭으로 상회했다. 이에 따라 회사는 2026 회계연도 전체 매출 가이던스를 8억5,600만~8억6,000만 달러(중간값 기준 전년 대비 46% 성장)로 상향 조정했다. 조정영업이익(Adjusted Operating Income) 가이던스도 2억3,600만~2억4,400만 달러로 상향, 전년 대비 101% 성장 및 조정영업이익률 약 28%(직전 가이던스 27%에서 개선)를 제시해 흑자 전환 이후 수익성 레버리지가 뚜렷해지고 있다. 3분기 가이던스는 매출 2억2,300만~2억2,500만 달러(전년 대비 +45%)로 성장 둔화 없이 견조한 모멘텀을 이어가고 있다. 실적 발표 직후 주가는 급등했으며 이후 자사주 매입 활동도 병행 공개했다. 다음 분기(3분기) 실적 발표는 통상적 일정상 2026년 11월 초순경으로 예상된다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 8월 4일 발표된 2분기 실적에서 매출 서프라이즈(가이던스 상단 초과)와 연간 가이던스 상향, Cylinder Health 인수를 통한 GI 케어 진출 소식이 동시에 나오며 주가가 강하게 반응했다. 8월 5일 Evercore ISI(100→105달러)와 Barclays(97→100달러)가 목표가를 상향했고, 8월 11일에는 Truist가 목표가를 85달러에서 112달러로 대폭 상향하며 Buy 의견을 유지했다. Morgan Stanley 역시 목표가를 72달러에서 108달러로 상향하며 Overweight를 유지, 향후 성장 궤도에 대한 확신을 나타냈다. 8월 20~21일경 주가는 88.46달러 부근에서 거래되며 실적 이후 상승분을 소화하는 조정 국면을 거쳤고, 90일 수익률은 +60.5%, 7일 수익률은 +19.6%, 연초 대비로는 +94.2%에 달했다. 이러한 강한 상승 추세와 다수 IB의 연쇄적 목표가 상향이 누적되며 8월 24일 피벗가 90.70달러를 평균거래량의 2.01배에 달하는 거래량과 함께 돌파, 매수가 91.51달러(피벗 대비 +0.84% 확장)로 신규 진입이 체결됐다. 즉 이번 돌파는 실적 서프라이즈 후 조정을 거친 뒤 애널리스트들의 목표가 재평가 랠리가 이어지며 나온 2차 상승 시도로 해석된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">디지털 MSK(근골격계) 치료 시장은 미국에서만 연간 약 1.3조 달러에 달하는 관련 의료비 지출을 배경으로 고용주·보험사의 비용 절감 수요가 지속 확대되는 구조적 성장 섹터다. 북미가 전체 시장의 약 40%를 차지하며, Hinge Health와 Sword Health가 사실상 과점 구도를 형성하고 있다. Hinge Health는 매출 규모(분기 2.1억 달러, 연환산 약 8.6억 달러)에서 Sword(연환산 약 2.4억 달러)를 압도적으로 앞서는 업계 1위이며, 하이브리드 케어(HingeSelect) 확장과 GI 영역 인수를 통해 만성질환 통합 플랫폼으로 진화하며 경쟁 우위를 넓히고 있다. 다만 두 회사 모두 최근 IPO한 신생 상장사로 밸류에이션 부담과 대형 보험사·고용주 계약 갱신 리스크에 노출되어 있다는 점은 공통적인 약점이다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">주가는 2026년 8월 4일 실적 발표 후 급등한 뒤 8월 중순 88달러 부근에서 횡보하며 상승분을 소화하는 베이스를 형성했고, 이 구간에서 애널리스트 목표가 연쇄 상향(8/5~8/11)이 배경 지지력으로 작용했다. 8월 24일 피벗가 90.70달러를 평균 대비 2.01배에 달하는 거래량 급증과 함께 돌파했으며, 매수 체결가 91.51달러는 피벗 대비 +0.84% 확장으로 과열 없이 정석적인 초기 돌파 구간에서 진입이 이뤄졌다. 상단에는 뚜렷한 저항 매물대가 없는 신고가권에 가까운 위치이며, 하단 지지는 방금 돌파한 90.70달러 피벗 라인과 8월 중순 형성된 88달러대 베이스가 1차·2차 지지선 역할을 할 것으로 판단된다. 다만 연초 대비 +94%에 달하는 누적 상승폭을 감안하면 단기 변동성 확대 가능성은 유의해야 한다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">3분기 실적(11월 초 예상)에서도 2분기와 같은 가이던스 상회 흐름이 재현되고 GI 케어(Cylinder Health) 통합이 예정대로 3분기 중 완료되어 교차판매 기대가 현실화될 경우, 추가 목표가 상향 랠리가 이어질 수 있다. 현재 16개 증권사 평균 목표가는 105.13달러(현재가 대비 약 +21%)이며, 최근 상향된 목표가 중 Truist 112달러, Morgan Stanley 108달러가 상단을 형성하고 있어 매수가(91.51달러) 대비 15~22% 추가 상승 여력이 컨센서스 상으로 존재한다. HingeSelect 하이브리드 케어의 100개 이상 대도시 확장이 순조롭게 진행되며 대형 고용주·보험사와의 신규 계약이 확인될 경우 조정영업이익률 28%를 상회하는 이익 레버리지 스토리가 추가 재평가(re-rating) 촉매로 작용할 수 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 밸류에이션 리스크: 연초 대비 +94%, 3개월 +60% 급등한 상황에서 이미 높은 성장 기대가 주가에 상당 부분 선반영돼 있어, 향후 실적이 컨센서스를 단순히 부합(in-line)하는 수준에 그치면 차익실현 매물로 급락 전환할 수 있다. ② 대형 고용주 계약 집중 리스크: 매출이 소수 대형 자가보험 고용주 및 보험사와의 대형 계약에 의존하는 구조여서, 주요 고객사 이탈이나 계약 갱신 실패 시 성장률 가이던스가 하향될 수 있다. ③ Cylinder Health 인수 통합 리스크: 3분기 중 마무리 예정인 GI 케어 인수의 통합 비용이 예상보다 크거나 시너지 실현이 지연될 경우 조정영업이익률 개선 스토리에 균열이 생길 수 있다. ④ 경쟁 심화 리스크: Sword Health를 비롯한 경쟁사들의 하이브리드 케어·다중 만성질환 진출이 가속화될 경우 가격 경쟁 및 고객사 확보 경쟁이 심화되어 마진 압박 요인으로 작용할 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 3분기 실적 발표(예상 11월 초순): 가이던스(매출 2억2,300만~2억2,500만 달러) 달성 여부와 4분기 및 2027년 가이던스 코멘트 확인 필요. ② Cylinder Health 인수 완료 시점(2026년 3분기 중 예정): 통합 진행 상황 및 GI 케어 신규 계약 발표 여부 모니터링. ③ HingeSelect 100개 대도시 확장 관련 신규 고용주·보험사 파트너십 공시. ④ 애널리스트 목표가 추가 조정 여부(현재 컨센서스 105.13달러, 최고 112달러) 및 기관 보유 비중 변화. ⑤ 자사주 매입 진행 상황(2분기 실적 발표 시 언급됨) 관련 후속 공시.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 53% 매출 성장, 가이던스 상향, 다수 IB의 연쇄적 목표가 상향(85→112달러 등) 등 펀더멘털 모멘텀은 매우 강하고 RVOL 2.01배의 견조한 거래량 돌파도 기술적으로 양호하다. 다만 연초 대비 이미 94% 상승한 상태에서의 진입이라 밸류에이션 부담과 단기 변동성 리스크가 상존하며, Cylinder Health 인수 통합 성과가 아직 확인되지 않은 점을 감안해 강한 확신보다는 보통 등급으로 판단한다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

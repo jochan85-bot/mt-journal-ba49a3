@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>RHI — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>RHI <span class="dim" style="font-size:1rem">로버트 하프</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.19yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$46.21</b>
+
+· 수익률 <span class="neg">-2.36%</span>
+· 보유 64주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 4점 (20260815 기준)</span></div>
+<div class="dim">2026-08-24 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 64주 @ $46.21
+<div class="dim">2026-08-24 22:46 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $45.36
+<div class="dim">2026-08-24 23:33 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">재무/회계·IT 전문직 인재파견과 리스크자문 자회사 Protiviti를 함께 보유한 미국 대형 스태핑 기업으로, 2026년 2분기를 실적 바닥으로 확인하며 반등 국면에 진입한 순환주</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">Robert Half는 크게 두 축으로 사업을 영위한다. 핵심인 Talent Solutions는 재무회계, IT, 법률, 행정 등 화이트칼라 전문직종의 임시직(temp) 및 정규직 채용알선(permanent placement) 서비스를 제공하며 전체 매출의 대부분을 차지한다. 두 번째 축인 Protiviti는 내부감사·리스크·규제자문 컨설팅 자회사로 별도 세그먼트로 실적을 보고한다. 주 고객층은 중견~대기업의 재무·회계·IT 부서 및 금융서비스 업계로, 이 때문에 미국 금융서비스 규제 환경 변화에 매출이 상대적으로 민감하다. 경쟁사로는 ManpowerGroup, Adecco, Insperity, Kforce, Korn Ferry 등이 있으며, RHI는 고마진 전문직 스태핑 포지셔닝과 감사·리스크자문 겸업 구조로 순수 인력파견 업체 대비 차별화된다. 최근 장기 자사주매입 프로그램(2018년 2월 개시)을 종료했고, 분기배당 $0.59는 그대로 유지 중이다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기 매출은 $1.336B로 컨센서스를 0.8% 상회했으나 전년동기 $1.370B 대비 -2.4% YoY 감소했고, 순이익은 $26M(EPS $0.26)으로 전년 $41M($0.41) 대비 크게 줄었다. Talent Solutions는 조정 기준 3개 분기 연속 순차 성장을 기록했고 정규직 배치(permanent placement) 매출은 조정 기준 +2.5% YoY로 개선세를 보였다. 반면 Protiviti는 미국 금융서비스 규제 환경 변화로 매출이 부진했다. 3분기 가이던스는 매출 $1.31B~$1.41B, EPS $0.43~$0.53으로 중간값 기준 조정매출이 전년과 거의 flat 수준을 시사하며, 회사는 EPS +8~12% 성장 및 Protiviti 조정 세그먼트 마진 7~9% 목표를 제시했다. 다음 실적발표는 공식 확정일은 미확인이나 과거 패턴(2024·2025년 모두 10월 발표)상 2026년 10월 중순~하순으로 예상된다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">6월 22일 약 $29였던 주가는 7월 16일 $41.35까지 약 40% 급등했고, 7월 23일 Q2 실적 발표에서 매출 서프라이즈(+0.8%)와 함께 주가가 추가로 약 5% 상승했다. 8월 7일 Barclays가 Hold 의견을 제시한 가운데, BMO Capital은 목표가를 $45→$47로 상향하며 Outperform으로 상향, &#x27;2분기가 실적 바닥&#x27;이라는 논리를 제시했다. 8월 13일 +5.4%(종가 $43.78), 8월 18일 +3.0%(종가 $43.76)로 거래량 동반 상승세가 이어졌고, 금리 인하 기대와 고용시장 바닥 신호 등 매크로 환경 개선도 겹쳤다. 이러한 흐름 속에 8월 24일 피벗 45.32를 RVOL 2.12배의 유의미한 거래량 증가와 함께 돌파, +2.38% 확장된 46.21에 진입이 체결됐다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">미국 스태핑 산업은 2026년 시장규모 $183.3B, +2% 성장이 전망되며 2025년의 변동성을 지나 안정화 국면에 진입했다는 평가다. ASA 스태핑지수는 2026년 4월 기준 YoY +5.3%로 업황이 반등 국면에 들어섰음을 시사한다. 다만 세부 섹터별로는 헬스케어 스태핑(+8%)과 IT/기술 스태핑(+6%)이 성장을 주도하는 반면, RHI의 핵심인 재무·회계·전문직 스태핑은 상대적으로 회복 속도가 느리다. 피어 대비 RHI는 고마진 전문직 파견과 Protiviti 리스크자문 겸업 구조로 차별화되지만, Protiviti의 금융규제 민감성이 최근 실적의 발목을 잡는 약점으로 작용하고 있다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">수개월간의 베이스(약 $29~$45)를 다진 뒤 45.32 피벗을 RVOL 2.12배의 거래량 증가를 동반하며 돌파, 확장폭 +2.38%로 진입이 이루어져 거래량-가격 측면에서 양호한 돌파 품질을 보인다. 위로는 최근 52주 신고가권에 근접해 뚜렷한 매물 저항대가 확인되지 않으나, 8월 13~18일 구간의 단기 고점($43.7~44대)이 1차 소화 구간이 될 수 있다. 아래로는 피벗 45.32가 1차 지지, 그 아래 20일 이동평균선 부근(대략 $42~43대)이 2차 지지로 추정된다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">BMO를 비롯한 강세론자들은 2026년 2분기를 실적 바닥으로 판단하며, 회사가 제시한 3분기 EPS +8~12% 성장 가이던스와 Protiviti 조정 마진 7~9% 목표 달성 시 밸류에이션 리레이팅이 가능하다고 본다. GF Value 모델은 공정가치를 $55.76로 제시해 21.5% 저평가로 평가하며, 모멘텀 랭크는 10/10으로 최상위권이다. ASA 스태핑지수의 반등 추세가 이어질 경우 정규직 배치(permanent placement) 부문의 회복이 가속화될 가능성이 있다. 다만 애널리스트 목표가는 극단적으로 양분되어 있어(BMO $47 vs Goldman $29·KBW $20, 둘 다 Sell 유지) 방향성에 대한 시장 컨센서스는 형성되지 않은 상태다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">1) 실적 리스크: Protiviti의 금융규제 민감 매출 부진이 지속될 경우 3분기 EPS가 가이던스 하단($0.43)을 하회할 수 있으며, 10월 실적 발표 시 하락 갭 위험이 있다. 2) 밸류에이션/애널리스트 괴리 리스크: Goldman Sachs(PT $29, Sell)와 KBW의 Kevin McVeigh(PT $20, Sell)는 현재가 대비 각각 -35%, -55% 수준의 목표가를 제시하고 있어, 최근 40% 이상 단기 급등에 대한 되돌림(밸류에이션 조정) 리스크가 상존한다. 3) 매크로 고용 리스크: 미국 고용시장 회복이 예상보다 더딜 경우 임시직·정규직 배치 수요가 재차 위축되어 Talent Solutions 성장세가 꺾일 수 있다. 4) 수급 리스크: 장기 자사주매입 프로그램이 최근 종료되어 하방 수급 지지력이 약화될 가능성이 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 3분기 배당락/기록일: 2026년 8월 25일(매수 다음날), 지급일 9월 15일 (주당 $0.59) — 수급 변동 요인. ② 3분기 실적발표: 과거 패턴상 2026년 10월 중순~하순 예상(공식일자 IR 확인 필요), Talent Solutions 순차 성장 지속 여부와 Protiviti 마진 회복이 핵심 관전포인트. ③ ASA 스태핑지수 월간 발표(매월 초) — 업황 선행지표. ④ 미국 비농업고용지표(NFP, 매월 첫 금요일) — 고용시장 바닥 확인 지속 여부. ⑤ BMO/Barclays/Goldman/KBW 등 후속 리포트 — 극단적으로 갈린 목표가 컨센서스 변화 추적.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — Q2 실적 바닥 확인 기대감과 RVOL 2.12배를 동반한 피벗 돌파는 기술적으로 양호하나, 애널리스트 목표가가 $20~$55로 극단적으로 양분되어 있고 6주 만에 40% 이상 급등한 뒤의 진입이라 단기 되돌림 리스크가 상존한다. 리포트 AI의 8월 15일 사전판단(관망, conviction 4)도 신중론에 무게를 실었던 만큼, 3분기 실적 발표 전까지는 분할 관점의 보통 확신 등급이 적절하다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
