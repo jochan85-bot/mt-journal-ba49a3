@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>NTRA — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>NTRA <span class="dim" style="font-size:1rem">나테라</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.88yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$335.00</b>
+
+· 수익률 <span class="pos">+0.76%</span>
+· 보유 4주
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div class="dim">2026-08-25 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 4주 @ $335.00
+<div class="dim">2026-08-25 23:03 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $333.37
+<div class="dim">2026-08-25 23:31 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">실적 서프라이즈와 Signatera 적응증 확장을 동력으로 사상 최고가 랠리를 이어가는 분자진단(MRD/NIPT) 선두주자 Natera가 신규 피벗 돌파 매수 종목이다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">Natera는 세포유리 DNA(cfDNA) 기반 유전자 검사 전문기업으로, 크게 3개 사업부(여성건강 NIPT &#x27;Panorama&#x27;, 종양학 MRD &#x27;Signatera&#x27;, 장기이식 &#x27;Prospera&#x27;)로 매출이 구성된다. 2026년 2분기 기준 종양학(Signatera)이 성장을 견인하며 임상 MRD 검사량 28.3만 건(전년비 +56%), ASP 약 1,275달러를 기록해 전사 매출의 핵심 축으로 부상했다. 여성건강 NIPT는 안정적 캐시카우 역할을 하며 시장 점유율 1위를 유지하고 있고, 장기이식 부문(Prospera)은 신장·심장 이식 거부반응 모니터링 시장에서 CareDx와 경쟁 중이다. 분기 처리량은 2개 분기 연속 100만 건을 돌파했으며, 보험 상환(Medicare/민간보험) 확대가 ASP 상승의 핵심 동력이다. 경쟁사로는 Guardant Health(Guardant Reveal/Shield), Exact Sciences(현 Abbott 소속), Foundation Medicine, Adaptive Biotechnologies 등이 있으며, Natera는 종양 유래 변이 기반 개인맞춤형(tumor-informed) MRD 검사에서 임상 데이터 우위를 보유하고 있다. 주요 고객은 종양내과·이식외과 의료진 및 병원 네트워크이며, 제약사와의 동반진단(Companion Diagnostic) 파트너십(예: 로슈 티센트릭 연계)도 확대되고 있다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기(8월 6일 발표) 매출은 약 7억 5,280만 달러로 전년비 +37.7%(트루업 제외 시 약 +40%) 성장했으며 컨센서스를 상회했다. 매출총이익률은 약 65%로 ASP 상승에 힘입어 개선세를 유지했고, 순손실 폭은 전년 대비 축소됐다. 회사는 2026 회계연도 매출 가이던스를 기존 대비 중간값 기준 1억 달러 상향한 28.5억~29.1억 달러(연간 +31% 성장 시사, 트루업 제외)로 상향 조정했다. 실적 발표 직후 주가는 하루 만에 +16.3%, 이후 규제 진전 뉴스까지 겹쳐 누적 +20% 이상 급등했다. 다음 실적 발표일은 2026년 11월 11일(장 마감 후)로 예정되어 있다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">8월 6일 2분기 실적 발표에서 매출·처리량이 컨센서스를 크게 상회하고 연간 가이던스가 상향되면서 주가가 하루 만에 +16.3% 급등했고, 이는 이번 랠리의 1차 트리거였다. 이어 일본에서 근침윤성 방광암 대상 Signatera 동반진단 신청 등 규제 확장 뉴스가 나오며 8월 중순 추가 상승(+20% 이상 누적)이 발생했다. 8월 14~17일 사이 Citi, Piper Sandler, Guggenheim, Stephens 등 주요 대형 하우스가 일제히 목표주가를 대폭 상향(예: 피퍼샌들러 249→363.5달러, 시티 315→365달러)하면서 기관 수급이 유입됐다. 이후 회사는 8.49억 달러 규모의 셀프 등록(직원 주식플랜 연계, 320만 주)을 신고했는데 이는 희석 우려보다는 임직원 보상 프로그램 성격으로 시장이 소화한 것으로 보인다. 이런 흐름 속에서 8월 25일 333.56달러 피벗을 RVOL 3.45배의 강한 거래량 동반 돌파가 나왔으며, 이는 실적 후 조정을 거친 뒤 기관 매수세가 재유입되는 2차 베이스 돌파 성격이 강하다. 피벗 대비 확장폭 +0.56%로 진입 시점 기준 초기 돌파 구간에 해당한다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">분자진단/정밀의학(liquid biopsy, MRD) 섹터는 2026년 현재 FDA의 혈액 기반 동반진단 승인 확대(8월 방광암 Tecentriq 연계 승인 등)로 규제 인프라가 정착되는 성장 초입 국면에 있으며, 시장 규모는 2025년 약 40.3억 달러에서 2030년 70.5억 달러(CAGR 11.8%)로 전망된다. Natera는 종양유래 맞춤형(tumor-informed) MRD 분야에서 임상 데이터·보험 상환 트랙레코드 면에서 Guardant Health(Reveal/Shield) 대비 선두 지위를 지키고 있으나, Guardant의 다암종 조기검진(Shield) 사업 확장과 Exact Sciences(Abbott 편입)의 대장암 스크리닝 강세가 잠재 위협 요인이다. 진단 섹터 전반적으로 실적 모멘텀과 보험 커버리지 확대가 주가 재평가의 핵심 촉매로 작용하는 국면이며, Natera는 동종업계 대비 가장 높은 매출 성장률(+37~40%)을 보이는 상대적 강자다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">실적 발표(8/6) 급등 이후 단기 급등분을 소화하는 컵형 또는 플랫 베이스를 형성한 것으로 추정되며, 이번 333.56달러 피벗 돌파는 RVOL 3.45배라는 뚜렷한 거래량 증가를 동반해 기관 매수세 유입을 시사하는 유효한 돌파 신호로 판단된다. 피벗 대비 진입가 +0.56% 확장은 추격매수 부담이 크지 않은 초기 진입 구간이며, ×1 사이징 티어 적용은 RVOL 강도 대비 보수적 접근을 나타낸다. 다만 실적 발표 후 단기간(3주 내)에 애널리스트 목표가가 잇따라 상향되며 이미 큰 폭 상승한 종목이라 위쪽으로는 뚜렷한 매물대가 없는 신고가권이나, 심리적 저항선(예: 애널리스트 목표가 350~365달러 구간)에서 단기 숨고르기 가능성은 유의해야 한다. 아래 지지선은 이번 피벗(333.56달러) 및 8월 급등 시작 구간(실적 발표 전 종가대)이 될 것으로 보인다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">시나리오는 Signatera의 적응증 확대(방광암 동반진단 승인 등)와 보험 상환 범위 확대가 계속 ASP·처리량을 밀어올려 3분기(11/11 발표) 실적에서도 어닝 서프라이즈가 재현되는 경로다. 다수 애널리스트(Citi, Piper Sandler, Guggenheim, Stephens)가 8월 중순 목표주가를 350~365달러 구간으로 일제히 상향했으며 이는 현재가(335달러) 대비 5~9% 추가 상승 여력을 시사한다. 추가 촉매로는 CareDx와의 특허 소송에서 향후 로열티 판결이 나올 경우 이식(Prospera) 사업부 수익성 개선, 신규 암종(방광암 외 추가 적응증)으로의 Signatera 확장 승인 등이 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">1) 밸류에이션 부담: 최근 3주간 +20% 이상 급등해 이미 좋은 뉴스가 상당 부분 선반영됐을 가능성이 있으며, 11월 실적에서 기대에 못 미치는 가이던스가 나올 경우 급격한 되돌림(갭다운) 리스크가 있다. 2) 경쟁 심화: Guardant Health의 Shield 다암종 조기검진 확대나 신규 진입자의 가격 경쟁이 심화되면 Signatera의 ASP·점유율 압박 요인이 될 수 있다. 3) 보험 상환 정책 리스크: Medicare(CMS)나 민간보험사가 MRD 검사 상환 기준을 강화하거나 삭감할 경우 매출 성장률 둔화로 직결된다. 4) 법적 불확실성: CareDx와의 특허소송에서 이전 배심원 평결(9,630만 달러 승소)이 연방판사에 의해 뒤집힌 바 있어, 향후 항소심 결과에 따라 예상 로열티 수익이 실현되지 않거나 반대로 역풍(반소 리스크)을 맞을 가능성이 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 11월 11일(장 마감 후) 3분기 실적 발표 — 처리량(1M+ 건 지속 여부)과 Signatera ASP 추이 확인 필수. ② 일본 방광암 동반진단 승인 심사 진행 상황(신청 접수 이후 후속 뉴스). ③ CareDx 특허소송 항소심 및 향후 로열티 판결 일정. ④ CMS/보험사의 MRD 검사 상환 정책 변경 발표 여부(연말 결산 시즌 전후 주의). ⑤ 8.49억 달러 셀프등록 물량의 실제 매도(임직원 스톡플랜) 진행에 따른 단기 수급 영향 모니터링.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟢강한 확신 — 실적·가이던스 상향, 규제 승인 확대, 대형 하우스의 일제 목표가 상향이라는 3중 펀더멘털 촉매가 명확하고, RVOL 3.45배를 동반한 거래량 돌파로 기술적 신호도 뒷받침된다. 다만 단기 급등에 따른 밸류에이션 부담과 CareDx 소송 불확실성이 있어 신고가권 추격 시 변동성 확대에 유의해야 한다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

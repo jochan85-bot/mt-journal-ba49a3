@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>JAZZ — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>JAZZ <span class="dim" style="font-size:1rem">재즈 파마슈티컬스</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.79yr, B2)</span></div>
+
+<div class="card">
+평균 매수가 <b>$264.66</b>
+
+· 수익률 <span class="neg">-1.67%</span>
+· 보유 4주
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div class="dim">2026-08-25 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 4주 @ $264.66
+<div class="dim">2026-08-25 23:29 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">재즈 파마슈티컬스는 수면장애(Xywav)와 뇌전증(Epidiolex) 중심의 희귀질환 포트폴리오에 종양학(Zepzelca·Modeyso·Ziihera)을 빠르게 얹으며 2026년 사상 최고가를 갱신 중인 아일랜드 소재 중형 바이오제약사입니다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">재즈 파마슈티컬스는 신경과학(수면장애·뇌전증)과 종양학 두 축으로 사업을 운영하는 중형 특수제약사입니다. 저나트륨 옥시베이트 제제 Xywav가 기면증·특발성 과다수면증 치료제로 2026년 2분기 4억7,100만달러(전년비 +13%)의 매출을 올려 여전히 최대 매출 브랜드이며, 뇌전증 치료제 Epidiolex는 같은 분기 2억9,200만달러(+16%)를 기록했습니다. 종양 부문은 소세포폐암 치료제 Zepzelca(1억600만달러, +42%)와 신규 승인된 Modeyso(4,800만달러)가 이끌며 전체 종양 포트폴리오가 전년비 32% 성장했습니다. 최근에는 위·위식도접합부선암 1차 치료용 이중특이항체 Ziihera(자니다타맙) 병용요법이 2026년 8월 25일 FDA 승인을 받으며 4번째 성장축이 추가됐습니다. 경쟁 지위 측면에서 Xywav는 고나트륨 제네릭 대비 심혈관·신장 부담이 적다는 차별점으로 시장 점유율을 방어하고 있으나 Lupin·Teva·Granules의 ANDA 신청과 Alkermes(Avadel 인수 후) Lumryz의 압박을 동시에 받고 있습니다. 최근 8월 10일 발표한 Actio Biosciences 인수를 통해 희귀 뇌전증 파이프라인을 보강하며 종양+신경과학 이중 성장 전략을 이어가고 있습니다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기 매출은 12억800만달러로 전년비 16% 성장하며 컨센서스(11억1,000만달러)를 크게 상회하는 사상 최대 분기 실적을 기록했습니다. 다만 EPS는 5.71달러로 컨센서스 6.18달러를 하회했는데, 이는 전환사채 희석 효과와 인수 관련 진행중 연구개발비(IPR&amp;D) 상각 때문입니다. 회사는 실적 발표 직후 2026년 연간 매출 가이던스를 기존 42.5억~45.0억달러에서 46.0억~47.5억달러로 상향했으며, 희귀수면질환(Rare Sleep) 부문 가이던스도 20.25억~21.25억달러로 상향 조정했습니다. Xywav의 하반기 제네릭 침투가 제한적이고 순 환자 순증(net patient adds)이 견조하다는 가정이 근거입니다. 다음 분기(3분기 2026) 실적 발표는 통상적인 발표 패턴(8월 초 2분기 발표) 기준 2026년 11월 초순으로 예상됩니다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 8월 3일 발표된 2분기 실적에서 매출이 컨센서스를 크게 상회하고 연간 가이던스가 상향되며 주가 재평가의 1차 트리거가 발생했습니다. 이후 8월 10일 Actio Biosciences 인수 발표로 희귀 뇌전증 파이프라인 확장 기대가 더해졌고, Stifel($275), Truist($264), TD Cowen($300), Piper Sandler($310) 등 다수 IB가 목표주가를 잇달아 상향하며 수급을 뒷받침했습니다. 결정적 촉매는 매수 당일인 8월 25일 발생한 FDA의 Ziihera 병용요법(1차 HER2 양성 위·위식도접합부선암) 승인으로, 이는 종양 파이프라인의 상업화 가시성을 크게 높이는 이벤트였습니다. 승인 소식에 주가는 당일 +3.8% 급등하며 264.66달러(장중 264~265.5달러대 사상 최고가권)까지 상승했고, 매수 시점 상대거래량(RVOL) 2.08배는 이 뉴스에 대한 시장의 실질적인 매수세 유입을 반영합니다. 피벗 256.92달러를 +2.85% 확장 돌파한 것은 실적 서프라이즈(8/3)→ M&amp;A 기대(8/10)→ 신약 승인(8/25)으로 이어진 연속 카탈리스트의 누적 효과로 해석됩니다. 결과적으로 이번 돌파는 단발성 루머가 아닌 펀더멘털 개선(가이던스 상향)과 규제 이벤트(FDA 승인)가 동시에 확인된 &#x27;뉴스 기반 거래량 동반 돌파&#x27;의 전형적 사례입니다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">바이오/제약 섹터는 2026년 상반기 XBI(중소형 바이오 ETF) 기준 최근 1년 총수익률 약 70%를 기록하며 강한 랠리 국면에 있으며, 이는 무차별적 밸류에이션 확장이 아니라 M&amp;A 활황(1분기 딜 규모 650억달러 이상, 2020년 이후 최강 분기)과 FDA의 유연한 승인 기조(2026년 6월 발표) 등 펀더멘털 개선에 기반합니다. 특허절벽(LOE)을 앞둔 대형 제약사들이 종양학·희귀질환 파이프라인 보강을 위해 중형 바이오텍 인수(bolt-on M&amp;A)에 적극 나서면서 재즈와 같은 중형 특수제약사가 인수 후보이자 자체 성장 스토리를 동시에 갖춘 섹터 스위트스팟에 위치해 있습니다. 재즈는 피어 대비 이미 안정적 매출 기반(연 46억달러대)과 흑자 구조를 갖추고 있어 순수 파이프라인 베팅형 바이오텍보다 변동성이 낮으면서도, 종양 부문 32% 고성장으로 밸류에이션 리레이팅 여지가 남아있다는 점이 강점입니다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">베이스 형태는 8월 초 실적 발표 이후 신고가 경신 흐름 속에서 단기 손잡이형(플랫/컵형) 조정을 거친 것으로 추정되며, 8월 25일 FDA 승인 뉴스를 계기로 피벗 256.92달러를 명확히 돌파했습니다. RVOL 2.08배는 미너비니 기준 유효 돌파(통상 1.5~2배 이상)를 충족하는 수준이며, 확장폭 +2.85%는 피벗 대비 5% 이내로 아직 추격매수 과열 구간에 진입하지 않은 양호한 진입 지점입니다. 매수가 264.66달러는 당일 사상 최고가권(264~265.5달러)에 근접해 위쪽에 뚜렷한 매물대 저항이 없는 &#x27;무저항 신고가&#x27; 구간으로, 하방 1차 지지는 돌파 피벗 256.92달러, 2차 지지는 최근 실적 발표 갭업 구간이 될 것으로 판단됩니다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">상승 시나리오의 핵심 트리거는 (1) Ziihera의 1차 위암 치료제 상업화 성공에 따른 종양 매출 재가속, (2) Xywav의 하반기 제네릭 침투 최소화 및 순환자 증가세 지속, (3) Actio Biosciences 인수를 통한 희귀 뇌전증 파이프라인의 추가 임상 성과 발표입니다. 이 경로가 현실화될 경우 다음 분기 가이던스 추가 상향과 함께 밸류에이션 리레이팅이 예상되며, 애널리스트 목표가는 평균 263~268달러, 강세론자 기준 TD Cowen 300달러, Piper Sandler 310달러까지 분포해 현재가 대비 추가 상승 여력을 시사합니다. 17명의 매수 의견과 1명의 중립 의견(매도 의견 없음)이라는 컨센서스 구조도 우호적 수급 지속 가능성을 뒷받침합니다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① Xywav 제네릭/경쟁 리스크: Lupin이 이미 잠정 승인을 받았고 Teva·Granules의 ANDA 소송이 진행 중이며, Alkermes의 Avadel 인수(2026년 2월)로 강화된 Lumryz와의 경쟁이 격화될 경우 최대 매출원인 희귀수면 부문 성장률이 훼손되어 가이던스 하향 및 주가 급락으로 이어질 수 있습니다. ② EPS 희석 리스크: 최근 분기에도 전환사채 희석과 IPR&amp;D 상각으로 EPS가 컨센서스를 하회했는데, 추가 M&amp;A(Actio 등)로 인한 일회성 비용이나 부채 조달이 이어질 경우 이익 서프라이즈 없이 매출만 성장하는 &#x27;탑라인 착시&#x27; 구조가 반복될 수 있습니다. ③ 종양 파이프라인 실행 리스크: Ziihera·Zepzelca·Modeyso의 성장이 시장 기대(32% 성장)에 못 미치거나 경쟁 신약(HER2 표적치료제 등)이 등장할 경우 최근 랠리를 견인한 종양 스토리가 약화되며 밸류에이션 되돌림이 발생할 수 있습니다. ④ 섹터 리스크: XBI 전체가 이미 1년간 70% 상승한 상태에서 정책 리스크(약가 규제, 관세 등)나 금리 상승이 재부각될 경우 밸류에이션이 높아진 중형 바이오텍 전반이 동반 조정받을 가능성이 있습니다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 11월 초순 예상 3분기 실적 발표 — Xywav 순환자 증가세와 종양 부문 성장률 재확인 필요. ② Xywav 관련 ANDA 소송(Lupin/Teva/Granules) 판결·화해 소식 — 제네릭 출시 시점에 직접 영향. ③ Ziihera 1차 위암 적응증의 실제 상업화 진행 상황(2026년 하반기 출시 예정) 및 초기 처방 데이터. ④ Actio Biosciences 인수 딜 클로징 및 파이프라인 임상 일정 공개. ⑤ Epidiolex 신규 캡슐 제형 NDA 심사 진행 상황 및 치료저항성 발작 관련 신규 임상 3건의 데이터 발표 시점.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟢강한 확신 — 실적 서프라이즈(8/3), M&amp;A 발표(8/10), FDA 신약 승인(8/25)이 3주 내 연속으로 발생하며 펀더멘털과 뉴스플로우가 동시에 개선된 상태에서 RVOL 2.08배를 동반한 저확장(+2.85%) 신고가 돌파가 나왔습니다. 다만 Xywav 제네릭 리스크와 EPS 희석 이슈가 상존하므로, 3분기 실적과 Ziihera 초기 처방 데이터로 스토리의 지속성을 재확인할 필요가 있습니다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
