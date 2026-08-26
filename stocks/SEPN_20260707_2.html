@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>SEPN — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>SEPN ☀️ <span class="dim" style="font-size:1rem">셉터나</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.91yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$36.47</b>
+
+· 수익률 <span class="pos">+13.24%</span>
+· 보유 95주
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div class="dim">2026-07-07 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 95주 @ $36.47
+<div class="dim">2026-07-07 22:51 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">Novo Nordisk와 최대 22억 달러 규모 GPCR 공동연구 계약을 체결한 임상단계 GPCR 신약 플랫폼 바이오텍, Septerna(SEPN)</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">Septerna는 자체 개발한 &#x27;Native Complex Platform&#x27;을 기반으로 G단백질 결합 수용체(GPCR)를 표적으로 하는 경구용 저분자 신약을 발굴하는 임상단계 바이오테크 기업이다. 이 플랫폼은 수십억 개의 화합물을 스크리닝해 기존에는 &#x27;드러거블(druggable)&#x27;하지 않다고 여겨졌던 GPCR 표적을 공략하는 것이 핵심 경쟁력이다. 자체 파이프라인으로는 부갑상선기능저하증 치료제 SEP-479(임상 1상)와 만성 자발성 두드러기(CSU) 등 비만세포 매개 질환 치료제 SEP-631(임상 1상, 긍정적 PK/약력학 데이터 확보)이 있다. 매출의 핵심 축은 2025년 5월 체결한 Novo Nordisk와의 대사질환(비만·제2형 당뇨) 공동연구 계약으로, 업프론트 및 단기 마일스톤 2억 달러 이상을 포함해 총 최대 22억 달러 규모이며 GLP-1, GIP, 글루카곤 수용체 등 4개 이상의 프로그램을 공동 개발한다. 2026년 2분기 매출 2,675만 달러 중 대부분이 이 Novo 협업에서 발생해 사실상 파트너십 매출이 회사의 현재 수익 기반이다. 경쟁사로는 Structure Therapeutics(GPCR) 등이 있으며, Septerna는 플랫폼 기술력과 빅파마 파트너십(Novo Nordisk)을 통해 GPCR 신약개발 분야에서 차별화된 위치를 점하고 있다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기(6월 마감) 매출은 2,675만 달러로 컨센서스(1,922만 달러)를 30.07% 상회했으며, 전년 동기 10만 달러 대비 급증(주로 Novo 협업의 업프론트 상각 1,460만 달러, 연구 마일스톤 90만 달러, 연구서비스 1,120만 달러)했다. 순손실은 1,300만 달러로 전년 동기 2,480만 달러 대비 축소됐고, R&amp;D 비용 3,510만 달러, G&amp;A 850만 달러로 총 영업비용은 4,360만 달러(전년 2,910만 달러)로 증가했다. 2026년 6월 30일 기준 현금 및 유가증권 보유액은 5억 1,650만 달러로 회사는 2029년까지 자금 소진 없이 운영 가능하다고 밝혔다. 다음 실적 발표는 3분기(9월 마감분)로 통상 11월 초 예상되며, 매수 시점(7월 7일) 기준으로는 8월 10일 발표된 2분기 실적 이전이었다. 8월 25일에는 Rajiv Patni 박사가 신임 최고의료책임자(CMO)로 선임되며 임상 조직을 보강했다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2025년 5월 Novo Nordisk와의 최대 22억 달러 GPCR 공동연구 계약 체결이 회사의 밸류에이션 재평가 촉매가 됐고, 이후 파이프라인 진전이 이어지며 주가는 우상향 추세를 형성했다. 2026년 6월 22일에는 내부자(SVP Drug Discovery)의 15,000주 지분 매도가 있었으나 주가에 큰 영향은 없었던 것으로 보인다. 매수 직전인 2026년 7월 1일, Truist가 목표주가를 35달러에서 43달러로 상향(매수의견 유지)했고, 같은 날 Guggenheim은 52달러에서 45달러로 하향했으나 여전히 당시 주가 대비 상단 여력을 시사하는 수준이었다. 이러한 애널리스트 목표가 상향과 GPCR/대사질환 섹터에 대한 시장의 기대감 고조가 맞물리며 7월 초 거래량을 동반한 베이스 돌파가 나타난 것으로 판단된다(RVOL 1.44배). 이후 주가는 8월 초 38.78달러의 52주 신고가를 기록했고, 8월 10일 2분기 실적 서프라이즈(매출 컨센서스 대비 +30%)와 8월 12일 Wells Fargo의 목표가 50달러 상향이 추가 상승 모멘텀으로 작용했다. 즉, 진입 시점(7월 7일)은 실적 발표 전 애널리스트 리레이팅과 Novo 파트너십 모멘텀이 선반영되던 국면으로 해석된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">GPCR(G단백질결합수용체) 신약 발굴 분야는 극저온전자현미경(cryo-EM)과 AI 기반 구조 예측 기술의 발전으로 &#x27;지난 10년 중 가장 흥미로운 국면&#x27;에 진입했다는 평가를 받고 있으며, 특히 경구용 비만·대사질환 치료제(GLP-1/GIP/글루카곤 수용체 표적)로의 빅파마 자금 유입이 활발하다. Eli Lilly, Novo Nordisk 등 빅파마들이 주사제 GLP-1의 뒤를 이을 경구용 대체재를 확보하기 위해 GPCR 특화 바이오텍과의 딜을 적극 추진 중이며, Septerna는 이 흐름의 최전선에서 Novo Nordisk와 직접 파트너십을 맺은 몇 안 되는 기업 중 하나다. 경쟁사인 Structure Therapeutics는 자체 파이프라인(aleniglipron 등) 임상 데이터로 시장 평가를 받는 반면, Septerna는 플랫폼 기술 라이선싱과 빅파마 검증(Novo 자금)이라는 구조로 임상 리스크를 일부 분산시킨 점이 상대적 강점이다. 다만 두 회사 모두 자체 리드 후보물질의 임상 성공 여부가 장기 밸류에이션의 관건이라는 공통 리스크를 안고 있다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">35.17달러 피벗을 뚫는 돌파가 RVOL 1.44배의 다소 완만한 거래량 증가를 동반해 발생했으며, 확장폭은 +3.72%로 과열 없이 적정 범위 내 진입이 이루어졌다. Novo 딜 이후 형성된 상승 베이스에서의 돌파로, 거래량이 폭발적이진 않지만 애널리스트 목표가 상향과 맞물린 점을 감안하면 저항대 매물 소화가 일부 진행된 구조로 해석 가능하다. 직전 저항선이자 신규 지지선은 피벗가 35.17달러이며, 상단으로는 뚜렷한 매물대 없이 8월 초 기록한 52주 신고가(38.78달러) 부근이 단기 저항으로 작용할 가능성이 있다. 신규 진입 포지션인 만큼 초기 손절 기준은 피벗 하회(35달러 이탈) 여부로 판단하는 것이 합리적이다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">Novo Nordisk 협업의 마일스톤 달성(임상 진입, 데이터 발표 등)이 이어질 경우 최대 22억 달러 딜 밸류의 재평가가 지속될 수 있으며, 자체 파이프라인인 SEP-479(2027년 1분기 SAD/MAD 데이터)와 SEP-631의 긍정적 결과가 추가 상승 트리거가 될 수 있다. 8월 실적 서프라이즈(+30% 매출 어닝비트) 이후 Wells Fargo가 목표가를 50달러로 상향한 것처럼, 애널리스트들의 연쇄적 목표가 상향이 이어질 가능성이 있다. 8개 애널리스트 컨센서스는 &#x27;Strong Buy&#x27;이며 평균 목표주가는 45.38달러로 매수가(36.47달러) 대비 약 24%의 상승 여력을 시사한다. 5억 1,650만 달러의 두터운 현금 보유(2029년까지 운영자금 확보)는 추가 자금조달 리스크 없이 파이프라인 확장에 집중할 수 있는 기반이 된다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 임상 리스크: SEP-479(부갑상선기능저하증)나 SEP-631(두드러기)의 초기 임상 데이터가 기대에 못 미칠 경우 플랫폼 신뢰도 자체가 훼손되며 주가 급락 가능성이 있다. 특히 SEP-631은 애초 계획했던 Phase 2b CSU 연구 대신 &#x27;자본효율적 시그널 파인딩 전략&#x27;으로 선회했는데, 이는 파이프라인 우선순위 변경 신호로 해석될 여지가 있다. ② 파트너십 의존 리스크: 현재 매출의 대부분이 Novo Nordisk 협업 상각/마일스톤에서 발생하므로, Novo가 프로그램을 조기 종료하거나 우선순위를 낮추면 매출과 밸류에이션에 직접적 타격이 있다. ③ 고밸류에이션 리스크: 매출 대비 시가총액(P/S) 배수가 높은 상태로 지적되고 있어(gurufocus 등), 임상단계 바이오텍 특성상 소규모 악재에도 밸류에이션 조정 폭이 클 수 있다. ④ 내부자 매도: 2026년 6월 SVP급 임원의 지분 매도(15,000주)가 있었는데, 향후 추가 내부자 매도가 이어질 경우 단기 수급에 부담을 줄 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 3분기 실적 발표(9월 마감분, 통상 11월 초 예상) — Novo 협업 마일스톤 진행 상황과 R&amp;D 지출 추이 확인. ② SEP-479 SAD/MAD 데이터 발표(2027년 1분기 예정) — 하이포파라타이로이디즘 프로그램의 임상적 검증 여부. ③ SEP-631 관련 &#x27;시그널 파인딩&#x27; 임상 전략의 구체적 설계 발표 시점 — 임상 규모·일정 변경 여부. ④ Novo Nordisk와의 추가 마일스톤/프로그램 확대 발표 여부(공동연구 4개 프로그램 진행 상황). ⑤ 신임 CMO Rajiv Patni 취임(2026.8.25) 이후 임상 전략 변화 여부. ⑥ 애널리스트 목표가 추가 조정(현재 컨센서스 45.38달러, Wells Fargo 50달러) 및 추가 내부자 매매 공시.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — Novo Nordisk와의 대형 파트너십과 두터운 현금(5억 달러+, 2029년까지 런웨이), Strong Buy 컨센서스(목표가 45.38달러)는 긍정적이나, 매수 시점(7/7)이 8/10 실적 발표 및 8월 애널리스트 목표가 상향 랠리보다 먼저 이루어져 결과적으로는 좋은 타이밍이었던 것으로 확인된다. 다만 여전히 임상 초기 단계 파이프라인 의존도가 높고 매출 대부분이 파트너 마일스톤에 의존하는 구조라 변동성이 크므로, 리스크 관리(손절 기준: 피벗 35달러 하회)를 병행한 보통 확신의 진입으로 평가한다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

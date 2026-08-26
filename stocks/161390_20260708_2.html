@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>161390 — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>161390 <span class="dim" style="font-size:1rem">한국타이어앤테크놀로지</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.17yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>74,900원</b>
+
+· 수익률 <span class="neg">-8.81%</span>
+· 보유 46주
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div class="dim">2026-07-08 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 46주 @ 74,900원
+<div class="dim">2026-07-08 09:38 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">한국타이어앤테크놀로지는 국내 1위·글로벌 7위권 타이어 제조사로, 고인치·전기차용 고부가 타이어 믹스 개선과 한온시스템 편입 효과로 이익 체력이 구조적으로 레벨업되고 있는 종목이다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">한국타이어앤테크놀로지는 승용차·SUV용 타이어(RE, 교체용)와 완성차 납품용 신차용 타이어(OE)를 주력으로 하며, 최근에는 전기차 전용 타이어(iON 시리즈)와 18인치 이상 고인치·초고성능(UHP) 타이어 비중을 빠르게 늘리고 있다. 매출 구성은 유럽·북미 등 해외가 절반 이상을 차지하며 현지화 생산(헝가리, 미국 테네시, 인도네시아 등)을 통해 관세 리스크를 분산하고 있다. 2025년 자회사로 편입한 한온시스템(열관리 부문)이 연결 매출의 약 절반을 차지하면서 사업 포트폴리오가 타이어 단일에서 자동차 부품 복합기업으로 확장됐다. 글로벌 타이어 시장에서 미쉐린·브리지스톤·굿이어·콘티넨탈에 이어 매출 기준 상위권에 위치하며, 완성차 OE 공급사로는 현대차·기아·BMW·포르쉐·GM 등 프리미엄 브랜드를 다수 확보하고 있다. 국내 시장에서는 한국앤컴퍼니 지주 체제 하에서 사실상 독보적 1위 지위를 유지하고 있다. 고부가 제품 믹스 개선이 매출 성장률보다 이익 성장률을 더 크게 끌어올리는 구조가 최근 실적의 핵심 특징이다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 1분기 연결 매출 5조3139억원(+7.0% YoY), 영업이익 5069억원(+42.9% YoY)을 기록했으며, 타이어 부문만 보면 매출 2조5657억원(+9.3%), 영업이익 4375억원(+31.1%), 영업이익률 17.1%로 고부가 제품 판매 확대 효과가 뚜렷했다. 2분기(8월 11일 발표)에는 연결 매출 5조6824억원(+5.8% YoY), 영업이익 5590억원(+58.1% YoY)으로 분기 기준 역대 최대 실적을 재차 경신했고, 타이어 부문 매출도 2조8073억원(+11.8%)으로 사상 최대치를 기록했다(영업이익률 17.2%). 한온시스템(열관리 부문)은 1분기 영업이익이 전년비 361% 급증한 972억원, 2분기 1037억원으로 이익 기여도가 빠르게 커지고 있다. 매수 시점인 7월 8일은 1분기 어닝서프라이즈(5월 8일 발표) 이후 실적 모멘텀이 이어지던 구간이며, 다음 분기(3분기) 실적 발표는 통상 11월 초로 예상된다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">5월 8일 발표된 1분기 실적에서 영업이익이 시장 기대치를 상회하는 42.9% 증가를 기록하며 어닝서프라이즈가 나왔고, 이후 증권가에서 목표주가 상향 리포트(삼성증권 8.5만원, KB증권·한투 8만원, DB증권 8.3만원 등)가 잇따랐다. 5월 중순에는 관세 이슈에도 불구하고 &#x27;K타이어 3사&#x27;가 견조한 실적을 이어간다는 업종 리포트가 나오며 섹터 전반에 대한 재평가가 진행됐다. 이후 원자재(고무) 가격 상승과 관세 부담이라는 우려 요인이 있었지만, 고부가 제품 믹스 개선과 가격 인상으로 상쇄 가능하다는 시각이 우세해지며 주가가 저항선을 향해 서서히 상승했다. 7월 초에는 배당성향을 3년 내 35%까지 단계적으로 확대하고 중간배당을 도입하겠다는 밸류업 정책 기대감이 재부각되며 수급이 개선됐다. 이러한 배경 속에서 7월 8일 74,100원 피벗을 RVOL 1.41배의 거래량 증가를 동반하며 +1.08% 확장 돌파했고, 이는 실적 모멘텀과 밸류업 기대가 동시에 반영된 신규 진입성 돌파로 해석된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">타이어 업종은 2026년 들어 신차용(OE)·교체용(RE) 수요가 유럽·중국을 중심으로 견조하게 유지되는 가운데, 미국의 반덤핑 관세 이슈에도 현지 생산거점 확대로 대응하며 상대적으로 방어력을 보이고 있다. 다만 중동 정세 불안에 따른 천연·합성고무 등 원자재 가격 상승이 하반기 원가율을 4~5%p가량 끌어올릴 수 있다는 우려가 업종 공통 리스크로 지목된다. 한국타이어는 국내 경쟁사(금호타이어, 넥센타이어) 대비 고인치·전기차용 프리미엄 제품 비중과 영업이익률(17%대)에서 우위를 보이며, 한온시스템 편입으로 포트폴리오 다각화까지 갖춰 업종 내 상대적 강자로 평가된다. 다올투자증권은 목표주가 10만원을 제시할 정도로 낙관적인 반면, 일부 증권사는 원가율 부담을 이유로 보수적 접근을 권고하는 등 의견 차가 존재한다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">5월 어닝서프라이즈 이후 상승분을 소화하며 형성된 베이스에서 74,100원 피벗을 돌파했으며, 진입 시점 RVOL 1.41배는 평균적인 수준의 거래량 동반으로 강한 기관 매집을 확신하기엔 다소 부족하지만 신규 진입을 정당화할 수준은 된다. 피벗 대비 +1.08% 확장은 매우 타이트한 진입으로 손절 라인(피벗 하단 74,100원 부근) 설정이 용이해 리스크 관리 측면에서 양호하다. 상단 매물대는 최근 애널리스트 목표주가 밀집구간인 80,000~85,000원대가 1차 저항으로 작용할 가능성이 크며, 하방 지지는 20일선 및 직전 베이스 저점이 될 것으로 판단된다. 다만 8월 11일 발표된 2분기 실적이 재차 어닝서프라이즈를 기록한 점은 7월 돌파 당시의 펀더멘털 논리가 사후적으로 검증됐다는 점에서 긍정적이다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">3분기 이후에도 고부가·전기차용 타이어 매출 비중 확대가 이어지고 원자재 가격 인상분을 판가 전가로 상쇄한다면, 영업이익률 17%대 이상이 유지되며 밸류에이션 리레이팅이 가능하다. 배당성향 35% 확대 로드맵과 중간배당 도입이 구체화될 경우 밸류업 프리미엄이 추가로 붙을 수 있다. 애널리스트 목표주가는 8만원~8.5만원에 집중돼 있고, 다올투자증권은 10만원까지 제시해 매수가(74,900원) 대비 최대 33% 이상의 상승 여력이 열려 있다. 한온시스템 부문의 이익 기여 확대가 지속되면 단순 타이어주에서 복합 부품기업으로의 리레이팅 스토리도 부각될 수 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">1) 원자재 가격 급등: 중동 정세 불안이 장기화돼 천연·합성고무 가격이 추가 상승하면 하반기 원가율이 4~5%p 이상 악화되며 영업이익률이 15% 초반까지 하락할 수 있다. 2) 미국 관세 강화: 반덤핑 관세율이 예상보다 높게 확정되거나 대상 품목이 확대되면 북미향 수출 마진이 훼손되고 현지화 전환 비용이 부담으로 작용할 수 있다. 3) 유럽/중국 수요 둔화: 완성차 판매 부진이나 경기 둔화로 OE 수주가 줄어들면 고부가 제품 믹스 개선 속도가 느려져 실적 모멘텀이 꺾일 수 있다. 4) 한온시스템 통합 리스크: 열관리 부문의 이익 변동성(전방 전기차 수요 둔화 등)이 커질 경우 연결 실적 예측 가능성이 낮아지고 주가 디스카운트 요인이 될 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 8월 11일 2분기 실적(이미 발표, 영업이익 +58.1% YoY로 서프라이즈 확인됨) — 돌파 이후 펀더멘털 검증 완료. ② 3분기 실적 발표(통상 11월 초 예상) — 원자재 원가율 반영 정도와 판가 인상 효과 확인 필요. ③ 미국 관세 관련 정책 발표 및 반덤핑 관세 재산정 일정 모니터링. ④ 중간배당 및 배당성향 35% 로드맵 관련 이사회 결의·공시 시점 확인. ⑤ 목표주가 밀집구간인 80,000~85,000원 도달 시 저항 돌파 여부 재점검.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 1분기·2분기 연속 어닝서프라이즈와 밸류업 기대감이 뒷받침된 견조한 돌파이나, RVOL 1.41배는 강한 수급 확신을 주기엔 다소 평범한 수준이고 하반기 원자재 원가 상승 리스크가 상존한다. 목표주가 상단(8~10만원)까지 여력은 있으나 진입가 대비 좁은 확장폭(+1.08%)을 고려할 때 초기 손절 라인 관리가 중요하다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

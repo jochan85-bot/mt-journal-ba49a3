@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>006360 — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>006360 <span class="dim" style="font-size:1rem">GS건설</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.45yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>36,750원</b>
+
+· 수익률 <span class="pos">+2.86%</span>
+· 보유 94주
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div class="dim">2026-08-26 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 94주 @ 36,750원
+<div class="dim">2026-08-26 09:10 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">부동산 경기 저점을 지나 주택 마진 정상화와 AI 데이터센터·베트남 원전이라는 신성장 모멘텀이 겹치며 재평가받는 국내 대형 종합건설사</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">GS건설은 건축·주택, 플랜트, 인프라, 신사업(수처리·모듈러 등) 4개 사업부문을 운영하는 국내 4대 종합건설사 중 하나입니다. 2026년 1분기 기준 매출 구성은 건축·주택사업본부 1조4213억원, 플랜트사업본부 2536억원, 인프라사업본부 3264억원으로 주택 부문이 전체 매출의 절반 이상을 차지하는 주택 중심 포트폴리오입니다. 자이(Xi) 브랜드를 앞세워 재건축·재개발 정비사업 수주에서 업계 상위권 지위를 유지하고 있으며, 최근에는 GS그룹 계열사(GS, GS에너지 등)의 AI 데이터센터 투자와 연계된 시공 물량 확보, 베트남·중동 지역 플랜트 및 원전 수주로 사업 다각화를 추진 중입니다. 주요 고객은 재건축·재개발 조합, 공공발주처(LH 등), 해외 정부 발주처 및 GS그룹 계열사입니다. 경쟁사로는 현대건설, 대우건설, DL이앤씨 등이 있으며, 주택 브랜드 파워와 도시정비사업 트랙레코드에서 강점을 보유하고 있습니다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 1분기 매출은 2조4005억원으로 전년 동기(3조629억원) 대비 21.6% 감소했으나, 영업이익은 735억원으로 전년 동기(704억원) 대비 4.4% 증가하며 수익성은 방어했습니다. 이는 고원가 현장들이 준공 정산 단계에 진입하며 원가 부담을 털어내고, 정상 마진 신규 현장의 매출 반영 비중이 확대된 결과입니다. 대신증권은 2026년 연간 연결 매출액을 전년 대비 8.8% 감소한 11조3608억원, 영업이익은 7.5% 증가한 4712억원(영업이익률 4.1%)으로 전망하고 있어 매출은 역성장하지만 수익성은 개선되는 흐름입니다. 삼성증권은 5월 리포트에서 &#x27;상저하고&#x27; 실적 흐름을 제시하며 하반기 개선을 예상했고, 교보증권은 7월 30일 2분기 리뷰에서 주택 부문 매출총이익률의 가파른 상승을 근거로 목표가 34,000원의 Buy 리포트를 발행했습니다. 다음 실적 발표는 3분기 실적으로, 전년(2025년 3분기) 발표가 11월 4일이었던 점을 감안하면 2026년 3분기 실적도 10월 말~11월 초 발표가 예상됩니다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">GS건설 주가는 8월 초부터 급격한 랠리를 시작했습니다. 8월 4일 장중 26,300원까지 8.45% 상승했고, 8월 5일에는 AI 데이터센터 수주 기대감으로 9%대 강세를 보였으며, 8월 8일에는 33,900원까지 전일 대비 17.70% 급등했습니다. 핵심 촉매는 BNK투자증권 등이 제시한 GS그룹의 2028년까지 1.2GW급 AI 데이터센터 투자 계획으로, 이 기간 약 10조원 규모의 시공 물량이 GS건설로 유입될 것이라는 추정이 시장에 확산되었습니다. 동시에 베트남 닌투언2 원전(총사업비 약 8.9조원) 수주전에서 &#x27;팀코리아&#x27; 컨소시엄 참여가 가시화되며 GS건설이 20년 이상 축적한 베트남 현지 네트워크를 바탕으로 1조원 이상의 수주를 확보할 수 있다는 기대감이 더해졌습니다. 여기에 중동 지역 지정학적 긴장 완화 시그널까지 겹치며 코스피 전반의 투자심리가 개선되었고, 기관·외국인 매수세가 유입되며 PBR 0.3배대 저평가 구간에서 재평가가 시작되었습니다. 이번 매수 시점(8월 26일)의 35,450원 피벗 돌파는 이러한 8월 초 급등 이후 형성된 눌림목 베이스에서 재차 상승 모멘텀을 확인하는 흐름으로 해석됩니다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">건설업은 2026년 부동산 경기 침체가 장기화되는 가운데 업황 회복의 초기 단계에 진입한 것으로 평가받고 있습니다. 민간 건설시장의 뚜렷한 회복은 아직 제한적이지만, 서울 등 주요 도시의 재건축·재개발 정비사업이 공급의 핵심 축으로 부각되며 관련 기업들의 수주 모멘텀이 부각되고 있습니다. GS건설은 도시정비사업 트랙레코드와 자이 브랜드 파워에서 강점을 보유하고 있으나, 과거 고원가 현장 부담으로 마진율이 피어 대비 낮았던 이력이 있어 현재는 이를 해소하는 과정에 있습니다. 데이터센터·원전 등 비주택 신성장 동력 확보 측면에서는 현대건설, 삼성물산 등 대형 경쟁사 대비 상대적으로 늦게 진입했지만 GS그룹 계열 시너지라는 차별화 요소를 갖추고 있습니다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">이번 진입은 피벗 35,450원을 확인 후 매수가 36,750원으로 +3.95% 확장된 지점에서 이루어졌으며, 진입 시점 상대거래량(RVOL) 3.15배는 평상시 대비 3배 이상의 강한 수급 유입을 동반한 유효한 돌파로 판단됩니다. 8월 초 17% 이상의 단기 급등 이후 일정 기간 눌림목(컨솔리데이션) 구간을 거친 뒤 재차 신고가권으로 진입하는 형태로, 미너비니 VCP 관점에서는 1차 급등 후 변동성 수축 베이스의 2차 돌파에 해당할 가능성이 높습니다. 다만 확장폭이 4%에 근접한 시점의 진입이므로 피벗 부근(35,450원)이 1차 지지선, 8월 초 급등 시작 구간(26,000원대)이 2차 하방 지지선으로 작용할 것으로 예상되며, 상단으로는 KB증권 목표가 39,000원 부근이 단기 매물 저항대로 관찰됩니다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">상승 시나리오의 핵심 트리거는 베트남 닌투언2 원전 &#x27;팀코리아&#x27; 컨소시엄 수주 확정(1조원 이상 추정)과 GS그룹 AI 데이터센터 프로젝트의 구체적 발주(10조원 시공물량 중 GS건설 배정분 확정)입니다. 여기에 3분기 실적에서 주택 부문 매출총이익률 개선이 숫자로 확인될 경우 추가 재평가가 가능합니다. 증권가 목표주가는 KB증권 39,000원(Buy), 교보증권 34,000원(Buy), 삼성증권 45,000원 등으로 분포하며 컨센서스 범위는 24,000원~52,000원으로 넓게 형성되어 있어, 원전·데이터센터 모멘텀이 현실화될 경우 목표가 상단 재상향 여지가 존재합니다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 원전·데이터센터 수주 불확실성: 베트남 닌투언2 컨소시엄 최종 확정이나 GS그룹 데이터센터 발주 물량이 기대에 못 미치거나 지연될 경우, 현재 주가에 선반영된 기대감이 되돌려지며 급락 압력이 발생할 수 있습니다. ② 부동산 PF·미분양 리스크: 국내 부동산 경기 침체가 장기화되는 상황에서 정비사업 준공 시점의 미분양이 확대되면 주택 부문 수익성 개선 흐름이 다시 꺾일 수 있습니다. ③ 단기 과열에 따른 차익실현: 8월 초 이미 17% 이상 급등한 이후 재차 돌파가 나온 만큼, 뉴스 모멘텀 소멸 시 단기 급등분에 대한 차익실현 매물이 출회될 가능성이 있습니다. ④ 거시 금리 환경: KB증권이 무위험수익률 상승을 이유로 목표주가를 17.9% 하향 조정한 사례처럼, 금리 상승 국면에서는 밸류에이션(BVPS 배수) 자체가 하향 압력을 받을 수 있습니다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 3분기 실적 발표(전년도 발표일 11월 4일 기준, 10월 말~11월 초 예상) — 주택 마진 개선 지속 여부 확인. ② 베트남 닌투언2 원전 &#x27;팀코리아&#x27; 컨소시엄 최종 참여사 및 수주 확정 발표 일정. ③ GS그룹 AI 데이터센터(2028년까지 1.2GW 목표) 관련 시공 발주 세부 계획 공시. ④ 국내 주택 정책 및 도시정비사업(재건축·재개발) 관련 정부 발표. ⑤ 8월 초 급등분에 대한 기관·외국인 수급 지속 여부(순매수 추세 전환 시 경계).</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — RVOL 3.15배를 동반한 유효한 피벗 돌파이고 원전·데이터센터·주택 마진 정상화라는 3중 모멘텀이 뚜렷하지만, 8월 초 이미 17% 이상 급등한 이후 재돌파 지점이라 단기 과열 리스크가 상존하고 핵심 카탈리스트(베트남 원전, 데이터센터 발주)가 아직 확정이 아닌 기대감 단계라는 점에서 강한 확신보다는 보통 등급이 적절합니다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
