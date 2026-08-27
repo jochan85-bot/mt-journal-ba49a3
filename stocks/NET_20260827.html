@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>NET — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>NET <span class="dim" style="font-size:1rem">클라우드플레어</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.21yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$302.62</b>
+
+· 수익률 <span class="pos">+1.61%</span>
+· 보유 9주
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div class="dim">2026-08-27 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 9주 @ $302.62
+<div class="dim">2026-08-27 23:01 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">AI 시대의 엣지 네트워크·보안 인프라를 장악하며 개발자 플랫폼(Workers)까지 확장 중인 클라우드플레어, Q2 실적 서프라이즈와 가이던스 상향을 발판으로 신고가권 돌파를 시도하고 있다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">클라우드플레어는 전 세계 300개 이상 도시에 분산된 애니캐스트 네트워크를 기반으로 CDN, DDoS 방어, WAF, 제로트러스트 보안(SASE), DNS 등을 단일 플랫폼으로 제공하는 엣지 클라우드 기업이다. 매출은 크게 네트워크 서비스(CDN·보안)와 신성장 축인 Workers(서버리스 컴퓨팅)·AI 추론 플랫폼(Workers AI)으로 구성되며, 최근에는 자체 AI 워크스페이스를 오픈소스화한 &#x27;Cloudflare OS&#x27;로 개발자 락인을 강화하고 있다. 매출 100만 달러 이상 대형 고객이 4,698개사(+27% YoY)로 전체 매출의 73%를 차지해 엔터프라이즈 침투가 가속화되는 구조다. 경쟁사는 Akamai, Fastly, Zscaler, Palo Alto Networks 등이며, 클라우드플레어는 이들 대비 훨씬 빠른 매출 성장률(약 25~30%)과 넓은 제품 포트폴리오(TAM 약 2,000억 달러 추정)로 우위를 점하고 있다. 주요 고객군은 대형 엔터프라이즈부터 AI 스타트업까지 폭넓으며, Workers 플랫폼에는 2분기에만 신규 개발자 약 200만 명이 유입되며 생태계 확장이 가속화되고 있다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기(8월 7일 발표) 매출은 6억 9,610만 달러로 전년 대비 +36% 성장하며 컨센서스(6억 6,600만 달러)를 크게 상회했고, 조정 EPS는 0.29달러로 예상치(0.27달러)와 전년 대비 +38%를 웃돌았다. 대형 고객 확대와 순매출유지율(DBNR) 120%(+6%p YoY) 개선이 마진 레버리지로 이어지며 잔여계약가치(cRPO)도 +35% 성장했다. 회사는 3분기 매출 가이던스를 7억 3,600만~7억 3,700만 달러, 영업이익 1억 2,900만~1억 3,000만 달러로 제시했고, 2026 회계연도 전체로는 매출 28억 6,400만~28억 7,000만 달러, 영업이익 4억 4,300만~4억 4,500만 달러, EPS 1.25~1.26달러로 상향했다. 다음 실적 발표는 3분기 실적으로, 과거 발표 패턴(2월·5월·8월 초)을 감안하면 2026년 11월 초순이 유력하다. 다만 P/S 40배, 선행 P/E 200배 이상의 고밸류에이션이 실적 미스 시 변동성 확대 요인이 될 수 있다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">8월 7일 2분기 실적 발표 직후 매출·EPS 서프라이즈와 가이던스 상향으로 주가가 하루 만에 +8.2% 급등하며 상승 모멘텀의 시작점을 만들었다. 이후 조정 국면(8월 20일 -3.20%)을 거치며 베이스를 다졌고, 8월 26일 +3.10%, 8월 27일 +6.43%로 이틀 연속 강한 상승이 나타나며 피벗 293.57달러를 돌파했다. 8월 27일 매수 시점 상대거래량(RVOL) 2.01배는 평소 대비 수급이 크게 몰렸음을 보여주며, 피벗 대비 +3.02% 확장은 아직 과열되지 않은 초기 돌파 구간에 해당한다. 촉매는 Citi(목표가 265→400달러)와 BofA(330→380달러) 등 주요 하우스의 대폭적인 목표가 상향, 그리고 자체 AI 워크스페이스를 개방한 &#x27;Cloudflare OS&#x27; 발표에 따른 AI 제품 전략 재평가다. 다만 같은 시기 21억 5,000만 달러 규모 2031년 만기 전환사채(0% 쿠폰) 발행에 따른 희석 우려와 CEO 매튜 프린스의 10b5-1 계획에 따른 1,500만 달러 이상 자사주 매도 공시가 있었음에도 매수세가 이를 압도하며 돌파가 성립됐다는 점에서 수급 강도가 상당히 강했던 것으로 판단된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">엣지 컴퓨팅·클라우드 보안 섹터는 AI 워크로드 확산과 제로트러스트 전환 수요에 힘입어 뚜렷한 상승 사이클에 있으며, 클라우드플레어의 25~30%대 매출 성장률은 Akamai(6~8%)를 크게 앞서는 카테고리 리더 위치를 보여준다. 반면 Fastly는 성장 정체, Zscaler·Palo Alto Networks는 순수 보안 영역에 집중돼 있어 CDN+보안+개발자플랫폼을 아우르는 클라우드플레어의 통합 포지셔닝이 상대적 강점으로 부각된다. 다만 업종 전반이 고밸류에이션 프리미엄을 받고 있어 금리·거시 변수에 따른 밸류에이션 되돌림 리스크는 섹터 공통 약점이다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">직전 베이스는 8월 7일 실적 갭업(+8.2%) 이후 약 3주간 293~310달러 박스권에서 다져진 손잡이형 조정 패턴으로, 8월 20일 -3.20% 눌림 이후 재차 매수세가 유입되며 저점을 높여왔다. 293.57달러 피벗 돌파 시 RVOL 2.01배는 미너비니 기준(1.5배 이상 유의미)을 충족하는 견조한 거래량 동반 돌파이며, 진입가 302.62달러는 피벗 대비 +3.02% 확장으로 5% 이내 초기 진입 구간에 해당해 추격매수 리스크가 제한적이다. 상단 저항은 뚜렷한 매물대가 없는 신고가 부근이며, 하방 1차 지지는 피벗 293.57달러, 2차 지지는 8월 20일 저점 부근으로 판단된다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">AI 추론·에이전트 워크로드가 Workers 플랫폼으로 계속 유입되며 대형 고객(현재 4,698개) 증가와 DBNR 120% 이상 확대가 이어질 경우, 3분기 실적에서 재차 어닝 서프라이즈가 나올 가능성이 트리거다. 애널리스트 목표가는 최고 400달러(Citi, +32% 여지)부터 평균 333.55달러(34개 기관 컨센서스, Buy 등급)까지 분포하며, 최근 상향 흐름이 지속될 경우 신고가 갱신 후 추세 지속 패턴이 기대된다. Cloudflare OS를 통한 개발자 생태계 락인이 성공적으로 안착하면 Workers 매출 비중 확대와 함께 밸류에이션 프리미엄 정당화 논리가 강화될 수 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 밸류에이션 리스크: P/S 40배·선행 P/E 200배 이상의 고평가 상태에서 3분기(11월 초 예상) 실적이 컨센서스를 하회하면 급격한 되돌림이 발생할 수 있다. ② 희석 리스크: 8월 발행한 21억 5,000만 달러 규모 2031년 만기 전환사채가 향후 주가 상승 시 전환되며 EPS 희석 압력으로 작용할 수 있다. ③ 내부자 매도 신호: CEO 매튜 프린스를 비롯한 경영진의 10b5-1 계획에 따른 지속적 자사주 매도(8월 1,500만 달러 이상)는 단기적으로는 계획된 매도이나 시장 심리에 부담을 줄 수 있다. ④ 경쟁 심화: AWS·Google Cloud·Akamai·Zscaler 등이 AI 보안·엣지 컴퓨팅 영역에 공격적으로 투자하고 있어, 가격 경쟁이나 대형 고객 이탈 시 성장률 둔화로 이어질 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 3분기 실적 발표(과거 패턴상 2026년 11월 초 예상) — 매출 7억 3,600만~7,700만 달러 가이던스 달성 여부와 대형 고객·DBNR 추이 확인. ② 2031년 만기 전환사채(21.5억 달러) 관련 추가 공시 및 희석 영향 재평가. ③ CEO 및 경영진 Form 4 내부자 매도 공시 지속 여부 모니터링. ④ Cloudflare OS·Workers AI 관련 신규 고객사·파트너십 발표. ⑤ Citi(400달러)·BofA(380달러) 등 주요 하우스의 목표가 추가 조정 여부.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 실적·가이던스 상향, 강한 거래량 동반 피벗 돌파(RVOL 2.01배), 애널리스트 목표가 상향 랠리 등 기술·펀더멘털 모두 긍정적이나, 이미 40배 이상의 P/S와 200배를 넘는 선행 P/E, 최근 전환사채 발행에 따른 희석 우려, 경영진의 지속적 매도가 리스크로 병존한다. 초기 확장폭(+3.02%)이 크지 않아 진입 자체는 합리적이나, 밸류에이션 부담을 감안해 실적 발표 전까지는 손절 라인(피벗 293.57달러 부근)을 엄격히 준수할 필요가 있다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
