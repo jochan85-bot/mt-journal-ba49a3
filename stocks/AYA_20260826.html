@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AYA — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>AYA <span class="dim" style="font-size:1rem">아야 골드 앤 실버</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.07yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$28.07</b>
+
+· 수익률 <span class="neg">-1.07%</span>
+· 보유 43주
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div class="dim">2026-08-26 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 43주 @ $28.07
+<div class="dim">2026-08-26 23:00 </div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · None주 @ $28.02
+<div class="dim">2026-08-26 23:25 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">모로코 즈군데르(Zgounder) 은광산을 핵심 자산으로 보유한 순은(pure-play silver) 생산기업으로, 사상 최대 생산 실적과 은 가격 슈퍼사이클 재점화에 힘입어 재평가받고 있는 주니어 은채굴주.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">Aya Gold &amp; Silver는 모로코 안티아틀라스 산맥의 즈군데르 은광산을 핵심 자산으로 보유한 캐나다 기반 순은 생산기업이다. 2022년 상업생산을 개시한 즈군데르는 최근 확장을 통해 일일 채굴률 4,900톤(Q2-2026 기준)으로 명목 처리능력을 초과했으며, 2026년 520만~580만 온스의 은 생산을 목표로 한다. 매출은 사실상 전량 은(및 부산물) 판매에서 발생하며, Q2-2026 실현 은환산가격은 온스당 64.22달러로 국제 은 스팟가와 직접 연동된다. 회사는 즈군데르 외에 모로코 내 부마딘(Boumadine) 금-은 프로젝트를 2차 성장동력으로 개발 중이며, 2026년 상반기 타당성조사에 착수해 36만 미터 규모 시추 프로그램(2026년 목표 18만 미터)을 진행 중이다. 2026년 8월에는 모로코 내 미개발 광물벨트에 걸친 3건의 채굴권과 18건의 탐사허가(약 259km²)로 구성된 전략적 탐사 포트폴리오를 인수하며 파이프라인을 추가 확장했다. 캐나다(TSX)와 미국 시장 이중 상장을 통해 북미 투자자 접근성을 확보하고 있으며, 모로코 정부·왕실투자기구와의 우호적 관계가 사업 안정성의 기반이다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 8월 13일 발표된 Q2-2026(6월 30일 마감) 실적에서 매출은 9,700만 달러로 전년동기 대비 151% 증가했고, 순이익은 3,500만 달러(전년 900만 달러 대비 +305%, 희석 EPS 0.23달러)를 기록했다. 다만 EPS 0.23달러는 컨센서스 0.3855달러를, 매출 9,679만 달러는 컨센서스 1억 2,100만 달러를 하회했는데, 이는 6월 생산분 일부가 7월로 이연 판매된 타이밍 차이와 분기 후반 은 가격 하락에 기인한다. 영업현금흐름은 4,800만 달러로 전년 대비 522% 급증했고, 은환산 생산량은 168만 온스(전년비 +61%, 전분기비 +12%)로 사상 최대를 기록했다. 2026년 연간 가이던스는 즈군데르 기준 520만~580만 온스, 현금비용 온스당 약 21.50달러이며, 다음 분기(Q3-2026) 실적 발표는 통상적으로 11월 중순경 예상된다. 실적 발표 후 주가는 헤드라인 미스에도 불구하고 기록적 생산 지표와 강한 현금창출력이 부각되며 상승 흐름을 이어갔다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 8월 6일 AYA는 모로코 내 3건의 채굴권과 18건의 탐사허가(약 259km²)로 구성된 전략적 탐사 포트폴리오 인수를 발표하며 52주 신고가(TSX 기준 C$35.26)를 경신했다. 이어 8월 13~14일 Q2-2026 실적 발표에서 매출·EPS는 컨센서스를 하회했지만, 은환산 생산량 168만 온스(사상 최대)와 즈군데르 채굴률의 명목용량 초과 등 운영 지표가 부각되며 시장은 &#x27;실적 미스&#x27;보다 &#x27;기록적 성장세&#x27;에 주목했다. 발표 직후인 8월 14일 CIBC(C$35→C$41.50), BMO(C$36→C$41), 이어 내셔널뱅크(C$41→C$43, 아웃퍼폼)가 잇달아 목표주가를 상향하며 애널리스트 재평가가 이어졌다. 동시에 국제 은 가격이 8월 한 달간 19% 급등해 8월 25일 기준 온스당 67.82달러까지 상승했는데, 이는 미 재무부의 장기채 바이백 확대 발표, 달러 약세, 중동發 지정학적 긴장, 글로벌 인플레이션 우려가 복합적으로 작용한 결과다. 이러한 섹터 전반의 강세와 회사 고유의 실적·자원 확장 모멘텀이 겹치며 8월 26일 주가는 피벗 27.91달러를 거래량 2.61배(RVOL) 동반 돌파, 28.07달러에서 신규 진입 신호가 발생했다. 이번 돌파는 단일 뉴스가 아니라 &#x27;은 가격 슈퍼사이클 재개 + 자체 생산 기록 경신 + 자원 파이프라인 확장 + 애널리스트 목표가 상향&#x27;이 동시에 작용한 복합 카탈리스트로 해석된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">은 가격은 2026년 초 온스당 121.64달러까지 폭등했다가 6월 말 50달러 후반대로 약 50% 조정된 뒤, 8월 들어 재차 19% 급등하며 67~68달러대로 회복하는 등 변동성이 큰 슈퍼사이클 국면에 있다. 금-은 동반 강세장에서 두 금속의 시가총액은 8월 한 달 만에 약 5조 달러 증가했으며, 통화완화 기대와 재정적자·부채 우려가 귀금속 수요를 지지하고 있다. 이런 업황에서 AYA는 금·구리 등 부산물 의존도가 낮은 순은 비중 최상위 주니어 생산주로서 은 가격 레버리지가 가장 큰 종목군에 속하며, 생산량 자체도 전년비 61% 늘어 가격 상승분 이상의 실적 개선을 보이는 강점이 있다. 반면 모로코 단일 국가·단일 핵심광산 의존도가 높아 지정학·인허가 리스크 측면에서는 다변화된 대형 은생산사(팬 아메리칸 실버, 헤클라 등) 대비 열위에 있다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">8월 6일 52주 신고가 경신 이후 실적 발표를 전후해 단기 눌림목/베이스를 형성했고, 27.91달러 피벗을 상향 돌파하며 2.61배의 유의미한 거래량 급증을 동반했다는 점에서 기관 수급이 실린 진성 돌파로 판단된다. 피벗 대비 확장폭 +0.43%는 매우 낮은 수준으로, 추격매수 부담이 적고 손절 기준(피벗 하회)이 명확한 이상적인 진입 지점에 해당한다. 위쪽으로는 뚜렷한 매물대가 없는 신고가 영역(blue sky breakout)이어서 저항선 부재가 상승 여력으로 작용하며, 아래로는 27.91달러 피벗과 그 직하 단기 이동평균선이 1차 지지, 200일선이 훨씬 하단에서 장기 지지로 기능한다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">은 가격이 8월 급등 흐름을 이어가 연초 고점(121달러)을 재차 시도하거나 최소 70~80달러대에 안착할 경우, 즈군데르의 생산 레버리지(2026년 520만~580만 온스 가이던스, 온스당 현금비용 약 21.50달러)를 감안하면 마진 확대가 실적에 직접 반영되며 추가 상방이 가능하다. 부마딘 프로젝트의 2026년 하반기 업데이트 PEA와 8월 신규 탐사 포트폴리오 인수가 자원량 증가로 이어질 경우 밸류에이션 리레이팅 트리거가 될 수 있다. 애널리스트 목표주가는 최근 상향된 CIBC C$41.50, BMO C$41, 내셔널뱅크 C$43 등을 중심으로 컨센서스 평균이 형성되어 있어, 현재 진입가(28.07달러) 대비 추가 상승 여지를 시사하는 목표가들이 존재한다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">1) 은 가격 조정 리스크: 연초 121달러에서 6월 50달러대까지 약 50% 급락한 전례가 있듯, 달러 강세 전환이나 연준의 매파적 발언, 재정 우려 완화 시 은 가격이 재차 조정되면 베타가 높은 AYA 주가는 더 크게 하락할 수 있다. 2) 모로코 단일 자산 집중 리스크: 매출 대부분이 즈군데르 단일 광산에서 발생해 현지 규제 변경, 로열티·세제 개편, 건조지역 특성상 용수 인프라 이슈, 노동 이슈 등이 발생하면 생산 차질로 직결된다. 3) 실적 실행 리스크: 이번 Q2에서도 매출·EPS가 컨센서스를 하회했듯, 판매 타이밍 차이나 실현가격 변동으로 향후 분기에도 &#x27;깜짝 미스&#x27;가 재발하면 단기 주가 조정 압력이 될 수 있다. 4) 밸류에이션 부담: 최근 애널리스트 목표가 상향과 52주 신고가 랠리로 이미 상당한 기대치가 선반영돼 있어, 부마딘 PEA나 향후 실적이 시장 기대에 못 미칠 경우 되돌림 폭이 클 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">- 다음 분기(Q3-2026) 실적 발표: 통상 11월 중순 예상(정확한 일자는 회사 공지 확인 필요). - 부마딘(Boumadine) 업데이트 PEA 발표: 2026년 하반기 내 예정. - 타이딩스 저장시설(TSF) 2단계 완공: 2026년 3분기 초 예정. - 360,000미터 시추 프로그램 중 2026년 목표 18만 미터 진행 상황 분기별 업데이트. - 국제 은 현물가격 및 COMEX 재고·포지셔닝 동향, 9월 FOMC 등 연준 금리 결정 지속 모니터링. - 애널리스트 목표주가 추가 조정 여부(CIBC·BMO·내셔널뱅크 상향 이후 후속 리포트).</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟢강한 확신 - 은 가격 슈퍼사이클 재점화, 사상 최대 생산 실적, 애널리스트 목표가 잇단 상향이라는 세 가지 모멘텀이 동시에 작용하는 가운데, 낮은 확장폭(+0.43%)과 높은 RVOL(2.61배)을 동반한 교과서적인 피벗 돌파가 발생했다. 다만 단일 광산·단일 국가 집중도와 은 가격 자체의 높은 변동성(연초 이후 121달러→50달러대→68달러대 롤러코스터)을 감안해 손절 라인(피벗 27.91달러 하회) 준수가 중요하다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

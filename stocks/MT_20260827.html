@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>MT — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>MT <span class="dim" style="font-size:1rem">아르셀로미탈(ADR)</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.54yr, B2)</span></div>
+
+<div class="card">
+평균 매수가 <b>$75.22</b>
+
+· 수익률 <span class="neg">-0.33%</span>
+· 보유 39주
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div class="dim">2026-08-27 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 39주 @ $75.22
+<div class="dim">2026-08-27 00:24 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">세계 2위 조강 생산능력을 보유한 글로벌 철강기업으로, 2026년 미국·EU의 관세·탄소국경조정(CBAM) 등 무역보호 정책 강화의 최대 수혜주로 부상하며 주가가 연초 대비 56% 급등한 종목.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">ArcelorMittal은 유럽 플랫카본, 브라질/ACIS(우크라이나·카자흐스탄), 마이닝(철광석·원료탄) 등 사업부를 통해 자동차용 고급강판, 건설용 철근·형강, 에너지용 강관 등을 생산·판매하는 세계 최대 철강기업 중 하나다. 매출 비중은 유럽 지역이 가장 크고 브라질·북미·ACIS가 뒤를 이으며, 철광석·석탄 광산 자산을 자체 보유해 원자재 수직계열화를 이룬 것이 경쟁사 대비 원가 경쟁력의 원천이다. 자동차용 강판 시장에서 Stellantis, Renault 등 완성차업체와 장기 공급계약을 맺고 있으며, 건설·가전용 철강 수요도 핵심 고객군이다. 경쟁사로는 Nucor(미국), Nippon Steel(일본), POSCO(한국), Baowu(중국) 등이 있으며 이들 대비 지리적 다변화가 강점이자, 우크라이나(Kryvyi Rih) 등 지정학적 리스크 노출 생산기지를 보유한 것은 약점이다. 2026년은 창립 20주년으로, 안전 지표(LTIFR)가 반기 기준 사상 최저치를 기록하는 등 운영 효율 개선도 병행되고 있다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기 매출은 168억 달러로 전분기 대비 +8.4% 증가했으나 컨센서스 대비 약 2.3억 달러(-1.35%) 하회했다. EBITDA는 21억 달러(톤당 155달러)로 전분기 대비 +22.9% 급증했고, 순이익은 6.83억 달러로 +18.8% 증가했으나 조정 EPS는 0.90달러로 컨센서스 1.18달러를 0.28달러 하회하며 헤드라인 실적은 &#x27;어닝 미스&#x27;로 발표됐다. 다만 유럽 부문 EBITDA/톤이 1분기 70달러에서 2분기 98달러로 급등, 3년래 최고치를 기록하며 유럽 마진 회복이 뚜렷하게 확인됐다. 실적 발표(8월 3일) 이후 시장은 &#x27;실적 미스보다 강한 향후 가이던스&#x27;에 주목했다는 평가가 나왔으며, 이는 이후 주가 상승의 배경이 됐다. 다음 실적 발표(Q3 2026)는 통상적 일정상 11월 초로 예상된다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 1월 CBAM(탄소국경조정메커니즘) 시행과 6월 Section 232 관세 25%→50% 인상(2025년 결정분 시행), 이어 2월 24일 EU산 철강에 대한 Section 122 10% 관세 부과로 역내·미국 내 철강 가격 보호 기조가 강화됐다. 7월 1일에는 EU 철강 수입쿼터(TRQ) 신규 제도가 시행되며 유럽 생산자 보호가 한층 두터워졌고, 이 흐름 속에 8월 3일 발표된 2분기 실적에서 EBITDA가 전분기 대비 +22.9% 급증(유럽 EBITDA/톤 3년래 최고)하며 &#x27;실적 미스에도 개선되는 펀더멘털&#x27;이라는 서사가 형성됐다. 8월 17일 우크라이나 Kryvyi Rih 제철소가 미사일 공격을 받아 직원 사망·부상 및 일부 생산 중단이 발생했음에도 주가는 흔들리지 않고 8월 20일 종가 72.20달러까지 상승(YTD +55.93%)하며 저항력을 보였다. 이어 8월 24일 Morgan Stanley가 목표주가 82달러(약 14% 상승여력)로 Overweight 신규 커버리지를 개시하며 매수세에 추가 촉매를 제공했다. 이러한 정책·실적·투자의견 호재가 누적된 흐름 속에서 8월 27일 주가는 피벗 74.12달러를 RVOL 2.14배의 유의미한 거래량 증가를 동반해 돌파했고, 진입 시점 75.22달러(피벗 대비 +1.38%)까지 확장됐다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">세계철강협회(World Steel Association)는 2026년 글로벌 철강수요가 전년 대비 +1.3% 반등한 17.73억 톤에 이를 것으로 전망하며, 특히 유럽 수요는 2025년 생산 -2.4% 위축을 딛고 2026년 +3.2% 회복이 예상된다. 반면 중국 수요는 부동산 침체 지속으로 추가 -1% 위축이 예상되고, 글로벌 과잉생산능력은 2028년까지 확대될 것으로 전망돼 구조적 공급과잉 부담은 여전하다. 이 가운데 ArcelorMittal은 유럽 최대 생산자로서 CBAM·TRQ·미국 Section 232/122 관세 등 보호무역 정책의 직접적 최대 수혜 기업으로 꼽히며, 동종업체(Nucor, Nippon Steel 등) 대비 유럽·북미 이중 노출로 정책 수혜 폭이 가장 크다는 평가를 받는다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">이번 돌파는 피벗 74.12달러를 RVOL 2.14배의 뚜렷한 거래량 증가를 동반해 통과했고, 확장폭이 +1.38%에 불과해 과열 없이 초기 구간에서 신규 진입이 이뤄진 양호한 셋업으로 평가된다. YTD +55.93%(8/21 기준)의 강한 상승 추세 안에서 Morgan Stanley의 목표주가 82달러 발표(8/24) 직후 나온 돌파라는 점에서 수급상 뉴스 모멘텀이 실린 브레이크아웃으로 해석된다. 위쪽으로는 뚜렷한 매물대 없이 MS 목표가 82달러 부근까지 상승여력이 열려 있으며, 아래쪽 1차 지지는 돌파 피벗인 74.12달러다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">Morgan Stanley의 목표주가 82달러(현재가 대비 약 14% 상승여력)가 1차 목표로, CBAM·TRQ·미국 관세 정책이 유지·강화될 경우 유럽 EBITDA/톤이 3분기 이후에도 추가 개선될 가능성이 있다. 유럽 철강수요가 실제로 +3.2% 반등 궤도에 진입하고 자사주 매입 프로그램(10만주 단위 트랜치, 2030년까지 진행)이 가속화될 경우 추가 상승 모멘텀이 형성될 수 있다. 시장 컨센서스 목표주가는 대체로 70~82달러 구간에 분포하며, 정책 수혜 지속이 확인될 경우 목표가 상향 여지가 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 우크라이나 Kryvyi Rih 제철소 추가 피격·전황 악화 시 생산 차질이 장기화되며 매출·EBITDA에 직접 타격을 줄 수 있다(8/17 이미 1건 발생). ② 미-EU 무역협상 변화로 Section 232/122 관세나 CBAM/TRQ 제도가 완화·철회될 경우 정책 프리미엄이 빠르게 소멸하며 밸류에이션 재평가 리스크가 있다. ③ 중국 부동산 침체 지속에 따른 글로벌 과잉공급(2028년까지 확대 전망)이 심화되면 철강가격 하락 압력이 전 지역으로 확산될 수 있다. ④ 2분기처럼 EBITDA는 개선되나 EPS가 컨센서스를 하회하는 패턴이 반복될 경우, 헤드라인 미스에 따른 단기 변동성이 재발할 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">Q3 2026 실적 발표(예상 11월 초) 시 유럽 EBITDA/톤 개선 지속 여부 확인, 우크라이나 Kryvyi Rih 제철소 복구 진행 상황 및 추가 피격 여부 모니터링, EU CBAM·TRQ 세부 시행령 및 미-EU 무역협상 동향(관세 완화 리스크 점검), World Steel Association 월간 생산·수요 데이터 발표, 자사주 매입 프로그램 트랜치 진행 공시 등을 지속 체크해야 한다.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 - CBAM·관세 등 정책 수혜와 Morgan Stanley의 목표주가 82달러 상향이 강한 모멘텀을 제공하고 돌파 자체도 RVOL 2.14배를 동반한 신뢰도 높은 셋업이지만, 2분기 EPS 미스와 우크라이나 지정학 리스크, 중국발 과잉공급 우려가 여전히 상존한다. 이미 YTD +56% 상승한 이후의 신규 진입이라는 점에서 밸류에이션 부담도 감안해야 한다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
