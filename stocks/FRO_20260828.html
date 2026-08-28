@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>FRO — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>FRO <span class="dim" style="font-size:1rem">프론트라인</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.10yr, B4)</span></div>
+
+<div class="card">
+평균 매수가 <b>$44.86</b>
+
+· 수익률 <span class="neg">-1.55%</span>
+· 보유 51주
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div class="dim">2026-08-28 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 51주 @ $44.86
+<div class="dim">2026-08-28 22:46 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">세계 최대 원유 탱커 선사로, 이란의 호르무즈 해협 봉쇄가 촉발한 지정학적 리스크를 등에 업고 사상 최대 분기 실적을 기록한 VLCC 중심 해운주.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">Frontline은 VLCC(초대형 원유운반선), Suezmax, LR2/Aframax 등 총 80척(VLCC 41척, Suezmax 21척, LR2/Aframax 18척)의 다각화된 원유 탱커 선단을 운영하는 세계 최대 규모의 원유 해운사입니다. 매출은 대부분 스팟시장과 단기 TCE(Time Charter Equivalent) 계약에서 발생하며, 국제 오일메이저·트레이딩하우스·정유사를 고객으로 중동-아시아, 대서양분지-아시아 등 장거리 원유 운송을 담당합니다. 경쟁사로는 VLCC 전용선을 운영하는 DHT Holdings(시총 약 18.7억달러), Scorpio Tankers(STNG, 약 26억달러)가 있으며, FRO는 선단 규모와 다각화 측면에서 업계 최대 지위를 보유하고 있습니다. 순이익의 대부분을 분기 배당으로 환원하는 고배당 정책을 유지하며, 최근에는 노후선 매각대금을 재원으로 한 특별배당도 병행하고 있습니다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기 매출 9억4,330만달러, 순이익 6억5,920만달러(주당 2.96달러)로 분기 사상 최대 실적을 기록했고, 조정순이익도 5억8,020만달러(주당 2.61달러)로 최대치를 경신했습니다. VLCC 평균 TCE 운임은 일일 15만2,700달러, Suezmax 11만1,400달러, LR2/Aframax 9만2,400달러였습니다. 분기배당 주당 2.61달러와 함께 선박 매각대금(약 1억7,900만달러) 환원 목적의 특별 일회성 배당 주당 0.80달러를 추가 선언했습니다. 6월말 기준 유동성 12억달러를 보유하고 있으며 2030년까지 만기 도래 부채가 사실상 없습니다. 1분기 매출은 전년 동기 대비 67% 성장했고, 2분기 VLCC 가동일의 80% 이상이 사전 계약된 상태였습니다. 다음 3분기 실적은 통상적 발표 패턴상 11월 하순 예상됩니다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 3월 2일 이란의 호르무즈 해협 봉쇄로 촉발된 지정학적 위기가 톤마일 수요를 급증시키며 탱커 운임이 사상 최고 수준(중동-아시아 노선 한때 일일 근접 50만달러)까지 치솟았습니다. 이후 선박 우회, 항로 장기화, 전쟁보험료 상승 등으로 유효 공급이 계속 축소되며 3분기까지 고운임 기조가 이어졌습니다. 오늘(2026년 8월 28일) 발표된 2분기 실적에서 순이익 6억5,920만달러, 주당순이익 2.96달러로 분기 사상 최대치를 기록하며 시장 컨센서스를 상회, 즉각적인 매수세를 촉발했습니다. 여기에 특별배당(주당 0.80달러) 추가 발표까지 겹치며 배당 매력이 부각되었습니다. 실적 발표 당일 거래량이 평소 대비 2.62배로 급증했고, 주가는 돌파 피벗 43.99달러를 넘어 44.86달러(+2.02% 확장)까지 상승하며 신규 베이스 돌파가 발생했습니다. 다만 같은 시기 Danske Bank(8월 18일, Sell로 강등)와 Evercore(In Line으로 강등, 밸류에이션 되돌림 리스크 경고) 등 일부 기관은 고운임의 지속가능성에 의문을 제기하며 엇갈린 반응을 보였습니다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">글로벌 원유 탱커 업황은 호르무즈 해협 리스크로 2026년 들어 사상 초유의 호황 국면에 있으며, 연간 전체 탱커 평균 수익은 일일 8만871달러로 과거 최고점이었던 2008·2020·2022년의 약 2배 수준입니다. 다만 VLCC를 통한 글로벌 원유 수출량은 전쟁 이전 대비 36% 감소했고 VLCC의 해상 원유 수출 비중도 52%에서 40%로 축소되는 등, 실제 물동량은 위축된 채 운임 강세만 유지되는 다소 기형적인 구조입니다. Q4 선물 운임(TD3C FFA 기준 일일 18만1,163달러)은 여전히 높은 수준이나 상반기 피크 대비 상승폭 둔화 신호가 나타나고 있습니다. FRO는 업계 최대 다각화 선단과 우량 재무구조(2030년까지 만기부채 부재)로 DHT·STNG 대비 규모 우위를 갖췄으나, 부채비율이 상대적으로 높아 하락 국면 방어력은 DHT보다 약할 수 있습니다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">실적 발표를 촉매로 돌파 피벗 43.99달러를 상향 돌파, RVOL 2.62배의 유의미한 거래량 증가를 동반하며 44.86달러(+2.02% 확장)에서 신규 진입이 체결되었습니다. 확장폭 2% 수준은 미너비니 기준 이상적 매수 구간(피벗 대비 5% 이내)에 위치해 추격 리스크가 크지 않은 편입니다. 다만 이번 상승은 지정학 이벤트와 실적 서프라이즈가 겹친 갭성 돌파 성격이 강해 전형적인 VCP 베이스 다지기보다는 뉴스 드리븐 돌파에 가깝고, 상단 저항은 최근 52주 신고가 부근, 하단 지지는 돌파 피벗 43.99달러와 그 아래 이전 저항대입니다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">호르무즈 리스크가 3~4분기까지 지속되거나 재차 악화될 경우 톤마일 수요 증가가 이어지며 TCE 운임 고공행진이 연장될 가능성이 있습니다. 애널리스트 목표주가는 BTIG의 55달러(최고)부터 25.25~48.30달러 범위로 분산되며 평균 41~44달러 수준이고, 컨센서스는 8명 중 7명이 매수(Strong Buy 4, Buy 3, Hold 1)로 우호적입니다. 특별배당 등 적극적 주주환원이 지속될 경우 현재 약 7.6%인 배당수익률에 이끌린 매수세가 추가 유입될 수 있으며, 노후선 매각을 통한 선단 최적화도 밸류에이션 리레이팅 요인으로 작용할 수 있습니다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">(1) 호르무즈 해협 긴장이 완화·재개통될 경우 운임이 급격히 정상화되며 2027년 실적 급감 우려가 있고, Evercore 등이 이미 밸류에이션 되돌림 리스크를 경고한 상태로 실현 시 프리미엄 밸류에이션이 빠르게 축소되며 급락할 수 있습니다. (2) 원유 물동량 자체 위축(현재 VLCC 수출량 전쟁 전 대비 36% 감소)이 장기화되면 운임 강세에도 불구하고 실질 수요 기반이 훼손될 수 있습니다. (3) Danske Bank의 Sell 강등(8월 18일)처럼 고점 인식이 확산될 경우 차익실현 매물이 출회되며 배당 매력만으로 버티기 어려운 국면이 전개될 수 있습니다. (4) 신규 발주 선박 인도 증가로 2027년 이후 공급 과잉으로 전환될 경우 사이클 정점 통과 리스크가 있습니다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">3분기 실적 발표(통상 11월 하순 예상), 호르무즈 해협 관련 지정학 뉴스(이란-이스라엘/미국 관계, 해협 재개통 여부) 지속 모니터링, 특별배당(주당 0.80달러) 지급 및 배당락 일정, Baltic Exchange TD3C·MEG-China VLCC 스팟 운임 지수 주간 추이, OPEC+ 증산 결정 및 글로벌 원유 물동량 지표 발표.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통. 실적 서프라이즈와 지정학 촉매가 명확한 강한 돌파이고 RVOL·확장폭도 양호하나, 랠리의 근본 동력이 &#x27;전쟁 프리미엄&#x27;이라는 비영구적 요인에 크게 의존하고 있어 Evercore·Danske Bank의 되돌림 경고를 무시하기 어렵습니다. 진입 후에는 호르무즈 관련 뉴스 흐름과 다음 분기 가이던스를 통해 사이클 정점 여부를 빠르게 재평가할 필요가 있습니다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
