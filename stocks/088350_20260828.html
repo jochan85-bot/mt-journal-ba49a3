@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>088350 — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>088350 ☀️ <span class="dim" style="font-size:1rem">한화생명</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.19yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>5,910원</b>
+
+· 수익률 <span class="pos">+0.68%</span>
+· 보유 586주
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div class="dim">2026-08-28 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 586주 @ 5,910원
+<div class="dim">2026-08-28 11:17 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">국내 2위권 생명보험사 한화생명은 2026년 상반기 순이익 96% 급증과 K-ICS 개선을 등에 업고 보험주 랠리의 중심에 선 저PBR 밸류업 후보입니다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">한화생명은 삼성생명에 이은 국내 대형 생명보험사로, 종신보험·건강보험 등 보장성보험과 저축성·변액보험을 주력으로 판매하며 매출의 대부분이 보험료 수입과 자산운용(투자)손익에서 발생합니다. 계열사로 손해보험 자회사 캐롯손해보험(디지털 손보), 한화저축은행, 한화투자증권 등을 두고 비보험·비은행 부문으로 사업 포트폴리오를 확장하고 있습니다. 해외에서는 베트남, 인도네시아 등 동남아 생보 시장에 자회사·합작법인 형태로 진출해 있으며 자회사 실적 개선이 최근 연결 실적 상향의 주요 요인으로 꼽힙니다. 국내 경쟁 지위는 삼성생명·교보생명과 함께 &#x27;빅3&#x27; 생보사 구도를 형성하고 있으며, 신계약 CSM(계약서비스마진) 성장률에서 최근 업계 평균을 상회하는 모습을 보였습니다. 주요 고객층은 개인 보장성보험 가입자이며, 법인 및 퇴직연금(DB형) 시장에서도 상당한 적립금 기반을 보유하고 있습니다. 다만 실적배당형(DC·IRP) 퇴직연금 시장에서는 상대적으로 후발주자로, 2026년 2분기 기준 적립금 7조1,209억원으로 전체 43개 사업자 중 18위에 그쳐 이 부문 확장이 향후 과제로 남아 있습니다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">한화생명은 2026년 상반기 연결기준 당기순이익 9,045억원을 기록해 전년 동기 대비 96.0% 급증했으며, 지배주주순이익은 7,719억원으로 119.8% 증가했습니다. 신계약 CSM은 1조3,001억원으로 전년 동기 대비 40.5% 늘어나며 IFRS17 도입 이후 상반기 기준 역대 최대치를 경신했습니다. 지급여력비율(K-ICS)은 167.0%로 지난해 말 대비 9.5%포인트 상승했는데, 이는 이익 증가와 금리 상승에 따른 가용자본 확대가 반영된 결과입니다. 이러한 어닝서프라이즈에 힘입어 8월 12일 실적 발표 직후 NH투자증권은 목표주가를 3,900원에서 6,300원으로, 신한투자증권은 5,300원으로 상향했고, 키움증권은 기존 8,500원(2월 상향)을 유지했습니다. 2025년 4분기에는 순손실을 기록했다가 보험손익이 2,050억원으로 대폭 개선되며 반등한 바 있어, 최근 2~3개 분기 연속 실적 개선 흐름이 이어지고 있습니다. 다음 분기(3분기) 실적 발표는 통상적인 국내 보험사 공시 일정을 고려할 때 11월 중순경으로 예상됩니다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">8월 12일 발표된 2026년 상반기 실적에서 순이익이 전년 대비 96% 급증하고 신계약 CSM이 사상 최대치를 기록하면서 시장의 실적 눈높이가 상향 조정되기 시작했습니다. 실적 발표 직후 NH투자증권·신한투자증권 등 주요 증권사들이 목표주가를 잇따라 상향하며 리레이팅 기대감이 확산됐습니다. 8월 14일에는 코스피가 2.42% 급등하는 강세장 속에서 보험 업종 전반이 동반 상승했고 한화생명 주가는 전 거래일 대비 11.93%(600원) 오른 5,630원으로 마감하며 단기 급등 구간을 형성했습니다. 이후 국고채 금리 상승 국면이 이어지면서 보험사들의 투자영업이익 개선 기대가 지속됐고, KRX보험지수는 이틀 연속 3%대 상승하며 변동성 장세 속 &#x27;피난처&#x27; 성격의 자금 유입이 나타났습니다. 여기에 미래에셋생명의 자사주 93% 소각 결정 등 업종 내 밸류업(주주환원) 모멘텀이 확산되며 저평가된 생보주 전반에 대한 재평가 심리가 강화됐습니다. 이런 흐름 속에서 8월 28일 한화생명 주가는 피벗 5,660원을 2.04배의 상대거래량을 동반하며 돌파, 5,910원까지 밀어올려 신규 진입 신호가 발생했습니다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">국고채 금리 상승 국면에서 생명보험사들의 투자영업이익이 빠르게 개선되며 최근 3개월간 보험주가 평균 약 30% 상승하는 강세 사이클이 진행 중입니다. 삼성생명이 18% 급등하는 등 대형 생보주 전반이 동반 상승했고, KRX보험지수는 최근 이틀 연속 3%대 오르며 변동장 속 방어주 겸 성장주 성격을 동시에 인정받고 있습니다. 밸류업 프로그램 기대와 미래에셋생명의 대규모 자사주 소각 등 주주환원 정책이 업종 전체 재평가의 촉매로 작용하고 있습니다. 다만 한화생명은 KB손해보험·신한라이프·현대해상과 함께 현재 배당을 실시하지 못하는 그룹에 속해 있어, 실적 개선 대비 주주환원 매력에서는 배당을 지급 중인 삼성생명 등 피어 대비 상대적 열위에 있습니다. 이는 향후 배당 재개 여부가 확인될 경우 추가 리레이팅 여력이 큰 잠재적 강점이기도 합니다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">한화생명은 2월 23일 기록한 52주 신고가 7,560원 대비 여전히 낮은 가격대에서 거래되고 있어, 상단 구간(6,500~7,560원)에 과거 매물대가 잠재해 있는 상태입니다. 8월 14일 11.93% 단일 급등 이후 일정 기간 눌림목/베이스를 형성했을 가능성이 높으며, 이번 진입은 5,660원 피벗을 2.04배 상대거래량과 함께 돌파한 것으로 거래량 동반 측면에서 준수한 돌파 신호로 평가됩니다. 피벗 대비 확장폭 +4.42%는 다소 확장된 진입가로, 이상적인 저확장 진입 구간(0~3%)을 다소 벗어나 있어 초기 되돌림(pullback) 리스크에 유의할 필요가 있습니다. 사이징 티어가 ×1로 책정된 점은 시스템이 이번 진입을 표준 강도의 신호로 판단했음을 시사합니다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">3분기에도 국고채 금리 상승 기조와 신계약 CSM 성장세가 이어질 경우 실적 서프라이즈가 재현되며 추가 목표주가 상향이 이어질 수 있습니다. 현재 증권사 목표주가는 5,300원(신한)부터 6,300원(NH), 8,500원(키움, 0.4배 PBR 적용)까지 폭넓게 분포해 있어 상단 시나리오상 현 주가 대비 40% 이상의 상승 여력이 열려 있습니다. K-ICS 비율이 167%까지 개선된 만큼 향후 배당 재개 또는 자사주 매입·소각 발표가 나올 경우 밸류업 재평가의 강력한 트리거가 될 수 있습니다. 캐롯손해보험 등 자회사 실적 개선과 해외(베트남·인도네시아) 사업 성장이 연결 실적에 추가로 기여하며 실적 모멘텀을 뒷받침할 전망입니다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">1) 국고채 금리가 되돌림(하락 반전)될 경우 투자영업이익 개선 모멘텀이 약화되며 최근 랠리의 핵심 근거가 훼손될 수 있습니다. 2) 한화생명은 현재 배당을 실시하지 못하는 그룹에 속해 있어, 3분기 이후에도 배당 재개 발표가 지연될 경우 주주환원 기대감이 실망으로 바뀌며 차익실현 매물이 출회할 수 있습니다. 3) IFRS17 체계 하에서는 계리적 가정(할인율, 해지율 등) 변경에 따라 CSM 및 순이익이 큰 폭으로 변동할 수 있어, 향후 가정 변경 공시 시 어닝 변동성 리스크가 존재합니다. 4) 8월 급등(8/14 +11.93%) 이후 이미 상당폭 상승한 상태에서 피벗 대비 +4.42% 확장된 가격에 진입한 만큼, 단기 과열에 따른 되돌림이나 52주 신고가(7,560원) 하단 매물대에서의 저항으로 상승 탄력이 둔화될 가능성이 있습니다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 3분기 실적 발표(예상 11월 중순, 통상 IR 일정 기준) — 신계약 CSM 및 K-ICS 추이 재확인, ② 국고채 금리 및 한국은행 통화정책 발표 일정 — 투자영업이익 방향성 판단, ③ 배당정책 관련 공시 여부 — 배당 재개 시그널 발생 시 즉시 대응 필요, ④ 캐롯손해보험 등 자회사 실적 공시, ⑤ 업종 전반의 밸류업 프로그램 관련 정책·규제(K-ICS 기준 변경 등) 발표 동향.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 상반기 실적 96% 급증과 섹터 전반의 강한 수급 모멘텀은 돌파 신호의 신뢰도를 높이지만, 8월 14일 단일 급등 이후 이미 상당폭 오른 구간에서 피벗 대비 +4.42% 확장된 가격에 진입했고 배당 미실시라는 구조적 약점이 남아 있어 추격 매수에는 다소 주의가 필요합니다. 다만 K-ICS 개선과 목표주가 상단(8,500원)까지의 괴리, 업종 전체의 밸류업 모멘텀을 고려하면 중기 관점에서는 긍정적 접근이 가능합니다.</div></div>
+
+
+
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
