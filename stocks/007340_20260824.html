@@ -65,14 +65,25 @@ a:hover { text-decoration:underline; }
 .tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
       padding:10px 12px; position:relative; }
 .tr.hide { display:none; }
-.l1 { padding-right:86px; }
+/* [CARD-FMT-20260901] 모바일 겹침 수리 — 절대배치 폐기, 헤더 flex 2열.
+   구 구조: .rt 가 position:absolute(top:10 right:12) 3단 스택(≈72px)인데 회피용
+   padding-right 는 .l1 에만 있었다. .rt 가 .l2 를 지나 .l3 까지 내려오고 .l3/.l4 는
+   카드 우변까지 차므로 그 아래로 파고들었다(실측 rt 588~660 / l3 645~668, 우변 동일).
+   신 구조: .rt 를 정상 흐름에 넣어 겹침을 구조적으로 불가능하게 만든다.
+   → padding-right 회피값 자체가 불필요. 320·360·390·414·480px 전폭 겹침 0 실측. */
+.hd { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.hl { flex:1 1 auto; min-width:0; }   /* min-width:0 = 긴 종목명이 .rt 를 밀지 못하게 */
+.l1 { padding-right:0; }
 .tk { font-weight:700; font-size:1rem; }
-.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400;
+      display:inline-block; max-width:100%; overflow:hidden;
+      text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; }
 .rt { font-size:1rem; white-space:nowrap; text-align:right;
-      position:absolute; top:10px; right:12px; }
+      position:static; flex:0 0 auto; }
 .l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
       font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
-.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; row-gap:5px; margin-top:6px;
+      flex-wrap:wrap; }
 .l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
       font-size:0.68rem; color:#6b7080; }
 .rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
@@ -89,6 +100,20 @@ a:hover { text-decoration:underline; }
       background:#171a24; border:1px solid var(--border); color:#8f95a8; }
 .ev.na { color:#5f6478; background:transparent; border-color:transparent; }
 .rt .ev { display:block; margin:2px 0 0; }
+/* [CARD-FMT-20260901] 지표 칩 — 리포트 .g 칩과 같은 어법(라벨 dim + 값 bold + 색점) */
+.chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
+        border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
+        color:#cbd0de; background:#161923; white-space:nowrap; }
+.chip i { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:#4b5163; }
+.chip em { font-style:normal; color:var(--dim); }
+.chip b { font-weight:700; }
+.chip.fail { border-color:#7f1d1d; background:#1d1113; }
+.chip.fail b { color:#f87171; }
+@media (max-width:520px) {
+  .chip { font-size:0.68rem; padding:1px 6px; gap:3px; }
+  .l3 { gap:5px; }
+  .rt { font-size:0.92rem; }
+}
 .nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
 </style></head>
 <body>
@@ -101,7 +126,7 @@ a:hover { text-decoration:underline; }
 
 · 수익률 <span class="pos">+2.05%</span>
 · 보유 74주
-<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 5점 (20260819 기준)</span></div>
 <div class="dim">2026-08-24 진입</div>
 </div>
 
