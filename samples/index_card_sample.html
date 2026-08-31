@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>매매일지 카드 지표 개편 샘플</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+
+.chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
+        border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
+        color:#cbd0de; background:#161923; }
+.chip i { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:#4b5163; }
+.chip em { font-style:normal; color:var(--dim); }
+.chip b { font-weight:700; }
+.chip.fail { border-color:#7f1d1d; background:#1d1113; }
+.chip.fail b { color:#f87171; }
+</style></head><body>
+<div class="dim"><a href="./index.html">← 샘플 목록</a> · <a href="../index.html">매매일지</a></div>
+<h1>카드 지표 개편 샘플 <span class="dim" style="font-size:1rem">CARD-FMT-20260901</span></h1>
+<div class="card" style="border-left:3px solid #fbbf24;background:#1f1b12">
+<b>⚠️ 제안 샘플 — 실제 index.html 무변경</b>
+<div class="section-body">
+· <b>삭제</b>: 성장가속 · 감속지표 n/6 · 재고 적체<br>
+· <b>추가</b>: VCP 수축깊이 · 매출 감속 O/X<br>
+· <b>배치</b>: 리포트 서식(FORMAT-WIRE-20260827)과 동일 순서 —
+  1줄 <code>RS · VCP 패턴 · 수축깊이 · 거래량</code> / 2줄 <code>Stage · AI · 매출 감속</code><br>
+· 수익률·RVOL·피벗 줄, 티커/이름/시장/날짜/상태 줄은 <b>무변경</b><br>
+· 수축깊이는 <b>진입일 이전 최신 리포트값</b>(툴팁에 출처). 없으면 항목 생략 —
+  결측을 0%로 오인시키지 않기 위해 리포트와 동일 규칙<br>
+· 매출 감속: <code>growth_pattern</code> S2 = <b>O</b>(적색) / S0·S1·S3 = <b>X</b> / NA는 무표시
+</div></div>
+<h2>최근 20건</h2>
+<div class="tr">
+ <div class="rt"><span class="dim">—</span><span class="ev">RVOL 2.6x</span><span class="ev">피벗+2.0%</span></div>
+ <div class="l1"><a href="../stocks/FRO_20260828.html"><span class="tk">FRO</span></a>
+   <span class="nm">프론트라인</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.28 <span class="badge open">보유중</span> </div>
+ <div class="l3"><span class="rs hi">RS 92</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip" title="리포트 2026-08-28"><i></i><em>수축깊이</em> <b>8.9%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.10yr, B4)</b></span><span class="ai" style="background:#f1c40f" title="진입 기록 미보유 — 리포트에서 소급">AI 가능 7</span></div>
+</div><div class="tr">
+ <div class="rt"><span class="neg">-1.02%</span><span class="ev">RVOL 2.0x</span><span class="ev">피벗+4.4%</span></div>
+ <div class="l1"><a href="../stocks/088350_20260828.html"><span class="tk">088350</span></a>
+   <span class="nm">한화생명</span></div>
+ <div class="l2"><span class="badge kr">KR</span>
+   26.08.28 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.31</span></div>
+ <div class="l3"><span class="rs">RS 86</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="리포트 2026-08-28"><i></i><em>수축깊이</em> <b>7.5%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (1.20yr, B1)</b></span><span class="ai" style="background:#f1c40f" title="진입 기록 미보유 — 리포트에서 소급">AI 가능 6</span></div>
+</div><div class="tr">
+ <div class="rt"><span class="dim">—</span><span class="ev">RVOL 2.4x</span><span class="ev">피벗+3.3%</span></div>
+ <div class="l1"><a href="../stocks/CDNA_20260828.html"><span class="tk">CDNA</span></a>
+   <span class="nm">케어DX</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.28 <span class="badge open">보유중</span> </div>
+ <div class="l3"><span class="rs hi">RS 98</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="리포트 2026-08-28"><i></i><em>수축깊이</em> <b>7.6%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.72yr, B1)</b></span><span class="ai" style="background:#2ecc71" title="진입 기록 미보유 — 리포트에서 소급">AI 고려 8</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr">
+ <div class="rt"><span class="dim">—</span><span class="ev">RVOL 2.0x</span><span class="ev">피벗+3.0%</span></div>
+ <div class="l1"><a href="../stocks/NET_20260827.html"><span class="tk">NET</span></a>
+   <span class="nm">클라우드플레어</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.27 <span class="badge open">보유중</span> </div>
+ <div class="l3"><span class="rs">RS 82</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="리포트 2026-08-27"><i></i><em>수축깊이</em> <b>6.9%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.22yr, B1)</b></span><span class="ai" style="background:#f1c40f" title="진입 기록 미보유 — 리포트에서 소급">AI 가능 6</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr">
+ <div class="rt"><span class="dim">—</span><span class="ev">RVOL 2.4x</span><span class="ev">피벗+2.5%</span></div>
+ <div class="l1"><a href="../stocks/RVMD_20260827.html"><span class="tk">RVMD</span></a>
+   <span class="nm">레볼루션 메디신</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.27 <span class="badge open">보유중</span> </div>
+ <div class="l3"><span class="rs hi">RS 98</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="리포트 2026-08-27"><i></i><em>수축깊이</em> <b>6.8%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.91yr, B1)</b></span><span class="ai" style="background:#f1c40f" title="진입 기록 미보유 — 리포트에서 소급">AI 가능 7</span></div>
+</div><div class="tr">
+ <div class="rt"><span class="dim">—</span><span class="ev">RVOL 2.5x</span><span class="ev">피벗+3.0%</span></div>
+ <div class="l1"><a href="../stocks/WT_20260827.html"><span class="tk">WT</span></a>
+   <span class="nm">위즈덤트리</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.27 <span class="badge open">보유중</span> </div>
+ <div class="l3"><span class="rs">RS 88</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="리포트 2026-08-27"><i></i><em>수축깊이</em> <b>5.6%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.11yr, B2)</b></span><span class="ai" style="background:#f1c40f" title="진입 기록 미보유 — 리포트에서 소급">AI 가능 6</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr">
+ <div class="rt"><span class="neg">-0.73%</span><span class="ev">RVOL 2.1x</span><span class="ev">피벗+1.4%</span></div>
+ <div class="l1"><a href="../stocks/MT_20260827.html"><span class="tk">MT</span></a>
+   <span class="nm">아르셀로미탈(ADR)</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.27 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.27</span></div>
+ <div class="l3"><span class="rs">RS 87</span><span class="chip"><i style="background:#6B8E9F"></i><em>VCP</em> <b>플랫</b></span><span class="chip" title="리포트 2026-08-27"><i></i><em>수축깊이</em> <b>7.1%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.55yr, B2)</b></span><span class="ai" style="background:#f1c40f" title="진입 기록 미보유 — 리포트에서 소급">AI 가능 7</span></div>
+</div><div class="tr">
+ <div class="rt"><span class="neg">-0.35%</span><span class="ev">RVOL 2.1x</span><span class="ev">피벗+0.3%</span></div>
+ <div class="l1"><a href="../stocks/SRRK_20260826.html"><span class="tk">SRRK</span></a>
+   <span class="nm">스칼러 록 홀딩</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.26 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.27</span></div>
+ <div class="l3"><span class="rs">RS 80</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip" title="리포트 2026-08-26"><i></i><em>수축깊이</em> <b>6.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.78yr, B2)</b></span><span class="ai" style="background:#f1c40f" title="진입 기록 미보유 — 리포트에서 소급">AI 가능 7</span></div>
+</div><div class="tr">
+ <div class="rt"><span class="dim">—</span><span class="ev">RVOL 2.6x</span><span class="ev">피벗+0.4%</span></div>
+ <div class="l1"><a href="../stocks/AYA_20260826.html"><span class="tk">AYA</span></a>
+   <span class="nm">아야 골드 앤 실버</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.26 <span class="badge open">보유중</span> </div>
+ <div class="l3"><span class="rs hi">RS 96</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="리포트 2026-08-26"><i></i><em>수축깊이</em> <b>7.0%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.09yr, B1)</b></span><span class="ai" style="background:#f1c40f" title="진입 기록 미보유 — 리포트에서 소급">AI 가능 6</span></div>
+</div><div class="tr">
+ <div class="rt"><span class="dim">—</span><span class="ev">RVOL 3.8x</span><span class="ev">피벗+0.6%</span></div>
+ <div class="l1"><a href="../stocks/VCTR_20260826.html"><span class="tk">VCTR</span></a>
+   <span class="nm">빅토리 캐피탈 홀딩스</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.26 <span class="badge open">보유중</span> </div>
+ <div class="l3"><span class="rs">RS 85</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="리포트 2026-08-26"><i></i><em>수축깊이</em> <b>6.3%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (≥2.32yr, B3+)</b></span><span class="ai" style="background:#f1c40f" title="진입 기록 미보유 — 리포트에서 소급">AI 가능 6</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr">
+ <div class="rt"><span class="dim">—</span><span class="ev">RVOL 3.1x</span><span class="ev">피벗+4.0%</span></div>
+ <div class="l1"><a href="../stocks/006360_20260826.html"><span class="tk">006360</span></a>
+   <span class="nm">GS건설</span></div>
+ <div class="l2"><span class="badge kr">KR</span>
+   26.08.26 <span class="badge open">보유중</span> </div>
+ <div class="l3"><span class="rs">RS 86</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip" title="리포트 2026-08-26"><i></i><em>수축깊이</em> <b>7.9%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.47yr, B1)</b></span><span class="ai" style="background:#e67e22" title="진입 기록 미보유 — 리포트에서 소급">AI 관망 5</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr">
+ <div class="rt"><span class="neg">-7.07%</span><span class="ev">RVOL 2.1x</span><span class="ev">피벗+2.9%</span></div>
+ <div class="l1"><a href="../stocks/JAZZ_20260825.html"><span class="tk">JAZZ</span></a>
+   <span class="nm">재즈 파마슈티컬스</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.25 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.29</span></div>
+ <div class="l3"><span class="rs">RS 85</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="현재 후보목록(최신값)"><i></i><em>수축깊이</em> <b>7.3%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.80yr, B2)</b></span><span class="ai" style="background:#f1c40f" title="진입 기록 미보유 — 리포트에서 소급">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr">
+ <div class="rt"><span class="dim">—</span><span class="ev">RVOL 3.5x</span><span class="ev">피벗+0.6%</span></div>
+ <div class="l1"><a href="../stocks/NTRA_20260825.html"><span class="tk">NTRA</span></a>
+   <span class="nm">나테라</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.25 <span class="badge open">보유중</span> </div>
+ <div class="l3"><span class="rs hi">RS 93</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="현재 후보목록(최신값)"><i></i><em>수축깊이</em> <b>6.5%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.89yr, B1)</b></span><span class="ai" style="background:#f1c40f" title="진입 기록 미보유 — 리포트에서 소급">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr">
+ <div class="rt"><span class="dim">—</span><span class="ev">RVOL 3.7x</span><span class="ev">피벗+1.8%</span></div>
+ <div class="l1"><a href="../stocks/PHVS_20260825.html"><span class="tk">PHVS</span></a>
+   <span class="nm">파바비스</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.25 <span class="badge open">보유중</span> </div>
+ <div class="l3"><span class="rs">RS 80</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="현재 후보목록(최신값)"><i></i><em>수축깊이</em> <b>6.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (1.09yr, B3)</b></span><span class="ai" style="background:#f1c40f" title="진입 기록 미보유 — 리포트에서 소급">AI 가능 7</span></div>
+</div><div class="tr">
+ <div class="rt"><span class="dim">—</span><span class="ev">RVOL 3.1x</span><span class="ev">피벗+0.7%</span></div>
+ <div class="l1"><a href="../stocks/BWLP_20260825.html"><span class="tk">BWLP</span></a>
+   <span class="nm">BW LPG</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.25 <span class="badge open">보유중</span> </div>
+ <div class="l3"><span class="rs">RS 80</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.10yr, B2)</b></span><span class="ai" style="background:#e67e22" title="진입 기록 미보유 — 리포트에서 소급">AI 관망 5</span></div>
+</div><div class="tr">
+ <div class="rt"><span class="dim">—</span><span class="ev">RVOL 2.0x</span><span class="ev">피벗+0.8%</span></div>
+ <div class="l1"><a href="../stocks/HNGE_20260824.html"><span class="tk">HNGE</span></a>
+   <span class="nm">힌지 헬스</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.24 <span class="badge open">보유중</span> </div>
+ <div class="l3"><span class="rs hi">RS 90</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="현재 후보목록(최신값)"><i></i><em>수축깊이</em> <b>8.9%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.26yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr">
+ <div class="rt"><span class="dim">—</span><span class="ev">RVOL 2.1x</span><span class="ev">피벗+2.4%</span></div>
+ <div class="l1"><a href="../stocks/RHI_20260824.html"><span class="tk">RHI</span></a>
+   <span class="nm">로버트 하프</span></div>
+ <div class="l2"><span class="badge us">US</span>
+   26.08.24 <span class="badge open">보유중</span> </div>
+ <div class="l3"><span class="rs">RS 89</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.21yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 4</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr">
+ <div class="rt"><span class="neg">-8.27%</span><span class="ev">RVOL 4.2x</span><span class="ev">피벗+1.8%</span></div>
+ <div class="l1"><a href="../stocks/028670_20260824.html"><span class="tk">028670</span></a>
+   <span class="nm">팬오션</span></div>
+ <div class="l2"><span class="badge kr">KR</span>
+   26.08.24 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.26</span></div>
+ <div class="l3"><span class="rs">RS 81</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="현재 후보목록(최신값)"><i></i><em>수축깊이</em> <b>15.6%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (1.20yr, B1)</b></span><span class="ai" style="background:#f1c40f" title="진입 기록 미보유 — 리포트에서 소급">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr">
+ <div class="rt"><span class="neg">-5.14%</span><span class="ev">RVOL 5.7x</span><span class="ev">피벗+1.2%</span></div>
+ <div class="l1"><a href="../stocks/017670_20260824.html"><span class="tk">017670</span></a>
+   <span class="nm">SK텔레콤</span></div>
+ <div class="l2"><span class="badge kr">KR</span>
+   26.08.24 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.08.25</span></div>
+ <div class="l3"><span class="rs">RS 87</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="현재 후보목록(최신값)"><i></i><em>수축깊이</em> <b>12.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.61yr, B2)</b></span><span class="ai" style="background:#f1c40f" title="진입 기록 미보유 — 리포트에서 소급">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr">
+ <div class="rt"><span class="dim">—</span><span class="ev">RVOL 5.1x</span><span class="ev">피벗+0.8%</span></div>
+ <div class="l1"><a href="../stocks/007340_20260824.html"><span class="tk">007340</span></a>
+   <span class="nm">DN오토모티브</span></div>
+ <div class="l2"><span class="badge kr">KR</span>
+   26.08.24 <span class="badge open">보유중</span> </div>
+ <div class="l3"><span class="rs">RS 89</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="현재 후보목록(최신값)"><i></i><em>수축깊이</em> <b>9.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (2.14yr, B1)</b></span><span class="ai" style="background:#e67e22" title="진입 기록 미보유 — 리포트에서 소급">AI 관망 5</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div>
+<div class="footer">MacTrader auto-journal · 카드 지표 개편 샘플</div></body></html>
