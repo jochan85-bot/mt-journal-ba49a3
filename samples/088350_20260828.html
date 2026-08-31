@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>088350 — 매매일지 (축약 서식 샘플)</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+.l1 { padding-right:86px; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:absolute; top:10px; right:12px; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; margin-top:6px; flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="./index.html">← 샘플 목록</a></div>
+<div class="card" style="border-left:3px solid #fbbf24;background:#1f1b12">
+<b>⚠️ 축약 서식 제안 샘플</b> <span class="dim">— JOURNAL-SLIM-20260901. 실제 매매일지
+(<code>/stocks/</code>)는 무변경입니다. 확인 후 지시 주시면 이 서식으로 전환합니다.</span></div>
+<h1>088350 <span class="dim" style="font-size:1rem">한화생명</span></h1>
+<div><span class="badge closed">청산 완료</span> <span class="badge kr">KR</span></div>
+
+<div class="card">
+평균 매수가 <b>5,910원</b>
+· 평균 매도가 <b>5,850원</b>
+· 수익률 <span class="neg">-1.02%</span>
+
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div class="dim">2026-08-28 진입 → 2026-08-31 청산</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy"><b>매수</b> · 586주 @ 5,910원<div class="dim">2026-08-28 11:17</div></div><div class="tl-item sell"><b>매도</b> · 586주 @ 5,850원<div class="dim">2026-08-31 12:00 — 돌파 실패 — 확정 종가 5480.00 &lt; 피벗 5660.00 (D+1)</div></div></div>
+
+<h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-08-28 기준) 발췌</span></h2>
+<div class="card" style="border-left:3px solid var(--accent)"><b>실적 부진에도 지배구조 개편 기대감이 주가 상승 견인, 저평가+배당 재개 기대 부각</b></div>
+<div class="card"><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">Forward PE</span> <b style="color:var(--green)">5.6x</b> <span class="dim">저평가 구간 지속</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">목표주가</span> <b style="color:var(--green)">₩8,500 (키움)</b> <span class="dim">2/24 상향, 현재가 대비 괴리 큼</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">연결 순이익</span> <b style="color:var(--red)">8,363억원</b> <span class="dim">전년비 -3%, 자회사 실적 호조로 감소폭 방어</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">K-ICS 비율</span> <b style="color:var(--red)">157%(연말 추정)</b> <span class="dim">전분기 대비 1.2%p 하락</span></span></div>
+<div class="card"><b>사업</b><div class="section-body">한화생명은 보장성·저축성·단체보험 등 다양한 생명보험 상품을 개인·법인 고객에게 판매하고, 보험료를 받아 자산운용 수익을 더해 이익을 내는 생명보험사다. 한화생명금융서비스라는 강력한 설계사 판매망을 통해 상품을 유통하며, 손해보험·자산운용·증권 자회사와 베트남·인도네시아 현지법인, 미국 증권사를 더해 종합금융그룹 형태로 사업을 운영한다.</div></div>
+<div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· 지배구조 개편 기대</b><br><span class="section-body">한화그룹 지배구조 개편 논의와 한화생명 계열분리 가능성이 실적과 무관하게 주가를 끌어올리는 핵심 동력으로 작용 중이다. 구조 변화가 현실화되면 그룹 내 한화생명 위상과 밸류에이션 재평가로 이어질 수 있어 시장이 선반영하는 흐름이다.</span></div><div style="margin-top:8px"><b>· 자사주 소각 기대</b><br><span class="section-body">상법 개정에 따라 보유 중인 자사주 13.5% 소각 가능성이 주가에 반영되고 있다. 소각이 현실화되면 주당가치 희석이 줄어 직접적인 주가 상승 재료가 된다.</span></div></div>
+<div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 지배구조 개편은 여전히 확정되지 않은 사안으로, 논의가 지연되거나 무산되면 주가 상승 동력이 급격히 약화될 수 있다.</div><div style="margin-top:6px">· 해약환급금준비금 제도 개선 없이는 배당 재개가 쉽지 않다는 점이 명시적으로 지적돼, 배당 기대감만으로 오른 구간은 되돌림 리스크가 있다.</div></div></div>
+<div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 ₩5,830 돌파가 유효하려면 최근 50일 평균 대비 거래량이 뒷받침되는지 확인하며 접근하되, 현재가는 피벗 대비 소폭 낮아 추격 가능 구간 잔여 여력을 참고해 진입 타이밍을 판단한다. 규칙엔진이 관리하는 초기 손절선(-8%)이 자동 설정되며, 그 이전 -4% 도달 시 진입 후 2영업일 이내면 33%, 이후면 67% 물량의 부분청산이 마감 직전 창에서 작동할 수 있다. 지배구조 개편 기대감이 뉴스 부재로 식거나 피벗 아래로 되밀리면 셋업이 무효화된 것으로 본다.</div></div>
+<h2>📉 매도 분석 — 2026-08-31</h2><div class="card"><b>청산 원인</b><div class="section-body">8/29 확정 종가 5480원이 피벗 5660원을 하회하며 돌파 실패가 확정돼 D+1 매도 트리거가 발동했습니다. 8/31 코스피는 장중 -3%대 급락 후 반등해 +0.46% 강보합 마감했지만 낙폭 회복은 반도체·화학 등 일부 업종 중심이었고, 보험·금융주는 뚜렷한 주도력을 보이지 못해 한화생명도 피벗 위 안착에 실패했습니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">피벗 이탈 후 익일 확정 종가 기준 손절 매도는 VCP 돌파 실패 원칙에 부합하는 적절한 대응입니다. 재진입은 5660원대 피벗을 재돌파하며 거래량이 동반되고, 코스피 전반 변동성(장중 3%대 급락 후 반등)이 진정돼야 유효합니다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#60a5fa;color:#0f1117;font-weight:800;font-size:0.85rem">B</span></h2><div class="card"><b>요약</b><div class="section-body">피벗 5660원 돌파를 기대하고 5910원에 진입했으나 다음 거래일 확정 종가가 5480원으로 피벗을 하회하며 돌파 실패가 확인됐다. 규칙에 따라 D+1 종가 기준으로 손절 신호가 발생했고, 다음날 5850원에 청산했다. 3거래일 보유 후 -1.02% 손실로 마감됐다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입가가 피벗보다 4.4% 높은 추격 매수였고 결국 돌파가 실패해 진입 타이밍 자체는 아쉬웠다. 다만 청산은 명확한 규칙(D+1 종가&lt;피벗)에 따라 신속하게 이루어져 손실을 -1%대로 제한했다는 점에서 리스크 관리는 우수했다. 규칙이 없었다면 손실이 더 커졌을 가능성이 높아, 이 케이스에서 청산 규칙은 뚜렷한 득이었다.</div></div><div class="card"><b>교훈</b><div class="section-body">피벗 대비 과도하게 높은 가격에서의 추격 매수는 돌파 실패 확률을 높이므로, 진입가와 피벗 간 괴리가 클 때는 포지션 크기를 줄이거나 진입을 보류해야 한다.</div></div>
+
+<div class="footer">MacTrader auto-journal · 축약 서식 샘플</div>
+</body></html>
