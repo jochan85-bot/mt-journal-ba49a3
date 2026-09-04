@@ -117,18 +117,18 @@ a:hover { text-decoration:underline; }
 .nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
 </style></head>
 <body>
-<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<div class="dim"><a href="../prototype.html">← Prototype 기록</a></div>
 <h1>SBLK <span class="dim" style="font-size:1rem">스타 벌크 캐리어스</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.11yr, B3)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.11yr, B3)</span></div>
 
 <div class="card">
 평균 매수가 <b>$32.25</b>
-· 평균 매도가 <b>$31.90</b>
-· 수익률 <span class="neg">-1.18%</span>
-· 보유 75주
+· 평균 매도가 <b>$32.44</b>
+· 수익률 <span class="pos">+0.58%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 5점 (20260903 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.36x">예측 1.58x → 확정 1.30x</span></div>
-<div class="dim">2026-09-03 진입</div>
+<div class="dim">2026-09-03 진입 → 2026-09-04 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -138,11 +138,14 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item sell">
 <b>REBAL_SELL</b> · None주 @ $31.90
 <div class="dim">2026-09-04 02:18 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 75주 @ $32.56
+<div class="dim">2026-09-04 22:46  — 돌파 실패[BREAKOUT_FAIL_BOTH] — 확정종가 31.8700 vs 피벗 31.8800(FAIL) / EOD배수 1.3012 vs 문턱 1.4(FAIL) / 분모봉수 50 / 판정봉날짜 20260903</div>
 </div></div>
 
 
-
-
+<h2>📉 매도 분석 — 2026-09-04</h2><div class="card"><b>청산 원인</b><div class="section-body">판정봉(9/3) 종가가 31.87로 피벗 31.88을 근소하게 넘지 못했고 EOD 거래량배수도 1.30으로 문턱 1.4에 미달해 거래량 동반 없는 약한 돌파로 판정됐다. 같은 날 배당 지급(주당 0.90달러)이 있었던 만큼 배당락성 매물이 상단을 눌렀을 가능성이 크다. 벌크지수(BDI)는 오히려 강세(9/4 +140p, 3628)였던 점을 보면 종목 개별 요인(배당 매물·거래량 부족)이 실패의 주된 원인으로 보인다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">피벗·거래량 두 조건 모두 미달한 명백한 판정 기준 미달 케이스로 시스템 매도는 적절했다. 재진입 시에는 배당락 물량 소화 이후 31.9달러 피벗을 EOD 거래량 1.4배 이상 동반해 재돌파하는지, BDI 강세가 이어지는지를 확인해야 한다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#60a5fa;color:#0f1117;font-weight:800;font-size:0.85rem">B</span></h2><div class="card"><b>요약</b><div class="section-body">SBLK는 강한 상승 모멘텀 속 피벗 돌파를 노리고 32.25에 진입했으나, 배당(9/3 지급)락 영향과 거래량 부족이 겹쳐 익일 확정종가가 피벗 31.88을 하회하며 돌파 실패로 판정됐다. 리밸런스 매도 이후 잔여 물량을 32.56에 정리하며 소폭 수익(+0.58%)으로 마감했다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입 자체는 피벗 근접 매수로 타당했으나, 배당락 직후 진입한 타이밍이 판정봉의 EOD배수(1.30&lt;1.4) 및 종가 기준(31.87&lt;31.88) 미달을 유발한 핵심 요인으로 보인다. 청산 규칙은 이틀 만에 실패를 정확히 걸러내 손실 확대를 막았다는 점에서 득이었다.</div></div><div class="card"><b>교훈</b><div class="section-body">배당락일 직전·직후의 돌파 시도는 거래량과 가격 왜곡으로 판정 실패 확률이 높으므로, 배당 캘린더를 사전 확인해 진입을 회피하거나 문턱을 보수적으로 잡아야 한다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
