@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>NEO — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+/* [CARD-FMT-20260901] 모바일 겹침 수리 — 절대배치 폐기, 헤더 flex 2열.
+   구 구조: .rt 가 position:absolute(top:10 right:12) 3단 스택(≈72px)인데 회피용
+   padding-right 는 .l1 에만 있었다. .rt 가 .l2 를 지나 .l3 까지 내려오고 .l3/.l4 는
+   카드 우변까지 차므로 그 아래로 파고들었다(실측 rt 588~660 / l3 645~668, 우변 동일).
+   신 구조: .rt 를 정상 흐름에 넣어 겹침을 구조적으로 불가능하게 만든다.
+   → padding-right 회피값 자체가 불필요. 320·360·390·414·480px 전폭 겹침 0 실측. */
+.hd { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.hl { flex:1 1 auto; min-width:0; }   /* min-width:0 = 긴 종목명이 .rt 를 밀지 못하게 */
+.l1 { padding-right:0; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400;
+      display:inline-block; max-width:100%; overflow:hidden;
+      text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:static; flex:0 0 auto; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; row-gap:5px; margin-top:6px;
+      flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+/* [CARD-FMT-20260901] 지표 칩 — 리포트 .g 칩과 같은 어법(라벨 dim + 값 bold + 색점) */
+.chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
+        border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
+        color:#cbd0de; background:#161923; white-space:nowrap; }
+.chip i { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:#4b5163; }
+.chip em { font-style:normal; color:var(--dim); }
+.chip b { font-weight:700; }
+.chip.fail { border-color:#7f1d1d; background:#1d1113; }
+.chip.fail b { color:#f87171; }
+@media (max-width:520px) {
+  .chip { font-size:0.68rem; padding:1px 6px; gap:3px; }
+  .l3 { gap:5px; }
+  .rt { font-size:0.92rem; }
+}
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../prototype.html">← Prototype 기록</a></div>
+<h1>NEO <span class="dim" style="font-size:1rem">네오지노믹스</span></h1>
+<div><span class="badge closed">청산 완료</span> <span class="badge" title="IPM 리밸런싱 매도로 전량 청산된 건. 원장 수량 재계산으로 판정.">원장 재계산</span> <span class="badge" title="같은 종목의 2개 왕복 중 2번째 다리. 진입 분석은 1번째 다리에서 생성된 것을 공유한다.">2/2다리</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2u (0.82yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$17.29</b>
+· 평균 매도가 <b>$17.85</b>
+· 수익률 <span class="pos">+3.24%</span>
+
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2)">예측 — → 확정 —</span></div>
+<div class="dim">2026-08-27 진입 → 2026-08-27 청산</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>REBAL_BUY</b> · None주 @ $17.29
+<div class="dim">2026-08-27 04:15 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 14주 @ $17.85
+<div class="dim">2026-08-27 07:42  — IPM_GHOST_REBUY_UNWIND</div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">커뮤니티 종양내과(전체 암 치료의 약 80% 비중) 시장에서 압도적 지위를 가진 미국 최대 독립계 암 정밀진단 랩으로, NGS 기반 고부가 검사 확대로 흑자 전환에 성공한 턴어라운드 스토리 종목</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">NeoGenomics는 병리 클리닉, 병원, 제약사를 대상으로 종양학 특화 진단 검사를 제공하는 미국 최대 독립계 암 진단 전문기업으로, DNA/RNA 기반 차세대시퀀싱(NGS), FISH(형광 제자리 부합법), 면역조직화학(IHC), 세포유전학 등 650종 이상의 검사 포트폴리오를 보유하고 있다. 매출은 크게 임상검사(Clinical) 부문과 제약서비스(Pharma Services) 부문으로 나뉘며, 임상검사가 매출의 대부분을 차지하고 그중에서도 고부가가치 NGS 검사 비중이 빠르게 확대되고 있다. 경쟁 지위는 특히 &#x27;커뮤니티 종양내과&#x27;(전체 암 치료의 약 80%가 이루어지는 병원 밖 클리닉 네트워크) 시장에서 강한 편이며, 이 채널에서 파트너십을 통한 검사 아웃소싱 수요를 흡수하고 있다. 주요 경쟁사는 Guardant Health(액체생검 특화), Exact Sciences(대장암 선별검사 Cologuard 중심)이며, NEO는 광범위한 검사 메뉴와 병리 서비스 통합 역량으로 차별화한다. 최근에는 아스트라제네카 등 제약사와 협력해 동반진단(Companion Diagnostic) 개발을 확대하며 제약서비스 부문 수익성도 개선 중이다. 리스크 요인으로는 대형병원들이 NGS 검사를 자체 내재화(in-house)하려는 흐름이 지목된다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 7월 28일(현지시간 장 마감 후) 발표한 2분기 실적에서 매출 2억 170만 달러로 전년동기 대비 11% 성장하며 컨센서스(1억 9,700만 달러)를 상회했다. 임상검사 매출은 14% 성장했는데, 검사 건수(volume)가 2% 늘고 검사당 평균단가(AUP)가 12% 오른 것이 견인했으며, 특히 NGS 매출은 26% 급증했다. 조정 EBITDA는 전년 대비 36% 증가했고, 순이익은 224만 달러를 기록하며 전년동기 4,509만 달러 순손실에서 흑자 전환에 성공했다. 회사는 2026년 연간 가이던스를 상향해 매출 8억 200만~8억 600만 달러(기존 대비 상향), 조정 EBITDA 5,600만~5,800만 달러(기존 5,500만~5,700만 달러에서 상향), 순손실 전망은 3,400만~4,200만 달러로 축소했다. 이 실적 발표 직후 주가는 8.4% 급등했으며, 다음 분기(3분기) 실적 발표는 아직 공식 일정이 나오지 않았으나 과거 패턴상 2026년 10월 하순으로 예상된다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">돌파의 직접적 촉매는 시간순으로 두 가지다. 첫째, 2026년 7월 9일 FDA가 승인한 전립선암 동반진단 검사 &#x27;PTEN IHC CDx&#x27;(아스트라제네카의 표적치료제 TRUQAP 적합 환자를 선별) 출시 소식에 주가가 3.4% 상승하며 모멘텀의 초기 불씨가 붙었다. 둘째, 7월 28일 장 마감 후 발표된 2분기 실적에서 매출 컨센서스 상회, NGS 매출 26% 성장, 4개 분기 만의 순이익 흑자 전환, 연간 가이던스 상향이라는 &#x27;트리플 서프라이즈&#x27;가 나오며 익일 주가가 8.4% 급등했다. 이 어닝 서프라이즈를 계기로 Benchmark 등 애널리스트들이 목표주가를 즉각 상향 조정(예: Benchmark $11→$16, Buy 유지)했고, 시장의 밸류에이션 리레이팅 기대가 형성됐다. 자동매매 시스템이 진입한 7월 30일은 실적 발표 후 2거래일째로, 피벗 14.65달러를 상대거래량 2.25배(평균 대비 급증)를 동반해 돌파했으며 15.35달러(+4.71% 확장)에서 신규 진입이 체결됐다. 이는 어닝 후 갭업 이후 조정 없이 후속 매수세가 유입되는 전형적인 &#x27;실적 모멘텀 지속형&#x27; 돌파 패턴으로 해석된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">액체생검(liquid biopsy) 시장은 2026년 약 95억 달러 규모로 추정되며 2035년까지 연평균 12.1% 성장이 전망되고, 더 넓은 암 진단 시장은 2026년 1,241억 달러에서 2031년 1,835억 달러(연평균 8.2%)로 확대될 전망이다. 2024~2026년 사이 액체생검은 연구용 도구에서 보험 급여가 적용되는 임상 정규 검사로 전환됐고, 재발 감지가 영상검사보다 평균 8.7개월 빠르다는 근거가 축적되며 채택이 가속화되고 있다. NEO는 이 성장 사이클에서 커뮤니티 종양내과라는 방어적 채널을 장악하고 있어 Guardant Health(액체생검 순수 플레이)나 Exact Sciences(선별검사 중심)와는 포지셔닝이 다르며, NGS 검사 매출 성장률(26%)이 업계 평균을 상회한다는 점에서 상대적 강점을 보인다. 다만 대형병원들의 NGS 내재화 시도는 업계 전반의 구조적 역풍으로, NEO의 병원 채널 매출에는 장기적 압박 요인이 될 수 있다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">피벗 14.65달러를 상대거래량(RVOL) 2.25배의 확연한 거래량 증가를 동반해 돌파했으며, 진입가 15.35달러는 피벗 대비 +4.71% 확장된 지점으로 미너비니 기준 이상적 매수 구간(피벗 대비 5% 이내)에 부합한다. 이는 실적 발표(7/28) 직후 갭업-지속형 패턴으로, 어닝 서프라이즈로 형성된 새로운 수급 레벨 위에서 베이스가 재형성되며 나온 돌파로 판단된다. 위쪽으로는 뚜렷한 매물대가 거의 없어(최근 신고가권 진입) 추가 상승 시 저항이 제한적일 가능성이 높으며, 피벗 14.65달러 및 그 아래 어닝 갭업 시작가 부근이 1차 지지선 역할을 할 것으로 예상된다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">NGS 매출 성장(26%)과 AUP 상승 추세가 지속되며 3분기(10월 예상)에도 컨센서스 상회 및 추가 가이던스 상향이 나올 경우, 실적 모멘텀에 힘입은 연속 상승 경로가 가능하다. 아스트라제네카와의 동반진단 협력(PTEN IHC CDx) 같은 제약서비스 파트너십이 추가로 발표되면 밸류에이션 리레이팅의 추가 촉매가 될 수 있다. 애널리스트 목표주가는 낮게는 11달러, 높게는 25달러까지 분포하며 평균 목표가는 약 15~19.7달러(현재가 대비 최대 47% 상승여력)로, 컨센서스는 12명 중 8명 매수·4명 보유·매도 의견 없음의 우호적 구도다. 흑자 전환이 안착되면 성장주에서 &#x27;수익성 있는 성장주&#x27;로의 리레이팅이 본격화될 수 있다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 대형병원의 NGS 검사 내재화(in-house) 확대: 병원들이 자체 시퀀싱 역량을 구축하면 NEO의 병원 채널 검사 위탁 물량이 잠식되어 임상검사 매출 성장률이 둔화될 수 있다. ② 경쟁 심화: Guardant Health, Exact Sciences 등 특화 경쟁사들이 액체생검·선별검사 시장에서 점유율을 확대하면 NEO의 AUP(검사단가) 방어력이 약화되고 가격 경쟁이 심화될 수 있다. ③ 실적 모멘텀 둔화 리스크: 현재 주가는 어닝 서프라이즈 직후 급등 국면으로, 3분기 실적에서 성장률이 둔화되거나 가이던스가 컨센서스에 못 미칠 경우 갭 메우기 식 급락이 발생할 수 있다. ④ 정책·보험수가 리스크: 메디케어·민간보험의 유전자 검사 수가 정책 변경이나 급여 축소가 발생하면 NGS·액체생검 검사의 수익성이 직접적으로 타격받을 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 3분기 실적 발표(공식 일정 미발표, 과거 패턴상 10월 하순 예상) — NGS 매출 성장률 및 가이던스 유지 여부 확인 필수. ② 아스트라제네카 TRUQAP 및 PTEN IHC CDx 처방 확산 추이 — 제약서비스 부문 매출 기여도 점검. ③ 경쟁사(Guardant Health, Exact Sciences)의 분기 실적 및 신제품 발표 일정 — 상대적 경쟁력 변화 모니터링. ④ 애널리스트 목표주가 추가 조정 여부(Benchmark $16, 컨센서스 평균 $15~19.7 대비 주가 위치) 지속 추적.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 어닝 서프라이즈(매출·NGS 성장·흑자전환)와 FDA 승인 동반진단 출시라는 이중 촉매가 명확하고 진입 시 RVOL 2.25배로 수급도 확인되나, 이미 실적 발표 후 8.4% 갭업을 거친 뒤 2거래일째 진입이라 피벗 확장폭(+4.71%)이 다소 후행적이며 단기 과열 조정 가능성을 배제할 수 없다. 병원 NGS 내재화라는 구조적 리스크가 상존하는 만큼, 3분기 실적 확인 전까지는 보통 수준의 확신으로 포지션을 유지하며 지지선(피벗 14.65달러) 이탈 여부를 주시할 필요가 있다.</div></div>
+
+
+
+<div class="dim" style="font-size:0.7rem;margin-top:12px">
+예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

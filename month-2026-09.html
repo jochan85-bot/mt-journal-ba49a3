@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>📓 매매일지 · 2026-09</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+/* [CARD-FMT-20260901] 모바일 겹침 수리 — 절대배치 폐기, 헤더 flex 2열.
+   구 구조: .rt 가 position:absolute(top:10 right:12) 3단 스택(≈72px)인데 회피용
+   padding-right 는 .l1 에만 있었다. .rt 가 .l2 를 지나 .l3 까지 내려오고 .l3/.l4 는
+   카드 우변까지 차므로 그 아래로 파고들었다(실측 rt 588~660 / l3 645~668, 우변 동일).
+   신 구조: .rt 를 정상 흐름에 넣어 겹침을 구조적으로 불가능하게 만든다.
+   → padding-right 회피값 자체가 불필요. 320·360·390·414·480px 전폭 겹침 0 실측. */
+.hd { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.hl { flex:1 1 auto; min-width:0; }   /* min-width:0 = 긴 종목명이 .rt 를 밀지 못하게 */
+.l1 { padding-right:0; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400;
+      display:inline-block; max-width:100%; overflow:hidden;
+      text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:static; flex:0 0 auto; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; row-gap:5px; margin-top:6px;
+      flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+/* [CARD-FMT-20260901] 지표 칩 — 리포트 .g 칩과 같은 어법(라벨 dim + 값 bold + 색점) */
+.chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
+        border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
+        color:#cbd0de; background:#161923; white-space:nowrap; }
+.chip i { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:#4b5163; }
+.chip em { font-style:normal; color:var(--dim); }
+.chip b { font-weight:700; }
+.chip.fail { border-color:#7f1d1d; background:#1d1113; }
+.chip.fail b { color:#f87171; }
+@media (max-width:520px) {
+  .chip { font-size:0.68rem; padding:1px 6px; gap:3px; }
+  .l3 { gap:5px; }
+  .rt { font-size:0.92rem; }
+}
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+
+.nav { display:flex; gap:6px; flex-wrap:wrap; margin:12px 0 4px; }
+.nav .nv { background:#161923; border:1px solid var(--border); color:var(--dim);
+           border-radius:14px; padding:4px 11px; font-size:0.76rem; font-weight:600;
+           text-decoration:none; }
+.nav .nv:hover { color:var(--text); text-decoration:none; }
+.nav .nv.on { border-color:var(--accent); color:var(--accent);
+              background:rgba(96,165,250,0.10); }
+.card.perf { padding:13px 16px; }
+.perf .ph { font-size:0.8rem; color:var(--accent); font-weight:700; margin-bottom:6px; }
+.perf .prow { font-size:0.86rem; display:flex; align-items:center; gap:8px;
+              flex-wrap:wrap; margin-top:3px; }
+.perf .prow .pl { white-space:nowrap; }
+.perf .badge { flex:0 0 auto; }
+.perf .tag { flex:0 0 auto; font-size:0.66rem; font-weight:700; color:var(--dim);
+             border:1px solid var(--border); border-radius:5px; padding:1px 5px; }
+</style></head>
+<body>
+<h1>📓 매매일지 · 2026-09</h1>
+<div class="dim">매수일 기준 월별 기록 · Prototype 제외</div>
+<div class="nav"><a class="nv" href="index.html">전체</a><a class="nv on" href="month-2026-09.html">2026.09</a><a class="nv" href="month-2026-08.html">2026.08</a><a class="nv" href="month-2026-07.html">2026.07</a><a class="nv" href="prototype.html">🧪 Prototype</a></div><div class="card perf"><div class="ph">전체 실적<span class="dim"> (계좌 기준 + 일지 집계 · Prototype 제외)</span></div><div class="prow">보유 19건 · 청산 0건 · <span class="dim">청산 실적 없음</span></div><div class="prow"><span class="badge kr">KR</span><span class="tag">계좌</span><span class="pl" title="현금 12,259,861원 + 평가 24,655,320원">총자산 36,915,181원</span><span class="dim">원금 40,000,000원</span><b class="neg">-7.71%</b></div><div class="prow"><span class="badge us">US</span><span class="tag">계좌</span><span class="pl" title="현금 $3,603.46 + 평가 $25,867.12">총자산 $29,470.58</span><span class="dim">원금 $30,000.00</span><b class="neg">-1.76%</b></div><div class="prow"><span class="badge kr">KR</span><span class="tag">일지</span><span class="pl">실현 <span class="neg">-75,200원</span></span><span class="pl">평가 <span class="pos">+1,489,632원</span></span><span class="dim" title="투입원금 40,000,000원">원금 대비</span><b class="pos">+3.54%</b></div><div class="prow"><span class="badge us">US</span><span class="tag">일지</span><span class="pl">실현 <span class="pos">+$572.10</span></span><span class="pl">평가 <span class="pos">+$1,511.83</span></span><span class="dim" title="투입원금 $30,000.00">원금 대비</span><b class="pos">+6.95%</b></div></div><div class="card perf"><div class="ph">2026-09 실적<span class="dim"> (매수일 기준)</span></div><div class="prow">보유 8건 · 청산 0건 · <span class="dim">청산 실적 없음</span></div><div class="prow"><span class="badge kr">KR</span><span class="tag">일지</span><span class="pl">실현 <span class="neg">-75,200원</span></span><span class="pl">평가 <span class="neg">-263,478원</span></span><span class="dim" title="투입원금 40,000,000원">원금 대비</span><b class="neg">-0.85%</b></div><div class="prow"><span class="badge us">US</span><span class="tag">일지</span><span class="pl">실현 <span class="pos">+$7.37</span></span><span class="pl">평가 <span class="pos">+$50.60</span></span><span class="dim" title="투입원금 $30,000.00">원금 대비</span><b class="pos">+0.19%</b></div><div class="dim" style="font-size:.72rem;margin-top:6px">계좌 = 실제 잔고(현금+평가) 대비 투입원금 — 정시 계좌현황 보고와 같은 산식. 일지 = 이 사이트에 기록된 거래의 체결가 기준 실현·평가 손익(수수료·세금 제외, 2026-07-05 기록 개시 이전 거래 미포함)이라 계좌 수치와 차이가 납니다. 실현손익에는 보유중 종목의 부분매도 체결분이 포함됩니다. 국장/미장은 통화가 달라 합산하지 않습니다.</div></div><div class="card">
+<div class="dim">예측/확정 중앙 (이번 달): 예측 1.69x (n=1) · 확정 — (D+1 미도달)</div><div class="dim">마지막 갱신: 2026-09-04 15:28 KST</div>
+</div><div class="fbar">
+ <div class="frow"><span class="flab">시장</span>
+  <button class="on" onclick="setf('mkt','ALL',this)">전체</button>
+  <button onclick="setf('mkt','KR',this)">KR</button>
+  <button onclick="setf('mkt','US',this)">US</button></div>
+ <div class="frow"><span class="flab">상태</span>
+  <button class="on" onclick="setf('st','ALL',this)">전체</button>
+  <button onclick="setf('st','open',this)">보유중</button>
+  <button onclick="setf('st','closed',this)">청산</button></div>
+ <div class="frow"><span class="flab">AI</span>
+  <button class="on" onclick="setf('ai','ALL',this)">전체</button>
+  <button onclick="setf('ai','매수 고려',this)">고려</button>
+  <button onclick="setf('ai','매수 가능',this)">가능</button>
+  <button onclick="setf('ai','관망',this)">관망</button>
+  <button onclick="setf('ai','회피',this)">회피</button></div>
+ <div class="frow"><span class="flab">정렬</span>
+  <button class="on" data-lab="매수일" onclick="setsort('date',this)">매수일 ↓</button>
+  <button data-lab="수익률" onclick="setsort('ret',this)">수익률</button>
+  <button data-lab="RS" onclick="setsort('rs',this)">RS</button>
+  <button data-lab="RVOL" onclick="setsort('rvol',this)">RVOL</button>
+  <button data-lab="피벗%" onclick="setsort('pivot',this)">피벗%</button></div>
+</div>
+<div class="list" id="list"><div class="tr" data-mkt="KR" data-st="open" data-ai="매수 가능"
+ data-mon="2026-09"
+ data-date="2026-09-04T10:55:10.793333+09:00" data-ret="0.33222591362126247"
+ data-rs="74.0"
+ data-rvol="2.37"
+ data-pivot="0.84">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/003490_20260904.html"><span class="tk">003490 ☀️</span></a>
+     <span class="nm">대한항공</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.09.04 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+0.33%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.37x">예측 1.69x → 확정 —</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 74</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="리포트 2026-09-03 기준"><i></i><em>수축깊이</em> <b>12.2%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.58yr, B2)</b></span><span class="ai" style="background:#f1c40f">AI 가능 6</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
+</div><div class="tr" data-mkt="KR" data-st="open" data-ai="매수 가능"
+ data-mon="2026-09"
+ data-date="2026-09-04T09:21:11.719708+09:00" data-ret="-4.517782761935277"
+ data-rs="74.0"
+ data-rvol="2.0"
+ data-pivot="0.32">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/004430_20260904.html"><span class="tk">004430</span></a>
+     <span class="nm">송원산업</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.09.04 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="neg">-4.52%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.00x">예측 — → 확정 —</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.3%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 74</span><span class="chip"><i style="background:#8B6F4E"></i><em>VCP</em> <b>수축이탈</b></span><span class="chip" title="리포트 2026-09-03 기준"><i></i><em>수축깊이</em> <b>6.3%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.33yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 6</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 고려"
+ data-mon="2026-09"
+ data-date="2026-09-04T02:17:50.651274+09:00" data-ret="1.5027505702401778"
+ data-rs="91.0"
+ data-rvol="2.02"
+ data-pivot="0.58">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/MRX_20260904.html"><span class="tk">MRX</span></a>
+     <span class="nm">마렉스 그룹</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.09.04 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+1.50%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.02x">예측 — → 확정 —</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div>
+ </div>
+ <div class="l3"><span class="rs hi">RS 91</span><span class="chip"><i style="background:#6B8E9F"></i><em>VCP</em> <b>플랫</b></span><span class="chip" title="리포트 2026-09-03 기준"><i></i><em>수축깊이</em> <b>6.5%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.54yr, B1)</b></span><span class="ai" style="background:#2ecc71">AI 고려 8</span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="관망"
+ data-mon="2026-09"
+ data-date="2026-09-03T22:48:24.176799+09:00" data-ret="-1.1782945736434078"
+ data-rs="86.0"
+ data-rvol="2.36"
+ data-pivot="1.13">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/SBLK_20260903.html"><span class="tk">SBLK</span></a>
+     <span class="nm">스타 벌크 캐리어스</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.09.03 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="neg">-1.18%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.36x">예측 1.58x → 확정 1.30x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.1%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 86</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip" title="리포트 2026-09-03 기준"><i></i><em>수축깊이</em> <b>5.9%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.11yr, B3)</b></span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
+</div><div class="tr" data-mkt="KR" data-st="open" data-ai="관망"
+ data-mon="2026-09"
+ data-date="2026-09-03T09:28:55.809123+09:00" data-ret="-5.88235294117647"
+ data-rs="88.0"
+ data-rvol="2.86"
+ data-pivot="1.16">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/088350_20260903.html"><span class="tk">088350 ☀️</span></a>
+     <span class="nm">한화생명</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.09.03 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="neg">-5.88%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.86x">예측 1.58x → 확정 5.88x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.2%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 88</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="리포트 2026-09-03 기준"><i></i><em>수축깊이</em> <b>9.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.20yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
+</div><div class="tr" data-mkt="KR" data-st="open" data-ai="관망"
+ data-mon="2026-09"
+ data-date="2026-09-03T09:27:11.014149+09:00" data-ret="0.4952673815130719"
+ data-rs="79.0"
+ data-rvol="2.81"
+ data-pivot="0.85">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/028670_20260903.html"><span class="tk">028670 ☀️</span></a>
+     <span class="nm">팬오션</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.09.03 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+0.50%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.81x">예측 1.51x → 확정 2.43x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 79</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="리포트 2026-09-03 기준"><i></i><em>수축깊이</em> <b>7.3%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.21yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 4</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 가능"
+ data-mon="2026-09"
+ data-date="2026-09-03T02:06:48.035020+09:00" data-ret="2.3592715231788093"
+ data-rs="88.0"
+ data-rvol="2.01"
+ data-pivot="1.85">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/SLDE_20260903.html"><span class="tk">SLDE</span></a>
+     <span class="nm">슬라이드 인슈어런스</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.09.03 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+2.36%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.01x">예측 2.04x → 확정 1.91x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.9%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 88</span><span class="chip"><i style="background:#8B6F4E"></i><em>VCP</em> <b>수축이탈</b></span><span class="chip" title="리포트 2026-09-03 기준"><i></i><em>수축깊이</em> <b>5.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.44yr, B1+)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="관망"
+ data-mon="2026-09"
+ data-date="2026-09-01T23:19:33.044840+09:00" data-ret="-0.5965532479010075"
+ data-rs="89.0"
+ data-rvol="2.07"
+ data-pivot="0.73">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/HP_20260901.html"><span class="tk">HP ☀️</span></a>
+     <span class="nm">헬머리치 앤 페인</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.09.01 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="neg">-0.60%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.07x">예측 1.69x → 확정 1.79x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.7%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 89</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="리포트 2026-09-01 기준"><i></i><em>수축깊이</em> <b>9.2%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.81yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 5</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div></div>
+<div class="nores" id="nores" style="display:none">조건에 맞는 거래가 없습니다.</div>
+<div class="dim" style="font-size:0.7rem;margin-top:12px">
+VCP 패턴·수축깊이·거래량·Stage = 관찰 태그 (매매 판정 무관) · RS·AI = 진입 시점 기록값<br>
+수축깊이는 진입일 이전 최신 리포트값(툴팁에 출처) — 값이 없으면 항목을 생략합니다.
+매출 감속 O = 매출 성장 감속 전환 관찰 태그이며 역성장이 아닙니다(성장 지속 중 속도 감소).<br>
+예측→확정 = B2 예측기(v1.2) EOD 배수, 문턱 KR≥1.4 / US≥1.6(US 이번
+배선 무접촉 — 등재만). 예측 —=진입 기록 미보유(9/4 이전 등) · 확정 —=D+1 미도달 또는 미청산.<br>
+예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
+<div class="footer">MacTrader auto-journal</div>
+<script>
+const S={mkt:'ALL',st:'ALL',ai:'ALL',mon:'ALL',sort:'date',dir:-1};  // dir -1=내림차순 / 1=오름차순
+function setf(g,v,el){S[g]=v;
+  el.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on'); apply();}
+// 같은 정렬 버튼 재클릭 = 방향 토글 / 다른 버튼 = 내림차순부터
+function setsort(v,el){
+  if(S.sort===v){ S.dir=-S.dir; } else { S.sort=v; S.dir=-1; }
+  el.parentNode.querySelectorAll('button').forEach(b=>{
+    b.classList.remove('on');
+    b.textContent=b.dataset.lab;
+  });
+  el.classList.add('on');
+  el.textContent=el.dataset.lab+(S.dir<0?' ↓':' ↑');
+  apply();
+}
+function apply(){
+  const L=document.getElementById('list'); if(!L) return;
+  const cs=[...L.querySelectorAll('.tr')];
+  let n=0;
+  cs.forEach(c=>{
+    const ok=(S.mkt==='ALL'||c.dataset.mkt===S.mkt)
+          && (S.st==='ALL'||c.dataset.st===S.st)
+          && (S.ai==='ALL'||c.dataset.ai===S.ai)
+          && (S.mon==='ALL'||c.dataset.mon===S.mon);
+    c.classList.toggle('hide',!ok); if(ok) n++;
+  });
+  const num={date:false,ret:true,rs:true,rvol:true,pivot:true}[S.sort];
+  const key={date:c=>c.dataset.date,ret:c=>parseFloat(c.dataset.ret),
+             rs:c=>parseFloat(c.dataset.rs),
+             rvol:c=>parseFloat(c.dataset.rvol),
+             pivot:c=>parseFloat(c.dataset.pivot)}[S.sort];
+  cs.sort((a,b)=>{const x=key(a),y=key(b);
+    const r = num ? (x-y) : (x<y?-1:x>y?1:0);
+    return S.dir<0 ? -r : r;});
+  cs.forEach(c=>L.appendChild(c));
+  const nr=document.getElementById('nores'); if(nr) nr.style.display = n?'none':'block';
+}
+</script>
+</body></html>

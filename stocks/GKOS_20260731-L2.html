@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>GKOS — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+/* [CARD-FMT-20260901] 모바일 겹침 수리 — 절대배치 폐기, 헤더 flex 2열.
+   구 구조: .rt 가 position:absolute(top:10 right:12) 3단 스택(≈72px)인데 회피용
+   padding-right 는 .l1 에만 있었다. .rt 가 .l2 를 지나 .l3 까지 내려오고 .l3/.l4 는
+   카드 우변까지 차므로 그 아래로 파고들었다(실측 rt 588~660 / l3 645~668, 우변 동일).
+   신 구조: .rt 를 정상 흐름에 넣어 겹침을 구조적으로 불가능하게 만든다.
+   → padding-right 회피값 자체가 불필요. 320·360·390·414·480px 전폭 겹침 0 실측. */
+.hd { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.hl { flex:1 1 auto; min-width:0; }   /* min-width:0 = 긴 종목명이 .rt 를 밀지 못하게 */
+.l1 { padding-right:0; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400;
+      display:inline-block; max-width:100%; overflow:hidden;
+      text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:static; flex:0 0 auto; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; row-gap:5px; margin-top:6px;
+      flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+.rt .ev { display:block; margin:2px 0 0; }
+/* [CARD-FMT-20260901] 지표 칩 — 리포트 .g 칩과 같은 어법(라벨 dim + 값 bold + 색점) */
+.chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
+        border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
+        color:#cbd0de; background:#161923; white-space:nowrap; }
+.chip i { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:#4b5163; }
+.chip em { font-style:normal; color:var(--dim); }
+.chip b { font-weight:700; }
+.chip.fail { border-color:#7f1d1d; background:#1d1113; }
+.chip.fail b { color:#f87171; }
+@media (max-width:520px) {
+  .chip { font-size:0.68rem; padding:1px 6px; gap:3px; }
+  .l3 { gap:5px; }
+  .rt { font-size:0.92rem; }
+}
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../prototype.html">← Prototype 기록</a></div>
+<h1>GKOS <span class="dim" style="font-size:1rem">글라우코스</span></h1>
+<div><span class="badge closed">청산 완료</span> <span class="badge" title="IPM 리밸런싱 매도로 전량 청산된 건. 원장 수량 재계산으로 판정.">원장 재계산</span> <span class="badge" title="같은 종목의 2개 왕복 중 2번째 다리. 진입 분석은 1번째 다리에서 생성된 것을 공유한다.">2/2다리</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.75yr, B2)</span></div>
+
+<div class="card">
+평균 매수가 <b>$181.43</b>
+· 평균 매도가 <b>$179.51</b>
+· 수익률 <span class="neg">-1.06%</span>
+
+<div style="margin-top:6px">리포트 AI 판단: <span class="dim">AI 판단 없음</span></div>
+<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2)">예측 — → 확정 —</span></div>
+<div class="dim">2026-08-27 진입 → 2026-08-27 청산</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>REBAL_BUY</b> · None주 @ $181.43
+<div class="dim">2026-08-27 04:15 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 2주 @ $179.51
+<div class="dim">2026-08-27 07:41  — IPM_GHOST_REBUY_UNWIND</div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">미국 최대 MIGS(최소침습 녹내장 수술) 스텐트 시장을 장악한 안과 특화 의료기기·제약 기업으로, iDose TR과 Epioxa 두 개의 신성장 동력이 동시에 폭발하며 매출 성장률이 가속화되고 있는 기업</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">글라우코스는 녹내장, 각막질환, 망막질환 치료에 특화된 안과 의료기기·제약 복합기업으로, 주력 제품은 트라베큘러 메쉬워크에 삽입하는 미세 스텐트 iStent 계열과 서방형 약물 임플란트 iDose TR이다. iDose TR은 안압 강하 약물을 6개월 이상 서방 방출하는 인젝터블 임플란트로 2024년 출시 이후 급성장하며 2026년 매출 가이던스에서만 약 2.75억~2.8억달러 기여가 예상된다. 매출은 크게 녹내장(Glaucoma) 부문과 각막건강(Corneal Health) 부문으로 나뉘며, 2026년 2분기 기준 녹내장 부문이 1억5,520만달러로 전체 매출의 약 84%를 차지하는 핵심 축이다. 각막건강 부문은 각막교차결합술(CXL) 치료제 Photrexa에서 2025년 10월 FDA 승인을 받은 신약 Epioxa로 전환 중이며, 이는 상피를 제거하지 않는 무통증·비침습 각막교차결합 치료제로 각막원추증(케라토코누스) 시장의 표준 치료를 재편할 잠재력을 지닌다. 주요 고객은 백내장·녹내장 수술을 겸하는 안과 전문의와 안과 클리닉, 외래수술센터(ASC)이며 미국이 매출의 대부분을 차지하나 국제 부문도 확대 중이다. MIGS 스텐트 시장에서 사실상 개척자이자 선두주자 지위를 보유하고 있으며, 경쟁사(Alcon, Sight Sciences 등) 대비 제품 포트폴리오 폭과 임상 데이터 축적에서 우위를 점하고 있다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기(7월 29일 발표) 매출은 1억8,560만달러로 전년 동기 대비 +50%(환율효과 제외 +49%) 성장하며 사상 최대치를 기록했고, 시장 컨센서스(1억5,113만달러)를 큰 폭으로 상회했다. 녹내장 부문 매출은 1억5,520만달러로 전년 대비 +50% 성장했으며 iDose TR과 iStent 계열이 동반 견인했다. GAAP 기준으로는 순손실 1,840만달러(주당 -0.31달러)를 기록했으나, 비GAAP 조정 주당손실은 -0.14달러로 시장 예상(-0.21달러)을 크게 상회(어닝 서프라이즈 +0.07달러)했다. 매출총이익률은 GAAP 기준 약 82%, 비GAAP 기준 약 85%로 견조한 수준을 유지했다. 회사는 실적 발표와 함께 2026년 연간 매출 가이던스를 기존 6.2억~6.35억달러에서 6.8억~7.0억달러로 대폭 상향했으며, 이 중 iDose TR 매출만 2.75억~2.8억달러로 제시했다. 다음 분기(3분기) 실적 발표는 통상 패턴상 2026년 10월 말~11월 초로 예상된다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">2026년 7월 1일 Epioxa가 영구 J-코드(J2789)를 부여받으며 보험 청구·상환 절차가 간소화되는 구조적 호재가 발생했고, 이는 각막건강 부문의 매출 가시성을 높였다. 7월 8일 씨티그룹이 목표주가를 162달러에서 175달러로 상향하며 매수의견을 재확인했고, 7월 17일 스티펠 니콜라우스도 목표주가를 170달러에서 175달러로 올리는 등 실적 발표 전부터 애널리스트들의 목표가 상향 랠리가 이어졌다. 7월 25일경 GLK-321(안검염 치료제) 2상 임상 환자등록 완료 소식도 파이프라인 모멘텀을 더했다. 결정적 계기는 7월 29일 장 마감 후 발표된 2분기 실적으로, 매출이 컨센서스를 22% 이상 상회하고 연간 가이던스가 큰 폭 상향되면서 시간외 거래에서 주가가 정규장 종가 161.08달러 대비 +8.87% 급등해 176달러까지 상승했다. 이 실적 서프라이즈가 촉매가 되어 7월 31일 정규장에서 166달러의 직전 저항선(피벗)을 거래량 동반 돌파했고, 매수 시점 RVOL 1.67배로 평균 이상의 수급이 유입되며 피벗 대비 +2.96% 확장된 170.58달러에서 신규 진입이 체결됐다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">글로벌 MIGS 디바이스 시장은 2026년 약 6억~18억달러 규모(집계 방식에 따라 상이)에서 2035년까지 연평균 20% 이상 성장이 전망되는 구조적 성장 섹터로, 고령화에 따른 녹내장 유병률 증가와 최소침습 수술 선호 확대가 핵심 동력이다. 안과 클리닉들이 경증·중등도 녹내장의 1차 수술적 개입 수단으로 MIGS 채택을 확대하는 추세이며, FDA 신속심사 경로와 EU MDR 하의 CE 마킹이 신제품 승인을 가속화하고 있다. 다만 2027년 시행이 논의 중인 메디케어 지역보장결정(LCD) 초안이 확정될 경우 최대 3,000만달러 규모의 매출 역풍이 될 수 있다는 리스크가 존재해 업계 전반의 상환정책 불확실성이 남아있다. 글라우코스는 이 시장에서 사실상 창시자이자 최대 점유율 보유 기업으로, Alcon·Sight Sciences 등 경쟁사 대비 제품 라인업(iStent inject, iStent infinite, iDose TR)의 폭과 장기 임상 데이터에서 확고한 우위를 점하고 있다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">주가는 52주 저점 73.16달러에서 최근 52주 고점 161.53달러(7월 발표 전 기준)까지 꾸준히 우상향하는 강한 중기 상승추세를 형성해왔으며, 1년 수익률 +58%를 기록한 구조적 강세 종목이다. 166달러 피벗은 실적 발표 전 형성된 컵-핸들 또는 손잡이형 베이스의 상단 저항선으로, 7월 29일 실적 서프라이즈로 시간외 176달러까지 급등한 이후 이 저항선을 정규장에서 거래량(RVOL 1.67배) 동반 돌파한 것은 질적으로 양호한 돌파 신호다. 다만 피벗 대비 +2.96% 확장은 이미 다소 확장된 진입가로, 이상적인 5% 이내 저확장 진입 범위 안에 있으나 여유는 크지 않다. 위쪽으로는 뚜렷한 매물대가 없는 신고가권이라 추가 상승 여력은 열려있는 반면, 아래로는 166달러 피벗선이 1차 지지, 그 아래 148~150달러 부근이 2차 지지 구간으로 작용할 가능성이 있다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">iDose TR의 서방형 임플란트 시장 침투율이 지속 상승하고 Epioxa가 J-코드 부여를 발판으로 상환 마찰 없이 빠르게 채택될 경우, 2026년 연간 매출 7억달러 상단 돌파 및 2027년 가이던스 추가 상향이 트리거가 될 수 있다. GLK-321(안검염) 등 파이프라인의 임상 결과가 긍정적으로 나올 경우 신규 적응증 확장에 따른 밸류에이션 리레이팅도 기대된다. 현재 애널리스트 평균 목표가는 155.23달러 수준이나 이는 실적 발표 전 데이터가 다수 반영된 것이며, 씨티(175달러)·스티펠(175달러)·HC Wainwright(168달러) 등 최근 상향된 목표가는 170달러 중반대에 형성되어 있어 실적 이후 추가 상향 여지가 있다. 12개 매수의견 대비 매도의견은 1건에 불과해 우호적인 애널리스트 컨센서스가 상승 모멘텀을 뒷받침한다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 밸류에이션 부담 — 여전히 GAAP 기준 순손실 기업으로 고성장을 가격에 선반영한 고밸류에이션 상태이며, 성장률 둔화 신호가 나올 경우 급격한 밸류에이션 조정 가능성이 있다. ② 메디케어 LCD 리스크 — 2027년 시행이 논의 중인 지역보장결정 초안이 확정되면 연간 최대 3,000만달러의 매출 역풍이 발생해 녹내장 부문 성장률이 둔화될 수 있다. ③ Epioxa 전환 리스크 — 회사 스스로 Photrexa에서 Epioxa로의 전환 과정에서 매출 변동성과 페이어(보험사) 상환 장벽으로 인한 채택 지연을 경고했으며, 이는 각막건강 부문 실적 부진으로 이어질 수 있다. ④ 내부자 매도 — CFO 알렉스 서먼이 7월 9일 160만달러 규모 주식을 매도한 사실이 확인되어, 경영진의 단기 밸류에이션 부담 인식 가능성을 시사하며 추가 내부자 매도 발생 시 투자심리에 부담을 줄 수 있다.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 3분기 실적 발표(예상 2026년 10월 말~11월 초) — iDose TR과 Epioxa 매출 기여도 및 가이던스 재확인 여부 확인 필요. ② 메디케어 LCD(지역보장결정) 최종안 발표 시점 — 확정될 경우 2027년 실적 전망에 영향. ③ Epioxa 상업화 진행 상황 — J-코드(J2789, 7월 1일 발효) 이후 실제 보험 청구·채택률 추이. ④ GLK-321(안검염) 2상 임상 결과 발표 시점 — 6월 25일 환자등록 완료 후 톱라인 데이터 공개 일정 모니터링. ⑤ 166달러 피벗 지지 여부 — 종가 기준 166달러 하회 시 돌파 실패 가능성으로 리스크 관리 필요.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟢강한 확신: 2분기 매출 서프라이즈(+50% YoY, 컨센서스 22% 상회)와 연간 가이던스 대폭 상향(6.2억~6.35억→6.8억~7.0억달러)이라는 명확한 펀더멘털 카탈리스트를 동반한 돌파이며, 씨티·스티펠 등 다수 기관의 목표가 상향과 MIGS 시장의 구조적 고성장이 뒷받침한다. 다만 피벗 대비 확장폭(+2.96%)이 이미 진행된 상태이고 GAAP 적자 지속 및 메디케어 LCD 리스크가 남아있어, 166달러 지지선 관리가 병행되어야 하는 포지션이다.</div></div>
+
+
+
+<div class="dim" style="font-size:0.7rem;margin-top:12px">
+예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
