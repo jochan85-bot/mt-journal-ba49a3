@@ -99,7 +99,8 @@ a:hover { text-decoration:underline; }
       font-size:0.67rem; font-weight:600; white-space:nowrap;
       background:#171a24; border:1px solid var(--border); color:#8f95a8; }
 .ev.na { color:#5f6478; background:transparent; border-color:transparent; }
-.rt .ev { display:block; margin:2px 0 0; }
+/* [JOURNAL-REVAMP-20260905 §7] 위 뱃지 폭을 따라 늘어나지 않게 fit-content + 우측 정렬 */
+.rt .ev { display:block; width:fit-content; margin:2px 0 0 auto; }
 /* [CARD-FMT-20260901] 지표 칩 — 리포트 .g 칩과 같은 어법(라벨 dim + 값 bold + 색점) */
 .chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
         border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
@@ -117,7 +118,7 @@ a:hover { text-decoration:underline; }
 .nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
 </style></head>
 <body>
-<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<div class="dim"><a href="../prototype.html">← Prototype 기록</a></div>
 <h1>FRO <span class="dim" style="font-size:1rem">프론트라인</span></h1>
 <div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.11yr, B4)</span></div>
 

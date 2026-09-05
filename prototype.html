@@ -99,7 +99,8 @@ a:hover { text-decoration:underline; }
       font-size:0.67rem; font-weight:600; white-space:nowrap;
       background:#171a24; border:1px solid var(--border); color:#8f95a8; }
 .ev.na { color:#5f6478; background:transparent; border-color:transparent; }
-.rt .ev { display:block; margin:2px 0 0; }
+/* [JOURNAL-REVAMP-20260905 §7] 위 뱃지 폭을 따라 늘어나지 않게 fit-content + 우측 정렬 */
+.rt .ev { display:block; width:fit-content; margin:2px 0 0 auto; }
 /* [CARD-FMT-20260901] 지표 칩 — 리포트 .g 칩과 같은 어법(라벨 dim + 값 bold + 색점) */
 .chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
         border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
@@ -131,12 +132,21 @@ a:hover { text-decoration:underline; }
 .perf .badge { flex:0 0 auto; }
 .perf .tag { flex:0 0 auto; font-size:0.66rem; font-weight:700; color:var(--dim);
              border:1px solid var(--border); border-radius:5px; padding:1px 5px; }
+.nav .nvsel { background:#161923; border:1px solid var(--border); color:var(--dim);
+              border-radius:14px; padding:4px 11px; font-size:0.76rem; font-weight:600;
+              -webkit-appearance:none; appearance:none; cursor:pointer; }
+.nav .nvsel.on { border-color:var(--accent); color:var(--accent);
+                 background:rgba(96,165,250,0.10); }
+/* [JOURNAL-REVAMP-20260905 §2] 모바일 실적 행 — 항목 단위로만 줄바꿈되게 축소 */
+@media (max-width:520px) {
+  .perf .prow { font-size:0.78rem; gap:6px; row-gap:3px; }
+}
 </style></head>
 <body>
 <h1>🧪 Prototype 기록</h1>
-<div class="dim">2026-09-04(미장 ET 기준)까지 청산된 초기 구간 거래 — 보관용이며 전체 통계에는 포함되지 않습니다.</div>
-<div class="nav"><a class="nv" href="index.html">전체</a><a class="nv" href="month-2026-09.html">2026.09</a><a class="nv" href="month-2026-08.html">2026.08</a><a class="nv" href="month-2026-07.html">2026.07</a><a class="nv on" href="prototype.html">🧪 Prototype</a></div><div class="card perf"><div class="ph">🧪 Prototype 구간 실적<span class="dim"> (~2026-09-04 청산분 · 전체 통계 미포함)</span></div><div class="prow">보유 0건 · 청산 127건 · 승률 22% · 평균 -1.95%</div><div class="prow"><span class="badge kr">KR</span><span class="tag">일지</span><span class="pl">실현 <span class="neg">-5,853,180원</span></span><span class="pl">평가 <span class="pos">+0원</span></span><span class="dim" title="투입원금 40,000,000원">원금 대비</span><b class="neg">-14.63%</b></div><div class="prow"><span class="badge us">US</span><span class="tag">일지</span><span class="pl">실현 <span class="neg">-$2,281.99</span></span><span class="pl">평가 <span class="pos">+$0.00</span></span><span class="dim" title="투입원금 $30,000.00">원금 대비</span><b class="neg">-7.61%</b></div><div class="dim" style="font-size:.72rem;margin-top:6px">이 사이트에 기록된 거래의 체결가 기준 실현·평가 손익입니다(수수료·세금 제외, 2026-07-05 기록 개시 이전 거래 미포함). 실현손익에는 보유중 종목의 부분매도 체결분이 포함됩니다. 국장/미장은 통화가 달라 합산하지 않습니다.</div></div><div class="card">
-<div class="dim">마지막 갱신: 2026-09-05 11:37 KST</div>
+<div class="dim">2026-09-07 이전(시장 로컬 진입일 기준) 진입한 초기 구간 거래(보유중 포함) — 보관용이며 전체 통계에는 포함되지 않습니다.</div>
+<div class="nav"><a class="nv" href="index.html">전체</a><a class="nv proto on" href="prototype.html" style="margin-left:auto">🧪 Prototype</a></div><div class="card perf"><div class="ph">🧪 Prototype 구간 실적<span class="dim"> (2026-09-07 이전 진입분 · 전체 통계 미포함)</span></div><div class="prow"><span class="pl">보유 20건</span><span class="pl">청산 127건</span><span class="pl">승률 22%</span><span class="pl">평균 -1.95%</span></div><div class="prow"><span class="badge kr">KR</span><span class="tag">일지</span><span class="pl">실현 <span class="neg">-5,928,380원</span></span><span class="pl">평가 <span class="pos">+1,532,462원</span></span><span class="dim" title="투입원금 40,000,000원">원금 대비</span><b class="neg">-10.99%</b></div><div class="prow"><span class="badge us">US</span><span class="tag">일지</span><span class="pl">실현 <span class="neg">-$1,668.01</span></span><span class="pl">평가 <span class="pos">+$1,584.21</span></span><span class="dim" title="투입원금 $30,000.00">원금 대비</span><b class="neg">-0.28%</b></div><div class="dim" style="font-size:.72rem;margin-top:6px">이 사이트에 기록된 거래의 체결가 기준 실현·평가 손익입니다(수수료·세금 제외, 2026-07-05 기록 개시 이전 거래 미포함). 실현손익에는 보유중 종목의 부분매도 체결분이 포함됩니다. 국장/미장은 통화가 달라 합산하지 않습니다.</div></div><div class="card">
+<div class="dim">예측/확정 중앙 (이번 달): 예측 1.69x (n=3) · 확정 1.68x (n=1)</div><div class="dim">마지막 갱신: 2026-09-05 21:49 KST</div>
 </div><div class="fbar">
  <div class="frow"><span class="flab">시장</span>
   <button class="on" onclick="setf('mkt','ALL',this)">전체</button>
@@ -158,14 +168,95 @@ a:hover { text-decoration:underline; }
   <button class="on" data-lab="매수일" onclick="setsort('date',this)">매수일 ↓</button>
   <button data-lab="수익률" onclick="setsort('ret',this)">수익률</button>
   <button data-lab="RS" onclick="setsort('rs',this)">RS</button>
-  <button data-lab="RVOL" onclick="setsort('rvol',this)">RVOL</button>
-  <button data-lab="피벗%" onclick="setsort('pivot',this)">피벗%</button></div>
+  <button data-lab="예측량" onclick="setsort('pred',this)">예측량</button>
+  <button data-lab="확정량" onclick="setsort('conf',this)">확정량</button>
+  <button data-lab="피벗%" onclick="setsort('pivot',this)">피벗%</button>
+  <button data-lab="매출감속" onclick="setsort('rev',this)">매출감속</button></div>
 </div>
-<div class="list" id="list"><div class="tr" data-mkt="KR" data-st="closed" data-ai="관망"
+<div class="list" id="list"><div class="tr" data-mkt="US" data-st="open" data-ai="관망"
+ data-mon="2026-09"
+ data-date="2026-09-05T04:11:06.367282+09:00" data-ret="-0.023709792144156434"
+ data-rs="80.0"
+ data-rvol="1.95"
+ data-pred="1.689"
+ data-conf="-1"
+ data-rev="1"
+ data-pivot="0.31">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/ITGR_20260905.html"><span class="tk">ITGR</span></a>
+     <span class="nm">인티거 홀딩스</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.09.05 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="neg">-0.02%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.95x">예측 1.69x → 확정 —</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.3%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 80</span><span class="chip"><i style="background:#6B8E9F"></i><em>VCP</em> <b>플랫</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.23yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 3</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 고려"
+ data-mon="2026-09"
+ data-date="2026-09-05T02:18:28.261646+09:00" data-ret="0.1949317738791343"
+ data-rs="93.0"
+ data-rvol="2.05"
+ data-pred="1.6323"
+ data-conf="-1"
+ data-rev="-1"
+ data-pivot="0.44">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/FRO_20260905.html"><span class="tk">FRO</span></a>
+     <span class="nm">프론트라인</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.09.05 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+0.19%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.05x">예측 1.63x → 확정 —</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div>
+ </div>
+ <div class="l3"><span class="rs hi">RS 93</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip" title="리포트 2026-09-04 기준"><i></i><em>수축깊이</em> <b>8.9%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.11yr, B4)</b></span><span class="ai" style="background:#2ecc71">AI 고려 8</span></div>
+</div><div class="tr" data-mkt="KR" data-st="open" data-ai="매수 가능"
+ data-mon="2026-09"
+ data-date="2026-09-04T10:55:10.793333+09:00" data-ret="0.33222591362126247"
+ data-rs="74.0"
+ data-rvol="2.37"
+ data-pred="1.6871"
+ data-conf="1.6824823021391027"
+ data-rev="2"
+ data-pivot="0.84">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/003490_20260904.html"><span class="tk">003490 ☀️</span></a>
+     <span class="nm">대한항공</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.09.04 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+0.33%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.37x">예측 1.69x → 확정 1.68x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 74</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="리포트 2026-09-04 기준"><i></i><em>수축깊이</em> <b>9.3%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.58yr, B3)</b></span><span class="ai" style="background:#f1c40f">AI 가능 6</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
+</div><div class="tr" data-mkt="KR" data-st="open" data-ai="매수 가능"
+ data-mon="2026-09"
+ data-date="2026-09-04T09:21:11.719708+09:00" data-ret="-4.597885293175264"
+ data-rs="74.0"
+ data-rvol="2.0"
+ data-pred="1.2582347470161726"
+ data-conf="1.6478487140168496"
+ data-rev="1"
+ data-pivot="0.32">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/004430_20260904.html"><span class="tk">004430</span></a>
+     <span class="nm">송원산업</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.09.04 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="neg">-4.60%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.00x">예측 1.26x → 확정 1.65x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.3%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 74</span><span class="chip"><i style="background:#8B6F4E"></i><em>VCP</em> <b>수축이탈</b></span><span class="chip" title="리포트 2026-09-04 기준"><i></i><em>수축깊이</em> <b>6.3%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.34yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 6</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr" data-mkt="KR" data-st="closed" data-ai="관망"
  data-mon="2026-09"
  data-date="2026-09-04T09:10:39.305119+09:00" data-ret="-0.7375537799631223"
  data-rs="93.0"
  data-rvol="4.63"
+ data-pred="1.5715686318365965"
+ data-conf="2.1173800204100925"
+ data-rev="1"
  data-pivot="3.76">
  <div class="hd">
   <div class="hl">
@@ -177,11 +268,33 @@ a:hover { text-decoration:underline; }
  </div>
  <div class="l3"><span class="rs hi">RS 93</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip" title="리포트 2026-09-04 기준"><i></i><em>수축깊이</em> <b>7.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.17yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 5</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 고려"
+ data-mon="2026-09"
+ data-date="2026-09-04T02:17:50.651274+09:00" data-ret="5.0181135113377096"
+ data-rs="91.0"
+ data-rvol="2.02"
+ data-pred="2.0587267464691883"
+ data-conf="2.3200866808542626"
+ data-rev="-1"
+ data-pivot="0.58">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/MRX_20260904.html"><span class="tk">MRX</span></a>
+     <span class="nm">마렉스 그룹</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.09.04 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+5.02%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.02x">예측 2.06x → 확정 2.32x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div>
+ </div>
+ <div class="l3"><span class="rs hi">RS 91</span><span class="chip"><i style="background:#6B8E9F"></i><em>VCP</em> <b>플랫</b></span><span class="chip" title="리포트 2026-09-04 기준"><i></i><em>수축깊이</em> <b>6.5%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.54yr, B1)</b></span><span class="ai" style="background:#2ecc71">AI 고려 8</span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="관망"
  data-mon="2026-09"
  data-date="2026-09-03T22:48:24.176799+09:00" data-ret="0.5830805527468933"
  data-rs="86.0"
  data-rvol="2.36"
+ data-pred="1.5833301045102874"
+ data-conf="1.301236478247538"
+ data-rev="-1"
  data-pivot="1.13">
  <div class="hd">
   <div class="hl">
@@ -193,11 +306,52 @@ a:hover { text-decoration:underline; }
  </div>
  <div class="l3"><span class="rs">RS 86</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip" title="리포트 2026-09-03 기준"><i></i><em>수축깊이</em> <b>5.9%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.11yr, B3)</b></span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
+</div><div class="tr" data-mkt="KR" data-st="open" data-ai="관망"
+ data-mon="2026-09"
+ data-date="2026-09-03T09:28:55.809123+09:00" data-ret="-6.209150326797386"
+ data-rs="88.0"
+ data-rvol="2.86"
+ data-pred="1.5805823711870306"
+ data-conf="5.880054399676824"
+ data-rev="-1"
+ data-pivot="1.16">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/088350_20260903.html"><span class="tk">088350 ☀️</span></a>
+     <span class="nm">한화생명</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.09.03 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="neg">-6.21%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.86x">예측 1.58x → 확정 5.88x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.2%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 88</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="리포트 2026-09-03 기준"><i></i><em>수축깊이</em> <b>9.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.21yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
+</div><div class="tr" data-mkt="KR" data-st="open" data-ai="관망"
+ data-mon="2026-09"
+ data-date="2026-09-03T09:27:11.014149+09:00" data-ret="0.6641669905576317"
+ data-rs="79.0"
+ data-rvol="2.81"
+ data-pred="1.5125320241262716"
+ data-conf="2.4319640514756813"
+ data-rev="1"
+ data-pivot="0.85">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/028670_20260903.html"><span class="tk">028670 ☀️</span></a>
+     <span class="nm">팬오션</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.09.03 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+0.66%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.81x">예측 1.51x → 확정 2.43x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 79</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="리포트 2026-09-03 기준"><i></i><em>수축깊이</em> <b>7.3%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.21yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 4</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="매수 가능"
  data-mon="2026-09"
  data-date="2026-09-03T02:13:26.850050+09:00" data-ret="-1.2546125461254607"
  data-rs="80.0"
  data-rvol="2.01"
+ data-pred="2.0548064586307526"
+ data-conf="1.5085826293886742"
+ data-rev="1"
  data-pivot="0.93">
  <div class="hd">
   <div class="hl">
@@ -209,11 +363,33 @@ a:hover { text-decoration:underline; }
  </div>
  <div class="l3"><span class="rs">RS 80</span><span class="chip"><i style="background:#6B8E9F"></i><em>VCP</em> <b>플랫</b></span><span class="chip" title="리포트 2026-09-03 기준"><i></i><em>수축깊이</em> <b>8.9%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.35yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 6</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 가능"
+ data-mon="2026-09"
+ data-date="2026-09-03T02:06:48.035020+09:00" data-ret="2.028145695364232"
+ data-rs="88.0"
+ data-rvol="2.01"
+ data-pred="2.0369673873817535"
+ data-conf="1.907622410198022"
+ data-rev="-1"
+ data-pivot="1.85">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/SLDE_20260903.html"><span class="tk">SLDE</span></a>
+     <span class="nm">슬라이드 인슈어런스</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.09.03 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+2.03%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.01x">예측 2.04x → 확정 1.91x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.9%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 88</span><span class="chip"><i style="background:#8B6F4E"></i><em>VCP</em> <b>수축이탈</b></span><span class="chip" title="리포트 2026-09-03 기준"><i></i><em>수축깊이</em> <b>5.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.44yr, B1+)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="NA"
  data-mon="2026-09"
  data-date="2026-09-02T04:56:47.460366+09:00" data-ret="-0.020518713066332808"
  data-rs="-1"
  data-rvol="-1"
+ data-pred="-1"
+ data-conf="-1"
+ data-rev="1"
  data-pivot="-9999">
  <div class="hd">
   <div class="hl">
@@ -224,12 +400,34 @@ a:hover { text-decoration:underline; }
   <div class="rt"><span class="neg">-0.02%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2)">예측 — → 확정 —</span><span class="ev na" title="진입 기록 미보유">피벗 —</span></div>
  </div>
  <div class="l3"><span class="dim" style="font-size:.72rem">RS —</span><span class="chip" title="리포트 2026-08-31 기준"><i></i><em>수축깊이</em> <b>9.4%</b></span></div>
- <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.82yr, B2)</b></span><span class="dim" style="font-size:.72rem">AI —</span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.82yr, B2)</b></span><span class="dim" style="font-size:.72rem">AI —</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="관망"
+ data-mon="2026-09"
+ data-date="2026-09-01T23:19:33.044840+09:00" data-ret="-1.9885108263367182"
+ data-rs="89.0"
+ data-rvol="2.07"
+ data-pred="1.688412558625347"
+ data-conf="1.785608177061874"
+ data-rev="1"
+ data-pivot="0.73">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/HP_20260901.html"><span class="tk">HP ☀️</span></a>
+     <span class="nm">헬머리치 앤 페인</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.09.01 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="neg">-1.99%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.07x">예측 1.69x → 확정 1.79x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.7%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 89</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="리포트 2026-09-01 기준"><i></i><em>수축깊이</em> <b>9.2%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.81yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 5</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="관망"
  data-mon="2026-09"
  data-date="2026-09-01T09:30:35.420689+09:00" data-ret="-3.6258278145695364"
  data-rs="88.0"
  data-rvol="2.03"
+ data-pred="1.3519282384042923"
+ data-conf="1.2468867745862906"
+ data-rev="-1"
  data-pivot="0.5">
  <div class="hd">
   <div class="hl">
@@ -246,6 +444,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-09-01T09:10:37.719442+09:00" data-ret="-4.232469993682881"
  data-rs="93.0"
  data-rvol="2.37"
+ data-pred="1.2596573776219107"
+ data-conf="0.9890376010710924"
+ data-rev="1"
  data-pivot="3.25">
  <div class="hd">
   <div class="hl">
@@ -262,6 +463,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-09-01T04:55:09.721921+09:00" data-ret="-3.2759511787858346"
  data-rs="-1"
  data-rvol="-1"
+ data-pred="-1"
+ data-conf="-1"
+ data-rev="1"
  data-pivot="-9999">
  <div class="hd">
   <div class="hl">
@@ -272,12 +476,34 @@ a:hover { text-decoration:underline; }
   <div class="rt"><span class="neg">-3.28%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2)">예측 — → 확정 —</span><span class="ev na" title="진입 기록 미보유">피벗 —</span></div>
  </div>
  <div class="l3"><span class="dim" style="font-size:.72rem">RS —</span><span class="chip" title="리포트 2026-08-31 기준"><i></i><em>수축깊이</em> <b>9.4%</b></span></div>
- <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.82yr, B2)</b></span><span class="dim" style="font-size:.72rem">AI —</span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.82yr, B2)</b></span><span class="dim" style="font-size:.72rem">AI —</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 가능"
+ data-mon="2026-08"
+ data-date="2026-08-31T23:06:19.947356+09:00" data-ret="7.273280584297019"
+ data-rs="83.0"
+ data-rvol="2.02"
+ data-pred="1.6014670527842034"
+ data-conf="1.309497981161262"
+ data-rev="-1"
+ data-pivot="0.31">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/TRMD_20260831.html"><span class="tk">TRMD</span></a>
+     <span class="nm">톰</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.08.31 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+7.27%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.02x">예측 1.60x → 확정 1.31x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.3%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 83</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="리포트 2026-08-31 기준"><i></i><em>수축깊이</em> <b>8.0%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.98yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="매수 고려"
  data-mon="2026-08"
  data-date="2026-08-31T22:46:48.422675+09:00" data-ret="-7.976875279327605"
  data-rs="92.0"
  data-rvol="3.12"
+ data-pred="1.6748988717088351"
+ data-conf="1.8454064304858429"
+ data-rev="1"
  data-pivot="0.88">
  <div class="hd">
   <div class="hl">
@@ -294,6 +520,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-28T22:46:35.212937+09:00" data-ret="-1.0254123941150264"
  data-rs="92.0"
  data-rvol="2.62"
+ data-pred="1.5905100592366592"
+ data-conf="1.3504763779495534"
+ data-rev="-1"
  data-pivot="2.02">
  <div class="hd">
   <div class="hl">
@@ -310,6 +539,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-28T11:17:24.211949+09:00" data-ret="-1.015228426395939"
  data-rs="86.0"
  data-rvol="2.04"
+ data-pred="1.651044577975102"
+ data-conf="2.055033179808567"
+ data-rev="-1"
  data-pivot="4.42">
  <div class="hd">
   <div class="hl">
@@ -326,6 +558,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-28T04:06:49.772683+09:00" data-ret="-6.771424965290927"
  data-rs="98.0"
  data-rvol="2.37"
+ data-pred="2.48147359067536"
+ data-conf="1.0678966814869453"
+ data-rev="1"
  data-pivot="3.3">
  <div class="hd">
   <div class="hl">
@@ -342,6 +577,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-28T00:05:12.153093+09:00" data-ret="-6.367996114854623"
  data-rs="96.0"
  data-rvol="3.03"
+ data-pred="-1"
+ data-conf="-1"
+ data-rev="-1"
  data-pivot="4.9">
  <div class="hd">
   <div class="hl">
@@ -358,6 +596,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-27T23:01:41.589935+09:00" data-ret="-4.814618994118052"
  data-rs="82.0"
  data-rvol="2.01"
+ data-pred="1.5719824416872907"
+ data-conf="1.2178236822281607"
+ data-rev="1"
  data-pivot="3.02">
  <div class="hd">
   <div class="hl">
@@ -374,6 +615,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-27T22:45:21.518246+09:00" data-ret="-6.251538357536808"
  data-rs="98.0"
  data-rvol="2.37"
+ data-pred="1.5444068682241578"
+ data-conf="1.423656464473431"
+ data-rev="-1"
  data-pivot="2.46">
  <div class="hd">
   <div class="hl">
@@ -390,6 +634,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-27T04:15:45.975262+09:00" data-ret="-0.6690361697679287"
  data-rs="-1"
  data-rvol="-1"
+ data-pred="-1"
+ data-conf="-1"
+ data-rev="-1"
  data-pivot="-9999">
  <div class="hd">
   <div class="hl">
@@ -406,6 +653,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-27T04:15:38.967738+09:00" data-ret="3.238866396761147"
  data-rs="-1"
  data-rvol="-1"
+ data-pred="-1"
+ data-conf="-1"
+ data-rev="-1"
  data-pivot="-9999">
  <div class="hd">
   <div class="hl">
@@ -422,6 +672,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-27T04:15:17.985163+09:00" data-ret="-1.0582593837843883"
  data-rs="-1"
  data-rvol="-1"
+ data-pred="-1"
+ data-conf="-1"
+ data-rev="-1"
  data-pivot="-9999">
  <div class="hd">
   <div class="hl">
@@ -438,6 +691,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-27T04:15:14.515527+09:00" data-ret="-0.4562334217506704"
  data-rs="-1"
  data-rvol="-1"
+ data-pred="-1"
+ data-conf="-1"
+ data-rev="-1"
  data-pivot="-9999">
  <div class="hd">
   <div class="hl">
@@ -449,11 +705,33 @@ a:hover { text-decoration:underline; }
  </div>
  <div class="l3"><span class="dim" style="font-size:.72rem">RS —</span><span class="chip" title="리포트 2026-08-27 기준"><i></i><em>수축깊이</em> <b>4.9%</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.37yr, B1)</b></span><span class="dim" style="font-size:.72rem">AI —</span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 가능"
+ data-mon="2026-08"
+ data-date="2026-08-27T01:51:40.745456+09:00" data-ret="1.055623223710928"
+ data-rs="88.0"
+ data-rvol="2.54"
+ data-pred="2.3493681099351638"
+ data-conf="1.4530667862311908"
+ data-rev="1"
+ data-pivot="3.05">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/WT_20260827.html"><span class="tk">WT</span></a>
+     <span class="nm">위즈덤트리</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.08.27 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+1.06%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.54x">예측 2.35x → 확정 1.45x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.0%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 88</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="리포트 2026-08-27 기준"><i></i><em>수축깊이</em> <b>5.6%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.12yr, B2)</b></span><span class="ai" style="background:#f1c40f">AI 가능 6</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="NA"
  data-mon="2026-08"
  data-date="2026-08-27T01:41:08.487357+09:00" data-ret="-0.5873304432946465"
  data-rs="87.0"
  data-rvol="2.67"
+ data-pred="-1"
+ data-conf="-1"
+ data-rev="-1"
  data-pivot="1.76">
  <div class="hd">
   <div class="hl">
@@ -470,6 +748,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-27T00:24:12.163663+09:00" data-ret="-0.731188513693163"
  data-rs="87.0"
  data-rvol="2.14"
+ data-pred="1.94721888447198"
+ data-conf="1.003713049521937"
+ data-rev="-1"
  data-pivot="1.38">
  <div class="hd">
   <div class="hl">
@@ -486,6 +767,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-26T23:24:45.921397+09:00" data-ret="-0.3503503503503518"
  data-rs="80.0"
  data-rvol="2.07"
+ data-pred="1.7181698412179072"
+ data-conf="1.6608927507867233"
+ data-rev="-1"
  data-pivot="0.34">
  <div class="hd">
   <div class="hl">
@@ -502,6 +786,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-26T23:00:40.001901+09:00" data-ret="0.9353692181506297"
  data-rs="96.0"
  data-rvol="2.61"
+ data-pred="1.725540914355903"
+ data-conf="1.3903072226968036"
+ data-rev="-1"
  data-pivot="0.43">
  <div class="hd">
   <div class="hl">
@@ -518,6 +805,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-26T22:47:10.933560+09:00" data-ret="1.8734824868450481"
  data-rs="85.0"
  data-rvol="3.81"
+ data-pred="1.7760808726157098"
+ data-conf="2.1601332230727794"
+ data-rev="1"
  data-pivot="0.55">
  <div class="hd">
   <div class="hl">
@@ -534,6 +824,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-26T09:10:38.371833+09:00" data-ret="-8.035113345075963"
  data-rs="86.0"
  data-rvol="3.15"
+ data-pred="1.3837991494020812"
+ data-conf="1.9922197482490998"
+ data-rev="1"
  data-pivot="3.95">
  <div class="hd">
   <div class="hl">
@@ -550,6 +843,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-25T23:29:50.274461+09:00" data-ret="-6.313327543386514"
  data-rs="85.0"
  data-rvol="2.08"
+ data-pred="1.744507543292034"
+ data-conf="2.0068330859255408"
+ data-rev="1"
  data-pivot="2.85">
  <div class="hd">
   <div class="hl">
@@ -561,11 +857,33 @@ a:hover { text-decoration:underline; }
  </div>
  <div class="l3"><span class="rs">RS 85</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="현재 후보목록 최신값 (진입 시점값 아님)"><i></i><em>수축깊이</em> <b>9.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.82yr, B2)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 가능"
+ data-mon="2026-08"
+ data-date="2026-08-25T23:03:34.600136+09:00" data-ret="-2.2803243816549172"
+ data-rs="93.0"
+ data-rvol="3.45"
+ data-pred="1.960497953134164"
+ data-conf="1.1780839800432152"
+ data-rev="1"
+ data-pivot="0.56">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/NTRA_20260825.html"><span class="tk">NTRA</span></a>
+     <span class="nm">나테라</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.08.25 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="neg">-2.28%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.45x">예측 1.96x → 확정 1.18x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div>
+ </div>
+ <div class="l3"><span class="rs hi">RS 93</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="현재 후보목록 최신값 (진입 시점값 아님)"><i></i><em>수축깊이</em> <b>7.9%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.90yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-25T22:59:09.116976+09:00" data-ret="-4.742037340817924"
  data-rs="80.0"
  data-rvol="3.7"
+ data-pred="1.9504555548727658"
+ data-conf="1.6613359363244582"
+ data-rev="-1"
  data-pivot="1.75">
  <div class="hd">
   <div class="hl">
@@ -582,6 +900,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-25T22:45:11.799795+09:00" data-ret="-2.1160674544608917"
  data-rs="80.0"
  data-rvol="3.08"
+ data-pred="1.668962636977096"
+ data-conf="1.5452977848521023"
+ data-rev="-1"
  data-pivot="0.68">
  <div class="hd">
   <div class="hl">
@@ -598,6 +919,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-24T23:33:31.781438+09:00" data-ret="-2.156185116380719"
  data-rs="90.0"
  data-rvol="2.01"
+ data-pred="1.7400463482163588"
+ data-conf="1.3273967914306593"
+ data-rev="1"
  data-pivot="0.84">
  <div class="hd">
   <div class="hl">
@@ -614,6 +938,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-24T22:46:38.009483+09:00" data-ret="-3.738368318545767"
  data-rs="89.0"
  data-rvol="2.12"
+ data-pred="1.4938780535767606"
+ data-conf="1.4039672797520828"
+ data-rev="1"
  data-pivot="2.38">
  <div class="hd">
   <div class="hl">
@@ -630,6 +957,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-24T09:13:19.894043+09:00" data-ret="-8.276532479414456"
  data-rs="81.0"
  data-rvol="4.24"
+ data-pred="1.5948402909524513"
+ data-conf="3.2566168613639888"
+ data-rev="1"
  data-pivot="1.78">
  <div class="hd">
   <div class="hl">
@@ -646,6 +976,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-24T09:10:25.442964+09:00" data-ret="-5.142857142857142"
  data-rs="87.0"
  data-rvol="5.71"
+ data-pred="1.6491821229602879"
+ data-conf="1.140129650810289"
+ data-rev="1"
  data-pivot="1.16">
  <div class="hd">
   <div class="hl">
@@ -657,11 +990,33 @@ a:hover { text-decoration:underline; }
  </div>
  <div class="l3"><span class="rs">RS 87</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="현재 후보목록 최신값 (진입 시점값 아님)"><i></i><em>수축깊이</em> <b>12.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.62yr, B2)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr" data-mkt="KR" data-st="open" data-ai="관망"
+ data-mon="2026-08"
+ data-date="2026-08-24T09:10:20.523477+09:00" data-ret="-1.9028824131026583"
+ data-rs="89.0"
+ data-rvol="5.14"
+ data-pred="1.592868276045123"
+ data-conf="1.4632459135099072"
+ data-rev="1"
+ data-pivot="0.76">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/007340_20260824.html"><span class="tk">007340 ☀️</span></a>
+     <span class="nm">DN오토모티브</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.08.24 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="neg">-1.90%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 5.14x">예측 1.59x → 확정 1.46x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 89</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="현재 후보목록 최신값 (진입 시점값 아님)"><i></i><em>수축깊이</em> <b>9.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (≥1.77yr, B1+)</b></span><span class="ai" style="background:#e67e22">AI 관망 5</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-22T03:30:47.793525+09:00" data-ret="-4.570028011204489"
  data-rs="95.0"
  data-rvol="1.41"
+ data-pred="1.6458329435075518"
+ data-conf="2.6874699075749517"
+ data-rev="2"
  data-pivot="4.14">
  <div class="hd">
   <div class="hl">
@@ -678,6 +1033,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-22T03:19:59.931164+09:00" data-ret="1.7822681348620666"
  data-rs="92.0"
  data-rvol="1.43"
+ data-pred="1.6617055294532834"
+ data-conf="1.8368415764104782"
+ data-rev="-1"
  data-pivot="3.1">
  <div class="hd">
   <div class="hl">
@@ -694,6 +1052,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-22T01:11:49.331256+09:00" data-ret="-6.979236250278347"
  data-rs="98.0"
  data-rvol="1.44"
+ data-pred="1.5937965915838952"
+ data-conf="1.8233756129119316"
+ data-rev="-1"
  data-pivot="4.62">
  <div class="hd">
   <div class="hl">
@@ -710,6 +1071,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-22T00:55:07.833038+09:00" data-ret="9.250346684068859"
  data-rs="81.0"
  data-rvol="1.41"
+ data-pred="1.5614427395004606"
+ data-conf="1.254699087123489"
+ data-rev="-1"
  data-pivot="4.98">
  <div class="hd">
   <div class="hl">
@@ -726,6 +1090,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-21T23:49:08.240185+09:00" data-ret="2.082555534814264"
  data-rs="81.0"
  data-rvol="1.44"
+ data-pred="1.519904237545775"
+ data-conf="1.8826326780769056"
+ data-rev="-1"
  data-pivot="1.77">
  <div class="hd">
   <div class="hl">
@@ -742,6 +1109,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-21T23:32:15.552708+09:00" data-ret="-1.7048904343986335"
  data-rs="83.0"
  data-rvol="1.45"
+ data-pred="1.4851935066635338"
+ data-conf="1.3181795457196661"
+ data-rev="1"
  data-pivot="2.21">
  <div class="hd">
   <div class="hl">
@@ -758,6 +1128,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-21T23:14:29.860595+09:00" data-ret="-1.196060206500527"
  data-rs="87.0"
  data-rvol="1.73"
+ data-pred="1.553965859621849"
+ data-conf="1.50562708828221"
+ data-rev="1"
  data-pivot="0.46">
  <div class="hd">
   <div class="hl">
@@ -774,6 +1147,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-21T23:05:43.362009+09:00" data-ret="-1.8531052033136628"
  data-rs="87.0"
  data-rvol="1.55"
+ data-pred="1.4543489187506269"
+ data-conf="1.4545770660351203"
+ data-rev="-1"
  data-pivot="0.8">
  <div class="hd">
   <div class="hl">
@@ -790,6 +1166,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-21T22:59:22.763816+09:00" data-ret="-2.978877671071703"
  data-rs="99.0"
  data-rvol="1.41"
+ data-pred="1.391414899144428"
+ data-conf="1.829662995408891"
+ data-rev="-1"
  data-pivot="3.97">
  <div class="hd">
   <div class="hl">
@@ -806,6 +1185,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-21T22:57:36.198901+09:00" data-ret="1.2895823457070017"
  data-rs="85.0"
  data-rvol="1.41"
+ data-pred="1.3706079650859917"
+ data-conf="1.5478451132032678"
+ data-rev="-1"
  data-pivot="4.23">
  <div class="hd">
   <div class="hl">
@@ -822,6 +1204,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-21T22:54:46.087476+09:00" data-ret="1.105850524179906"
  data-rs="91.0"
  data-rvol="1.48"
+ data-pred="1.393636170636266"
+ data-conf="1.1326398403672495"
+ data-rev="-1"
  data-pivot="4.93">
  <div class="hd">
   <div class="hl">
@@ -833,11 +1218,52 @@ a:hover { text-decoration:underline; }
  </div>
  <div class="l3"><span class="rs hi">RS 91</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip" title="현재 후보목록 최신값 (진입 시점값 아님)"><i></i><em>수축깊이</em> <b>12.6%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.19yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 가능"
+ data-mon="2026-08"
+ data-date="2026-08-21T22:45:35.161963+09:00" data-ret="6.902505970940971"
+ data-rs="86.0"
+ data-rvol="2.12"
+ data-pred="1.4942796740299686"
+ data-conf="1.208142023248571"
+ data-rev="-1"
+ data-pivot="1.89">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/CMBT_20260821.html"><span class="tk">CMBT</span></a>
+     <span class="nm">CMB테크</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.08.21 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+6.90%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.12x">예측 1.49x → 확정 1.21x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.9%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 86</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="현재 후보목록 최신값 (진입 시점값 아님)"><i></i><em>수축깊이</em> <b>5.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.81yr, B3)</b></span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 고려"
+ data-mon="2026-08"
+ data-date="2026-08-21T03:02:12.829113+09:00" data-ret="-0.5786939731754988"
+ data-rs="81.0"
+ data-rvol="2.07"
+ data-pred="2.152594777129621"
+ data-conf="2.0071187883109265"
+ data-rev="-1"
+ data-pivot="4.91">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/LB_20260821.html"><span class="tk">LB</span></a>
+     <span class="nm">랜드브릿지</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.08.21 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="neg">-0.58%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.07x">예측 2.15x → 확정 2.01x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.9%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 81</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="현재 후보목록 최신값 (진입 시점값 아님)"><i></i><em>수축깊이</em> <b>7.3%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.51yr, B2)</b></span><span class="ai" style="background:#2ecc71">AI 고려 8</span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-21T02:54:27.000576+09:00" data-ret="0.5944500167168095"
  data-rs="88.0"
  data-rvol="1.4"
+ data-pred="1.6312069059986287"
+ data-conf="2.0159073809633483"
+ data-rev="-1"
  data-pivot="0.83">
  <div class="hd">
   <div class="hl">
@@ -854,6 +1280,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-21T01:06:21.497918+09:00" data-ret="-3.29489291598023"
  data-rs="94.0"
  data-rvol="2.05"
+ data-pred="1.9628892782241105"
+ data-conf="1.1333649989444796"
+ data-rev="1"
  data-pivot="0.78">
  <div class="hd">
   <div class="hl">
@@ -870,6 +1299,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-20T23:33:40.257572+09:00" data-ret="-6.680647094068316"
  data-rs="90.0"
  data-rvol="1.56"
+ data-pred="1.5515576335342596"
+ data-conf="1.1801259955975785"
+ data-rev="1"
  data-pivot="0.32">
  <div class="hd">
   <div class="hl">
@@ -886,6 +1318,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-20T23:11:34.734517+09:00" data-ret="-3.2962939971444545"
  data-rs="96.0"
  data-rvol="1.71"
+ data-pred="1.5272158698249334"
+ data-conf="0.808475654167772"
+ data-rev="1"
  data-pivot="0.4">
  <div class="hd">
   <div class="hl">
@@ -895,13 +1330,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-3.30%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.71x">예측 1.53x → 확정 0.81x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div>
  </div>
- <div class="l3"><span class="rs hi">RS 96</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
+ <div class="l3"><span class="rs hi">RS 96</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>12.1%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.87yr, B1)</b></span><span class="ai" style="background:#2ecc71">AI 고려 8</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-20T22:55:50.579892+09:00" data-ret="2.9021692982633445"
  data-rs="90.0"
  data-rvol="1.42"
+ data-pred="1.3752073816981132"
+ data-conf="1.7040236832520683"
+ data-rev="1"
  data-pivot="2.25">
  <div class="hd">
   <div class="hl">
@@ -918,6 +1356,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-20T22:45:08.673003+09:00" data-ret="1.3156426139851602"
  data-rs="80.0"
  data-rvol="1.58"
+ data-pred="1.369744793229084"
+ data-conf="1.3807816629169243"
+ data-rev="1"
  data-pivot="1.71">
  <div class="hd">
   <div class="hl">
@@ -934,6 +1375,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-20T09:29:39.657556+09:00" data-ret="-1.015162266664729"
  data-rs="87.0"
  data-rvol="1.43"
+ data-pred="1.2189438885006467"
+ data-conf="0.83844126004896"
+ data-rev="1"
  data-pivot="1.11">
  <div class="hd">
   <div class="hl">
@@ -950,6 +1394,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-18T09:14:34.005287+09:00" data-ret="-4.1871921182266005"
  data-rs="77.0"
  data-rvol="3.47"
+ data-pred="1.4872026076012874"
+ data-conf="2.3828283207239265"
+ data-rev="1"
  data-pivot="0.5">
  <div class="hd">
   <div class="hl">
@@ -966,6 +1413,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-18T09:10:52.836872+09:00" data-ret="-7.894736842105263"
  data-rs="84.0"
  data-rvol="4.49"
+ data-pred="1.5232875634907144"
+ data-conf="1.2029642308076136"
+ data-rev="1"
  data-pivot="1.69">
  <div class="hd">
   <div class="hl">
@@ -982,6 +1432,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-18T09:10:37.667400+09:00" data-ret="-8.283341024457776"
  data-rs="88.0"
  data-rvol="5.36"
+ data-pred="1.615076348099973"
+ data-conf="2.117697190825818"
+ data-rev="-1"
  data-pivot="1.18">
  <div class="hd">
   <div class="hl">
@@ -991,13 +1444,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-8.28%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 5.36x">예측 1.62x → 확정 2.12x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.2%</span></div>
  </div>
- <div class="l3"><span class="rs">RS 88</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l3"><span class="rs">RS 88</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>9.5%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.39yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-18T09:10:29.908374+09:00" data-ret="-7.361199560006945"
  data-rs="91.0"
  data-rvol="2.27"
+ data-pred="1.2159648642573841"
+ data-conf="1.0739752415960702"
+ data-rev="1"
  data-pivot="0.67">
  <div class="hd">
   <div class="hl">
@@ -1014,6 +1470,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-14T22:51:58.129263+09:00" data-ret="1.8556741179219503"
  data-rs="95.0"
  data-rvol="2.87"
+ data-pred="1.6836172659470856"
+ data-conf="3.529768726173895"
+ data-rev="-1"
  data-pivot="4.77">
  <div class="hd">
   <div class="hl">
@@ -1023,13 +1482,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="pos">+1.86%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.87x">예측 1.68x → 확정 3.53x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.8%</span></div>
  </div>
- <div class="l3"><span class="rs hi">RS 95</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
+ <div class="l3"><span class="rs hi">RS 95</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>9.8%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (1.80yr, B1)</b></span><span class="ai" style="background:#2ecc71">AI 고려 8</span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-14T22:45:34.096136+09:00" data-ret="-4.068213021172047"
  data-rs="98.0"
  data-rvol="2.68"
+ data-pred="1.6016360150324047"
+ data-conf="1.3041733547351524"
+ data-rev="1"
  data-pivot="3.63">
  <div class="hd">
   <div class="hl">
@@ -1039,13 +1501,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-4.07%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.68x">예측 1.60x → 확정 1.30x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.6%</span></div>
  </div>
- <div class="l3"><span class="rs hi">RS 98</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l3"><span class="rs hi">RS 98</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>12.6%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (1.16yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-14T13:43:03.563154+09:00" data-ret="-5.557633223248921"
  data-rs="79.0"
  data-rvol="3.1"
+ data-pred="2.4615249506972057"
+ data-conf="3.2079801693887657"
+ data-rev="-1"
  data-pivot="0.36">
  <div class="hd">
   <div class="hl">
@@ -1062,6 +1527,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-13T22:52:28.454979+09:00" data-ret="-6.741853137090651"
  data-rs="97.0"
  data-rvol="2.96"
+ data-pred="1.7008920486926822"
+ data-conf="2.611908444643032"
+ data-rev="1"
  data-pivot="0.58">
  <div class="hd">
   <div class="hl">
@@ -1078,6 +1546,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-13T22:46:15.220281+09:00" data-ret="2.797822374039291"
  data-rs="98.0"
  data-rvol="1.73"
+ data-pred="1.4066364058999241"
+ data-conf="1.2015049408011875"
+ data-rev="1"
  data-pivot="3.12">
  <div class="hd">
   <div class="hl">
@@ -1087,13 +1558,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="pos">+2.80%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.73x">예측 1.41x → 확정 1.20x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.1%</span></div>
  </div>
- <div class="l3"><span class="rs hi">RS 98</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l3"><span class="rs hi">RS 98</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>12.0%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (1.16yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="관망"
  data-mon="2026-08"
  data-date="2026-08-13T09:37:26.376389+09:00" data-ret="-3.4283949346236957"
  data-rs="89.0"
  data-rvol="1.42"
+ data-pred="1.2223109642994672"
+ data-conf="1.1755384612751216"
+ data-rev="1"
  data-pivot="4.52">
  <div class="hd">
   <div class="hl">
@@ -1110,6 +1584,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-13T09:27:05.001783+09:00" data-ret="-4.094827586206897"
  data-rs="98.0"
  data-rvol="1.41"
+ data-pred="1.1799327758262577"
+ data-conf="1.398645190519117"
+ data-rev="1"
  data-pivot="3.12">
  <div class="hd">
   <div class="hl">
@@ -1126,6 +1603,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-13T09:10:04.475221+09:00" data-ret="-3.9379474940334127"
  data-rs="88.0"
  data-rvol="3.15"
+ data-pred="1.354961343469183"
+ data-conf="1.0696060618528405"
+ data-rev="2"
  data-pivot="0.84">
  <div class="hd">
   <div class="hl">
@@ -1142,6 +1622,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-13T01:39:17.390177+09:00" data-ret="-3.8444244604316413"
  data-rs="90.0"
  data-rvol="1.79"
+ data-pred="1.8592226677972807"
+ data-conf="1.4612412761714855"
+ data-rev="1"
  data-pivot="3.04">
  <div class="hd">
   <div class="hl">
@@ -1158,6 +1641,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-13T00:40:40.214755+09:00" data-ret="-0.8563283194689775"
  data-rs="97.0"
  data-rvol="1.95"
+ data-pred="1.8625011347371772"
+ data-conf="2.2578080627291204"
+ data-rev="2"
  data-pivot="0.39">
  <div class="hd">
   <div class="hl">
@@ -1174,6 +1660,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-12T11:06:50.612561+09:00" data-ret="-4.325206750364346"
  data-rs="98.0"
  data-rvol="1.53"
+ data-pred="1.3824569232926287"
+ data-conf="1.1682426677085989"
+ data-rev="1"
  data-pivot="1.72">
  <div class="hd">
   <div class="hl">
@@ -1190,6 +1679,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-12T09:52:34.418903+09:00" data-ret="-4.089219330855019"
  data-rs="89.0"
  data-rvol="1.6"
+ data-pred="1.3233728548325991"
+ data-conf="1.3596064090963527"
+ data-rev="2"
  data-pivot="1.0">
  <div class="hd">
   <div class="hl">
@@ -1206,6 +1698,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-12T09:34:56.235837+09:00" data-ret="-4.414587332053743"
  data-rs="80.0"
  data-rvol="1.41"
+ data-pred="1.2232062739062537"
+ data-conf="1.6620953950280906"
+ data-rev="2"
  data-pivot="2.36">
  <div class="hd">
   <div class="hl">
@@ -1215,13 +1710,35 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-4.41%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.41x">예측 1.22x → 확정 1.66x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.4%</span></div>
  </div>
- <div class="l3"><span class="rs">RS 80</span><span class="dim" style="font-size:.72rem">VCP —</span></div>
+ <div class="l3"><span class="rs">RS 80</span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>8.8%</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.36yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
+</div><div class="tr" data-mkt="KR" data-st="open" data-ai="매수 가능"
+ data-mon="2026-08"
+ data-date="2026-08-12T09:11:00.902870+09:00" data-ret="26.11303656186919"
+ data-rs="77.0"
+ data-rvol="4.62"
+ data-pred="1.5055592569342124"
+ data-conf="7.960227380025808"
+ data-rev="1"
+ data-pivot="3.77">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/161890_20260812.html"><span class="tk">161890 ☀️</span></a>
+     <span class="nm">한국콜마</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.08.12 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+26.11%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 4.62x">예측 1.51x → 확정 7.96x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.8%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 77</span><span class="chip" title="현재 후보목록 최신값 (진입 시점값 아님)"><i></i><em>수축깊이</em> <b>10.1%</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.36yr, B2)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-12T09:10:29.601970+09:00" data-ret="-0.9279662509814058"
  data-rs="90.0"
  data-rvol="5.82"
+ data-pred="1.6596110282096026"
+ data-conf="1.9735788901905815"
+ data-rev="1"
  data-pivot="0.98">
  <div class="hd">
   <div class="hl">
@@ -1238,6 +1755,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-11T23:14:43.413182+09:00" data-ret="-1.4675542410744642"
  data-rs="95.0"
  data-rvol="1.53"
+ data-pred="1.4788738641854124"
+ data-conf="0.9154707591238977"
+ data-rev="1"
  data-pivot="3.65">
  <div class="hd">
   <div class="hl">
@@ -1254,6 +1774,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-11T22:46:09.197910+09:00" data-ret="3.8385225885225833"
  data-rs="80.0"
  data-rvol="2.04"
+ data-pred="1.4769655026605626"
+ data-conf="1.951838897473799"
+ data-rev="2"
  data-pivot="0.85">
  <div class="hd">
   <div class="hl">
@@ -1265,11 +1788,33 @@ a:hover { text-decoration:underline; }
  </div>
  <div class="l3"><span class="rs">RS 80</span><span class="chip" title="현재 후보목록 최신값 (진입 시점값 아님)"><i></i><em>수축깊이</em> <b>5.9%</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.37yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="관망"
+ data-mon="2026-08"
+ data-date="2026-08-11T22:46:05.160330+09:00" data-ret="5.221960379385289"
+ data-rs="80.0"
+ data-rvol="3.05"
+ data-pred="1.663687048036882"
+ data-conf="2.366839630284676"
+ data-rev="-1"
+ data-pivot="1.28">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/CLBK_20260811.html"><span class="tk">CLBK</span></a>
+     <span class="nm">컬럼비아 파이낸셜</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.08.11 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+5.22%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.05x">예측 1.66x → 확정 2.37x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.3%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 80</span><span class="chip" title="현재 후보목록 최신값 (진입 시점값 아님)"><i></i><em>수축깊이</em> <b>3.1%</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.79yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 4</span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-11T09:10:30.632596+09:00" data-ret="-1.9573878399445694"
  data-rs="90.0"
  data-rvol="1.57"
+ data-pred="1.0765171120419514"
+ data-conf="0.9078768933683118"
+ data-rev="1"
  data-pivot="3.21">
  <div class="hd">
   <div class="hl">
@@ -1286,6 +1831,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-11T04:24:21.040634+09:00" data-ret="6.7337016131189396"
  data-rs="90.0"
  data-rvol="1.74"
+ data-pred="1.9648700602785785"
+ data-conf="2.558918945849565"
+ data-rev="1"
  data-pivot="0.49">
  <div class="hd">
   <div class="hl">
@@ -1302,6 +1850,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-11T00:08:33.194132+09:00" data-ret="0.18315018315017273"
  data-rs="97.0"
  data-rvol="1.54"
+ data-pred="1.60454329148277"
+ data-conf="2.357002719416727"
+ data-rev="1"
  data-pivot="0.4">
  <div class="hd">
   <div class="hl">
@@ -1311,13 +1862,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="pos">+0.18%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.54x">예측 1.60x → 확정 2.36x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div>
  </div>
- <div class="l3"><span class="rs hi">RS 97</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l3"><span class="rs hi">RS 97</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>18.0%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.90yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-10T22:56:46.046869+09:00" data-ret="-4.791976225854393"
  data-rs="98.0"
  data-rvol="1.46"
+ data-pred="1.3871204005197355"
+ data-conf="1.2580374729371164"
+ data-rev="1"
  data-pivot="1.37">
  <div class="hd">
   <div class="hl">
@@ -1327,13 +1881,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-4.79%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.46x">예측 1.39x → 확정 1.26x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.4%</span></div>
  </div>
- <div class="l3"><span class="rs hi">RS 98</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l3"><span class="rs hi">RS 98</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>10.1%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (1.16yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-10T09:51:33.339916+09:00" data-ret="-2.0527859237536656"
  data-rs="85.0"
  data-rvol="2.14"
+ data-pred="1.5411169395727915"
+ data-conf="2.0269034624580273"
+ data-rev="1"
  data-pivot="0.59">
  <div class="hd">
   <div class="hl">
@@ -1350,6 +1907,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-10T09:29:01.336533+09:00" data-ret="-4.657555440948947"
  data-rs="98.0"
  data-rvol="1.87"
+ data-pred="1.3600444107887897"
+ data-conf="1.8250774380758212"
+ data-rev="1"
  data-pivot="0.97">
  <div class="hd">
   <div class="hl">
@@ -1361,11 +1921,33 @@ a:hover { text-decoration:underline; }
  </div>
  <div class="l3"><span class="rs hi">RS 98</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="현재 후보목록 최신값 (진입 시점값 아님)"><i></i><em>수축깊이</em> <b>20.5%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.64yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 5</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr" data-mkt="KR" data-st="open" data-ai="매수 가능"
+ data-mon="2026-08"
+ data-date="2026-08-10T09:17:34.369953+09:00" data-ret="27.500000000000004"
+ data-rs="86.0"
+ data-rvol="1.75"
+ data-pred="1.1724253028185547"
+ data-conf="1.5401569854335468"
+ data-rev="-1"
+ data-pivot="1.27">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/001450_20260810.html"><span class="tk">001450</span></a>
+     <span class="nm">현대해상</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.08.10 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+27.50%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.75x">예측 1.17x → 확정 1.54x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.3%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 86</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="현재 후보목록 최신값 (진입 시점값 아님)"><i></i><em>수축깊이</em> <b>7.9%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.06yr, B2)</b></span><span class="ai" style="background:#f1c40f">AI 가능 6</span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="관망"
  data-mon="2026-08"
  data-date="2026-08-10T09:12:36.037536+09:00" data-ret="0.4554884369303376"
  data-rs="95.0"
  data-rvol="35.67"
+ data-pred="3.044773542457432"
+ data-conf="13.159044634372638"
+ data-rev="1"
  data-pivot="4.95">
  <div class="hd">
   <div class="hl">
@@ -1382,6 +1964,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-10T09:12:02.824536+09:00" data-ret="-4.238723905725837"
  data-rs="83.0"
  data-rvol="8.16"
+ data-pred="1.8703329321251823"
+ data-conf="3.0554689034783666"
+ data-rev="1"
  data-pivot="4.69">
  <div class="hd">
   <div class="hl">
@@ -1398,6 +1983,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-10T09:11:00.712744+09:00" data-ret="3.811827956989247"
  data-rs="93.0"
  data-rvol="2.78"
+ data-pred="1.2729761691412478"
+ data-conf="1.530030872066808"
+ data-rev="1"
  data-pivot="0.54">
  <div class="hd">
   <div class="hl">
@@ -1407,13 +1995,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="pos">+3.81%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.78x">예측 1.27x → 확정 1.53x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div>
  </div>
- <div class="l3"><span class="rs hi">RS 93</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs hi">RS 93</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>12.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.54yr, B1)</b></span><span class="ai" style="background:#2ecc71">AI 고려 8</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="관망"
  data-mon="2026-08"
  data-date="2026-08-10T09:10:13.425317+09:00" data-ret="-2.032518930099059"
  data-rs="93.0"
  data-rvol="2.71"
+ data-pred="1.2892597990546688"
+ data-conf="0.815673923099364"
+ data-rev="1"
  data-pivot="3.64">
  <div class="hd">
   <div class="hl">
@@ -1423,13 +2014,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-2.03%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.71x">예측 1.29x → 확정 0.82x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.6%</span></div>
  </div>
- <div class="l3"><span class="rs hi">RS 93</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
+ <div class="l3"><span class="rs hi">RS 93</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>8.3%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.85yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 5</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="관망"
  data-mon="2026-08"
  data-date="2026-08-08T00:01:04.089351+09:00" data-ret="-3.9922955699527254"
  data-rs="80.0"
  data-rvol="1.83"
+ data-pred="1.7325170778685381"
+ data-conf="2.322500047320702"
+ data-rev="2"
  data-pivot="2.96">
  <div class="hd">
   <div class="hl">
@@ -1446,6 +2040,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-07T23:48:48.080891+09:00" data-ret="-4.207920792079204"
  data-rs="81.0"
  data-rvol="1.8"
+ data-pred="1.6943186770611527"
+ data-conf="3.000502661528349"
+ data-rev="1"
  data-pivot="4.91">
  <div class="hd">
   <div class="hl">
@@ -1455,13 +2052,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-4.21%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.80x">예측 1.69x → 확정 3.00x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.9%</span></div>
  </div>
- <div class="l3"><span class="rs">RS 81</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs">RS 81</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>6.9%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.73yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 5</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-07T22:45:57.572327+09:00" data-ret="-4.945415871625638"
  data-rs="80.0"
  data-rvol="1.74"
+ data-pred="1.4094170235790542"
+ data-conf="2.430779619071695"
+ data-rev="1"
  data-pivot="4.51">
  <div class="hd">
   <div class="hl">
@@ -1478,6 +2078,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-07T11:51:30.419257+09:00" data-ret="-0.5191137077452576"
  data-rs="70.0"
  data-rvol="1.57"
+ data-pred="1.454983385156681"
+ data-conf="2.2636123201306626"
+ data-rev="1"
  data-pivot="0.42">
  <div class="hd">
   <div class="hl">
@@ -1494,6 +2097,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-07T09:40:02.509722+09:00" data-ret="-2.293608245056954"
  data-rs="80.0"
  data-rvol="1.44"
+ data-pred="1.2414867609046214"
+ data-conf="0.6359978591577521"
+ data-rev="1"
  data-pivot="2.95">
  <div class="hd">
   <div class="hl">
@@ -1510,6 +2116,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-07T09:12:48.815097+09:00" data-ret="-4.1877998629198085"
  data-rs="92.0"
  data-rvol="1.43"
+ data-pred="1.052073342196498"
+ data-conf="0.7694484831585087"
+ data-rev="2"
  data-pivot="0.97">
  <div class="hd">
   <div class="hl">
@@ -1526,6 +2135,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-07T09:10:31.099162+09:00" data-ret="-0.18902439024390244"
  data-rs="80.0"
  data-rvol="1.46"
+ data-pred="1.0509909617400353"
+ data-conf="0.5307434247245144"
+ data-rev="2"
  data-pivot="1.86">
  <div class="hd">
   <div class="hl">
@@ -1535,13 +2147,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-0.19%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.46x">예측 1.05x → 확정 0.53x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.9%</span></div>
  </div>
- <div class="l3"><span class="rs">RS 80</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs">RS 80</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>7.8%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.36yr, B1)</b></span><span class="ai" style="background:#2ecc71">AI 고려 8</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="관망"
  data-mon="2026-08"
  data-date="2026-08-07T09:10:13.621427+09:00" data-ret="-4.171157231422238"
  data-rs="92.0"
  data-rvol="1.47"
+ data-pred="1.0533636834391509"
+ data-conf="0.6956765163268196"
+ data-rev="1"
  data-pivot="0.43">
  <div class="hd">
   <div class="hl">
@@ -1551,13 +2166,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-4.17%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.47x">예측 1.05x → 확정 0.70x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div>
  </div>
- <div class="l3"><span class="rs hi">RS 92</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
+ <div class="l3"><span class="rs hi">RS 92</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>10.5%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.85yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 5</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="관망"
  data-mon="2026-08"
  data-date="2026-08-06T09:43:28.002252+09:00" data-ret="-0.34041574422817034"
  data-rs="82.0"
  data-rvol="1.56"
+ data-pred="1.2970113364144713"
+ data-conf="1.6297936440737248"
+ data-rev="1"
  data-pivot="3.51">
  <div class="hd">
   <div class="hl">
@@ -1574,6 +2192,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-06T09:29:05.731984+09:00" data-ret="1.2515463917525773"
  data-rs="78.0"
  data-rvol="2.02"
+ data-pred="1.4308558317487978"
+ data-conf="0.7471170553250007"
+ data-rev="2"
  data-pivot="0.41">
  <div class="hd">
   <div class="hl">
@@ -1583,13 +2204,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="pos">+1.25%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.02x">예측 1.43x → 확정 0.75x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div>
  </div>
- <div class="l3"><span class="rs">RS 78</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs">RS 78</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>11.2%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.36yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 6</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-06T09:14:02.400597+09:00" data-ret="0.4946814594532836"
  data-rs="78.0"
  data-rvol="1.42"
+ data-pred="1.0738325027877615"
+ data-conf="0.7113972413216807"
+ data-rev="1"
  data-pivot="2.22">
  <div class="hd">
   <div class="hl">
@@ -1606,6 +2230,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-06T09:10:22.307133+09:00" data-ret="1.1533469992341596"
  data-rs="81.0"
  data-rvol="3.59"
+ data-pred="1.4147715394830316"
+ data-conf="1.2534162279529415"
+ data-rev="-1"
  data-pivot="2.07">
  <div class="hd">
   <div class="hl">
@@ -1622,6 +2249,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-06T09:10:11.581390+09:00" data-ret="-4.0756823465258405"
  data-rs="87.0"
  data-rvol="2.18"
+ data-pred="1.1998217316810091"
+ data-conf="0.9312557979086009"
+ data-rev="1"
  data-pivot="1.51">
  <div class="hd">
   <div class="hl">
@@ -1631,13 +2261,35 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-4.08%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.18x">예측 1.20x → 확정 0.93x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.5%</span></div>
  </div>
- <div class="l3"><span class="rs">RS 87</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
+ <div class="l3"><span class="rs">RS 87</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>8.0%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (1.22yr, B2)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="관망"
+ data-mon="2026-08"
+ data-date="2026-08-05T22:46:36.156247+09:00" data-ret="2.0196829506092895"
+ data-rs="82.0"
+ data-rvol="3.81"
+ data-pred="1.776937515764407"
+ data-conf="3.1040392108161488"
+ data-rev="-1"
+ data-pivot="1.31">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/SAN_20260805.html"><span class="tk">SAN</span></a>
+     <span class="nm">방코 산탄데르(ADR)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.08.05 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+2.02%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.81x">예측 1.78x → 확정 3.10x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.3%</span></div>
+ </div>
+ <div class="l3"><span class="rs">RS 82</span><span class="chip"><i style="background:#8B6F4E"></i><em>VCP</em> <b>수축이탈</b></span><span class="chip" title="현재 후보목록 최신값 (진입 시점값 아님)"><i></i><em>수축깊이</em> <b>3.1%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.57yr, B2)</b></span><span class="ai" style="background:#e67e22">AI 관망 5</span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="매수 고려"
  data-mon="2026-08"
  data-date="2026-08-05T09:12:54.844638+09:00" data-ret="-2.030630970552417"
  data-rs="81.0"
  data-rvol="3.57"
+ data-pred="1.423346535370003"
+ data-conf="1.7553869572786818"
+ data-rev="1"
  data-pivot="4.06">
  <div class="hd">
   <div class="hl">
@@ -1654,6 +2306,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-05T09:12:53.479416+09:00" data-ret="-1.968019680196802"
  data-rs="81.0"
  data-rvol="2.26"
+ data-pred="1.2238084692786164"
+ data-conf="0.5158186834690521"
+ data-rev="1"
  data-pivot="0.62">
  <div class="hd">
   <div class="hl">
@@ -1663,13 +2318,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-1.97%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.26x">예측 1.22x → 확정 0.52x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div>
  </div>
- <div class="l3"><span class="rs">RS 81</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l3"><span class="rs">RS 81</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>6.5%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage3</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-05T09:12:50.098354+09:00" data-ret="-2.765896777872826"
  data-rs="84.0"
  data-rvol="1.73"
+ data-pred="1.120393355455296"
+ data-conf="0.535266790020478"
+ data-rev="-1"
  data-pivot="2.13">
  <div class="hd">
   <div class="hl">
@@ -1686,6 +2344,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-05T09:10:24.236818+09:00" data-ret="-2.2796265536399596"
  data-rs="84.0"
  data-rvol="1.81"
+ data-pred="1.128315435363008"
+ data-conf="0.5650294677417138"
+ data-rev="-1"
  data-pivot="2.52">
  <div class="hd">
   <div class="hl">
@@ -1702,6 +2363,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-05T09:10:09.943148+09:00" data-ret="-2.9730695049646445"
  data-rs="98.0"
  data-rvol="7.79"
+ data-pred="1.8274070594111531"
+ data-conf="3.734654051733418"
+ data-rev="1"
  data-pivot="1.33">
  <div class="hd">
   <div class="hl">
@@ -1718,6 +2382,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-04T10:11:16.571335+09:00" data-ret="31.935132657154337"
  data-rs="87.0"
  data-rvol="1.46"
+ data-pred="1.3005394121291285"
+ data-conf="0.9866586140006163"
+ data-rev="1"
  data-pivot="0.36">
  <div class="hd">
   <div class="hl">
@@ -1734,6 +2401,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-04T09:16:45.838715+09:00" data-ret="-1.4893617021276597"
  data-rs="77.0"
  data-rvol="2.1"
+ data-pred="1.2477161557629564"
+ data-conf="0.9608892485385825"
+ data-rev="2"
  data-pivot="0.86">
  <div class="hd">
   <div class="hl">
@@ -1743,13 +2413,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-1.49%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.10x">예측 1.25x → 확정 0.96x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.9%</span></div>
  </div>
- <div class="l3"><span class="rs">RS 77</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs">RS 77</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>8.8%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.36yr, B1)</b></span><span class="ai" style="background:#2ecc71">AI 고려 8</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-04T09:10:38.349921+09:00" data-ret="0.2270049711215195"
  data-rs="87.0"
  data-rvol="5.01"
+ data-pred="1.5794446921659193"
+ data-conf="1.4338195576857984"
+ data-rev="1"
  data-pivot="0.81">
  <div class="hd">
   <div class="hl">
@@ -1766,6 +2439,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-03T23:41:42.620058+09:00" data-ret="-1.21060042844845"
  data-rs="80.0"
  data-rvol="1.4"
+ data-pred="1.479756260630045"
+ data-conf="2.3781244578490117"
+ data-rev="-1"
  data-pivot="1.89">
  <div class="hd">
   <div class="hl">
@@ -1775,13 +2451,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-1.21%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.40x">예측 1.48x → 확정 2.38x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.9%</span></div>
  </div>
- <div class="l3"><span class="rs">RS 80</span><span class="chip"><i style="background:#6B8E9F"></i><em>VCP</em> <b>플랫</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs">RS 80</span><span class="chip"><i style="background:#6B8E9F"></i><em>VCP</em> <b>플랫</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>5.0%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (1.02yr, B2)</b></span><span class="ai" style="background:#e67e22">AI 관망 4</span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="매수 가능"
  data-mon="2026-08"
  data-date="2026-08-03T09:23:01.601240+09:00" data-ret="-0.14489495979943443"
  data-rs="72.0"
  data-rvol="1.65"
+ data-pred="1.2438663709067963"
+ data-conf="0.5250915427784547"
+ data-rev="1"
  data-pivot="0.52">
  <div class="hd">
   <div class="hl">
@@ -1798,6 +2477,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-03T09:11:10.355590+09:00" data-ret="0.35629453681710216"
  data-rs="87.0"
  data-rvol="2.8"
+ data-pred="1.3087514593986842"
+ data-conf="0.8381889607817553"
+ data-rev="1"
  data-pivot="0.36">
  <div class="hd">
   <div class="hl">
@@ -1814,6 +2496,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-03T09:10:37.803921+09:00" data-ret="-33.79402143303158"
  data-rs="70.0"
  data-rvol="5.56"
+ data-pred="1.6347417881247026"
+ data-conf="0.665541051985293"
+ data-rev="1"
  data-pivot="2.48">
  <div class="hd">
   <div class="hl">
@@ -1830,6 +2515,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-08-01T01:02:16.008459+09:00" data-ret="-2.3933246727290998"
  data-rs="94.0"
  data-rvol="1.58"
+ data-pred="1.6743051586569724"
+ data-conf="2.1556166446521567"
+ data-rev="1"
  data-pivot="0.58">
  <div class="hd">
   <div class="hl">
@@ -1846,6 +2534,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-07-31T12:17:06.697040+09:00" data-ret="-2.683626888187934"
  data-rs="92.0"
  data-rvol="1.84"
+ data-pred="1.6548559732255346"
+ data-conf="1.4106926712604393"
+ data-rev="1"
  data-pivot="0.49">
  <div class="hd">
   <div class="hl">
@@ -1855,13 +2546,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-2.68%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.84x">예측 1.65x → 확정 1.41x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div>
  </div>
- <div class="l3"><span class="rs hi">RS 92</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs hi">RS 92</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>16.1%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.54yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 6</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="매수 가능"
  data-mon="2026-07"
  data-date="2026-07-31T10:23:38.268771+09:00" data-ret="-2.9756423967561245"
  data-rs="79.0"
  data-rvol="2.25"
+ data-pred="1.6901206165060922"
+ data-conf="3.479093901973978"
+ data-rev="1"
  data-pivot="0.75">
  <div class="hd">
   <div class="hl">
@@ -1878,6 +2572,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-07-31T00:00:20.465908+09:00" data-ret="7.74554633671969"
  data-rs="90.0"
  data-rvol="1.67"
+ data-pred="1.6558174998911523"
+ data-conf="2.430063058598356"
+ data-rev="1"
  data-pivot="2.96">
  <div class="hd">
   <div class="hl">
@@ -1894,6 +2591,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-07-30T01:05:08.370636+09:00" data-ret="9.091546895984921"
  data-rs="96.0"
  data-rvol="2.25"
+ data-pred="2.076351647604744"
+ data-conf="3.0744518307558226"
+ data-rev="1"
  data-pivot="4.71">
  <div class="hd">
   <div class="hl">
@@ -1903,13 +2603,35 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="pos">+9.09%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.25x">예측 2.08x → 확정 3.07x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.7%</span></div>
  </div>
- <div class="l3"><span class="rs hi">RS 96</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs hi">RS 96</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>10.9%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.82yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
+</div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 가능"
+ data-mon="2026-07"
+ data-date="2026-07-29T23:48:04.458825+09:00" data-ret="48.53637722196002"
+ data-rs="95.0"
+ data-rvol="1.5"
+ data-pred="1.5509378298873646"
+ data-conf="2.663123504509479"
+ data-rev="-1"
+ data-pivot="2.66">
+ <div class="hd">
+  <div class="hl">
+   <div class="l1"><a href="stocks/PLSE_20260729.html"><span class="tk">PLSE</span></a>
+     <span class="nm">펄스 바이오사이언시스</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.07.29 <span class="badge open">보유중</span> </div>
+  </div>
+  <div class="rt"><span class="pos">+48.54%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.50x">예측 1.55x → 확정 2.66x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.7%</span></div>
+ </div>
+ <div class="l3"><span class="rs hi">RS 95</span><span class="chip"><i style="background:#8B6F4E"></i><em>VCP</em> <b>수축이탈</b></span><span class="chip" title="현재 후보목록 최신값 (진입 시점값 아님)"><i></i><em>수축깊이</em> <b>9.6%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.56yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="매수 가능"
  data-mon="2026-07"
  data-date="2026-07-29T01:32:09.405752+09:00" data-ret="-0.051118765932833606"
  data-rs="90.0"
  data-rvol="1.56"
+ data-pred="1.6955817899073846"
+ data-conf="2.2616090716323183"
+ data-rev="-1"
  data-pivot="4.72">
  <div class="hd">
   <div class="hl">
@@ -1926,6 +2648,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-07-27T13:00:26.799646+09:00" data-ret="-3.515625"
  data-rs="82.0"
  data-rvol="1.58"
+ data-pred="1.5296380648219863"
+ data-conf="1.0977671031484928"
+ data-rev="2"
  data-pivot="0.39">
  <div class="hd">
   <div class="hl">
@@ -1935,13 +2660,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-3.52%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.58x">예측 1.53x → 확정 1.10x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div>
  </div>
- <div class="l3"><span class="rs">RS 82</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs">RS 82</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>9.4%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.36yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="매수 가능"
  data-mon="2026-07"
  data-date="2026-07-25T00:00:32.756587+09:00" data-ret="-4.192872117400405"
  data-rs="88.0"
  data-rvol="2.13"
+ data-pred="1.8720119120971224"
+ data-conf="2.672184858176655"
+ data-rev="1"
  data-pivot="2.07">
  <div class="hd">
   <div class="hl">
@@ -1951,13 +2679,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-4.19%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.13x">예측 1.87x → 확정 2.67x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.1%</span></div>
  </div>
- <div class="l3"><span class="rs">RS 88</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs">RS 88</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>8.5%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (1.00yr, B2)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="매수 가능"
  data-mon="2026-07"
  data-date="2026-07-24T11:28:46.884967+09:00" data-ret="-4.8466864490603365"
  data-rs="88.0"
  data-rvol="5.06"
+ data-pred="3.3349839580248584"
+ data-conf="2.524327235207145"
+ data-rev="1"
  data-pivot="0.5">
  <div class="hd">
   <div class="hl">
@@ -1974,6 +2705,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-07-24T10:03:36.372758+09:00" data-ret="-4.301075268817205"
  data-rs="93.0"
  data-rvol="8.8"
+ data-pred="3.6774598107817336"
+ data-conf="3.285931152139026"
+ data-rev="1"
  data-pivot="1.64">
  <div class="hd">
   <div class="hl">
@@ -1983,13 +2717,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-4.30%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 8.80x">예측 3.68x → 확정 3.29x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.6%</span></div>
  </div>
- <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 93</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 93</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>21.1%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.54yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 6</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="매수 가능"
  data-mon="2026-07"
  data-date="2026-07-24T09:52:00.817520+09:00" data-ret="-4.448559493561861"
  data-rs="85.0"
  data-rvol="1.42"
+ data-pred="1.2348232155692975"
+ data-conf="0.9437704237802444"
+ data-rev="-1"
  data-pivot="3.45">
  <div class="hd">
   <div class="hl">
@@ -2006,6 +2743,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-07-24T09:49:48.258458+09:00" data-ret="-4.146621004879593"
  data-rs="82.0"
  data-rvol="1.41"
+ data-pred="1.2380120185125199"
+ data-conf="1.4012293452555702"
+ data-rev="1"
  data-pivot="0.46">
  <div class="hd">
   <div class="hl">
@@ -2022,6 +2762,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-07-24T09:11:27.053608+09:00" data-ret="-4.9504950495049505"
  data-rs="80.0"
  data-rvol="3.81"
+ data-pred="1.4489356269219975"
+ data-conf="0.545425864463118"
+ data-rev="2"
  data-pivot="1.0">
  <div class="hd">
   <div class="hl">
@@ -2031,13 +2774,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-4.95%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.81x">예측 1.45x → 확정 0.55x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.0%</span></div>
  </div>
- <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 80</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 80</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>10.5%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.36yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 7</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="관망"
  data-mon="2026-07"
  data-date="2026-07-23T10:53:03.301989+09:00" data-ret="-0.5278396436525613"
  data-rs="88.0"
  data-rvol="1.41"
+ data-pred="1.2936175246338868"
+ data-conf="2.8459948647181545"
+ data-rev="1"
  data-pivot="3.46">
  <div class="hd">
   <div class="hl">
@@ -2054,6 +2800,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-07-23T10:23:32.580020+09:00" data-ret="-7.652399481193256"
  data-rs="89.0"
  data-rvol="1.53"
+ data-pred="1.3350182098812666"
+ data-conf="1.0894620655096445"
+ data-rev="1"
  data-pivot="4.9">
  <div class="hd">
   <div class="hl">
@@ -2063,13 +2812,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-7.65%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.53x">예측 1.34x → 확정 1.09x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.9%</span></div>
  </div>
- <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 89</span><span class="chip"><i style="background:#8B6F4E"></i><em>VCP</em> <b>수축이탈</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 89</span><span class="chip"><i style="background:#8B6F4E"></i><em>VCP</em> <b>수축이탈</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>8.8%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (1.20yr, B1)</b></span><span class="ai" style="background:#e67e22">AI 관망 5</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="NA"
  data-mon="2026-07"
  data-date="2026-07-22T09:11:47.821233+09:00" data-ret="19.067634520105987"
  data-rs="94.0"
  data-rvol="2.38"
+ data-pred="1.2403369015534678"
+ data-conf="3.701441223476428"
+ data-rev="2"
  data-pivot="0.66">
  <div class="hd">
   <div class="hl">
@@ -2079,13 +2831,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="pos">+19.07%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.38x">예측 1.24x → 확정 3.70x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.7%</span></div>
  </div>
- <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 94</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 94</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>13.2%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.50yr, B1)</b></span><span class="dim" style="font-size:.72rem">AI —</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="NA"
  data-mon="2026-07"
  data-date="2026-07-22T09:11:40.300291+09:00" data-ret="-4.69687644252962"
  data-rs="97.0"
  data-rvol="3.73"
+ data-pred="1.4388131555666495"
+ data-conf="1.3440887850842602"
+ data-rev="-1"
  data-pivot="1.46">
  <div class="hd">
   <div class="hl">
@@ -2095,13 +2850,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-4.70%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.73x">예측 1.44x → 확정 1.34x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.5%</span></div>
  </div>
- <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 97</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 97</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>8.9%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (1.07yr, B2)</b></span><span class="dim" style="font-size:.72rem">AI —</span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="NA"
  data-mon="2026-07"
  data-date="2026-07-21T09:19:22.427919+09:00" data-ret="-4.311384226817635"
  data-rs="94.0"
  data-rvol="2.13"
+ data-pred="1.3243562834084521"
+ data-conf="2.0432864306477985"
+ data-rev="2"
  data-pivot="0.51">
  <div class="hd">
   <div class="hl">
@@ -2111,13 +2869,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-4.31%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.13x">예측 1.32x → 확정 2.04x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div>
  </div>
- <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 94</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 94</span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>13.2%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.50yr, B1)</b></span><span class="dim" style="font-size:.72rem">AI —</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="NA"
  data-mon="2026-07"
  data-date="2026-07-21T09:10:28.899483+09:00" data-ret="-0.6772626931567329"
  data-rs="81.0"
  data-rvol="2.38"
+ data-pred="1.2351235130255889"
+ data-conf="1.1819284083287445"
+ data-rev="2"
  data-pivot="1.35">
  <div class="hd">
   <div class="hl">
@@ -2127,13 +2888,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-0.68%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.38x">예측 1.24x → 확정 1.18x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.4%</span></div>
  </div>
- <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 81</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 81</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>9.0%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (0.36yr, B1)</b></span><span class="dim" style="font-size:.72rem">AI —</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="NA"
  data-mon="2026-07"
  data-date="2026-07-21T02:42:52.716705+09:00" data-ret="-4.684142672969488"
  data-rs="87.0"
  data-rvol="1.41"
+ data-pred="1.6289265541742772"
+ data-conf="1.6679647918210554"
+ data-rev="1"
  data-pivot="0.79">
  <div class="hd">
   <div class="hl">
@@ -2150,6 +2914,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-07-20T12:51:44.703395+09:00" data-ret="-4.7560975609756095"
  data-rs="98.0"
  data-rvol="2.31"
+ data-pred="2.063937461443419"
+ data-conf="2.5333013725265174"
+ data-rev="1"
  data-pivot="0.61">
  <div class="hd">
   <div class="hl">
@@ -2159,13 +2926,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-4.76%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.31x">예측 2.06x → 확정 2.53x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div>
  </div>
- <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 98</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 98</span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>15.9%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (1.10yr, B1)</b></span><span class="dim" style="font-size:.72rem">AI —</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="NA"
  data-mon="2026-07"
  data-date="2026-07-17T23:41:50.854311+09:00" data-ret="-2.210242587601079"
  data-rs="85.0"
  data-rvol="2.94"
+ data-pred="2.084655444654621"
+ data-conf="3.478040506294897"
+ data-rev="1"
  data-pivot="4.81">
  <div class="hd">
   <div class="hl">
@@ -2175,13 +2945,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-2.21%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.94x">예측 2.08x → 확정 3.48x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.8%</span></div>
  </div>
- <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 85</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
+ <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 85</span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>7.6%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage3</b></span><span class="dim" style="font-size:.72rem">AI —</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="KR" data-st="closed" data-ai="NA"
  data-mon="2026-07"
  data-date="2026-07-08T09:38:48.994903+09:00" data-ret="-3.1762349799732976"
  data-rs="91.0"
  data-rvol="1.41"
+ data-pred="1.231126983276834"
+ data-conf="1.6213748249086173"
+ data-rev="1"
  data-pivot="1.08">
  <div class="hd">
   <div class="hl">
@@ -2191,13 +2964,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-3.18%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.41x">예측 1.23x → 확정 1.62x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.1%</span></div>
  </div>
- <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 91</span><span class="chip"><i style="background:#8B6F4E"></i><em>VCP</em> <b>수축이탈</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs hi" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 91</span><span class="chip"><i style="background:#8B6F4E"></i><em>VCP</em> <b>수축이탈</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>6.6%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2u (1.20yr, B1)</b></span><span class="dim" style="font-size:.72rem">AI —</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="NA"
  data-mon="2026-07"
  data-date="2026-07-07T23:20:42.413765+09:00" data-ret="-3.104212860310414"
  data-rs="84.0"
  data-rvol="1.46"
+ data-pred="1.4603090260002105"
+ data-conf="1.741284301538119"
+ data-rev="-1"
  data-pivot="1.01">
  <div class="hd">
   <div class="hl">
@@ -2207,13 +2983,16 @@ a:hover { text-decoration:underline; }
   </div>
   <div class="rt"><span class="neg">-3.10%</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.46x">예측 1.46x → 확정 1.74x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.0%</span></div>
  </div>
- <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 84</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
+ <div class="l3"><span class="rs" title="진입 기록 미보유 — 당시 리포트에서 소급">RS 84</span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="진입 시점 소급 산출 (calc_vcp_depth, 2026-09-05 백필)"><i></i><em>수축깊이</em> <b>9.6%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage3</b></span><span class="dim" style="font-size:.72rem">AI —</span></div>
 </div><div class="tr" data-mkt="US" data-st="closed" data-ai="NA"
  data-mon="2026-07"
  data-date="2026-07-07T22:51:41.145350+09:00" data-ret="-3.674252810529192"
  data-rs="91.0"
  data-rvol="1.44"
+ data-pred="1.355149791213197"
+ data-conf="2.1577084036794876"
+ data-rev="-1"
  data-pivot="3.72">
  <div class="hd">
   <div class="hl">
@@ -2230,6 +3009,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-07-07T09:14:05.671580+09:00" data-ret="-3.109656301145663"
  data-rs="88.0"
  data-rvol="2.72"
+ data-pred="1.3608881321491517"
+ data-conf="1.6720460097488343"
+ data-rev="1"
  data-pivot="0.83">
  <div class="hd">
   <div class="hl">
@@ -2246,6 +3028,9 @@ a:hover { text-decoration:underline; }
  data-date="2026-07-07T09:10:12.857612+09:00" data-ret="14.87336437084204"
  data-rs="86.0"
  data-rvol="6.49"
+ data-pred="1.7204408583185298"
+ data-conf="2.360348146966722"
+ data-rev="1"
  data-pivot="2.4">
  <div class="hd">
   <div class="hl">
@@ -2294,11 +3079,14 @@ function apply(){
           && (S.mon==='ALL'||c.dataset.mon===S.mon);
     c.classList.toggle('hide',!ok); if(ok) n++;
   });
-  const num={date:false,ret:true,rs:true,rvol:true,pivot:true}[S.sort];
+  const num={date:false,ret:true,rs:true,rvol:true,pred:true,conf:true,pivot:true,rev:true}[S.sort];
   const key={date:c=>c.dataset.date,ret:c=>parseFloat(c.dataset.ret),
              rs:c=>parseFloat(c.dataset.rs),
              rvol:c=>parseFloat(c.dataset.rvol),
-             pivot:c=>parseFloat(c.dataset.pivot)}[S.sort];
+             pred:c=>parseFloat(c.dataset.pred),
+             conf:c=>parseFloat(c.dataset.conf),
+             pivot:c=>parseFloat(c.dataset.pivot),
+             rev:c=>parseFloat(c.dataset.rev)}[S.sort];
   cs.sort((a,b)=>{const x=key(a),y=key(b);
     const r = num ? (x-y) : (x<y?-1:x>y?1:0);
     return S.dir<0 ? -r : r;});
