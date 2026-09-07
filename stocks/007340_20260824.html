@@ -120,16 +120,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../prototype.html">← Prototype 기록</a></div>
 <h1>007340 ☀️ <span class="dim" style="font-size:1rem">DN오토모티브</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2u (≥1.77yr, B1+)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2u (≥1.77yr, B1+)</span></div>
 
 <div class="card">
 평균 매수가 <b>46,281원</b>
+· 평균 매도가 <b>45,500원</b>
+· 수익률 <span class="neg">-1.69%</span>
 
-· 수익률 <span class="neg">-1.90%</span>
-· 보유 75주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 5점 (20260819 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 5.14x">예측 1.59x → 확정 1.46x</span></div>
-<div class="dim">2026-08-24 진입</div>
+<div class="dim">2026-08-24 진입 → 2026-09-07 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -139,6 +139,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item buy">
 <b>REBAL_BUY</b> · None주 @ 48,550원
 <div class="dim">2026-08-25 15:00 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 75주 @ 45,500원
+<div class="dim">2026-09-07 09:25  — REFILTER_G1 소급청산 — 진입일 PIT G1 최종수축 31.92% &gt; 상한 12% (RD0·RD1 동일값 = 구 산식으로도 차단, 2봉 전환 무관). HOLD-REFILTER-20260907 1단계 판정, 오너 확정 2026-09-06</div>
 </div></div>
 
 <h3>💡 매수 시점 투자 분석</h3>
@@ -152,8 +155,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body">① Heller 통합비용 부담 장기화: 연간 영업이익률이 14.4%→12.3%로 하락한 원인인 Heller(공작기계) 통합 비용이 예상보다 오래 지속되면 이익 개선 시점이 2027년 이후로 밀릴 수 있다. ② DN솔루션즈 가치 실현 지연: 중복상장 금지 정책 수혜 기대가 실제 지분가치 이전(분할·매각·배당 등)으로 연결되지 않을 경우 밸류에이션 재평가 로직이 약화되며 프리미엄이 반납될 수 있다. ③ 단기 과열 후 재조정 리스크: 8월 중 이미 한 차례 급등(2주간 +38%)과 VI 발동을 겪은 종목으로, 이번 돌파가 2차 소진성 랠리일 경우 상단 매물대(63,900원) 이전에 재차 조정을 받을 가능성이 있다. ④ 완성차 업황 둔화: VMS(방진부품)·배터리 부문은 완성차 생산 및 수출 물량에 연동되어 있어 글로벌 자동차 수요 둔화 시 본업 실적이 흔들릴 수 있다.</div></div>
 <div class="card"><b>보유 중 체크포인트</b><div class="section-body">3분기 분기보고서 공시(통상 11월 중순), DN솔루션즈 IPO 재추진 여부 관련 공시 및 금융당국 중복상장 규제 후속 조치 발표, K9 자주포 등 K-방산 수출 관련 후속 계약 뉴스, 8월 18일 고점(63,900원) 부근 매물 소화 여부, 완성차(현대차·기아) 생산·수출 월간 지표 발표(매월 초).</div></div>
 <div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 어닝서프라이즈, 역대 최대 수주잔고, DN솔루션즈 지분가치 재평가라는 펀더멘털·수급 모멘텀이 뚜렷하고 RVOL 5.14배의 강한 돌파 신호도 확인되지만, 이미 8월 중순 급등(VI 발동 포함)을 거친 뒤 조정 후 재돌파라는 점에서 상단 매물대(63,900원) 저항 및 단기 과열 리스크를 함께 고려해야 하는 구간이다.</div></div>
-
-
+<h2>📉 매도 분석 — 2026-09-07</h2><div class="card"><b>청산 원인</b><div class="section-body">이번 매도는 당일 시황이나 종목 이슈가 아니라 시스템 내부 소급 재판정(REFILTER_G1)에 의한 강제 청산입니다. 진입일(8/24) 기준 PIT(Point-in-Time) 데이터로 재계산한 G1 최종 VCP 수축률이 31.92%로, 미너비니 기준 상한 12%를 크게 초과해 애초 진입 요건 자체가 무효였던 것으로 확인됐습니다. 구·신 산식(RD0/RD1) 모두 동일하게 기준 초과로 판정되어 예외 없이 오너 확정(9/6)에 따라 청산됐습니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">시스템 판단은 적절합니다 — 진입 당시 VCP 수축 기준을 충족하지 못한 종목을 보유 중 발견 시 손실 확대 전 조기 청산하는 것이 리스크 관리 원칙에 부합하며, 실제 손실도 -1.7%로 제한됐습니다. 재진입을 고려한다면 향후 신규 VCP 패턴에서 최종 수축률이 12% 이내로 명확히 수렴하는지, 그리고 실시간(비소급) 데이터 기준으로도 동일 결과가 나오는지 재확인이 필요합니다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">진입일 PIT 기준 G1 최종수축이 31.92%로 상한 12%를 초과한 상태에서 진입했으나 당시 필터를 통과해 매수·리밸런싱이 이루어졌다. 보름 뒤 오너 확정 소급심사에서 구 산식으로도 명백히 기준 위반임이 드러나 HOLD-REFILTER-20260907로 전량 청산됐다. 이후 주가는 51,200원까지 상승해(9/7 매도가 45,500원 대비), 소급청산이 아니었다면 수익 거래였을 가능성이 높다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입 자체가 PIT 필터링 오류로 발생한 부적격 진입이므로 진입의 질은 &#x27;실&#x27;이며, 청산은 규칙을 신뢰성 있게 사후 교정했다는 점에서 프로세스상 옳은 조치였다. 다만 결과적으로 청산 직후 주가가 반등해 소급청산이 수익 기회를 차단한 셈이 되어, 규칙 준수의 대가(기회비용)가 컸던 케이스다.</div></div><div class="card"><b>교훈</b><div class="section-body">진입 시점의 PIT 데이터 검증(G1 수축률 등)이 실시간 필터에서 누락되면 사후 소급청산으로 이어지므로, 진입 게이트 자체의 실시간 정합성을 강화해야 한다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
