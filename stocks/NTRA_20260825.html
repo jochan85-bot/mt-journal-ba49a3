@@ -120,16 +120,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../prototype.html">← Prototype 기록</a></div>
 <h1>NTRA <span class="dim" style="font-size:1rem">나테라</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.90yr, B1)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.90yr, B1)</span></div>
 
 <div class="card">
 평균 매수가 <b>$335.65</b>
-· 평균 매도가 <b>$325.38</b>
-· 수익률 <span class="neg">-2.58%</span>
-· 보유 2주
+· 평균 매도가 <b>$324.63</b>
+· 수익률 <span class="neg">-3.28%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260825 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.45x">예측 1.96x → 확정 1.18x</span></div>
-<div class="dim">2026-08-25 진입</div>
+<div class="dim">2026-08-25 진입 → 2026-09-08 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -145,6 +145,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item sell">
 <b>매도</b> · 2주 @ $321.38
 <div class="dim">2026-09-01 04:57  — PE_PARTIAL</div>
+</div><div class="tl-item sell">
+<b>매도</b> · 2주 @ $323.51
+<div class="dim">2026-09-08 22:40  — REFILTER_VOL 소급청산 — 진입일 D0 EOD배수 1.178 &lt; 1.4 (D0거래량/직전50세션평균, pfw_d0_batch.eval_breakout_fail 산식). HOLD-REFILTER-20260907 1단계 판정, 오너 확정 2026-09-06</div>
 </div></div>
 
 <h3>💡 매수 시점 투자 분석</h3>
@@ -158,8 +161,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body">1) 밸류에이션 부담: 최근 3주간 +20% 이상 급등해 이미 좋은 뉴스가 상당 부분 선반영됐을 가능성이 있으며, 11월 실적에서 기대에 못 미치는 가이던스가 나올 경우 급격한 되돌림(갭다운) 리스크가 있다. 2) 경쟁 심화: Guardant Health의 Shield 다암종 조기검진 확대나 신규 진입자의 가격 경쟁이 심화되면 Signatera의 ASP·점유율 압박 요인이 될 수 있다. 3) 보험 상환 정책 리스크: Medicare(CMS)나 민간보험사가 MRD 검사 상환 기준을 강화하거나 삭감할 경우 매출 성장률 둔화로 직결된다. 4) 법적 불확실성: CareDx와의 특허소송에서 이전 배심원 평결(9,630만 달러 승소)이 연방판사에 의해 뒤집힌 바 있어, 향후 항소심 결과에 따라 예상 로열티 수익이 실현되지 않거나 반대로 역풍(반소 리스크)을 맞을 가능성이 있다.</div></div>
 <div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 11월 11일(장 마감 후) 3분기 실적 발표 — 처리량(1M+ 건 지속 여부)과 Signatera ASP 추이 확인 필수. ② 일본 방광암 동반진단 승인 심사 진행 상황(신청 접수 이후 후속 뉴스). ③ CareDx 특허소송 항소심 및 향후 로열티 판결 일정. ④ CMS/보험사의 MRD 검사 상환 정책 변경 발표 여부(연말 결산 시즌 전후 주의). ⑤ 8.49억 달러 셀프등록 물량의 실제 매도(임직원 스톡플랜) 진행에 따른 단기 수급 영향 모니터링.</div></div>
 <div class="card"><b>AI 판단</b><div class="section-body">🟢강한 확신 — 실적·가이던스 상향, 규제 승인 확대, 대형 하우스의 일제 목표가 상향이라는 3중 펀더멘털 촉매가 명확하고, RVOL 3.45배를 동반한 거래량 돌파로 기술적 신호도 뒷받침된다. 다만 단기 급등에 따른 밸류에이션 부담과 CareDx 소송 불확실성이 있어 신고가권 추격 시 변동성 확대에 유의해야 한다.</div></div>
-
-
+<h2>📉 매도 분석 — 2026-09-08</h2><div class="card"><b>청산 원인</b><div class="section-body">매도 사유는 종목 자체 악재가 아니라 시스템 소급 필터(REFILTER_VOL) — 진입일(8/25) 돌파 당시 거래량이 직전 50일 평균 대비 1.178배로 기준(1.4배) 미달해 &#x27;거짓 돌파&#x27;로 재분류되어 강제 청산됨. NTRA 주가는 8/27 사상 최고가 $338.70를 찍고도 견조한 흐름(30일 +12.9%, 애널리스트 목표가 상향)을 유지해 종목 펀더멘털이나 당일 시장 요인은 매도 트리거와 무관하다. 즉 가격 하락이 아니라 거래량 미달 룰 위반으로 인한 사후 취소성 매도.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">종목 추세는 여전히 견조(신고가 경신, Leerink 목표가 상향)하므로 시스템 매도는 가격 판단이 아닌 규칙 준수 차원에서는 적절했으나 기회비용 손실 가능성이 있다. 재진입 시에는 동일 실수 방지를 위해 새로운 돌파 시점의 거래량이 50일 평균 대비 1.4배 이상 확실히 충족되는지, VCP 베이스가 재형성되는지를 확인해야 한다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">NTRA는 실적 서프라이즈와 가이던스 상향, 애널리스트 목표가 상향(52주 신고가 경신) 모멘텀 속에 돌파 진입했으나, 소급 검증 결과 진입일 거래량이 직전 50세션 평균의 1.178배로 VCP 돌파 기준(1.4배) 미달이었다. 보유 중 리밸런싱 매매와 PE_PARTIAL 부분청산을 거쳤고, 최종적으로 거래량 미달 판정에 따른 소급청산(REFILTER_VOL)으로 전량 정리되며 -3.28% 손실로 마감했다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 펀더멘털 재료(실적·가이던스 상향)에 이끌린 조급한 진입으로 거래량 확인이라는 핵심 게이트를 통과하지 못한 사례이며, 사후 필터(REFILTER_VOL)가 이를 정확히 걸러낸 것은 규칙의 실효성을 입증한다. 다만 진입 시점에 D0 거래량 배수를 즉시 검증하지 못하고 사후 소급청산에 의존한 점은 프로세스 개선 여지가 있다.</div></div><div class="card"><b>교훈</b><div class="section-body">뉴스·실적 재료가 아무리 강력해도 돌파일 거래량 배수(1.4배) 기준은 진입 전 실시간으로 확인해야 하며, 사후 소급청산에만 의존하면 불필요한 손실을 감수하게 된다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
