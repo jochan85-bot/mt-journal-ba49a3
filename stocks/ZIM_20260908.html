@@ -120,16 +120,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>ZIM <span class="dim" style="font-size:1rem">ZIM 인티그레이티드 시핑 서비시스</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.80yr, B2)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.80yr, B2)</span></div>
 
 <div class="card">
 평균 매수가 <b>$29.94</b>
-· 평균 매도가 <b>$29.80</b>
-· 수익률 <span class="pos">+0.03%</span>
-· 보유 83주
+· 평균 매도가 <b>$29.72</b>
+· 수익률 <span class="neg">-0.72%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 4점 (20260905 기준)</span></div>
-<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 15.77x">예측 2.27x → 확정 —</span></div>
-<div class="dim">2026-09-08 진입</div>
+<div style="margin-top:6px">거래량: <span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 15.77x">예측 2.27x → 확정 2.90x</span></div>
+<div class="dim">2026-09-08 진입 → 2026-09-09 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -139,6 +139,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item sell">
 <b>매도</b> · 16주 @ $29.80
 <div class="dim">2026-09-08 23:38  — USCAP-2500-20260908 캡 정렬 트리밍 — 오너 지시 부분매도 (진입가 기준 $2,500 초과분)</div>
+</div><div class="tl-item sell">
+<b>매도</b> · 83주 @ $29.71
+<div class="dim">2026-09-09 22:56  — MANUAL_EXIT — CUT14 섹터 소급 일괄청산 (오너 지시 2026-09-09 21:21 KST, 비주도 섹터 6건)</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-05 기준) 발췌</span></h2>
@@ -148,8 +151,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· 실적 레버리지 확대</b><br><span class="section-body">EPS 성장률이 178.5%에 달해 해운 운임 강세를 실적으로 빠르게 전환하고 있고, Forward PE 3.1배는 업종 평균 대비 현저히 낮다. 밸류에이션 매력이 살아있어 실적 서프라이즈 지속 시 재평가 여지가 있다.</span></div><div style="margin-top:8px"><b>· 인수 프리미엄 여지</b><br><span class="section-body">하파그로이드·FIMI가 주당 35달러(현재가 대비 약 22% 프리미엄)에 인수를 제안한 상태이며, 아직 완전히 무산되지 않았다. 9월 9일 정부기관 회의에서 극적 타결이 나오면 단기 주가 재평가 트리거가 될 수 있다.</span></div></div>
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 이스라엘 정부 8개 관계기관 중 다수가 9월 9일 회의에서 반대 입장을 표할 것으로 예상돼, 인수딜이 최종 무산되면 주당 35달러 프리미엄 기대가 소멸한다.</div><div style="margin-top:6px">· 컨테이너 해운 운임은 변동성이 커 최근의 실적 레버리지가 운임 하락기에는 반대 방향으로 작용할 수 있다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 $28.71 돌파 시 진입을 고려할 수 있으며, 이 구간에서는 거래량 동반 여부를 함께 확인해 돌파 신뢰도를 판단해야 한다. 초기 손절선은 규칙엔진이 진입가 대비 -8%(현재가 기준 약 $26.29)로 관리하며, 진입 후 조기에 -4% 구간에 도달하면 규칙에 따라 보유량 일부(진입 2영업일 이내 33%, 이후 67%)를 자동 부분청산한다. 피벗 부근에서 거래량 없이 밀리거나 9월 9일 이스라엘 정부 회의 결과가 부정적으로 확인되며 갭하락하면 셋업은 무효로 판단한다.</div></div>
-<h2>📉 매도 분석 — 2026-09-08</h2><div class="card"><b>청산 원인</b><div class="section-body">매도 사유는 종목 자체 약세가 아니라 오너 지시에 따른 종목당 캡 $2,500 정렬 트리밍으로, 진입가 기준 초과분을 -0.5% 근소한 손실로 정리한 것. 당일 ZIM은 하파그로이드-FIMI의 인수 제안 수정 소식에 프리마켓 +5.5% 상승했고 운임 강세·인수 프리미엄 기대가 유효해 개별 종목 펀더멘털은 견조했음. 즉 이번 매도는 VCP 붕괴나 트리거 이탈이 아닌 포지션 사이징 규정 적용에 따른 부분 청산.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">종목 이슈가 아닌 리스크 관리 룰(캡 정렬) 매도이므로 시스템 판단은 적절하며 손실도 미미함. 재진입 시에는 하파그로이드 인수가($35) 대비 스프레드, 호주 경쟁당국 심사 진행 상황과 컨테이너 운임 지속 여부를 확인할 것.</div></div>
-
+<h2>📉 매도 분석 — 2026-09-08</h2><div class="card"><b>청산 원인</b><div class="section-body">매도 사유는 종목 자체 약세가 아니라 오너 지시에 따른 종목당 캡 $2,500 정렬 트리밍으로, 진입가 기준 초과분을 -0.5% 근소한 손실로 정리한 것. 당일 ZIM은 하파그로이드-FIMI의 인수 제안 수정 소식에 프리마켓 +5.5% 상승했고 운임 강세·인수 프리미엄 기대가 유효해 개별 종목 펀더멘털은 견조했음. 즉 이번 매도는 VCP 붕괴나 트리거 이탈이 아닌 포지션 사이징 규정 적용에 따른 부분 청산.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">종목 이슈가 아닌 리스크 관리 룰(캡 정렬) 매도이므로 시스템 판단은 적절하며 손실도 미미함. 재진입 시에는 하파그로이드 인수가($35) 대비 스프레드, 호주 경쟁당국 심사 진행 상황과 컨테이너 운임 지속 여부를 확인할 것.</div></div><h2>📉 매도 분석 — 2026-09-09</h2><div class="card"><b>청산 원인</b><div class="section-body">ZIM은 종목 자체 악재보다 오너의 CUT14 섹터 컷(비주도 섹터 일괄청산) 지시로 매도된 케이스로, 개별 실적 이슈는 아니다. Hapag-Lloyd 인수 조건 재협상 이슈로 변동성이 남아있는 해운주로, 52주 고점(29.97) 부근에서 눌림을 받고 있었다. 진입 하루 만에 -0.8% 손실로 청산되어 종목 펀더멘털보다 리밸런싱 성격이 강하다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">종목 자체는 크게 무너진 것이 아니라 섹터 순위 재조정에 따른 강제청산이라 판단 타당성은 시스템 룰 준수 관점에서 적절하나, 개별 차트상 매도 근거는 약하다. 재진입은 Hapag-Lloyd 인수 조건 확정 여부와 해운 섹터가 다시 주도 섹터로 복귀하는지를 확인한 뒤 VCP 재형성 시점에서 검토해야 한다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">해운 섹터 모멘텀과 트랜스퍼시픽 운임 강세를 근거로 ZIM 돌파 진입 후 하루 만에 캡 정렬 트리밍으로 일부 매도했고, 다음날 오너 지시로 비주도 섹터 소급 컷(CUT14) 대상에 걸려 잔량 전량 청산되며 -0.72%로 마감됐다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입 자체는 실적 개선과 운임 상승이라는 펀더멘털 뒷받침이 있었으나 보유 1일 만에 섹터 재분류로 강제 청산돼 셋업의 유효성을 검증할 시간이 없었고, CUT14 룰은 손실을 소폭(-0.72%)으로 제한하는 데는 기여했으나 트렌드 추종 매매의 핵심인 &#x27;홀딩&#x27;을 원천 차단했다.</div></div><div class="card"><b>교훈</b><div class="section-body">섹터 로테이션 룰이 매매 신호보다 우선 적용되면 좋은 돌파도 하루 만에 강제 종료될 수 있으므로, 진입 전 해당 종목의 섹터 주도력 지속 가능성을 먼저 점검해야 한다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>

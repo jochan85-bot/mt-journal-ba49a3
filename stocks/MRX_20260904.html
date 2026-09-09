@@ -120,16 +120,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../prototype.html">← Prototype 기록</a></div>
 <h1>MRX <span class="dim" style="font-size:1rem">마렉스 그룹</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.54yr, B1)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.54yr, B1)</span></div>
 
 <div class="card">
 평균 매수가 <b>$74.69</b>
-· 평균 매도가 <b>$77.48</b>
-· 수익률 <span class="pos">+2.70%</span>
-· 보유 29주
+· 평균 매도가 <b>$76.05</b>
+· 수익률 <span class="pos">+1.81%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#2ecc71;color:#fff;font-size:0.8rem;font-weight:700">매수 고려</span> <span class="dim">conv 8점 (20260903 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.02x">예측 2.06x → 확정 2.32x</span></div>
-<div class="dim">2026-09-04 진입</div>
+<div class="dim">2026-09-04 진입 → 2026-09-09 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -142,6 +142,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item buy">
 <b>REBAL_BUY</b> · 2주 @ $77.33
 <div class="dim">2026-09-09 04:16 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 29주 @ $75.80
+<div class="dim">2026-09-09 22:47  — MANUAL_EXIT — CUT14 섹터 소급 일괄청산 (오너 지시 2026-09-09 21:21 KST, 비주도 섹터 6건)</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-03 기준) 발췌</span></h2>
@@ -151,8 +154,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· 실적 서프라이즈</b><br><span class="section-body">2분기 매출 $696M(+39%), 조정세전이익 $166M(+56%)로 2024년 IPO 이후 6분기 연속 기록적 실적을 냈다. 어닝비트가 목표가 줄상향으로 즉시 연결되는 흐름이 확인됐다.</span></div><div style="margin-top:8px"><b>· 애널리스트 전원 매수</b><br><span class="section-body">최근 3개월 커버 애널리스트 7명 전원이 매수·강력매수 등급이며 KBW $90, UBS $90, 골드만 $80 등 목표가가 실적 발표 직후 일제히 상향됐다. 시장이 이야기를 빠르게 학습하고 있다는 신호다.</span></div></div>
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 금리·상품가 변동성에 청산·마켓메이킹 수익이 민감하게 연동돼 매크로 환경이 바뀌면 실적 변동성이 커질 수 있다.</div><div style="margin-top:6px">· 6분기 연속 기록 경신이 이어지고 있어, 다음 실적에서 성장률 둔화 신호가 나오면 최근 형성된 상향 랠리 동력이 빠르게 식을 수 있다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 $73.91 상향 돌파 시 진입을 고려하되, 거래량이 최근 50일 평균 대비 유의미하게 실린 돌파인지 확인하는 것이 유효성 판단의 핵심이다. 초기 손절선은 규칙엔진이 진입가 대비 −8%로 관리하며, 그 이전 −4% 도달 시 보유량의 33%(2영업일 이내) 또는 67%(그 이후)를 부분청산하는 규칙이 자동 작동한다. 돌파 없이 밀리거나 피벗 부근에서 거래량 없이 반복적으로 밀리면 셋업은 무효로 본다.</div></div>
-
-
+<h2>📉 매도 분석 — 2026-09-09</h2><div class="card"><b>청산 원인</b><div class="section-body">MRX는 8월 H1 실적 서프라이즈로 52주 신고가(78.38)를 찍은 강세 종목이나, 이번 매도는 개별 종목 악재가 아니라 오너 지시에 의한 비주도 섹터 소급 일괄청산(CUT14) 대상에 포함되어 청산된 것이다. 매도 시점 종가는 75.8로 고점 대비 소폭 조정 수준이며 종목 자체의 기술적 붕괴 신호는 없었다. 매도 트리거는 종목 펀더멘털이 아닌 시스템의 섹터 비중 재조정 규칙에서 발동했다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">종목 자체는 실적·추세 모두 양호했던 상태에서 섹터 룰에 의해 기계적으로 청산된 것으로, +1.5% 소폭 수익 마감은 무리 없는 결과였다. 재진입은 해당 섹터가 다시 주도 섹터로 재등재되고 75.8 지지선 위에서 VCP 재형성이 확인될 때 검토할 만하다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">실적 호조(H1 기록적 이익)와 강세 모멘텀을 보고 진입했으나, 다음날 리밸런싱으로 대부분 매도 후 소량 재매수하며 포지션이 흔들렸고, 결국 보유 사유와 무관하게 오너 지시에 의한 비주도 섹터 소급 일괄청산으로 청산됨.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입 자체는 실적 강세 종목을 잘 포착했으나, 하루 만에 REBAL_SELL/REBAL_BUY로 포지션을 흔든 것은 비효율적 관리였고, 최종 청산도 개별 종목 판단이 아닌 섹터 일괄 룰에 의한 강제 청산이라 매매 로직의 질을 평가하기 어려움. 결과적으로 소폭 수익(1.81%)으로 끝났지만 이는 규칙(CUT14 소급 청산)이 우연히 손실을 막아준 것에 가깝다.</div></div><div class="card"><b>교훈</b><div class="section-body">리밸런싱으로 포지션을 축소했다가 곧바로 재매수하는 패턴은 거래 비용과 혼란만 키우므로, 섹터 소급 청산 같은 상위 룰이 개입할 가능성이 있다면 사전에 포지션 크기를 보수적으로 유지하는 것이 낫다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>

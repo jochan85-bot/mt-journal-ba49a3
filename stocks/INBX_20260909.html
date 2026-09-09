@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>INBX — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+/* [CARD-FMT-20260901] 모바일 겹침 수리 — 절대배치 폐기, 헤더 flex 2열.
+   구 구조: .rt 가 position:absolute(top:10 right:12) 3단 스택(≈72px)인데 회피용
+   padding-right 는 .l1 에만 있었다. .rt 가 .l2 를 지나 .l3 까지 내려오고 .l3/.l4 는
+   카드 우변까지 차므로 그 아래로 파고들었다(실측 rt 588~660 / l3 645~668, 우변 동일).
+   신 구조: .rt 를 정상 흐름에 넣어 겹침을 구조적으로 불가능하게 만든다.
+   → padding-right 회피값 자체가 불필요. 320·360·390·414·480px 전폭 겹침 0 실측. */
+.hd { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.hl { flex:1 1 auto; min-width:0; }   /* min-width:0 = 긴 종목명이 .rt 를 밀지 못하게 */
+.l1 { padding-right:0; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400;
+      display:inline-block; max-width:100%; overflow:hidden;
+      text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:static; flex:0 0 auto; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; row-gap:5px; margin-top:6px;
+      flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+/* [JOURNAL-REVAMP-20260905 §7] 위 뱃지 폭을 따라 늘어나지 않게 fit-content + 우측 정렬 */
+.rt .ev { display:block; width:fit-content; margin:2px 0 0 auto; }
+/* [CARD-FMT-20260901] 지표 칩 — 리포트 .g 칩과 같은 어법(라벨 dim + 값 bold + 색점) */
+.chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
+        border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
+        color:#cbd0de; background:#161923; white-space:nowrap; }
+.chip i { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:#4b5163; }
+.chip em { font-style:normal; color:var(--dim); }
+.chip b { font-weight:700; }
+.chip.fail { border-color:#7f1d1d; background:#1d1113; }
+.chip.fail b { color:#f87171; }
+@media (max-width:520px) {
+  .chip { font-size:0.68rem; padding:1px 6px; gap:3px; }
+  .l3 { gap:5px; }
+  .rt { font-size:0.92rem; }
+}
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>INBX ☀️ <span class="dim" style="font-size:1rem">인히브릭스</span></h1>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2u (1.17yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$126.88</b>
+· 평균 매도가 <b>$116.23</b>
+· 수익률 <span class="neg">-8.39%</span>
+
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260909 기준)</span></div>
+<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 4.00x">예측 1.63x → 확정 —</span></div>
+<div class="dim">2026-09-09 진입 → 2026-09-10 청산</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 19주 @ $126.88
+<div class="dim">2026-09-09 23:02 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 19주 @ $116.23
+<div class="dim">2026-09-10 02:34  — M50 하드바닥 발동 (장중, proven=False)</div>
+</div></div>
+
+<h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-09 기준) 발췌</span></h2>
+<div class="card" style="border-left:3px solid var(--accent)"><b>9/8 INBRX-106 두경부암 2상 긍정 데이터, 목표가 상승여력 133%</b></div>
+<div class="card"><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">신용한도</span> <b style="color:var(--green)">$5.0억</b> <span class="dim">Oxford Finance 증액, Term C $1억 즉시 지급(2026-07-16)</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">목표주가 상승여력</span> <b style="color:var(--green)">+133.2%</b> <span class="dim">애널리스트 강력매수 3명, 목표가 $266.67</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">RS</span> <b style="color:var(--green)">98.0</b> <span class="dim">SEPA 기술 게이트 통과</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">ROE</span> <b style="color:var(--red)">-1773.6%</b> <span class="dim">임상 단계 특성상 적자 지속(매출 미발생)</span></span></div>
+<div class="card"><b>사업</b><div class="section-body">Inhibrx Biosciences는 생명을 위협하는 희귀·난치 질환 치료를 위한 항체 기반 생물학적 치료 후보를 개발해 임상시험으로 검증한 뒤 대형 제약사 라이선스나 자체 상업화로 수익화하는 임상 단계 바이오텍이다. 주력 파이프라인은 사망수용체5(DR5)를 표적으로 하는 4가 항체 오제키바트(INBRX-109, 연골육종 대상 임상 1상)와 OX40을 표적으로 하는 6가 항체 INBRX-106(두경부암 등 고형암 대상 임상 2상)으로, 상업화 전 단계라 현재 매출은 발생하지 않는다.</div></div>
+<div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· 두경부암 2상 호재</b><br><span class="section-body">9월 8일 INBRX-106의 두경부암 2상 긍정적 데이터 발표가 확인됐고, 5월 인터림 결과에 이은 후속 확인이라는 점에서 신뢰도를 더한다. 임상 단계 바이오텍에서 데이터 발표는 주가를 직접 재평가시키는 핵심 이벤트다.</span></div><div style="margin-top:8px"><b>· 자금 확보로 실행력 강화</b><br><span class="section-body">7월 Oxford Finance와의 2차 대출 개정으로 신용한도가 최대 $5억까지 확대됐고 $1억은 즉시 지급됐다. 두 주력 파이프라인의 임상 진행 자금이 확보되면서 근시일 내 유상증자 등 희석 리스크는 낮아졌다.</span></div></div>
+<div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 두 주력 후보 모두 아직 임상 1/2상 단계로 상용화까지 다수의 데이터 관문이 남아있다. 향후 임상 데이터가 기대에 못 미치면 모멘텀이 빠르게 꺾일 수 있어 추가 리드아웃 결과를 지켜봐야 한다.</div><div style="margin-top:6px">· 매출이 없는 상태에서 대출 의존도가 높아지고 있고 ROE도 큰 폭의 마이너스다. Term D 최대 $2.25억 추가 인출이나 향후 자금 조달 방식(워런트 발행 등)에 따라 지분 희석 가능성을 주시할 필요가 있다.</div></div></div>
+<div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 $120.18를 종가 기준으로 돌파하고 거래량이 게이트 문턱을 채울 때 진입을 고려하는 자리이며, 초기 손절선은 규칙엔진이 진입가 대비 -8% 수준(약 $105.19)에서 자동 산출해 관리하고 종가가 바닥선(50일선과 하한선 중 높은 쪽) 아래로 마감하면 전량 청산된다. 정률 부분 익절 단계는 없고, 하한선은 종가 기준 +16% 도달 시 비가역적으로 본전까지 올라간다. 진입일 종가가 피벗 아래거나 거래량 배수가 문턱에 못 미치면 돌파 실패로 판정돼 다음 거래일 개장 직후 정리되므로, 현재는 피벗 미도달 구간에서 돌파 확인을 기다리는 것이 적절하다.</div></div>
+<h2>📉 매도 분석 — 2026-09-10</h2><div class="card"><b>청산 원인</b><div class="section-body">9/8 발표된 INBRX-106(HNSCC) 임상 중간결과 이후 재료 소진성 변동성이 커지며 9/9 장중 고점 128.5→저점 117.4까지 급락, 진입 다음날 바로 M50을 하드 이탈했다. 임상 데이터 자체는 긍정적이었으나 차익실현·재료 소멸 매물이 겹치며 급등분을 반납한 전형적 뉴스 후 변동성 급락 패턴이다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">진입 익일 -8%대 M50 하드 이탈은 VCP 실패 신호로 손절 처리가 타당했다. 재진입은 내부자 매수 지속 여부와 주가가 M50 위로 재안착·베이스 재형성을 확인한 뒤 검토해야 한다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">임상 호재(INBRX-106 병용요법 ORR 48.3%)와 내부자 매수 흐름 속 브레이크아웃 진입 시도였으나, 진입 직후 장중 변동성이 확대되며 M50 하드바닥 손절선이 발동돼 하루 만에 청산됐다. proven=False 상태에서 발동된 룰 기반 손절로 대응했다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 재료(임상 데이터+내부자 매수)는 있었으나 갭업 변동성 구간에서 진입해 타점 자체가 취약했고, 청산은 규칙을 기계적으로 준수해 손실을 8.4%로 제한한 점에서 유효했다. 결과적으로 규칙이 추가 하락을 막아준 실적이라 청산 과정은 득이었다.</div></div><div class="card"><b>교훈</b><div class="section-body">재료가 좋아도 일중 변동폭이 큰 종목은 브레이크아웃 당일 진입 시 손절 여유가 부족하므로, 확인 캔들 없이 뛰어드는 진입은 지양해야 한다.</div></div>
+
+<div class="dim" style="font-size:0.7rem;margin-top:12px">
+예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
+<div class="footer">MacTrader auto-journal</div>
+</body></html>

@@ -120,16 +120,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../prototype.html">← Prototype 기록</a></div>
 <h1>HP ☀️ <span class="dim" style="font-size:1rem">헬머리치 앤 페인</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.81yr, B1)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.81yr, B1)</span></div>
 
 <div class="card">
 평균 매수가 <b>$45.22</b>
-· 평균 매도가 <b>$44.93</b>
-· 수익률 <span class="neg">-3.34%</span>
-· 보유 48주
+· 평균 매도가 <b>$44.65</b>
+· 수익률 <span class="neg">-1.25%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 5점 (20260901 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.07x">예측 1.69x → 확정 1.79x</span></div>
-<div class="dim">2026-09-01 진입</div>
+<div class="dim">2026-09-01 진입 → 2026-09-09 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -145,6 +145,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item buy">
 <b>REBAL_BUY</b> · 3주 @ $44.33
 <div class="dim">2026-09-09 04:16 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 48주 @ $44.54
+<div class="dim">2026-09-09 22:44  — MANUAL_EXIT — CUT14 섹터 소급 일괄청산 (오너 지시 2026-09-09 21:21 KST, 비주도 섹터 6건)</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-01 기준) 발췌</span></h2>
@@ -154,8 +157,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· Q3 매출 서프라이즈</b><br><span class="section-body">8월 6일 발표한 3분기 매출이 10.35억달러로 컨센서스(9.87억달러)를 상회했고 조정 EBITDA 2.36억달러·FCF 9800만달러를 기록하며 자산 효율성 개선 신호를 보였다. 이 발표 직후 주가가 11.4% 급등하며 이번 상승 모멘텀의 시작점이 됐다.</span></div><div style="margin-top:8px"><b>· Barclays 목표가 상향</b><br><span class="section-body">Barclays가 목표가를 $47에서 $50로 상향하며 Overweight를 유지했고, 15명 애널리스트 중 7명이 매수를 권고하는 등 매수 우위 컨센서스가 형성돼 있다. 최근 시점의 상향 조정이라는 점에서 이야기가 아직 확산 중임을 시사한다.</span></div></div>
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· Zacks(8/17)는 3분기 EPS가 컨센서스를 밑돌았다고 지적했고, ROE -4.6%·매출성장률 -0.6%로 핵심 시추 사업 자체는 아직 개선이 완전하지 않다. Sahm Capital(8/8)은 자산매각 효과가 핵심 사업 손실을 가리고 있다고 지적한 바 있어, 실적 개선의 질을 계속 확인할 필요가 있다.</div><div style="margin-top:6px">· 애널리스트 시각이 극명하게 갈린다 — Barclays는 목표가를 $50로 올린 반면 Morgan Stanley는 $36으로 낮추고 Underweight를 유지해, 방향성 컨센서스가 아직 형성되지 않았다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 $44.96을 유효 거래량 동반 돌파할 때 진입을 검토하고, 초기 손절선은 규칙엔진이 진입가 대비 -8%로 자동 설정·관리한다(그 이전 -4% 도달 시 보유량의 33%~67%가 자동 부분청산될 수 있음). 피벗 돌파 없이 되밀리거나 돌파 후 거래량 부재로 되돌림이 반복되면 셋업은 무효로 보고 관망을 유지한다.</div></div>
-
-
+<h2>📉 매도 분석 — 2026-09-09</h2><div class="card"><b>청산 원인</b><div class="section-body">HP는 8/6 실적 호조(가이던스 상회, Barclays 목표가 상향)에도 유가·에너지 섹터 전반이 모멘텀을 잃으며 비주도 섹터로 밀렸다. 진입(9/1) 이후 44~45달러 박스권에 머물며 뚜렷한 돌파 없이 정체됐고, 이번 매도는 종목 자체의 급락이 아니라 오너 지시에 따른 비주도 섹터 6건 소급 일괄청산(CUT14)에 포함된 것이다. 개별 악재보다는 섹터 상대강도 저하가 매도 트리거의 핵심이다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">-1.5%의 소폭 손실로 청산됐고 종목 펀더멘털엔 문제가 없어 시스템 판단은 섹터 로테이션 관리 차원에서 합리적이다. 재진입은 에너지/유전서비스 섹터가 RS 상위로 복귀하고 HP가 45달러 저항을 거래량 동반 돌파할 때 검토할 만하다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#60a5fa;color:#0f1117;font-weight:800;font-size:0.85rem">B</span></h2><div class="card"><b>요약</b><div class="section-body">돌파 신호로 45.26에 진입했으나 리밸런스 매도로 포지션이 줄어드는 와중 44.33에 소폭 재매수했고, 결국 CUT14 섹터 소급 규칙(비주도 섹터 일괄청산, 오너 지시)에 따라 9일 만에 44.54에 강제 청산됐다. 주가 자체는 진입가 부근에서 큰 이탈 없이 유지돼 추세 훼손보다는 규칙 트리거가 청산 원인이다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 돌파 요건상 무리 없었으나, 보유 기간 내내 방향성 확신 없이 리밸런스 매도·재매수가 반복되며 포지션이 흔들린 점은 아쉽다. 청산은 개별 종목 신호가 아닌 섹터 소급 규칙에 의한 일괄 처리로, 손실을 -1.25%로 작게 묶었다는 점에서 규칙이 득이었다.</div></div><div class="card"><b>교훈</b><div class="section-body">섹터 로테이션 컷 기준 변경은 개별 종목의 차트 신호보다 우선해 포지션을 강제 정리할 수 있으므로, 진입 전 해당 종목의 섹터 주도력을 먼저 점검할 필요가 있다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
