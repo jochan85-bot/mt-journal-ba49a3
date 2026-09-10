@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../prototype.html">← Prototype 기록</a></div>
 <h1>CLBK <span class="dim" style="font-size:1rem">컬럼비아 파이낸셜</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.79yr, B1)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.79yr, B1)</span></div>
 
 <div class="card">
 평균 매수가 <b>$11.19</b>
-· 평균 매도가 <b>$11.72</b>
-· 수익률 <span class="pos">+2.60%</span>
-· 보유 230주
+· 평균 매도가 <b>$11.52</b>
+· 수익률 <span class="pos">+2.93%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 4점 (20260811 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.05x">예측 1.66x → 확정 2.37x</span></div>
-<div class="dim">2026-08-11 진입</div>
+<div class="dim">2026-08-11 진입 → 2026-09-10 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -225,6 +225,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item buy">
 <b>REBAL_BUY</b> · 27주 @ $11.47
 <div class="dim">2026-09-10 04:17 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 230주 @ $11.38
+<div class="dim">2026-09-10 22:31  — MANUAL_EXIT</div>
 </div></div>
 
 <h3>💡 매수 시점 투자 분석</h3>
@@ -263,8 +266,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>당일 시장 상황</b><div class="section-body">매도 시점인 8월 20일(미 동부시간) 미 증시는 국채금리 랠리(채권 강세)가 되돌려지며 나스닥·S&amp;P500이 소폭 하락 마감했고, 시장 전체가 다음날(8월 21일) 파월 의장의 잭슨홀 연설을 앞두고 관망세로 돌아선 상황이었습니다. 지방은행/저축은행 섹터는 금리 상승 우려에 특히 민감하게 반응해 동반 약세를 보였으며, 이는 소형 금융주인 CLBK의 단기 조정을 심화시킨 배경으로 작용했습니다. 공교롭게도 바로 다음 거래일(8월 21일) 파월 의장이 &#x27;정책 조정 시점이 왔다&#x27;는 비둘기파적 발언을 내놓으며 대형 랠리(다우 +0.98~1%대)가 촉발되어, 매도 직후 시장 분위기가 급반전된 점이 눈에 띕니다.</div></div>
 <div class="card"><b>시스템 판단 평가</b><div class="section-body">시스템의 매도 판단은 손절선이 아닌 상승 후 되돌림(트레일링/피벗 실패 룰)에 따른 이익실현형 매도로 추정되며, 상장 한 달 남짓 된 신규 전환주로서 검증된 VCP 베이스나 장기 가격 이력이 부재한 종목에 대해 6.2% 수익을 지키며 리스크를 관리한 점은 원칙적으로 타당합니다. 특히 잭슨홀이라는 고변동성 매크로 이벤트를 하루 앞두고 신주 물량 부담까지 겹친 상황에서 포지션을 정리한 것은 보수적이고 규율 있는 접근으로 평가됩니다. 다만 결과론적으로는 매도 직후 파월의 비둘기파 발언으로 금리민감 섹터 전반이 급반등하면서, 트레일링 스탑이 단기 노이즈(이벤트 직전 되돌림)에 다소 민감하게 반응해 추가 상승분을 놓친 측면도 있습니다.</div></div>
 <div class="card"><b>대안 검토</b><div class="section-body">규칙 범위 내에서는 트레일링 스탑 폭을 넓히거나 잭슨홀 이벤트 리스크를 고려해 부분 익절(포지션 일부만 정리) 방식을 취했다면 매도 후 발생한 반등분(파월 발언 이후 금융섹터 강세)을 일부라도 확보할 수 있었을 것입니다. 다만 이는 사후적으로 확인 가능한 결과이며, 사전 시점에는 잭슨홀 발언 방향을 예단할 수 없었다는 점에서 시스템 매도 자체가 비합리적이었다고 보기는 어렵습니다.</div></div>
-<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">합병 통합(노스필드 뱅콥 편입) 성과와 순이자마진(NIM) 개선 여부가 향후 실적의 핵심 변수이며, Piper Sandler의 목표주가(약 14달러대) 대비 여전히 상승 여력이 있다는 점은 긍정적입니다. 재진입 관점에서는 신주 유통물량 소화와 함께 11달러(IPO 발행가 부근)~12달러 구간에서 거래량이 줄어드는 타이트한 베이스가 재형성되는지, 그리고 9월 FOMC에서의 실제 금리 인하 여부가 지방은행 섹터 전반의 재평가로 이어지는지를 확인해야 합니다. 3분기 실적 발표(합병 후 첫 온전한 분기)에서 합병 시너지와 대손비용 관리가 확인되고, 지지선 위에서 거래량 동반 재돌파가 나올 경우 관심종목(watch list)으로 재편입할 만합니다.</div></div>
-
+<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">합병 통합(노스필드 뱅콥 편입) 성과와 순이자마진(NIM) 개선 여부가 향후 실적의 핵심 변수이며, Piper Sandler의 목표주가(약 14달러대) 대비 여전히 상승 여력이 있다는 점은 긍정적입니다. 재진입 관점에서는 신주 유통물량 소화와 함께 11달러(IPO 발행가 부근)~12달러 구간에서 거래량이 줄어드는 타이트한 베이스가 재형성되는지, 그리고 9월 FOMC에서의 실제 금리 인하 여부가 지방은행 섹터 전반의 재평가로 이어지는지를 확인해야 합니다. 3분기 실적 발표(합병 후 첫 온전한 분기)에서 합병 시너지와 대손비용 관리가 확인되고, 지지선 위에서 거래량 동반 재돌파가 나올 경우 관심종목(watch list)으로 재편입할 만합니다.</div></div><h2>📉 매도 분석 — 2026-09-10</h2><div class="card"><b>청산 원인</b><div class="section-body">9월 초 지역은행 섹터가 기술주발 디리스킹과 금리 불확실성으로 KRE 등 지수가 약세를 보였고, CLBK도 이 흐름에 동조화되며 단기 상승분을 반납했다. 뉴욕 소재 저축은행 특성상 개별 호재 없이는 거래량이 얇아 섹터 매도세에 더 민감하게 반응했을 가능성이 크다. 진입 후 한 달간 큰 재료 없이 완만한 상승만 이어지다 시스템이 수동 청산으로 대응한 것으로 보인다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">+1.7% 소폭 이익 구간에서의 수동 청산은 VCP 돌파 실패 초기 신호에 대한 선제적 리스크 관리로 적절해 보이나, 구체적 트리거(추세선 이탈·거래량 급증) 확인이 필요하다. 재진입은 지역은행 섹터가 50일선을 회복하고 CLBK가 거래량 동반 신고가 돌파 시 재검토할 것을 권한다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">8/3 Piper Sandler 상향 및 65% 랠리 모멘텀을 타고 진입했으나, 이후 한 달간 11.5~11.8 박스권에서 등락하며 방향성을 잃었고, 리밸런싱 매매만 반복되다 결국 수동 청산으로 마감했다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 애널리스트 상향이라는 촉매가 있었으나 진성 VCP 브레이크아웃이라기보다 밸류에이션이 이미 부담스러운 구간의 추격 매수에 가까웠고, 한 달 내내 좁은 박스권에서 30회 넘는 REBAL 매매로 회전만 시키다 손익분기 수준에서 청산한 것은 추세 실종을 규칙이 조기에 걸러내지 못했음을 보여준다.</div></div><div class="card"><b>교훈</b><div class="section-body">박스권 정체가 2주 이상 지속되면 REBAL로 버티지 말고 추세 소멸 신호로 보아 조기 손절 또는 비중 축소 규칙을 적용해야 한다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
