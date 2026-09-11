@@ -122,27 +122,30 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>OKTA <span class="dim" style="font-size:1rem">옥타</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.27yr, B1)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.27yr, B1)</span></div>
 
 <div class="card">
 평균 매수가 <b>$178.92</b>
+· 평균 매도가 <b>$169.07</b>
+· 수익률 <span class="neg">-5.51%</span>
 
-· 수익률 <span class="neg">-4.15%</span>
-· 보유 13주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260910 기준)</span></div>
-<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.10x">예측 1.63x → 확정 —</span></div>
-<div class="dim">2026-09-10 진입</div>
+<div style="margin-top:6px">거래량: <span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.10x">예측 1.63x → 확정 1.40x</span></div>
+<div class="dim">2026-09-10 진입 → 2026-09-11 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
 <div class="timeline"><div class="tl-item buy">
 <b>매수</b> · 13주 @ $178.92
 <div class="dim">2026-09-10 23:25 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 13주 @ $169.07
+<div class="dim">2026-09-11 22:46  — 돌파 실패[BREAKOUT_FAIL_PRICE] — 확정종가 171.1100 vs 피벗 173.7400(FAIL) / EOD배수 1.4035 vs 문턱 1.4(PASS) / 분모봉수 50 / 판정봉날짜 20260910</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-10 기준) 발췌</span></h2>
-
-
+<h2>📉 매도 분석 — 2026-09-11</h2><div class="card"><b>청산 원인</b><div class="section-body">OKTA는 실적 호조와 AI 에이전트 수요로 연초 대비 94% 급등한 강세 종목이지만, 판정일(9/10) 나스닥 전반이 기술주·반도체 매도세로 동반 하락(나스닥 -0.65%, 필라델피아반도체 -2.66%)하며 눌림을 받았다. 이 여파로 확정종가 171.11이 피벗 173.74를 넘지 못해 돌파 실패 조건이 충족됐고, EOD배수 1.4035로 문턱을 통과해 매도 트리거가 발동했다. 개별 악재보다는 시장 전반의 위험회피 분위기 속 돌파 시도가 무산된 케이스다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">가격·거래량 조건이 모두 규칙대로 충족돼 시스템 매도 판단은 기계적으로 적절했다. 재진입은 실적·AI 모멘텀 펀더멘털이 훼손되지 않았으므로, 나스닥 반도체·기술주 매도 압력이 진정되고 피벗(173.74) 위 거래량 동반 재돌파를 확인한 뒤 접근이 바람직하다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#60a5fa;color:#0f1117;font-weight:800;font-size:0.85rem">B</span></h2><div class="card"><b>요약</b><div class="section-body">173.74 피벗 돌파를 기대하고 178.92에 진입했으나, 판정봉(20260910) 확정종가가 171.11로 피벗을 하회하며 돌파 실패로 판정됐다. EOD거래대금배수는 1.40으로 문턱을 통과했지만 가격 조건 미충족으로 익일 169.07에 손절 청산됐다. 1일 보유 만에 -5.51% 손실로 종결됐다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 VCP 돌파 조건을 선행 충족해 규칙에 부합했으나, 돌파 익일 가격이 피벗을 재이탈하며 가짜 돌파로 드러났다. 청산은 BREAKOUT_FAIL_PRICE 규칙이 즉시 작동해 손실을 5.5%선에서 제한했으므로 과정 측면에서는 규칙이 제 역할을 한 손절이다.</div></div><div class="card"><b>교훈</b><div class="section-body">EOD배수만 통과하고 가격조건이 미달하는 돌파는 거래대금 동반 없는 약한 돌파일 가능성이 크므로, 두 조건 중 하나라도 실패 시 신속 손절 원칙을 유지해야 한다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
