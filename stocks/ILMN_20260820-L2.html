@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ILMN — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+/* [CARD-FMT-20260901] 모바일 겹침 수리 — 절대배치 폐기, 헤더 flex 2열.
+   구 구조: .rt 가 position:absolute(top:10 right:12) 3단 스택(≈72px)인데 회피용
+   padding-right 는 .l1 에만 있었다. .rt 가 .l2 를 지나 .l3 까지 내려오고 .l3/.l4 는
+   카드 우변까지 차므로 그 아래로 파고들었다(실측 rt 588~660 / l3 645~668, 우변 동일).
+   신 구조: .rt 를 정상 흐름에 넣어 겹침을 구조적으로 불가능하게 만든다.
+   → padding-right 회피값 자체가 불필요. 320·360·390·414·480px 전폭 겹침 0 실측. */
+.hd { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.hl { flex:1 1 auto; min-width:0; }   /* min-width:0 = 긴 종목명이 .rt 를 밀지 못하게 */
+.l1 { padding-right:0; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400;
+      display:inline-block; max-width:100%; overflow:hidden;
+      text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:static; flex:0 0 auto; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; row-gap:5px; margin-top:6px;
+      flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+/* [JOURNAL-REVAMP-20260905 §7] 위 뱃지 폭을 따라 늘어나지 않게 fit-content + 우측 정렬 */
+.rt .ev { display:block; width:fit-content; margin:2px 0 0 auto; }
+/* [CARD-FMT-20260901] 지표 칩 — 리포트 .g 칩과 같은 어법(라벨 dim + 값 bold + 색점) */
+.chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
+        border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
+        color:#cbd0de; background:#161923; white-space:nowrap; }
+.chip i { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:#4b5163; }
+.chip em { font-style:normal; color:var(--dim); }
+.chip b { font-weight:700; }
+.chip.fail { border-color:#7f1d1d; background:#1d1113; }
+.chip.fail b { color:#f87171; }
+.chip.na b, .chip.na em { color:#9ca3af; }
+.chip.na i { background:#4b5163; }
+@media (max-width:520px) {
+  .chip { font-size:0.68rem; padding:1px 6px; gap:3px; }
+  .l3 { gap:5px; }
+  .rt { font-size:0.92rem; }
+}
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>ILMN <span class="dim" style="font-size:1rem">일루미나</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge" title="같은 종목의 2개 왕복 중 2번째 다리. 진입 분석은 1번째 다리에서 생성된 것을 공유한다.">2/2다리</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.92yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$226.11</b>
+
+· 수익률 <span class="pos">+0.20%</span>
+· 보유 7주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260915 기준)</span></div>
+<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.93x">예측 1.62x → 확정 —</span></div>
+<div class="dim">2026-09-16 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 7주 @ $226.11
+<div class="dim">2026-09-16 03:09 </div>
+</div></div>
+
+<h3>💡 매수 시점 투자 분석</h3>
+<div class="card"><b>한 줄 요약</b><div class="section-body">차세대 시퀀싱(NGS) 시장의 절대 강자 일루미나가 중국발 리스크를 딛고 임상 시퀀싱 수요 회복과 NovaSeq X 확산에 힘입어 실적 가이던스를 상향하며 52주 신고가 돌파를 시도하고 있다.</div></div>
+<div class="card"><b>사업 내용</b><div class="section-body">일루미나는 DNA 시퀀싱 장비와 소모품(시약 키트)을 판매하는 유전체 분석 플랫폼 기업으로, 매출의 상당 부분이 소모품(consumables) 재구매 매출에서 발생하는 &#x27;면도기-면도날&#x27; 모델을 갖고 있다. 핵심 제품은 대량 처리용 NovaSeq X/X Plus 시리즈이며, 임상 진단(암 스크리닝, 유전병 검사), 종양학 동반진단(companion diagnostics), 신약개발용 연구시장(academic/pharma) 세 축으로 매출이 구성된다. 글로벌 NGS 장비 시장 점유율에서 압도적 1위를 유지하고 있으나 PacBio(롱리드), MGI/BGI(DNBSEQ, 저가 숏리드), 로슈의 신규 시퀀서 등 경쟁이 심화되고 있다. 2024년 6월 암 조기진단 자회사 GRAIL을 완전 분사(스핀오프)하며 지분 14.5%만 보유하는 순수 시퀀싱 플랫폼 기업으로 재편했다. 주요 고객은 병원·진단검사실(임상), 제약사·바이오텍(연구), 학술기관이며, 2025년 3월 중국의 일루미나 시퀀서 수입 금지 조치로 중국 매출이 크게 위축된 상태다. 미국·캐나다 및 유럽 임상 시장이 현재 성장의 주된 동력으로 부상했다.</div></div>
+<div class="card"><b>재무·실적</b><div class="section-body">2026년 2분기(7월 30일 발표) 매출은 11억6,000만 달러로 전년 동기 대비 +9.5% 성장했으며, 중국·통화·인수효과를 제외한 나머지 지역 유기적 성장률은 +8.1%를 기록했다. GAAP 영업이익률 21.1%, 비GAAP 영업이익률 22.5%로 마진이 개선세를 보였고, 임상용 소모품 매출은 중국 제외 기준 +15%, 미국·캐나다는 +20% 이상 성장했다. NovaSeq X는 2분기에만 95대 이상 신규 설치되며 플랫폼 전환이 가속화되고 있다. 이 실적을 바탕으로 회사는 2026 회계연도 매출 가이던스를 46.0억~46.4억 달러로, EPS 가이던스를 5.30~5.40달러로 상향했으며 3분기 매출 가이던스는 11.4억~11.6억 달러다. 다음 실적 발표(3분기)는 2026년 10월 말~11월 초로 예상된다.</div></div>
+<div class="card"><b>돌파 배경</b><div class="section-body">7월 30일 2분기 실적에서 매출 성장 가속과 가이던스 상향이 확인되며 주가가 상승 모멘텀을 얻기 시작했고, 이후 8월 13일 10억 달러 규모의 신규 무담보 리볼빙 크레딧 라인(2031년 만기) 체결과 8월 중 2029년 만기 2억9,990만 달러 규모 시니어노트 발행으로 재무 유연성 우려가 완화됐다. 이런 흐름 속에 8월 19일 주가가 8.9% 급등하며 종가 205달러로 52주 신고가(207달러)에 근접했고, 임상 소모품 고성장과 NovaSeq X 설치 확대가 재확인되며 시장의 재평가가 이어졌다. 이 여세를 몰아 8월 20일 207.0달러 피벗을 상대거래량(RVOL) 1.42배를 동반하며 돌파, 211.92달러(피벗 대비 +2.25% 확장)에서 신규 매수 신호가 발생했다. 이는 2025년 3월 중국 수출 금지 충격 이후 약 1년 5개월 만에 형성된 베이스를 벗어나는 구조적 전환점으로, 실적·재무·수급 삼박자가 맞물린 결과로 해석된다.</div></div>
+<div class="card"><b>섹터 동향</b><div class="section-body">유전체 시퀀싱 업황은 임상 응용(액체생검, 유전질환 진단, 감염병 시퀀싱) 수요 확대로 회복 국면에 진입했으며, 일루미나의 임상 소모품 성장률(+15~20%)이 이를 뒷받침한다. 다만 중국 시장은 정책 리스크로 사실상 봉쇄되어 있고, MGI/BGI의 DNBSEQ가 저가 숏리드 시장에서, PacBio의 SPRQ-Nx 화학기술(2026년 상용화 예정)이 롱리드 시장에서 각각 점유율을 잠식하고 있다. 그럼에도 일루미나는 NovaSeq X 플랫폼의 처리량·비용 우위와 방대한 설치기반(installed base)을 바탕으로 여전히 글로벌 NGS 시장 점유율 1위를 유지하며, 최근 실적은 업계 평균 대비 견조한 성장을 시현하고 있다.</div></div>
+<div class="card"><b>기술적 구조</b><div class="section-body">일루미나는 2025년 3월 중국 수출 금지 충격 이후 장기 하락·횡보 베이스를 형성했고, 이번 실적 시즌을 거치며 207달러(52주 고점 부근) 저항선을 상단 피벗으로 하는 컵형 베이스를 완성했다. 8월 20일 RVOL 1.42배의 준수한 거래량을 동반해 피벗을 돌파했으며, 진입가 211.92달러는 피벗 대비 +2.25% 확장에 그쳐 추격매수 부담이 크지 않은 양호한 진입 지점으로 평가된다. 다만 돌파 직후 신고가 영역이라 위쪽에 뚜렷한 매물대는 없는 대신, 아래로는 207달러(피벗)와 8월 19일 종가 205달러가 1차 지지선, 그 아래 200달러 심리적 지지선이 존재한다.</div></div>
+<div class="card"><b>상승 시나리오</b><div class="section-body">3분기(가이던스 11.4억~11.6억 달러) 및 4분기 실적에서 임상 소모품 고성장과 NovaSeq X 설치 확대가 지속 확인될 경우, 200달러 안팎에 몰려 있던 애널리스트 목표가(JP모건 230달러·Buy 등급 상향, 구겐하임 226달러·Buy, 리링크 210달러·Outperform, 에버코어ISI 200달러·Outperform)가 추가로 상향 조정되며 주가 재평가가 이어질 수 있다. 중국 외 지역(미국·유럽) 임상 파이프라인 확대와 신제품(예: 저가형 시퀀서) 출시가 추가 촉매가 될 수 있으며, 11월 2일 델라웨어 법원의 GRAIL 관련 화해안 승인이 소송 불확실성을 해소하는 트리거가 될 수 있다. 목표가 상단(230달러) 도달 시 현재가 대비 약 8~10%의 추가 상승 여력이 존재한다.</div></div>
+<div class="card"><b>리스크</b><div class="section-body">① 중국 매출 회복 지연: 수출 금지가 장기화될 경우 이미 반영된 1억 달러 비용절감 효과를 넘어서는 추가 실적 훼손 가능성. ② 경쟁 심화: MGI/BGI의 저가 DNBSEQ 플랫폼과 PacBio의 SPRQ-Nx(2026년 상용화), 로슈 신규 시퀀서가 가격/기술 경쟁을 촉발해 마진 압박으로 이어질 위험. ③ GRAIL 관련 소송 불확실성: 11월 2일 델라웨어 법원 화해안 승인이 불발되거나 조건이 불리하게 변경될 경우 재무·평판 리스크 재부각. ④ 내부자 매도: 최근 12개월간 순매도 3억460만 달러 규모로, 밸류에이션 부담(52주 신고가 근접) 속 추가 내부자 매도가 나올 경우 단기 수급 악화 가능성.</div></div>
+<div class="card"><b>보유 중 체크포인트</b><div class="section-body">3분기 실적 발표(2026년 10월 말~11월 초 예상, 매출 가이던스 11.4억~11.6억 달러 달성 여부), 2026년 11월 2일 델라웨어 형평법원의 GRAIL 관련 화해안 승인 심리, 중국 수출입 정책 변화 관련 뉴스, NovaSeq X 분기별 신규 설치 대수 추이, 임상 소모품 성장률(전분기 미국·캐나다 +20%대) 지속 여부, 경쟁사(PacBio SPRQ-Nx 상용화, MGI 국제 확장) 신제품 출시 동향을 지속 모니터링해야 한다.</div></div>
+<div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — 실적 가이던스 상향과 임상 소모품 고성장, 재무구조 개선(신규 크레딧라인)이 돌파 매매 논리를 뒷받침하고 애널리스트 목표가도 대체로 상향 중이나, 52주 신고가 근접 구간에서의 진입인 데다 중국 리스크·경쟁 심화·GRAIL 소송 불확실성 등 해소되지 않은 리스크가 다수 남아있어 강한 확신 단계로 보기는 이르다. RVOL 1.42배·확장폭 +2.25%는 무난한 돌파 품질이나, 위쪽 매물대가 없는 신고가 영역이므로 207달러 피벗 이탈 시 손절 원칙을 엄격히 지켜야 한다.</div></div>
+
+
+
+<div class="dim" style="font-size:0.7rem;margin-top:12px">
+예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
