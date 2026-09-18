@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>NTRA <span class="dim" style="font-size:1rem">나테라</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.93yr, B1)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.93yr, B1)</span></div>
 
 <div class="card">
 평균 매수가 <b>$349.10</b>
-· 평균 매도가 <b>$347.45</b>
-· 수익률 <span class="pos">+5.00%</span>
-· 보유 3주
+· 평균 매도가 <b>$356.36</b>
+· 수익률 <span class="pos">+2.08%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260915 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.06x">예측 1.64x → 확정 1.44x</span></div>
-<div class="dim">2026-09-16 진입</div>
+<div class="dim">2026-09-16 진입 → 2026-09-18 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -141,6 +141,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item sell">
 <b>REBAL_SELL</b> · 2주 @ $347.45
 <div class="dim">2026-09-16 23:32  — REGIME_TRIM</div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · 3주 @ $362.30
+<div class="dim">2026-09-18 22:47  — BOOTSTRAP_REALIGN</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-15 기준) 발췌</span></h2>
@@ -151,7 +154,7 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 아직 영업적자·마이너스 ROE 상태로 향후 실적 발표에서 수익성 개선 속도가 둔화되면 밸류에이션 되돌림 우려가 있다. 다음 실적은 지난 8월 7일 발표됐으므로 다음 분기 발표 시 마진 추이를 확인할 필요가 있다.</div><div style="margin-top:6px">· 보험 상환(reimbursement) 정책 변화나 경쟁사의 신규 MRD 데이터 발표는 Signatera 점유율 서사에 균열을 낼 수 있는 감시 포인트다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 $343.00을 종가 기준으로 유효하게 돌파하고 거래량이 뒷받침될 때 진입을 고려한다. 진입 시 규칙엔진이 관리하는 초기 손절선(진입가 대비 -8%)이 자동 적용되며, 이후 종가가 +16%에 도달하면 손절선이 본전으로 이동하는 방식이다(정률 부분 익절 단계는 없음). 진입일 확정 종가가 피벗 아래로 마감하거나 거래량 배수가 돌파 문턱에 못 미치면 돌파 실패로 간주돼 다음 거래일 개장 직후 정리된다.</div></div>
 
-
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">모건스탠리 헬스케어 컨퍼런스 발표 후 강세 모멘텀을 보이던 NTRA를 349.1에 진입했으나, 편입 다음날 REGIME_TRIM으로 2주가 강제 청산되고 이틀 뒤 BOOTSTRAP_REALIGN으로 잔량까지 정리됐다. 두 매도 모두 종목 자체의 약세가 아닌 포트폴리오 규칙(리짐 트림·초기 정렬 재조정)에 의한 것으로, 청산일에도 주가는 +5% 상승 중이었다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 컨퍼런스 모멘텀에 올라탄 타이밍으로 나쁘지 않았으나, 보유 이틀 만에 두 차례 규칙성 매도가 겹치며 온전한 추세 추종이 불가능했다. 이 케이스에서는 규칙이 실이었다 — 종목은 계속 강세였는데 리밸런싱 로직이 상승 초입에서 강제로 잘라내 소폭 수익에 그쳤다.</div></div><div class="card"><b>교훈</b><div class="section-body">신규 진입 직후 REGIME_TRIM·BOOTSTRAP_REALIGN 같은 포트폴리오 재조정 이벤트가 종목 펀더멘털과 무관하게 우량 추세를 조기 종료시킬 수 있으므로, 신규 편입분에 대한 재조정 예외 또는 유예 규칙 검토가 필요하다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>

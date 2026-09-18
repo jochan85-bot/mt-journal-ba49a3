@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>CMPS <span class="dim" style="font-size:1rem">컴퍼스 패스웨이스(ADR)</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.06yr, B1)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.06yr, B1)</span></div>
 
 <div class="card">
 평균 매수가 <b>$14.81</b>
-· 평균 매도가 <b>$13.94</b>
-· 수익률 <span class="pos">+0.95%</span>
-· 보유 51주
+· 평균 매도가 <b>$14.27</b>
+· 수익률 <span class="neg">-3.68%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260909 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.14x">예측 1.61x → 확정 2.26x</span></div>
-<div class="dim">2026-09-09 진입</div>
+<div class="dim">2026-09-09 진입 → 2026-09-18 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -144,6 +144,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item sell">
 <b>REBAL_SELL</b> · 7주 @ $15.31
 <div class="dim">2026-09-17 23:31  — REGIME_TRIM</div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · 51주 @ $15.01
+<div class="dim">2026-09-18 22:46  — BOOTSTRAP_REALIGN</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-09 기준) 발췌</span></h2>
@@ -153,8 +156,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· NDA 제출 임박</b><br><span class="section-body">4분기 FDA NDA 최종 제출을 목표로 진행 중이며 상업 출시 계획도 9~12개월 앞당겨졌다. 규제 이정표가 구체화될수록 승인 가능성에 대한 시장 재평가가 이어질 수 있다.</span></div><div style="margin-top:8px"><b>· 임상 데이터 강화</b><br><span class="section-body">두 번째 3상(COMP006)에서 통계적으로 매우 유의미한 개선(P&lt;0.001)과 -3.8점의 임상적 차이를 확인했다. 반복 검증된 데이터는 NDA 승인 확률에 대한 신뢰를 높이는 근거다.</span></div></div>
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· FDA NDA 제출 및 승인 여부가 확정되지 않은 단계로, 임상 데이터가 양호해도 규제 심사 과정에서 지연·보완요구가 나올 수 있다.</div><div style="margin-top:6px">· 매출이 없는 임상단계 기업 특성상 추가 자금조달(증자) 가능성이 상존하며 이는 주가 희석 리스크로 이어질 수 있다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 $14.44 상향 돌파가 확인되고 당일 거래량이 돌파 판정 임계 배수를 충족할 때 진입을 고려할 수 있는 자리다. 손절은 규칙엔진이 관리하는 초기 손절선(진입가 대비 -8%, 종가 기준 판정)으로 자동 산출되며 부분청산 단계는 없고, 진입일 종가가 피벗 아래로 마감하거나 거래량 배수가 문턱에 못 미치면 돌파 실패로 간주돼 다음 거래일 개장 직후 정리된다.</div></div>
-
-
+<h2>📉 매도 분석 — 2026-09-18</h2><div class="card"><b>청산 원인</b><div class="section-body">매도 트리거는 종목 펀더멘털 악화가 아닌 시스템의 BOOTSTRAP_REALIGN(초기 포지션 재정렬) 로직 발동으로, 52주 신고가(15.17) 근접권에서 기계적으로 청산됐다. CMPS는 COMP360 phase III 우울증 치료 긍정적 결과와 NDA 제출 진행으로 상승 모멘텀이 유지되는 국면이었다. 당일 특별한 악재나 섹터 조정은 확인되지 않는다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">펀더멘털·모멘텀 훼손 없이 시스템 내부 규칙에 의한 청산이라 매도 자체는 리스크 관리 절차상 적절했으나 트레이딩 신호로서의 근거는 약하다. 재진입은 15.17 신고가 돌파 및 거래량 동반 여부, NDA 제출 관련 추가 뉴스 확인 후 판단해야 한다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">돌파 진입 후 FDA 제출·상업화 준비 랠리로 주가가 상승했으나, 보유 9일 만에 REGIME_TRIM과 BOOTSTRAP_REALIGN 규칙에 의해 세 차례 분할 매도되며 상승분을 대부분 반납했다. 결과적으로 펀더멘털 호재(FDA 롤링 신청, Psych Congress 발표)가 진행 중인 상황에서 시스템 규칙이 포지션을 조기 축소·이탈시켰다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입 자체는 돌파 시점이 나쁘지 않았고 실제로 15.31까지 상승하며 이익 구간을 만들었으나, REGIME_TRIM과 BOOTSTRAP_REALIGN이 연이어 발동하며 저가(13.85)와 재편성 매도를 강제해 이익을 까먹었다. 이번 케이스에서는 규칙이 추세를 끊어내는 방향으로 작용해 손해였다.</div></div><div class="card"><b>교훈</b><div class="section-body">호재 뉴스 플로우가 살아있는 종목에서 리짐/재정렬 규칙이 겹칠 경우 조기 청산으로 이익을 반납할 수 있으므로, 규칙 간 우선순위나 쿨다운 설정을 점검할 필요가 있다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>

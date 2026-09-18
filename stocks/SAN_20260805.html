@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../prototype.html">← Prototype 기록</a></div>
 <h1>SAN <span class="dim" style="font-size:1rem">방코 산탄데르(ADR)</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.57yr, B2)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.57yr, B2)</span></div>
 
 <div class="card">
 평균 매수가 <b>$14.59</b>
-· 평균 매도가 <b>$14.54</b>
-· 수익률 <span class="pos">+2.04%</span>
-· 보유 76주
+· 평균 매도가 <b>$14.51</b>
+· 수익률 <span class="neg">-0.56%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 5점 (20260805 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.81x">예측 1.78x → 확정 3.10x</span></div>
-<div class="dim">2026-08-05 진입</div>
+<div class="dim">2026-08-05 진입 → 2026-09-18 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -252,6 +252,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item sell">
 <b>REBAL_SELL</b> · 69주 @ $14.78
 <div class="dim">2026-09-17 23:31  — REGIME_TRIM</div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · 76주 @ $14.37
+<div class="dim">2026-09-18 22:46  — BOOTSTRAP_REALIGN</div>
 </div></div>
 
 <h3>💡 매수 시점 투자 분석</h3>
@@ -285,8 +288,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>당일 시장 상황</b><div class="section-body">매도 당일(미 동부시간 8월 20일) S&amp;P500은 7,785.76(-0.17%), 다우 53,732.41(-0.20%), 나스닥 26,729.16(-0.28%)으로 3대 지수가 모두 소폭 약세 마감했으며, 전날 국채 수익률 급등과 변동성 지수 급등의 여진이 이어졌습니다. 금융섹터는 연준의 2026년 기준금리 두 차례 인하 기대(정책금리 3.00~3.25%)와 이에 따른 달러 약세가 유럽 은행주에는 우호적 재료였지만, 국채 수익률 급등이라는 단기 매크로 충격이 이를 상쇄하며 유럽 은행주 전반도 동반 조정을 받았습니다.</div></div>
 <div class="card"><b>시스템 판단 평가</b><div class="section-body">이번 매도는 손절/트레일링 성격의 규칙에 따라 진입가 대비 -3.3% 수준에서 발동된 것으로 보이며, 미너비니식 SEPA/VCP 전략의 통상 손절 한도(-5~8%)보다 훨씬 타이트하게 작동해 자본 보존이라는 규칙의 취지에는 충실했습니다. 다만 이 하락이 종목 고유의 펀더멘털 훼손(실적 쇼크, 가이던스 하향 등)이 아니라 시장 전체의 금리발 리스크오프에서 비롯된 동반 조정이었다는 점에서, 시스템이 시장 국면(broad market health)을 반영하지 못한 채 개별 종목 가격만으로 기계적으로 반응했을 가능성이 있습니다. 웹스터 인수 클로징, 자사주 매입 진행률 92.5%, EU 규제 승인 등 펀더멘털 촉매는 오히려 매도 시점과 겹쳐 존재했기 때문에, 규칙이 뉴스 흐름과 무관하게 순수 가격/거래량 기준으로만 작동했음을 시사합니다. 종합하면 규칙 자체는 보수적이고 방어적으로는 타당했으나, 시장 전체의 일시적 변동성 스파이크를 종목 고유 악화로 오인해 조기 청산했을 여지가 있습니다.</div></div>
 <div class="card"><b>대안 검토</b><div class="section-body">규칙 범위 안에서라면, 손절 기준을 지지선(예: 10일 또는 21일 이동평균) 종가 기준 이탈로 완화했거나 시장 전체 변동성(VIX 급등) 국면에서 손절폭을 일시적으로 넓히는 필터를 뒀다면 8월 19~20일의 하루짜리 변동성 충격을 버텨낼 수 있었을 가능성이 있습니다. 실제로 8월 21일 이후 국채 수익률 안정과 연준 인하 기대 재부각 시 은행주가 반등했다면 결과가 달라졌을 수 있으나, 이는 사후적 판단이며 당시로서는 추세 훼손 여부를 단정하기 어려웠습니다.</div></div>
-<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">SAN은 웹스터 인수 완료(8월 20일 자회사 편입)와 자사주 매입 마무리 단계, EU 규제 리스크 해소 등 개별 펀더멘털은 견조하며 애널리스트 컨센서스도 매수 우위를 유지하고 있어, 이번 조정이 추세 전환이 아닌 매크로발 일시 조정일 가능성이 높습니다. 재진입 관점에서는 국채 수익률 안정화와 VIX 진정을 전제로, 본주(SAN.MC) 기준 12.80~13.10유로대(ADR 환산 약 14.5~14.9달러) 재돌파 및 거래량 동반 여부를 핵심 트리거로 봐야 합니다. 8~10주 이동평균 위에서 변동성 축소(VCP) 패턴이 재형성되고 손절선을 다시 좁게 설정할 수 있는 신규 피벗이 나온다면 워치리스트 재편입을 고려할 만합니다. 다만 미 연준의 실제 금리 인하 시점과 국채 수익률 방향성이 은행주 전반의 단기 변동성을 계속 좌우할 변수이므로, 매크로 지표(고용, CPI, 국채 입찰 결과) 확인이 선행되어야 합니다.</div></div>
-
+<div class="card"><b>이후 전망·재진입 관점</b><div class="section-body">SAN은 웹스터 인수 완료(8월 20일 자회사 편입)와 자사주 매입 마무리 단계, EU 규제 리스크 해소 등 개별 펀더멘털은 견조하며 애널리스트 컨센서스도 매수 우위를 유지하고 있어, 이번 조정이 추세 전환이 아닌 매크로발 일시 조정일 가능성이 높습니다. 재진입 관점에서는 국채 수익률 안정화와 VIX 진정을 전제로, 본주(SAN.MC) 기준 12.80~13.10유로대(ADR 환산 약 14.5~14.9달러) 재돌파 및 거래량 동반 여부를 핵심 트리거로 봐야 합니다. 8~10주 이동평균 위에서 변동성 축소(VCP) 패턴이 재형성되고 손절선을 다시 좁게 설정할 수 있는 신규 피벗이 나온다면 워치리스트 재편입을 고려할 만합니다. 다만 미 연준의 실제 금리 인하 시점과 국채 수익률 방향성이 은행주 전반의 단기 변동성을 계속 좌우할 변수이므로, 매크로 지표(고용, CPI, 국채 입찰 결과) 확인이 선행되어야 합니다.</div></div><h2>📉 매도 분석 — 2026-09-18</h2><div class="card"><b>청산 원인</b><div class="section-body">BOOTSTRAP_REALIGN은 종목 자체의 기술적 붕괴가 아니라 시스템의 초기 포지션 재정렬 로직에 의한 매도로, 최근 코드에도 초기 정렬 조건(현재가&gt;스탑) 재정의 작업이 반영되어 있다. 실제 SAN은 최근 4주 +8.47%, 52주 신고가(15.05달러) 근접권의 강세 흐름을 유지 중이며 개별 종목·섹터 악재는 확인되지 않는다. -1.5% 손실은 재정렬 로직상 스탑 근접 재배치에 따른 소폭 이탈로 보인다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">종목 펀더멘털/추세가 훼손된 상태가 아니므로 매도 사유가 &#x27;위험 회피&#x27;라기보다 시스템 슬롯 재배치성 매도에 가까워 보이며, 손실폭도 미미(-1.5%)해 판단 자체는 중립적이다. 재진입은 SAN이 재차 VCP 베이스를 형성하며 기존 스탑선(14.59 부근) 위에서 거래량 동반 돌파를 재확인한 뒤 검토할 필요가 있다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fb923c;color:#0f1117;font-weight:800;font-size:0.85rem">D</span></h2><div class="card"><b>요약</b><div class="section-body">박스권(14.2~14.9달러)에서 진입해 뚜렷한 브레이크아웃 모멘텀 없이 44일간 보유했고, 이 기간 배당·자사주매입·목표가 상향 등 펀더멘털 호재에도 주가는 횡보에 그쳤다. 리밸런싱/트림 로직이 거의 매일 분할매도-재매수를 반복하며 포지션을 흔들다 결국 BOOTSTRAP_REALIGN으로 청산됐다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입 시점에 뚜렷한 VCP 수축이나 거래량 동반 브레이크아웃 신호가 보이지 않아 SEPA 원칙상 진입 근거가 약했고, 청산도 손절/추세이탈이 아닌 시스템 리밸런싱 규칙에 의한 것이라 자율적 매매 판단이 거의 없었다. 44일간 40회 가까운 매매가 발생한 것은 규칙(REBAL_TRIM 등)이 포지션 관리를 지나치게 잦게 개입시켜 손익에는 중립적이었지만 거래 효율성 면에서는 실이었다.</div></div><div class="card"><b>교훈</b><div class="section-body">박스권 횡보 종목에 대해 리밸런싱 트림 규칙을 과도하게 자주 발동시키면 방향성 없는 매매만 늘어나므로, 브레이크아웃 확인 전에는 트림 빈도를 낮추거나 포지션을 아예 보류하는 필터가 필요하다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>

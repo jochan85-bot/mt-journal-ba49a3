@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>ECO <span class="dim" style="font-size:1rem">오케아니스 에코 탱커스</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.14yr, B3)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.14yr, B3)</span></div>
 
 <div class="card">
 평균 매수가 <b>$82.95</b>
-· 평균 매도가 <b>$85.06</b>
-· 수익률 <span class="pos">+3.70%</span>
-· 보유 13주
+· 평균 매도가 <b>$85.34</b>
+· 수익률 <span class="pos">+2.88%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260915 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 4.45x">예측 1.60x → 확정 2.15x</span></div>
-<div class="dim">2026-09-15 진입</div>
+<div class="dim">2026-09-15 진입 → 2026-09-18 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -153,6 +153,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item sell">
 <b>REBAL_SELL</b> · 12주 @ $85.29
 <div class="dim">2026-09-17 23:31  — REGIME_TRIM</div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · 13주 @ $85.83
+<div class="dim">2026-09-18 22:46  — BOOTSTRAP_REALIGN</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-15 기준) 발췌</span></h2>
@@ -163,7 +166,7 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 원유 스팟 운임은 변동성이 큰 시장으로, 지정학적 긴장이 완화되거나 OPEC+ 증산이 확대되면 운임이 빠르게 되돌림될 수 있다.</div><div style="margin-top:6px">· 정식 애널리스트 커버리지가 1명뿐이라 목표가($75)가 이미 현재가를 밑도는 등 추정치 정보가 얇고 변동 가능성이 크다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">현재가는 피벗 $76.21에 근접한 돌파 전 대기 구간으로, 확정 종가가 피벗을 딛고 올라서면서 거래량이 예측 EOD 배수 1.6배 이상을 동반할 때 돌파 유효성이 확인된다. 진입 시 규칙엔진이 관리하는 초기 손절선(진입가 대비 -8%, 현재 기준 약 $73.34)이 자동 적용되고, 종가 기준 50일 이동평균선과 하한선 중 높은 쪽을 이탈하면 전량 청산된다. 진입일 확정 종가가 피벗 아래로 마감하거나 거래량 배수가 문턱에 못 미치면 돌파 실패로 판정돼 다음 거래일 개장 직후 정리된다.</div></div>
 
-
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">9/15 돌파 진입 후 채 하루도 안 되어 REGIME_TRIM으로 일부 청산과 REBAL_BUY 재진입이 반복됐고, 4일 만에 BOOTSTRAP_REALIGN으로 완전 청산됐다. ECO는 배당수익률 13%대의 고변동 탱커주로 추세 지속 여부를 검증할 시간도 없이 규칙성 매매로 소진됐다. 결과적으로 평단 82.95→85.34로 2.88% 수익은 났으나 이는 추세추종의 결과가 아니라 우연에 가깝다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 통상적 돌파 매수로 문제없었으나, 청산 과정은 REGIME_TRIM과 BOOTSTRAP_REALIGN이 연속 개입하며 하루~이틀 단위로 부분매도·재매수를 반복해 트렌드가 발현될 시간을 주지 못했다. 미너비니 원칙상 승자는 눌러야 하는데 이 케이스는 규칙이 승자를 조기에 잘라낸 실(失)에 가깝다. 순이익은 플러스였지만 이는 규칙의 성과가 아니라 종목 자체의 강세 덕이다.</div></div><div class="card"><b>교훈</b><div class="section-body">REGIME_TRIM/BOOTSTRAP_REALIGN 같은 시스템 재조정 규칙이 초단기(1~4일) 내 반복 발동될 경우 추세추종 전략의 핵심인 &#x27;눌러앉기&#x27;를 무력화하므로, 재조정 트리거 간 최소 보유일 하한을 두는 것이 필요하다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>

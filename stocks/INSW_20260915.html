@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>INSW <span class="dim" style="font-size:1rem">인터내셔널 시웨이스</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.13yr, B3)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.13yr, B3)</span></div>
 
 <div class="card">
 평균 매수가 <b>$107.86</b>
-· 평균 매도가 <b>$110.13</b>
-· 수익률 <span class="pos">+3.37%</span>
-· 보유 10주
+· 평균 매도가 <b>$110.95</b>
+· 수익률 <span class="pos">+2.86%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260912 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.86x">예측 1.61x → 확정 1.49x</span></div>
-<div class="dim">2026-09-15 진입</div>
+<div class="dim">2026-09-15 진입 → 2026-09-18 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -153,6 +153,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item sell">
 <b>REBAL_SELL</b> · 9주 @ $110.28
 <div class="dim">2026-09-17 23:31  — REGIME_TRIM</div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · 10주 @ $112.42
+<div class="dim">2026-09-18 22:46  — BOOTSTRAP_REALIGN</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-12 기준) 발췌</span></h2>
@@ -162,8 +165,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· 실적 서프라이즈</b><br><span class="section-body">8월 10일 발표된 2분기 EPS는 $5.91로 컨센서스 $5.55를 상회했고 매출도 $467.29M으로 예상치($406.38M)를 크게 웃돌며 전년비 138.9% 급증했다. 실적이 숫자로 확인되면서 랠리에 펀더멘탈 근거가 실렸다.</span></div><div style="margin-top:8px"><b>· 사상 최대 배당</b><br><span class="section-body">분기배당을 직전 $0.12에서 $5.05로 대폭 확대해 연환산 배당수익률이 19.9%에 달하고, 이는 조정순이익 $295M·FCF $261M의 강한 현금창출력을 반영한다. 고배당은 수급을 끌어들이는 추가 매수 동력으로 작용했다.</span></div></div>
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 유조선 운임은 중동 지정학적 긴장에 연동돼, 긴장이 완화되면(시장 맥락상 브렌트유가 9월 초 배럴당 108달러에서 104달러로 3% 하락한 사례처럼) 운임·주가 동력이 동반 위축될 수 있다.</div><div style="margin-top:6px">· 분기배당이 직전 $0.12에서 $5.05로 급증한 것은 특별배당 성격이 강해, 운임 사이클이 꺾이면 배당 규모가 다시 축소될 가능성을 계속 감시해야 한다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 $105.00을 거래량 동반 상승으로 돌파할 때 진입을 고려하며, 피벗 위 확정 종가와 거래량 확인 없이 일시적으로 웃도는 움직임은 가짜 돌파일 수 있어 주의가 필요하다. 규칙엔진이 관리하는 초기 손절선(-8%, $95.36)이 마감 기준으로 자동 청산을 수행하며 정률 부분 익절 단계는 없고, 진입일 확정 종가가 피벗 아래로 마감하거나 거래량 배수가 문턱에 못 미치면 돌파 실패로 판정돼 다음 거래일 개장 직후 정리된다.</div></div>
-
-
+<h2>📉 매도 분석 — 2026-09-18</h2><div class="card"><b>청산 원인</b><div class="section-body">INSW는 당일 52주 신고가(113.13) 근방인 112.97까지 상승 후 108.40까지 밀리며 매도가 112.42에 체결됐고, 거래량(63.6만)도 평균(78.4만) 대비 부진해 신고가 돌파 직후 매물 소화 구간에 들어간 모습입니다. 매도 사유가 종목 급락이 아닌 시스템의 BOOTSTRAP_REALIGN(초기 포지션 재정렬) 로직이라, 실적·뉴스성 악재보다는 진입 3거래일 만에 포트폴리오 슬롯 재배치 규칙에 걸린 것으로 판단됩니다. 탱커 섹터 자체에 특별한 당일 악재는 확인되지 않았습니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">수익 +4.2%로 청산했고 신고가 근처 눌림목 구간이라 리스크 관리 측면에서는 무리 없는 매도지만, 종목 펀더멘털 훼손이 아닌 시스템 내부 재정렬 규칙이므로 VCP 관점의 &#x27;매도&#x27;라기보다 &#x27;강제 청산&#x27;에 가깝습니다. 재진입은 108~110 지지 후 거래량 동반 신고가(113+) 재돌파가 나올 때, 배당수익률(7.6%)·저PER(6.98) 밸류에이션이 유지되는지 확인하며 노려볼 만합니다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">INSW를 106.47에 매수해 진입했으나 다음날부터 REGIME_TRIM·BOOTSTRAP_REALIGN 규칙에 의해 반복적으로 부분 매도·재매수가 이뤄지며 포지션이 잘게 쪼개졌다. 펀더멘털 악재 없이(오히려 실적 호조·목표가 상향 뉴스) 시스템 리밸런싱으로 4일 만에 전량 청산됐다. 결과적으로 2.86% 소폭 이익으로 마감했다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입 자체는 무난했지만 보유 3일 만에 REGIME_TRIM이 두 차례, 마지막날 BOOTSTRAP_REALIGN까지 겹쳐 추세 추종형 브레이크아웃 매매가 사실상 성립하지 못했다. 악재 없는 종목에서 규칙성 매도가 반복돼 상승분(장중 112대)을 온전히 취하지 못했으므로 이 케이스에서 규칙은 득보다 실에 가깝다. 매수-매도-재매수-재매도의 잦은 왕복은 거래비용·슬리피지만 키웠을 가능성이 크다.</div></div><div class="card"><b>교훈</b><div class="section-body">REGIME_TRIM과 BOOTSTRAP_REALIGN이 같은 종목에 단기간 연속 발동하면 추세 매매 로직을 무력화시키므로, 펀더멘털 악재가 없는 종목은 리밸런싱 트리거의 최소 보유기간 또는 쿨다운을 두어 잦은 왕복매매를 막을 필요가 있다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>

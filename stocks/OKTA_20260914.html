@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>OKTA <span class="dim" style="font-size:1rem">옥타</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.28yr, B1)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.28yr, B1)</span></div>
 
 <div class="card">
 평균 매수가 <b>$184.03</b>
-· 평균 매도가 <b>$189.99</b>
-· 수익률 <span class="pos">+3.73%</span>
-· 보유 6주
+· 평균 매도가 <b>$188.22</b>
+· 수익률 <span class="pos">+2.28%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260912 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.32x">예측 1.63x → 확정 1.87x</span></div>
-<div class="dim">2026-09-14 진입</div>
+<div class="dim">2026-09-14 진입 → 2026-09-18 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -153,6 +153,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item sell">
 <b>REBAL_SELL</b> · 5주 @ $191.27
 <div class="dim">2026-09-17 23:31  — REGIME_TRIM</div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · 6주 @ $184.67
+<div class="dim">2026-09-18 22:46  — BOOTSTRAP_REALIGN</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-12 기준) 발췌</span></h2>
@@ -162,8 +165,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· 2Q 실적 서프라이즈</b><br><span class="section-body">8월 26일 발표한 2Q(FY2027) 매출 8.05억달러(+11% YoY), 조정 EPS 1.05달러로 컨센서스를 상회했고 연간 매출 가이던스를 32.2~32.3억달러로 상향했다. 실적 발표 직후 시간외 약 20% 급등하며 이번 상승 랠리의 시발점이 됐다.</span></div><div style="margin-top:8px"><b>· AI 신원보안 수요</b><br><span class="section-body">AI 에이전트 확산으로 사람뿐 아니라 기계 계정까지 인증·권한 관리 대상이 되면서 신원보안 시장 자체가 커지는 구조적 흐름이 형성되고 있다. 모건스탠리·UBS가 목표가를 $200으로 상향한 배경도 이 수요 확장을 근거로 든다.</span></div></div>
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 8-K 최근 12개월 10건 중 5.02(임원 변동) 5건이 포함돼 있고 9월 2일 CFO가 8만주(약 1,290만달러)를 매도한 사실이 확인된다 — 추가 내부자 매도 흐름이 이어지는지 감시 포인트다.</div><div style="margin-top:6px">· 실적 서프라이즈 이후 주가가 이미 큰 폭(YTD +94%)으로 반영돼 있어, 다음 분기 실적이 이번만큼의 서프라이즈를 재현하지 못하면 동력이 둔화될 수 있다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 $179.44를 종가 기준으로 돌파하고 거래량이 게이트 임계(예측 EOD 배수 1.6배)를 충족하면 진입이 유효하다. 진입 후 초기 손절선은 규칙엔진이 진입가 대비 -8% 수준에서 자동 관리하며, 종가 기준 +16% 도달 시 손절선이 본전으로 이동하는 구조이고 별도의 정률 부분 익절 단계는 없다. 진입일 종가가 피벗 아래로 마감하거나 거래량 배수가 문턱에 못 미치면 돌파 실패로 간주돼 다음 거래일 개장 직후 정리된다.</div></div>
-
-
+<h2>📉 매도 분석 — 2026-09-18</h2><div class="card"><b>청산 원인</b><div class="section-body">매도 사유가 BOOTSTRAP_REALIGN으로, 종목 펀더멘털이 아닌 시스템의 초기 정렬/재조정 로직에 의한 기계적 청산입니다. OKTA는 AI 보안 수요와 실적 호조로 연초 대비 127% 급등, 52주 신고가(192.59) 부근에서 강세 흐름을 유지 중이었습니다. 매도가(184.67)가 평균단가 대비 +0.3%에 불과해 추세 이탈이나 손절 신호가 아닌 시스템 내부 규칙에 의한 조기 이탈로 판단됩니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">종목 자체는 VCP 돌파 후 상승 추세가 살아있어 시스템 매도가 추세적 근거보다는 봇 재정렬 로직에 따른 것으로 보이며, 조기 청산 측면에서 아쉬운 판단입니다. 재진입은 현재가가 MA50 위·전고점(192.59) 재돌파 또는 새로운 VCP 베이스 형성을 확인한 뒤 검토해야 합니다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">AI 보안 테마 모멘텀과 실적 서프라이즈로 52주 신고가(192.59) 랠리 중이던 OKTA를 돌파 진입했으나, 보유 기간 내내 REGIME_TRIM과 BOOTSTRAP_REALIGN 등 시스템 규칙에 의해 반복적으로 분할 매도·재매수가 발생했다. 종목 자체는 강한 상승 추세를 유지했지만 포지션이 계속 잘려나가며 온전한 추세 편승에 실패했고, 최종적으로 2.28%의 미미한 수익으로 청산됐다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 실적 호조와 AI 테마 모멘텀이 뒷받침된 정석적인 VCP 돌파로 질이 좋았다. 그러나 청산은 종목 고유 신호(손절/이익실현)가 아닌 레짐·리밸런싱 규칙에 의해 강제된 것으로, 강세 랠리 국면에서 규칙이 오히려 수익을 갉아먹은 사례다. 이 케이스에서는 규칙이 득보다 실이 컸다.</div></div><div class="card"><b>교훈</b><div class="section-body">종목이 뚜렷한 상승 모멘텀(52주 신고가, 실적 서프라이즈)을 보일 때는 레짐/리밸런싱 성격의 트림 규칙이 추세 추종을 방해하지 않도록 예외 또는 완화 조건을 검토할 필요가 있다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>

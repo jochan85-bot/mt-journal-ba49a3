@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>TNK <span class="dim" style="font-size:1rem">티케이 탱커스</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.15yr, B4)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.15yr, B4)</span></div>
 
 <div class="card">
 평균 매수가 <b>$99.75</b>
-· 평균 매도가 <b>$100.99</b>
-· 수익률 <span class="pos">+1.75%</span>
-· 보유 11주
+· 평균 매도가 <b>$101.10</b>
+· 수익률 <span class="pos">+1.35%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260911 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.91x">예측 1.64x → 확정 1.87x</span></div>
-<div class="dim">2026-09-12 진입</div>
+<div class="dim">2026-09-12 진입 → 2026-09-18 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -162,6 +162,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item sell">
 <b>REBAL_SELL</b> · 10주 @ $100.77
 <div class="dim">2026-09-17 23:31  — REGIME_TRIM</div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · 11주 @ $101.35
+<div class="dim">2026-09-18 22:46  — BOOTSTRAP_REALIGN</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-11 기준) 발췌</span></h2>
@@ -171,8 +174,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· 2분기 실적 급증</b><br><span class="section-body">2분기 매출 3.795억달러(전년 2.329억달러), 순이익 2.259억달러(전년 6,260만달러)로 3.6배 급증 — 호르무즈 해협 긴장에 따른 스팟 운임 강세가 그대로 반영됐다. 실적 서프라이즈가 돌파 스토리의 펀더멘탈 근거를 뒷받침한다.</span></div><div style="margin-top:8px"><b>· 목표가·전망 상향</b><br><span class="section-body">BofA가 8월 3일 목표가를 75달러에서 78달러로 올렸고, 최근 2개월간 연간 실적 전망도 EPS 13.75달러에서 15.40달러로 상향됐다. 애널리스트 재평가가 이어지고 있어 이야기가 아직 퍼지는 중임을 시사한다.</span></div></div>
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 탱커 운임은 지정학적 이벤트에 좌우되는 사이클성이 강해, 호르무즈 긴장이 완화되거나 물동량이 둔화되면 스팟 운임이 급격히 꺾일 수 있다.</div><div style="margin-top:6px">· Simply Wall St 발췌에서 &#x27;매출·순이익 성장세가 둔화되는 중(revenue and net income growth turning lower)&#x27;이라는 언급이 있어, 다음 분기 실적에서 이 둔화가 확인되면 프리미엄 유지가 어려워질 수 있다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 98.38달러를 종가 기준으로 돌파하고 거래량이 뒷받침될 때 진입을 고려한다. 초기 손절선은 규칙엔진이 관리하며 진입가 대비 -8%(90.39달러) 수준에서 시작해 종가 기준 +16% 도달 시 본전으로 올라가는 구조이고, 별도의 정률 부분 익절 단계는 없다. 진입일 종가가 피벗 아래로 마감하거나 거래량 배수가 돌파 문턱에 못 미치면 돌파 실패로 간주돼 다음 거래일 개장 직후 정리된다.</div></div>
-
-
+<h2>📉 매도 분석 — 2026-09-18</h2><div class="card"><b>청산 원인</b><div class="section-body">TNK는 진입 후 6일 만에 52주 신고가(100.91) 부근인 101.35에서 매도되었으며, 이는 실적 부진이나 되돌림이 아니라 시스템의 BOOTSTRAP_REALIGN(초기 정렬 재조정) 로직에 의한 기계적 청산이다. 당일 탱커 섹터는 이란-미국 충돌 여파로 VLCC 운임이 사상 최고치(하루 약 45만~80만 달러)를 기록하며 강세를 이어갔고, TNK 주가도 이에 연동해 신고가권에 머물렀다. 즉 종목·섹터 펀더멘털은 견조했고 매도는 포지션 관리 룰에 따른 것이다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">미실현 수익 구간에서 추세가 살아있는 상태의 강제 재정렬 매도로, 주가·모멘텀 자체의 이탈 신호는 아니었기에 SEPA 관점에서는 다소 성급한 청산으로 볼 수 있다. 재진입은 지정학적 리스크 프리미엄(이란-미국 긴장) 완화 여부와 VLCC 운임 조정 여부를 확인한 뒤, MA50 위에서 저변동 눌림목 재형성 시 고려할 만하다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">돌파 진입 후 뚜렷한 추세 발생 없이 98~102달러 박스권에서 6일 내내 잦은 리밸런스 매도/매수(REGIME_TRIM, BOOTSTRAP_REALIGN)가 반복되며 포지션이 잘게 쪼개졌고, 결국 부분 청산이 누적되어 소폭 익절로 마감됐다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입 자체는 무리 없었으나 청산 사유 대부분이 추세·손절 신호가 아닌 리밸런스/재정렬 로직(REGIME_TRIM, BOOTSTRAP_REALIGN)이라 셋업의 실제 추세 지속력을 검증하지 못한 채 기계적으로 분할 매도됐다. 규칙이 큰 손실은 막았지만 VCP 돌파 특유의 큰 폭 수익 기회를 리밸런싱이 조기에 갉아먹은 셈이다.</div></div><div class="card"><b>교훈</b><div class="section-body">돌파 직후 박스권 횡보 구간에서 리밸런스 매도가 과도하게 빈번하면 추세 추종 이익을 스스로 잘라먹으므로, 진짜 추세 이탈 신호와 리밸런스 트리거를 분리해 판단할 필요가 있다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
