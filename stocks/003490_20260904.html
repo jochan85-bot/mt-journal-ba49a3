@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../prototype.html">← Prototype 기록</a></div>
 <h1>003490 ☀️ <span class="dim" style="font-size:1rem">대한항공</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.58yr, B3)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.58yr, B3)</span></div>
 
 <div class="card">
 평균 매수가 <b>29,974원</b>
-· 평균 매도가 <b>29,247원</b>
-· 수익률 <span class="neg">-2.75%</span>
-· 보유 51주
+· 평균 매도가 <b>29,194원</b>
+· 수익률 <span class="neg">-2.60%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260903 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.37x">예측 1.69x → 확정 1.68x</span></div>
-<div class="dim">2026-09-04 진입</div>
+<div class="dim">2026-09-04 진입 → 2026-09-21 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -159,6 +159,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item sell">
 <b>REBAL_SELL</b> · 51주 @ 29,100원
 <div class="dim">2026-09-18 10:00  — REGIME_TRIM</div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · 51주 @ 29,100원
+<div class="dim">2026-09-21 09:11  — BOOTSTRAP_REALIGN</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-03 기준) 발췌</span></h2>
@@ -168,8 +171,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· 한진칼 합병 기대감</b><br><span class="section-body">한진칼과의 합병 관련 공시 효력 발생과 투자설명서 제출로 투자심리가 자극되며 외국인·기관 동반 매수세가 유입됐다. 지배구조 재편 기대가 주가 상승의 직접 트리거로 작용했다.</span></div><div style="margin-top:8px"><b>· 5거래일 연속 상승</b><br><span class="section-body">8/24 종가 26,000원에서 8/28 종가 28,700원까지 5거래일 만에 2,700원 상승하며 우상향 추세를 이어갔다. 거래량도 8/28 기준 273만주로 유입되며 상승 신뢰도를 높였다.</span></div></div>
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 최근 분기 영업이익이 적자(-2,071억원)로 전환된 이력이 있어 실적 변동성이 크고, 유가·환율 등 외부 비용 요인에 민감하다.</div><div style="margin-top:6px">· 합병 기대감이 재료 소진되거나 절차가 지연되면 단기 급등분이 되돌려질 수 있어 합병 관련 공시·일정 진행 상황을 계속 확인해야 한다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 ₩28,950 돌파 시 추격 진입을 고려하되, 거래량이 뒷받침되는지 확인 후 진입하는 것이 바람직하다. 초기 손절선은 규칙엔진이 진입가 대비 -8% 수준(₩26,818)에서 관리하며, 그 이전 -4% 도달 시 보유 시점에 따라 33% 또는 67% 부분청산이 자동 작동할 수 있다. 피벗 재이탈이나 상승분 되돌림이 크게 나타나면 셋업 무효로 판단해야 한다.</div></div>
-
-
+<h2>📉 매도 분석 — 2026-09-21</h2><div class="card"><b>청산 원인</b><div class="section-body">9월 유류할증료가 21단계로 재상승하고 중동發 지정학적 불안으로 국제유가가 배럴당 105달러대까지 오르며 항공주 전반이 연료비 부담·여객수요 둔화 우려로 약세를 보였다. 대한항공도 이 섹터 흐름에 동조해 평단가 대비 -2.9% 구간까지 밀렸다. 이는 매도 사유인 BOOTSTRAP_REALIGN(포트폴리오 재정렬) 기준선을 건드린 것으로 보인다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">손실이 -2.9%로 크지 않고 매도가 시스템 리밸런싱(BOOTSTRAP_REALIGN) 사유라 임의적 손절보다는 규칙 기반 정리로 적절했다. 재진입은 유가 안정화(105달러 이하 하락)와 유류할증료 단계 하락 전환, VCP 재형성 여부를 확인한 뒤 판단해야 한다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">3만원 부근 VCP형 브레이크아웃으로 진입했으나 이후 리밸런스 매수/매도가 반복되며 포지션이 잘게 쪼개졌고, 종목 자체의 기술적 붕괴가 아닌 REGIME_TRIM·BOOTSTRAP_REALIGN 등 포트폴리오 레벨 규칙에 의해 강제 청산됐다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입 시점은 무난했으나 보유 중 4차례의 소규모 리밸런스 매매가 발생해 실질적으로 추세를 관찰할 기회 없이 손절매 없는 소모성 매매로 흘렀다. 청산 사유가 개별 종목 신호가 아닌 시스템 리밸런스였다는 점에서 규칙이 종목 고유의 상승여력(목표가 36,000원, 화물운임 호재)을 반영하지 못하고 기계적으로 손실을 확정시킨 셈이다.</div></div><div class="card"><b>교훈</b><div class="section-body">포트폴리오 레벨 리밸런싱 규칙이 종목별 추세 신호보다 우선 발동되면, 건전한 브레이크아웃도 잦은 분할매매로 마모되어 작은 손실로 마감될 수 있다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>

@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../prototype.html">← Prototype 기록</a></div>
 <h1>028670 ☀️ <span class="dim" style="font-size:1rem">팬오션</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.21yr, B1)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.21yr, B1)</span></div>
 
 <div class="card">
 평균 매수가 <b>5,952원</b>
-· 평균 매도가 <b>5,924원</b>
-· 수익률 <span class="neg">-3.05%</span>
-· 보유 264주
+· 평균 매도가 <b>5,867원</b>
+· 수익률 <span class="neg">-1.42%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 4점 (20260902 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.81x">예측 1.51x → 확정 2.43x</span></div>
-<div class="dim">2026-09-03 진입</div>
+<div class="dim">2026-09-03 진입 → 2026-09-21 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -174,6 +174,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item sell">
 <b>REBAL_SELL</b> · 179주 @ 5,870원
 <div class="dim">2026-09-18 10:00  — REGIME_TRIM</div>
+</div><div class="tl-item sell">
+<b>REBAL_SELL</b> · 264주 @ 5,760원
+<div class="dim">2026-09-21 09:11  — BOOTSTRAP_REALIGN</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-02 기준) 발췌</span></h2>
@@ -183,8 +186,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· 1분기 실적 서프라이즈</b><br><span class="section-body">2026년 1분기 영업이익이 전년 대비 24.4% 늘며 시장 컨센서스를 7% 웃돌았다. 연료비 급등 부담을 탱커·LNG 사업부 수익 증가로 상쇄한 결과라 이익 체력이 벌크 한 축에만 의존하지 않는다는 점이 부각된다.</span></div><div style="margin-top:8px"><b>· BDI 지수 연중 최고치</b><br><span class="section-body">5월 초 기준 BDI지수가 2730포인트로 연중 최고를 기록하며 중국향 철광석·보크사이트 수요와 공급 제약이 동시에 작용했다. NH증권은 이를 근거로 목표주가를 6,200원에서 7,000원으로 상향했다.</span></div></div>
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 2026년 8월 26일 중동 분쟁 완화 기대감이 부각되며 해운주가 하루 만에 약 6% 급락한 바 있다. 지정학적 프리미엄이 실제로 해소될 경우 운임·용선료에 하방 압력이 실릴 수 있어 추가 뉴스 흐름을 지켜볼 필요가 있다.</div><div style="margin-top:6px">· BDI지수는 중국 철광석·보크사이트 수요와 선복 공급 제약이라는 변수에 민감해 시황이 반전되면 실적 개선세가 되돌려질 수 있다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 ₩5,860 돌파가 거래량 동반과 함께 확인될 때 진입을 고려할 수 있으며, 규칙엔진이 관리하는 초기 손절선(₩5,069, -8%)이 자동 적용되고 그 이전 -4% 도달 시 보유량 일부(진입 후 2영업일 이내 33%, 이후 67%)에 대한 부분청산이 마감 직전 창에서 평가될 수 있다. 피벗 돌파 없이 되밀리거나 거래량이 실리지 않은 채 상승하면 셋업은 무효로 보고 대기하는 것이 적절하다.</div></div>
-
-
+<h2>📉 매도 분석 — 2026-09-21</h2><div class="card"><b>청산 원인</b><div class="section-body">매도 당일 코스피는 반도체 훈풍으로 7,000선 재도전하며 강세(+0.64%)였으나 팬오션은 벌크선 운임·해운업 특성상 지수와 디커플링되어 약세, VCP 눌림 구간에서 지지선을 이탈했다. BOOTSTRAP_REALIGN은 개별 종목 이슈보다 포트폴리오 리밸런싱 성격의 트리거로, 추석 연휴 전 비중 조정 과정에서 발동된 것으로 보인다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">실적·투자의견(목표가 7,000원, Buy 유지)은 견조해 펀더멘털 훼손은 아니며 -3.2% 손절은 시스템 규칙에 따른 정상 처리로 판단된다. 재진입은 5,800원대 저항 돌파 및 거래량 동반 여부, 연휴 이후 시황 재개 시 벌크 운임(BDI) 반등 신호를 확인 후 검토할 것을 권한다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">VCP 패턴 돌파를 보고 진입했으나 이후 리밸런싱 매수/매도가 반복되며 포지션이 불안정하게 유지됐고, 목표가 상향(7,000원)의 긍정적 펀더멘털에도 불구하고 결국 REGIME_TRIM과 BOOTSTRAP_REALIGN 규칙에 의해 강제 청산됐다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입 자체는 명확한 트리거 없이 소액 리밸런싱 매수·매도가 9차례나 겹쳐 포지션 관리가 산만했고, 청산은 자체 신호(피벗 실패)가 아닌 시스템 레짐/부트스트랩 규칙에 의해 이뤄져 규칙이 실보다는 잡음 관리 수단으로 작동했다. 결과적으로 -1.42% 소폭 손실로 큰 화는 피했지만 매매 자체의 신호 품질은 낮았다.</div></div><div class="card"><b>교훈</b><div class="section-body">리밸런싱 매수/매도가 과도하게 자주 발생하면 원래의 진입 논리가 희석되므로, 초기 브레이크아웃 신호의 유효성을 벗어난 잦은 재조정은 지양해야 한다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
