@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../prototype.html">← Prototype 기록</a></div>
 <h1>TRMD <span class="dim" style="font-size:1rem">톰</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.98yr, B1)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.98yr, B1)</span></div>
 
 <div class="card">
 평균 매수가 <b>$34.59</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$35.04</b></span> <span class="dim" title="10건 매도 정정값 합계">· 실현(브로커) <b>+$212.25</b></span>
-· 평균 매도가 <b>$35.79</b>
-· 수익률 <span class="neg">-1.20%</span>
-· 보유 55주
+· 평균 매도가 <b>$35.38</b>
+· 수익률 <span class="pos">+2.28%</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260829 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.02x">예측 1.60x → 확정 1.31x</span></div>
-<div class="dim">2026-08-31 진입</div>
+<div class="dim">2026-08-31 진입 → 2026-09-23 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -180,6 +180,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item buy">
 <b>REBAL_BUY</b> · 22주 @ $38.07
 <div class="dim">2026-09-18 23:03  — REGIME_EXPAND</div>
+</div><div class="tl-item sell">
+<b>매도</b> · 55주 @ $34.63
+<div class="dim">2026-09-23 23:21  — M50 하드바닥 발동 (장중, proven=True, 기준=avg_cost_broker)</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-08-29 기준) 발췌</span></h2>
@@ -189,8 +192,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· 사상최대 실적</b><br><span class="section-body">2분기 순이익 3.38억달러, EBITDA 4.16억달러로 회사 역사상 최고 분기 실적을 기록했다. 실적 서프라이즈가 가이던스 상향의 근거가 되며 시장 재평가를 촉발할 수 있다.</span></div><div style="margin-top:8px"><b>· 연간 가이던스 대폭 상향</b><br><span class="section-body">2026 연간 TCE 가이던스를 8.5-12.5억달러에서 11.5-14.5억달러로, EBITDA는 5-9억달러에서 8-11억달러로 상향했다. 컨센서스 재조정 트리거로 작용해 애널리스트 실적 추정치 상향 압력을 만든다.</span></div></div>
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 호르무즈 해협 긴장이 완화되거나 정상 통항이 재개되면 운임 급등 요인이 빠르게 소멸할 수 있어 지정학 뉴스 흐름을 계속 확인해야 한다.</div><div style="margin-top:6px">· 탱커 운임은 사이클 산업 특성상 변동성이 크고, 이번 서프라이즈도 전년 저기저 효과에 기댄 측면이 있다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 $32.74 돌파 시 진입 시나리오가 유효하며, 돌파 국면에서 거래량이 뒷받침되는지 함께 확인할 필요가 있다. 규칙엔진이 관리하는 초기 손절선은 진입가 대비 -8%(현재 기준 약 $30.01)이며, 그 이전 -4% 도달 시 진입 후 2영업일 이내면 33%, 그 이후면 67% 부분청산이 자동 작동한다. 피벗 재이탈이나 돌파 실패로 되밀리면 셋업은 무효로 봐야 한다.</div></div>
-
-
+<h2>📉 매도 분석 — 2026-09-23</h2><div class="card"><b>청산 원인</b><div class="section-body">9월 초 9백만주 규모 2차 공모(secondary offering) 물량 출회로 수급 부담이 누적된 가운데, 이란의 호르무즈 해협 재개방 제안 뉴스로 지정학적 프리미엄과 운임 강세 기대가 약화되며 탱커 섹터 전반이 조정받았다. TRMD도 52주 고점(38.73) 대비 밀리며 M50(50일선) 브로커 평단 기준 하드바닥을 장중 이탈, 시스템 손절이 발동했다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">진입가 대비 +0.1%에 불과해 이익 보호가 아닌 순수 추세 이탈 방어 성격의 매도로, 공모 물량·지정학 이슈 겹침을 감안하면 적절한 조치였다. 재진입은 공모 물량 소화 완료 및 호르무즈/운임 이슈 안정화 확인 후 M50 위 재탈환·거래량 동반 시 검토할 것.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#60a5fa;color:#0f1117;font-weight:800;font-size:0.85rem">B</span></h2><div class="card"><b>요약</b><div class="section-body">SEPA 셋업으로 8/31 32.86에 진입 후 순항하며 34~38달러 구간에서 수차례 리밸런싱 매수·매도를 반복했다. 9/16 Oaktree 계열 대주주의 900만주 대량 매도(비상장 블록딜)로 공급 부담이 커지며 9/22 주가가 하루 6.7% 급락, 9/23 M50 하드바닥(브로커 평단 기준)이 발동해 잔여 55주를 34.63에 전량 청산했다. 최종 수익률은 2.28%로 소폭 플러스에 그쳤다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 추세 초입에서 이루어져 타이밍은 양호했으나, 이후 레짐 확장·축소에 따른 잦은 리밸런싱으로 평균매수단가가 34.59까지 끌어올려져 상승분을 상당 부분 깎아먹었다. 청산은 대주주 블록딜발 급락이라는 외부 충격에 대한 규칙 기반 방어로, 기준가를 브로커 평단으로 통일한 최근 수정 덕분에 조기청산 오판 없이 정상 작동해 실보다는 득이 컸다.</div></div><div class="card"><b>교훈</b><div class="section-body">레짐 신호에 따른 반복적 분할매수·매도가 평단을 계속 끌어올려 순수익을 잠식하는 구조이므로, 동일 종목 내 잦은 리밸런싱 빈도에 상한을 두는 것을 검토할 필요가 있다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
