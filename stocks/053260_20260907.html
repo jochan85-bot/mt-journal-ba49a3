@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>053260 ☀️ <span class="dim" style="font-size:1rem">금강철강</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.41yr, B1)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.41yr, B1)</span></div>
 
 <div class="card">
 평균 매수가 <b>6,749원</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>6,861원</b></span> <span class="dim" title="8건 매도 정정값 합계">· 실현(브로커) <b>+311,810원</b></span>
-· 평균 매도가 <b>7,402원</b>
-· 수익률 <span class="pos">+1.77%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="pos">+4.16%</span>)</span>
-· 보유 312주
+· 평균 매도가 <b>7,165원</b>
+· 수익률 <span class="pos">+6.16%</span> <span class="dim">(전기간 평균 — 정정열 없는 매도행 있음)</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 4점 (20260904 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.92x">예측 1.54x → 확정 8.57x</span></div>
-<div class="dim">2026-09-07 진입</div>
+<div class="dim">2026-09-07 진입 → 2026-09-28 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -174,6 +174,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item buy">
 <b>REBAL_BUY</b> · 42주 @ 7,210원
 <div class="dim">2026-09-21 09:12  — REGIME_EXPAND</div>
+</div><div class="tl-item sell">
+<b>매도</b> · 312주 @ 6,860원
+<div class="dim">2026-09-28 09:08  — M50 하드바닥 발동 (장중, proven=True, 기준=avg_cost_broker)</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-04 기준) 발췌</span></h2>
@@ -183,8 +186,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· 철강 테마 급등</b><br><span class="section-body">9월 3일 미이란 전쟁 확산 우려와 트럼프 알래스카 LNG 발언이 겹치며 철강·특수강 관련주가 일제히 급등, 금강철강도 장중 22~23%대 상승하며 대표 수혜주로 부각됐다. 섹터 전반의 매수세가 개별 종목 급등의 배경이 됐다는 점에서 단기 수급 쏠림이 확인된다.</span></div><div style="margin-top:8px"><b>· EPS 급증</b><br><span class="section-body">EPS 성장률 134.1%로 실적 개선 흐름이 뚜렷하며 최근 분기 영업이익도 1→3→0→12억원으로 반등세를 보였다. 소형 철강주 치고는 이익 턴어라운드 신호가 테마 매수세에 명분을 더했다.</span></div></div>
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 지정학적 재료 의존도가 높은 급등이라 미이란 전쟁 확산이 진정되면 재료 소멸과 함께 되돌림이 나올 수 있다. 9월 4일 현재 -5.63% 조정도 그 신호일 가능성이 있어 후속 뉴스 흐름을 확인해야 한다.</div><div style="margin-top:6px">· 영업이익률이 0.1%로 이익 기반이 매우 얇아 매출 성장이 실질 수익 개선으로 이어지는 속도가 느릴 수 있다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">현재가 6,030원은 B² 피벗 6,360원에 5.19% 못 미친 피벗 미도달 구간으로, 전일 급등 이후 -5.63% 조정 중인 스냅샷이다. 피벗 돌파가 거래량 동반으로 확인될 때 진입을 고려할 수 있으며, 규칙엔진이 관리하는 초기 손절선(6,030원 기준 -8%, 약 5,548원)이 자동 적용되고 그 이전 -4% 도달 시 진입 후 2영업일 이내면 보유량 33%, 이후면 67% 부분청산이 발동할 수 있다. 피벗 재도전 없이 조정이 이어지거나 지정학적 재료가 급격히 식으면 셋업은 무효로 판단한다.</div></div>
-
-
+<h2>📉 매도 분석 — 2026-09-28</h2><div class="card"><b>청산 원인</b><div class="section-body">9/28 개장 초반 코스닥이 반도체 등 대형주 약세로 하락 출발하며 전반적 투자심리가 위축된 가운데, 이전 조정 흐름(9/16 7,580원대에서 하락)이 이어지며 철강 개별주인 금강철강도 매수 평단(6,749원) 대비 상단에서 지지선(M50)까지 되밀렸다. 장중 M50 하드바닥(broker 평단 기준) 발동으로 소폭 수익(+1.6%) 구간에서 자동 청산됐다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">진입 후 3주 만에 수익권에서 하드바닥이 발동한 것은 추세 훼손을 조기에 인정한 보수적이고 적절한 리스크 관리로 판단된다. 재진입은 M50/M150 위 재안착 및 거래량 동반 VCP 재형성이 확인된 후, 철강 업종 전반의 반등 여부를 함께 점검해야 한다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#60a5fa;color:#0f1117;font-weight:800;font-size:0.85rem">B</span></h2><div class="card"><b>요약</b><div class="section-body">돌파 초입(6430원)에서 진입 후 리밸런싱 매매로 8030원까지 물량을 늘렸고, 9/18 REGIME_TRIM으로 일부 축소·9/21 REGIME_EXPAND로 재확대하며 변동성 국면을 관리했으나, 9/28 M50 하드바닥(장중, 평단 기준) 발동으로 전량 청산됐다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 VCP형 돌파 초입 저가 매수로 양호했고 중간 리밸런싱도 방향에 맞게 추가매수 위주였다는 점은 긍정적이나, REGIME_TRIM 후 곧바로 REGIME_EXPAND로 재진입한 것은 국면 판단이 오락가락한 흔적이며 최종 M50 하드바닥 청산은 룰대로 제때 손익을 지킨 실보다는 득에 가깝다.</div></div><div class="card"><b>교훈</b><div class="section-body">국면(REGIME) 전환 신호가 3일 만에 뒤집힐 경우 포지션 크기를 재확대하기보다 관망 비중을 늘리는 편이 변동성 손실을 줄인다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
