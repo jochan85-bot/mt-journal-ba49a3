@@ -122,22 +122,25 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>096770 <span class="dim" style="font-size:1rem">SK이노베이션</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.12yr, B1)</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.12yr, B1)</span></div>
 
 <div class="card">
-평균 매수가 <b>158,600원</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>158,600원</b></span>
+평균 매수가 <b>158,600원</b>
+· 평균 매도가 <b>145,800원</b>
+· 수익률 <span class="neg">-8.07%</span> <span class="dim">(전기간 평균 — 정정열 없는 매도행 있음)</span>
 
-· 수익률 <span class="neg">-3.91%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-3.91%</span>)</span>
-· 보유 12주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 7점 (20260923 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.26x">예측 1.44x → 확정 1.10x</span></div>
-<div class="dim">2026-09-28 진입</div>
+<div class="dim">2026-09-28 진입 → 2026-09-29 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
 <div class="timeline"><div class="tl-item buy">
 <b>매수</b> · 12주 @ 158,600원
 <div class="dim">2026-09-28 09:46 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 12주 @ 145,800원
+<div class="dim">2026-09-29 10:52  — M50 하드바닥 발동 (장중, proven=False, 기준=avg_cost_broker)</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-23 기준) 발췌</span></h2>
@@ -147,8 +150,8 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· SK온 대형 수주</b><br><span class="section-body">SK온이 8월 27일 미국 네오볼타 파워와 2027~2031년 9GWh(약 1.5조원 추정) LFP 파우치셀 공급계약을 체결했다. 연내 추가 9GWh 계약까지 성사되면 총 18GWh로 확대돼 자회사 실적 개선 기대가 모회사 주가에 반영되고 있다.</span></div><div style="margin-top:8px"><b>· 업종 대비 초과 상승</b><br><span class="section-body">9월 23일 동일업종 등락률(+2.35%)을 웃도는 +5.11%~5.82% 상승이 이어지며 삼성SDI·LG에너지솔루션 등 2차전지 밸류체인 전반의 반등에 동참하고 있다. AI 데이터센터 전력수요 확대로 ESS가 전기차 대체 수요처로 재조명되는 국면이라 자금 유입이 이어질 가능성이 있다.</span></div></div>
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· SK온의 실적 개선은 2027년 계약 개시 이후 반영되는 구조라 당장의 재무제표 효과는 제한적이며, 전기차·ESS 수요 회복 속도가 기대에 못 미치면 모멘텀이 빠르게 식을 수 있다.</div><div style="margin-top:6px">· 12개월 내 -15% 이상 급락 이력이 있었던 종목으로, 유가·정제마진 등 정유 부문 변수와 배터리 부문 재료가 동시에 주가 변동성을 키울 수 있다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">진입은 B² 피벗 151,100원을 확정 종가 기준으로 상향 돌파하고 거래량이 게이트 임계(예측 EOD 배수 1.4배)를 충족할 때 유효하다. 손절은 규칙엔진이 관리하는 초기 손절선(₩137,264, -8%)을 기준으로 하며, 이후 종가가 50일 이동평균선과 하한선 중 높은 쪽 아래로 마감하면 전량 청산되고 별도의 정률 부분 익절 단계는 없다. 진입일 확정 종가가 피벗 아래로 마감하거나 거래량 배수가 문턱에 못 미치면 돌파 실패로 판정돼 다음 거래일 개장 직후 정리된다.</div></div>
-
-
+<h2>📉 매도 분석 — 2026-09-29</h2><div class="card"><b>청산 원인</b><div class="section-body">9/29 장중 자회사 계약 공시에도 불구하고 SK이노베이션은 -7.8% 급락(146,100원대)해 업종 평균 낙폭(-3.09%)을 크게 상회했다. 계열사 재편(SK ii Technology 합병) 관련 불확실성과 차익실현, 글로벌 경기둔화·유가 변동성 우려가 겹쳤다. 뚜렷한 개별 악재 부재 상태에서 매도세가 쏠리며 진입 다음날 -8.1% 손절가에 하드바닥이 발동했다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">진입 하루 만에 계열 재편 불확실성발 시장 전체 매도세로 손실 확대된 상황이므로 M50 하드바닥 손절은 적절했다. 재진입은 합병안 구체화·SK On 가동률 개선 등 펀더멘털 가시성 확보와 VCP 재형성·거래량 동반 돌파 확인 후 고려해야 한다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#60a5fa;color:#0f1117;font-weight:800;font-size:0.85rem">B</span></h2><div class="card"><b>요약</b><div class="section-body">돌파 신호로 158,600원에 진입했으나 다음날 뚜렷한 악재 공시 없이 장중 급락(고가 부근에서 시작해 저가 144,100원까지)하며 M50 하드바닥 손절 규칙이 145,800원에서 발동해 익일 청산됐다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 돌파 이후 즉시 역행한 전형적 실패 브레이크아웃으로 질이 낮았고, 청산은 사전 정의된 손절선(M50)을 기계적으로 지켜 손실을 -8%대에서 끊었다는 점에서 규칙이 제 역할을 했다. 다만 하락 원인이 불명확한 수급성 급락이라는 점에서 종목 자체의 타이밍 판단은 아쉬웠다.</div></div><div class="card"><b>교훈</b><div class="section-body">명확한 악재 없는 기관성 수급 급락도 발생할 수 있으므로, 손절 규칙을 신뢰하고 신속히 따른 이번 대응 자체는 옳았다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
