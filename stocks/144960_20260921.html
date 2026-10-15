@@ -122,22 +122,25 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>144960 <span class="dim" style="font-size:1rem">뉴파워프라즈마</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.25yr, B1)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24" title="보유 종목 경과 기록">📔 마지막 점검 2026-10-14 · 약화</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.25yr, B1)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24" title="보유 종목 경과 기록">📔 청산 전 마지막 점검 2026-10-14 · 약화</span></div>
 
 <div class="card">
-평균 매수가 <b>10,850원</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>10,850원</b></span>
+평균 매수가 <b>10,850원</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>10,850원</b></span> <span class="dim" title="1건 매도 정정값 합계">· 실현(브로커) <b>-1,830원</b></span>
+· 평균 매도가 <b>10,840원</b>
+· 수익률 <span class="neg">-0.09%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-0.09%</span>)</span>
 
-· 수익률 <span class="pos">+4.42%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="pos">+4.42%</span>)</span>
-· 보유 183주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 3점 (20260918 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 4.99x">예측 1.57x → 확정 2.45x</span></div>
-<div class="dim">2026-09-21 진입</div>
+<div class="dim">2026-09-21 진입 → 2026-10-15 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
 <div class="timeline"><div class="tl-item buy">
 <b>매수</b> · 183주 @ 10,850원
 <div class="dim">2026-09-21 09:12 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 183주 @ 10,840원
+<div class="dim">2026-10-15 11:31  — M50 하드바닥 발동 (장중, proven=True, 기준=avg_cost_broker)</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-18 기준) 발췌</span></h2>
@@ -148,7 +151,7 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 20260128 교환사채권발행결정과 자기주식처분결정이 동시 공시돼 지분 희석·물량 출회 우려가 상존한다. 추가 자금조달 공시 여부를 계속 확인할 필요가 있다.</div><div style="margin-top:6px">· 12개월 동안 +15% 이상 급등 6일, -15% 급락 1일, 최대 162.4% 상승 후 고점대비 -31.5% 조정을 기록할 만큼 변동성이 크며, 실적·재료보다 수급에 기댄 등락일 가능성을 배제할 수 없다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">진입은 B² 피벗 10,400원을 거래량을 동반해 종가 기준으로 넘어설 때만 유효하며, 현재가 10,280원에서 피벗까지는 1.63% 남아 있어 아직 돌파 전 대기 구간이다. 돌파 시 초기 손절선은 규칙엔진이 진입가 대비 -8% 수준(약 9,458원)에서 관리하며, 별도의 정률 부분 익절 단계는 없고 종가가 바닥선 아래로 마감하면 다음 거래일 개장 직후 청산된다. 종가가 피벗 아래로 마감하거나 당일 확정 거래량 배수가 돌파 문턱에 못 미치면 돌파 실패로 간주돼 정리되는 셋업이다.</div></div>
 <style>.dy-tl{border-left:2px solid var(--border);padding-left:16px;margin:8px 0}.dy-row{margin-bottom:16px;position:relative}.dy-row::before{content:'';position:absolute;left:-21px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--dim)}.dy-row.dy-keep::before{background:var(--green)}.dy-row.dy-weak::before{background:#fbbf24}.dy-row.dy-review::before{background:var(--red)}.dy-row.dy-exit::before{background:var(--text)}.dy-tag{display:inline-block;margin-left:6px;padding:1px 7px;border:1px solid var(--border);border-radius:5px;font-size:0.72rem;color:var(--dim)}.dy-fixed{margin-top:6px;font-size:0.75rem;color:var(--dim)}</style>
-<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 마지막 점검 2026-10-14 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></h2>
+<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 청산 전 마지막 점검 2026-10-14 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></h2>
 <div class="dy-tl">
 <div class="dy-row dy-keep"><b>2026-10-08</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span><span class="dy-tag">가격·수급</span> <span class="dim">(첫 평가 · 기준선)</span><div class="dim">진입 당시 AI score 3/10(v6_3)</div><div class="section-body" style="margin-top:4px">주가가 최근 1년 최고가 부근까지 올라 상승 흐름이 이어지고 있어 보유 가치는 그대로입니다.
 10월 8일 종가는 14,000원으로 1년 최고가 14,040원에 거의 닿았고, 최근 4주 동안 57% 올라 전체 종목 중 상위 4%에 들었습니다.
@@ -160,10 +163,11 @@ a:hover { text-decoration:underline; }
 이날 거래량은 최근 50거래일 평균의 1.24배로, 높은 가격대에서 거래가 늘며 크게 내린 것은 파는 물량이 나오기 시작했다는 신호일 수 있습니다.
 다만 주가는 여전히 50일 평균선(10,663원)과 200일 평균선 위에 있고, 9월 11일부터 10월 14일까지 외국인과 기관이 모두 많이 사들였으며, 반도체 업종도 77개 업종 중 2위로 강세를 이어 가고 있습니다.
 진입한 날 이후 새로 나온 뉴스·공시·실적은 검색에서 발행일까지 확인된 것이 없었고, 시장 전체가 약하다는 점은 참고로만 적어 둡니다.</div><div class="dy-fixed">매도 집행은 청산 규칙과 오너 판단에 따릅니다.</div></div>
+<div class="dy-row dy-exit"><b>2026-10-15</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">청산</span> <span class="dim">M50_HARD_INTRADAY · 체결가 10,840원 · 청산 전 마지막 점검 <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></span></div>
 </div>
 <div class="dim">변동 없는 점검·미점검 2회는 표시하지 않습니다.</div>
-
-
+<h2>📉 매도 분석 — 2026-10-15</h2><div class="card"><b>청산 원인</b><div class="section-body">웹검색으로는 10/15 당일 뉴파워프라즈마 주가와 시장 상황을 확인하지 못했습니다. 그래서 종목·섹터 요인은 단정하지 않습니다. 확인된 것은 매도가 10,840원이 평균단가 10,850원 바로 아래라는 점입니다. 진입(9/21) 이후 약 3주 동안 상승 없이 횡보하거나 되밀렸고, 장중에 평단 아래로 내려가며 M50 하드바닥(기준=평균매수가)이 발동했습니다. 반도체 장비·부품주 약세가 있었는지는 확인이 안 됩니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">손실이 -0.1%로 사실상 본전이고 손절 규칙을 기계적으로 따랐으므로 적절한 판단입니다. 3주 동안 돌파 후 추세가 나오지 않은 종목의 자본을 빼낸 것이기도 합니다. 재진입은 거래량이 늘면서 직전 고점이나 피벗을 다시 넘고 50일선을 회복할 때, 그리고 반도체 장비 섹터가 강세로 돌아섰을 때만 보는 것이 좋습니다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#60a5fa;color:#0f1117;font-weight:800;font-size:0.85rem">B</span></h2><div class="card"><b>요약</b><div class="section-body">반도체 장비부품주 뉴파워프라즈마를 9/21에 10,850원으로 돌파매수했다. 24일을 보유했지만 추세가 이어지지 못했고 매수가 부근에서 횡보했다. 10/15 장중에 M50 하드바닥이 발동해 10,840원에 전량 청산했고 손익은 사실상 0(-0.09%)이었다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">돌파 후 24일 동안 상승이 이어지지 않았다. 진입의 질은 돌파 후속 매수세 확인이 부족해 보통 이하로 판단한다. 청산 규칙은 손실을 -0.09%로 막았고, 검색상 당일 주가가 -9.5% 급락(9,350원)해 있었으므로 규칙이 득이었다.</div></div><div class="card"><b>교훈</b><div class="section-body">돌파 후 며칠 안에 추세가 붙지 않으면 장기 보유보다 조기 정리를 검토하라. 하드바닥 규칙은 본전 부근에서 자본을 지켜 주었다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
