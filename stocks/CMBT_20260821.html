@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../prototype.html">← Prototype 기록</a></div>
 <h1>CMBT <span class="dim" style="font-size:1rem">CMB테크</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.81yr, B3)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24" title="보유 종목 경과 기록">📔 마지막 점검 2026-10-15 · 약화</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.81yr, B3)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24" title="보유 종목 경과 기록">📔 청산 전 마지막 점검 2026-10-15 · 약화</span></div>
 
 <div class="card">
-평균 매수가 <b>$18.89</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$19.16</b></span> <span class="dim" title="24건 매도 정정값 합계">· 실현(브로커) <b>+$158.91</b></span>
-· 평균 매도가 <b>$19.26</b>
-· 수익률 <span class="neg">-6.98%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-3.44%</span>)</span>
-· 보유 102주
+평균 매수가 <b>$18.89</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$19.61</b></span> <span class="dim" title="25건 매도 정정값 합계">· 실현(브로커) <b>-$1.73</b></span>
+· 평균 매도가 <b>$18.89</b>
+· 수익률 <span class="neg">-0.03%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-0.02%</span>)</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260815 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.12x">예측 1.49x → 확정 1.21x</span></div>
-<div class="dim">2026-08-21 진입</div>
+<div class="dim">2026-08-21 진입 → 2026-10-16 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -234,6 +234,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item buy">
 <b>REBAL_BUY</b> · 42주 @ $20.25
 <div class="dim">2026-09-18 23:04  — REGIME_EXPAND</div>
+</div><div class="tl-item sell">
+<b>매도</b> · 102주 @ $18.04
+<div class="dim">2026-10-16 01:37  — M50 하드바닥 발동 (장중, proven=False, 기준=avg_cost_broker)</div>
 </div></div>
 
 <h3>💡 매수 시점 투자 분석</h3>
@@ -248,7 +251,7 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>보유 중 체크포인트</b><div class="section-body">① 2026년 8월 27일: 2분기 실적 발표(개장 전) — VLCC/수에즈막스 실현 TCE, 3분기 예약 운임률, 선박 매각 차익 규모 확인. ② 2026년 9월 3일: 상반기(H1) 종합 보고서 발표. ③ OPEC+ 산유량 결정 일정 — VLCC 물동량 및 하반기 운임 방향성에 직접 영향. ④ Baltic Exchange 등 주간 VLCC·수에즈막스 스팟 운임 지수 — 시황 모멘텀 유지 여부 트래킹. ⑤ 추가 선박 매각·발주 공시 및 그린수소·암모니아 선박 프로젝트 진행 뉴스.</div></div>
 <div class="card"><b>AI 판단</b><div class="section-body">🟡보통 — RVOL 2.12배를 동반한 신고가 돌파, 확장폭 +1.89%의 건전한 진입 구조, 강한 실적 모멘텀과 애널리스트 목표가 상향 추세는 긍정적이나, 진입 6일 후인 8월 27일 실적 발표라는 단기 이벤트 리스크가 임박해 있고 현재가가 이미 평균 목표주가를 상회해 밸류에이션 부담이 존재한다. 탱커 운임의 구조적 고점 논쟁과 실적 변동성을 감안할 때 포지션 사이징(×1)에 부합하는 신중한 확신 수준이 적절하다.</div></div>
 <style>.dy-tl{border-left:2px solid var(--border);padding-left:16px;margin:8px 0}.dy-row{margin-bottom:16px;position:relative}.dy-row::before{content:'';position:absolute;left:-21px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--dim)}.dy-row.dy-keep::before{background:var(--green)}.dy-row.dy-weak::before{background:#fbbf24}.dy-row.dy-review::before{background:var(--red)}.dy-row.dy-exit::before{background:var(--text)}.dy-tag{display:inline-block;margin-left:6px;padding:1px 7px;border:1px solid var(--border);border-radius:5px;font-size:0.72rem;color:var(--dim)}.dy-fixed{margin-top:6px;font-size:0.75rem;color:var(--dim)}</style>
-<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 마지막 점검 2026-10-15 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></h2>
+<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 청산 전 마지막 점검 2026-10-15 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></h2>
 <div class="dy-tl">
 <div class="dim" style="margin:10px 0 4px;font-size:0.78rem">▎세션 2026-10-07</div>
 <div class="dy-row dy-keep"><b>2026-10-08</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span><span class="dy-tag">장후</span><span class="dy-tag">혼합</span> <span class="dim">(첫 평가 · 기준선)</span><div class="dim">진입 당시 AI score 6/10(v6_3)</div><div class="section-body" style="margin-top:4px">상승 추세와 상대강도가 유지되어 더 보유할 가치가 그대로입니다.
@@ -286,10 +289,11 @@ a:hover { text-decoration:underline; }
 회사는 10월 13일 유조선 Stella의 매각을 마쳤으며, 이 거래로 4분기에 약 5,960만 달러의 이익이 생길 것으로 예상한다고 밝혔습니다.
 10월 8일 주주총회에서는 주당 0.64달러의 주주 분배가 승인됐습니다. 배당락일은 10월 16일이어서 그날 주가가 그만큼 낮게 시작될 수 있습니다.
 세계 첫 암모니아 연료 건화물선의 첫 항해 소식도 있었지만, 고점 근처에서 대량 매도가 나온 흐름을 뒤집을 새 재료로 보기는 어렵습니다.</div><div class="dim">· <a href="https://www.marketbeat.com/instant-alerts/price-cmbtech-nyse-cmbt-shares-down-89-heres-why-2026-10-14/" rel="noopener nofollow">2026-10-14 — 출처</a> CMB.TECH는 10월 13일 수에즈막스 유조선 Stella의 매각을 마쳤고, 이 거래로 2026년 4분기에 약 5,960만 달러의 매각 이익을 반영할 예정이라고 밝혔다.</div><div class="dim">· <a href="https://www.stocktitan.net/news/CMBT/cmb-tech-special-general-meeting-rkbot38dzb3d.html" rel="noopener nofollow">2026-10-08 — 출처</a> 10월 8일 임시 주주총회에서 주당 0.64달러의 주주 분배가 승인됐다. 이 가운데 0.21달러는 중간배당이고 0.43달러는 주식발행초과금에서 지급하며, 지급일은 10월 22일이다. 배당락일은 10월 16일로 공지됐다.</div><div class="dim">· <a href="https://finance.yahoo.com/markets/stocks/articles/cmb-tech-enxtbr-cmbt-launches-141159560.html" rel="noopener nofollow">2026-10-09 — 출처</a> 회사는 세계 첫 암모니아 연료 건화물선 Mineral Europa(21만 dwt)가 첫 항해를 시작했다고 발표했다.</div><div class="dim">· 장전 시세를 확인하지 못해 전일 종가 기준 잠정 평가입니다.</div><div class="dy-fixed">매도 집행은 청산 규칙과 오너 판단에 따릅니다.</div></div>
+<div class="dy-row dy-exit"><b>2026-10-16</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">청산</span> <span class="dim">M50_HARD_INTRADAY · 체결가 $18.04 · 청산 전 마지막 점검 <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></span></div>
 </div>
 <div class="dim">변동 없는 점검·미점검 1회는 표시하지 않습니다.</div>
-
-
+<h2>📉 매도 분석 — 2026-10-16</h2><div class="card"><b>청산 원인</b><div class="section-body">검색으로는 CMBT의 당일 개별 악재 뉴스와 10/15 미국 시장 마감 자료를 확인하지 못했습니다. 그래서 하락 원인은 단정하지 않습니다. 확인된 것은 매수가 18.89 아래로 내려온 가격 흐름뿐입니다. 18.04에서 M50 하드바닥(평균단가 -4.5%, 미입증 포지션)이 장중에 발동했습니다. CMBT는 해운·탱커 업종이라 유가·운임 변동에 민감합니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">진입 후 한 번도 수익 구간에 들지 못한(proven=False) 포지션을 -4.5%에서 끊은 것은 손실 제한 규칙에 맞는 기계적 판단이라 적절했습니다. 재진입은 18.9(예전 매수가) 위로 종가를 회복하고, 거래량이 늘며 50일선을 되찾는 경우로 한정하세요. 운임·유가 등 섹터 흐름이 안정되는지도 함께 확인해야 합니다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">8/21에 18.32에 진입했지만 곧바로 횡보했고, 리밸런싱 매도와 매수가 반복됐다. 9월 중순에 20.57까지 올라 REGIME_TRIM으로 일부를 정리했고, 9/18에는 REGIME_EXPAND로 20.25에 재확대했다. 이후 상승분을 반납해 10/16 장중 M50 하드바닥(18.04)에서 청산됐고, 최종 수익률은 -0.02%였다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 돌파 후 follow-through가 약했다. 리밸런싱 매매가 잦아 추세 추종의 일관성이 떨어졌다. 20대 초반 고점 부근에서 추가 매수(REGIME_EXPAND)한 것은 손익비 면에서 불리했다. M50 하드바닥은 손실이 커지기 전에 본전 근처에서 끊어줬으므로 청산 규칙은 득이었다.</div></div><div class="card"><b>교훈</b><div class="section-body">돌파 후 상승이 길게 이어지지 않으면 고점 부근 추가 매수보다 이익 보호를 우선한다. 잦은 리밸런싱은 추세 수익을 깎는다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
