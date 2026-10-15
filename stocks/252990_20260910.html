@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>252990 <span class="dim" style="font-size:1rem">샘씨엔에스</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.16yr, B1)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24" title="보유 종목 경과 기록">📔 마지막 점검 2026-10-14 · 약화</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.16yr, B1)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24" title="보유 종목 경과 기록">📔 청산 전 마지막 점검 2026-10-14 · 약화</span></div>
 
 <div class="card">
-평균 매수가 <b>14,864원</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>14,854원</b></span> <span class="dim" title="5건 매도 정정값 합계">· 실현(브로커) <b>+243,513원</b></span>
-· 평균 매도가 <b>16,217원</b>
-· 수익률 <span class="pos">+8.60%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="pos">+11.01%</span>)</span>
-· 보유 135주
+평균 매수가 <b>14,864원</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>15,194원</b></span> <span class="dim" title="6건 매도 정정값 합계">· 실현(브로커) <b>+241,629원</b></span>
+· 평균 매도가 <b>15,721원</b>
+· 수익률 <span class="pos">+5.76%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="pos">+5.76%</span>)</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">conv 6점 (20260909 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.63x">예측 1.40x → 확정 1.49x</span></div>
-<div class="dim">2026-09-10 진입</div>
+<div class="dim">2026-09-10 진입 → 2026-10-15 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -165,6 +165,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item buy">
 <b>REBAL_BUY</b> · 16주 @ 17,722원
 <div class="dim">2026-09-21 09:11  — REGIME_EXPAND</div>
+</div><div class="tl-item sell">
+<b>매도</b> · 135주 @ 15,180원
+<div class="dim">2026-10-15 09:07  — M50 하드바닥 발동 (장중, proven=True, 기준=avg_cost_broker)</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-09 기준) 발췌</span></h2>
@@ -175,7 +178,7 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· HBM3E 엔비디아 테스트 통과 소식은 원문 매체가 확인되지 않은 웹 검색 요약으로, 사실관계가 추가 확인되지 않으면 테마성 반등에 그칠 수 있다.</div><div style="margin-top:6px">· 삼성전자 등 소수 대형 반도체 업체향 공급 의존도가 높아 해당 고객사의 발주·테스트 일정 변동에 실적이 좌우될 수 있다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 ₩13,590을 종가 기준으로 돌파하는지가 진입 트리거이며, 이때 거래량이 얼마나 동반되는지도 함께 확인해야 한다. 진입 후에는 규칙엔진이 관리하는 초기 손절선(진입가 대비 -8%, 참고치 ₩12,264)이 자동 적용되고, 부분 청산 단계 없이 종가 기준 바닥선 이탈 시 전량 청산된다. 반대로 진입일 종가가 피벗 아래에서 마감하거나 거래량 배수가 돌파 문턱에 못 미치면 돌파 실패로 간주돼 다음 거래일 개장 직후 정리된다.</div></div>
 <style>.dy-tl{border-left:2px solid var(--border);padding-left:16px;margin:8px 0}.dy-row{margin-bottom:16px;position:relative}.dy-row::before{content:'';position:absolute;left:-21px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--dim)}.dy-row.dy-keep::before{background:var(--green)}.dy-row.dy-weak::before{background:#fbbf24}.dy-row.dy-review::before{background:var(--red)}.dy-row.dy-exit::before{background:var(--text)}.dy-tag{display:inline-block;margin-left:6px;padding:1px 7px;border:1px solid var(--border);border-radius:5px;font-size:0.72rem;color:var(--dim)}.dy-fixed{margin-top:6px;font-size:0.75rem;color:var(--dim)}</style>
-<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 마지막 점검 2026-10-14 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></h2>
+<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 청산 전 마지막 점검 2026-10-14 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></h2>
 <div class="dy-tl">
 <div class="dy-row dy-keep"><b>2026-10-08</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span><span class="dy-tag">가격·수급</span> <span class="dim">(첫 평가 · 기준선)</span><div class="dim">진입 당시 AI score 6/10(v6_3)</div><div class="section-body" style="margin-top:4px">고점에서 10% 밀렸지만 거래량이 적은 조정이고 상승 추세는 그대로라 &#x27;유지&#x27;로 기록합니다.
 10월 8일 종가는 18,270원으로 진입 후 최고 종가 20,300원보다 10% 낮지만, 이날 거래량은 최근 50거래일 평균의 0.65배에 그쳐 큰손이 대량으로 물량을 넘기는 모습은 보이지 않습니다.
@@ -187,10 +190,11 @@ a:hover { text-decoration:underline; }
 주가는 진입 후 최고 종가 20,300원보다 12.7% 낮고, 돌파 기준가 18,860원보다도 6.3% 아래에 있어 신고가 쪽으로 다시 올라가는 움직임은 아직 보이지 않습니다.
 다만 주가는 50일 평균선(14,916원)과 200일 평균선(11,939원) 위에 있습니다. 상대강도는 전체 종목 중 상위 7%이고, 속한 업종이 77개 중 1위이며, 외국인 순매수도 최근 20거래일 동안 이어져 시장을 이끄는 종목이라는 위치는 유지되고 있습니다.
 최근 20거래일 동안 기관은 큰 규모로 순매도했습니다. 진입일 이후 발행일이 확인된 새 뉴스나 공시는 검색으로 찾지 못했습니다.</div><div class="dy-fixed">매도 집행은 청산 규칙과 오너 판단에 따릅니다.</div></div>
+<div class="dy-row dy-exit"><b>2026-10-15</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">청산</span> <span class="dim">M50_HARD_INTRADAY · 체결가 15,180원 · 청산 전 마지막 점검 <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></span></div>
 </div>
 <div class="dim">변동 없는 점검·미점검 2회는 표시하지 않습니다.</div>
-
-
+<h2>📉 매도 분석 — 2026-10-15</h2><div class="card"><b>청산 원인</b><div class="section-body">검색으로는 당일 하락 원인이나 뉴스를 확인하지 못했습니다. 종목 시세도 13,580원(-3.28%)과 14,010원(+2.34%)으로 엇갈려, 장중 변동성이 컸던 것으로만 볼 수 있습니다. 시장 시황 검색 결과는 날짜가 불확실해 근거로 쓰지 않았습니다. 매도가 15,180원이 평균단가 14,863.8원 위 약 +2.1%인 점으로 보면, 개장 직후 급락 또는 갭 후 되밀림으로 M50 하드바닥(평균단가 기준 보호선)이 발동한 것으로 추정됩니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">수익 구간(+2.1%)에서 청산해 손실 전환을 막았으므로 규칙상 적절한 판단입니다. 다만 장 초반 변동성에 의한 이탈일 수 있어, 재진입은 M50 회복 후 거래량이 줄어든 눌림 구간의 VCP 재수축이나 피벗 재돌파(거래량 동반) 확인 뒤에 보는 것이 좋습니다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#60a5fa;color:#0f1117;font-weight:800;font-size:0.85rem">B</span></h2><div class="card"><b>요약</b><div class="section-body">9/10 장중 14,070원에 돌파 진입했고, 이후 리밸런싱으로 분할 매도와 재매수를 반복하며 17,000원대 초반까지 올랐다. 9/18 REGIME_TRIM으로 일부를 줄였다가 9/21 REGIME_EXPAND로 다시 늘렸다. 검색 결과에 따르면 9/29에 19,000원대 52주 신고가를 냈지만, 10/15 장 초반 M50 하드바닥이 발동해 15,180원에 전량 청산했고 수익률은 +5.76%였다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입 후 약 2주 동안 추세가 이어졌고 리밸런싱도 추세 방향이었으므로 진입의 질은 양호했다. 반면 청산은 M50 하드바닥이라는 규칙을 지켰지만, 고점 19,000원대에서 15,180원까지 되돌린 뒤였다. 규칙은 손실 전환을 막아 득이었지만, 신고가 구간에서 이익을 보호하는 장치가 없어 수익 상당 부분을 반납했다. 이 판단은 9월 말 신고가 기사만 확인한 것이며, 10월 시세와 이슈는 확인하지 못했다.</div></div><div class="card"><b>교훈</b><div class="section-body">신고가를 낸 뒤에는 M50 같은 느슨한 바닥 하나에 의존하지 말고, 고점 대비 되돌림에 연동한 추적 청산이나 분할 익절로 수익을 지켜야 한다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
