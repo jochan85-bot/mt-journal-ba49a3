@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AMN — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+/* [CARD-FMT-20260901] 모바일 겹침 수리 — 절대배치 폐기, 헤더 flex 2열.
+   구 구조: .rt 가 position:absolute(top:10 right:12) 3단 스택(≈72px)인데 회피용
+   padding-right 는 .l1 에만 있었다. .rt 가 .l2 를 지나 .l3 까지 내려오고 .l3/.l4 는
+   카드 우변까지 차므로 그 아래로 파고들었다(실측 rt 588~660 / l3 645~668, 우변 동일).
+   신 구조: .rt 를 정상 흐름에 넣어 겹침을 구조적으로 불가능하게 만든다.
+   → padding-right 회피값 자체가 불필요. 320·360·390·414·480px 전폭 겹침 0 실측. */
+.hd { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.hl { flex:1 1 auto; min-width:0; }   /* min-width:0 = 긴 종목명이 .rt 를 밀지 못하게 */
+.l1 { padding-right:0; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400;
+      display:inline-block; max-width:100%; overflow:hidden;
+      text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:static; flex:0 0 auto; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; row-gap:5px; margin-top:6px;
+      flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+/* [JOURNAL-REVAMP-20260905 §7] 위 뱃지 폭을 따라 늘어나지 않게 fit-content + 우측 정렬 */
+.rt .ev { display:block; width:fit-content; margin:2px 0 0 auto; }
+/* [CARD-FMT-20260901] 지표 칩 — 리포트 .g 칩과 같은 어법(라벨 dim + 값 bold + 색점) */
+.chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
+        border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
+        color:#cbd0de; background:#161923; white-space:nowrap; }
+.chip i { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:#4b5163; }
+.chip em { font-style:normal; color:var(--dim); }
+.chip b { font-weight:700; }
+.chip.fail { border-color:#7f1d1d; background:#1d1113; }
+.chip.fail b { color:#f87171; }
+.chip.na b, .chip.na em { color:#9ca3af; }
+.chip.na i { background:#4b5163; }
+@media (max-width:520px) {
+  .chip { font-size:0.68rem; padding:1px 6px; gap:3px; }
+  .l3 { gap:5px; }
+  .rt { font-size:0.92rem; }
+}
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>AMN <span class="dim" style="font-size:1rem">AMN 헬스케어 서비시스</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.45yr, B2)</span></div>
+
+<div class="card">
+평균 매수가 <b>$40.55</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$40.55</b></span>
+
+· 수익률 <span class="pos">+0.03%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="pos">+0.04%</span>)</span>
+· 보유 49주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">AI score 72/100 · 패스1 관망 conv 5점 (20261016 기준)</span></div>
+<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.29x">예측 1.63x → 확정 —</span></div>
+<div class="dim">2026-10-17 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 49주 @ $40.55
+<div class="dim">2026-10-17 00:57 </div>
+</div></div>
+
+<h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-10-16 기준) 발췌</span></h2>
+<div class="card" style="border-left:3px solid var(--accent)"><b>여행간호사 주문 급증으로 흑자 전환한 의료 인력 대장, 피벗 직전 대기</b></div>
+<div class="card"><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">2Q 매출</span> <b style="color:var(--green)">$673M</b> <span class="dim">전년비 +2.3%, 가이던스 상단 6% 상회</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">2Q 조정 EPS</span> <b style="color:var(--green)">$0.77</b> <span class="dim">전년비 +158%, 컨센서스 $0.19 대비 서프라이즈</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">여행간호사 주문</span> <b style="color:var(--green)">+40%</b> <span class="dim">8월 초 기준 전년 대비</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">목표가 대비</span> <b style="color:var(--red)">-8.6%</b> <span class="dim">평균 목표가 $36.57 (중립 7명)</span></span></div>
+<div class="card"><b>사업</b><div class="section-body">AMN Healthcare Services는 병원과 의료기관에 여행간호사·연합 의료인력·의사 인력을 공급하고 채용 기술 플랫폼을 함께 제공해 수수료성 매출을 올리는 회사다. 간호사 및 연합 솔루션, 의사 및 리더십 솔루션, 기술 및 인력 솔루션 세 부문으로 운영되며, 병원이 인력 부족 시 단기 계약으로 간호사를 파견받는 B2B 구조다.</div></div>
+<div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· 실적 서프라이즈와 흑자 전환</b><br><span class="section-body">2분기 매출 $673M으로 가이던스 상단을 6% 웃돌았고 조정 EPS는 $0.77로 컨센서스를 크게 넘었다. 적자 구간을 벗어났다는 확인이 주가 재평가의 출발점이다.</span></div><div style="margin-top:8px"><b>· 수요 사이클 반등 확인</b><br><span class="section-body">여행간호사 물량은 +6%, 연합 물량은 +7%로 4년 내 최고 증가율이며 3분기 가이던스도 두 부문 모두 10% 넘는 물량 성장을 제시했다. 선행지표인 주문이 +40%여서 향후 분기 실적 가시성이 높다.</span></div></div>
+<div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 다음 실적(11월 초)에서 주문 증가가 매출·마진으로 이어지지 않으면 기대가 빠르게 꺼질 수 있다. 내년 EPS 컨센서스가 90일 전 1.086에서 0.939로 낮아진 점은 감시 포인트다.</div><div style="margin-top:6px">· 병원의 비용 절감, 의료 재정·노동 규제, 이민·비자 정책 변화는 마진을 압박할 수 있다. 정책 변화로 파견 수요나 외국 간호사 공급이 흔들리는지 확인해야 한다.</div></div></div>
+<div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 $40.15 돌파가 거래량 동반으로 유지되면 진입 시나리오가 유효하고, 규칙엔진이 관리하는 초기 손절선은 진입가 대비 -8%인 $36.80 수준이다. 청산 판정은 장중이 아니라 마감 직전 하루 1회 종가 기준이며 정률 부분 익절 단계는 없다. 진입일 종가가 피벗 아래로 마감하거나 당일 확정 거래량 배수가 돌파 문턱에 못 미치면 돌파 실패로 판정돼 다음 거래일 개장 직후 정리되며, 이 값들은 전일 확정봉 기준 참고치다.</div></div>
+
+
+
+<div class="dim" style="font-size:0.7rem;margin-top:12px">
+예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
