@@ -122,22 +122,25 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>041960 ☀️ <span class="dim" style="font-size:1rem">코미팜</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.48yr, B1)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24" title="보유 종목 경과 기록">📔 마지막 점검 2026-10-16 · 약화</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.48yr, B1)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24" title="보유 종목 경과 기록">📔 청산 전 마지막 점검 2026-10-16 · 약화</span></div>
 
 <div class="card">
-평균 매수가 <b>11,180원</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>11,180원</b></span>
+평균 매수가 <b>11,180원</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>11,180원</b></span> <span class="dim" title="1건 매도 정정값 합계">· 실현(브로커) <b>-160,008원</b></span>
+· 평균 매도가 <b>10,276원</b>
+· 수익률 <span class="neg">-8.09%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-8.09%</span>)</span>
 
-· 수익률 <span class="neg">-4.83%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-4.83%</span>)</span>
-· 보유 177주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">AI score 66/100 · 패스1 매수 가능 conv 6점 (20261006 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 5.82x">예측 1.66x → 확정 2.80x</span></div>
-<div class="dim">2026-10-07 진입</div>
+<div class="dim">2026-10-07 진입 → 2026-10-19 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
 <div class="timeline"><div class="tl-item buy">
 <b>매수</b> · 177주 @ 11,180원
 <div class="dim">2026-10-07 09:10 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 177주 @ 10,276원
+<div class="dim">2026-10-19 13:43  — M50 하드바닥 발동 (장중, proven=False, 기준=avg_cost_broker)</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-10-06 기준) 발췌</span></h2>
@@ -148,7 +151,7 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 핵심 촉매가 2026년 4월 이슈로 이번 검색에서 최신 진전은 확인되지 않았다. 수출 승인 이후 실제 계약·생산 일정 공시가 나오지 않으면 동력이 식을 수 있다.</div><div style="margin-top:6px">· 증권사 정식 커버리지가 없고 11,500원 목표가는 단일 외부 리포트 시각이라 시장 합의가 아니다. 정성적 뉴스에 주가가 양방향으로 크게 반응하는 구조다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 ₩10,610 돌파가 진입 기준이며, 돌파 당일 확정 거래량이 문턱(예측 EOD 1.4배)을 충족하고 종가가 피벗 위에서 마감할 때 유효한 돌파로 본다. 규칙엔진이 관리하는 초기 손절선은 진입가 대비 -8%(참고치 ₩9,596)이고, 마감 직전 하루 1회 종가가 바닥선(50일선과 하한선 중 높은 쪽) 아래면 전량 청산되며 정률 부분 익절 단계는 없다. 진입일 종가가 피벗 아래로 마감하거나 거래량 배수가 문턱에 못 미치면 돌파 실패로 판정돼 다음 거래일 개장 직후 정리되므로, 이 경우 셋업은 무효다. 본 내용은 전일 확정봉 기준 스냅샷이며 후보 등재는 매수 확정이 아니다.</div></div>
 <style>.dy-tl{border-left:2px solid var(--border);padding-left:16px;margin:8px 0}.dy-row{margin-bottom:16px;position:relative}.dy-row::before{content:'';position:absolute;left:-21px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--dim)}.dy-row.dy-keep::before{background:var(--green)}.dy-row.dy-weak::before{background:#fbbf24}.dy-row.dy-review::before{background:var(--red)}.dy-row.dy-exit::before{background:var(--text)}.dy-tag{display:inline-block;margin-left:6px;padding:1px 7px;border:1px solid var(--border);border-radius:5px;font-size:0.72rem;color:var(--dim)}.dy-fixed{margin-top:6px;font-size:0.75rem;color:var(--dim)}</style>
-<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 마지막 점검 2026-10-16 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></h2>
+<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 청산 전 마지막 점검 2026-10-16 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></h2>
 <div class="dy-tl">
 <div class="dy-row dy-keep"><b>2026-10-08</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span><span class="dy-tag">가격·수급</span> <span class="dim">(첫 평가 · 기준선)</span><div class="dim">진입 당시 AI score 6/10(v6_3)</div><div class="section-body" style="margin-top:4px">52주 최고가 바로 아래에서 버티고 있어 보유 근거는 그대로입니다.
 오늘 종가는 11,360원으로, 다음 돌파 기준인 52주 최고가 11,500원보다 1.2% 낮은 자리이고 50일 평균선(9,120원) 위에서 오름세가 이어지고 있습니다.
@@ -160,10 +163,11 @@ a:hover { text-decoration:underline; }
 이날 거래량은 최근 50거래일 평균의 1.72배로, 큰 물량이 나오면서 가격이 밀린 하루였습니다. 이런 움직임은 높은 가격대에서 파는 쪽이 늘고 있다는 신호로 읽힙니다.
 장중 집계로 외국인이 하루 내내 순매도했고 기관은 7거래일 연속 순매도 중이라, 그동안 주가를 받쳐 온 외국인 매수도 이날은 약해졌습니다.
 주가는 아직 50일 평균선(9,471원)과 200일 평균선(8,400원) 위에 있고, 상대강도도 전체 종목 중 상위 11%를 유지하고 있습니다. 다만 진입일(10월 7일) 이후 날짜가 확인된 새 뉴스나 공시는 검색에서 찾지 못했습니다.</div><div class="dy-fixed">매도 집행은 청산 규칙과 오너 판단에 따릅니다.</div></div>
+<div class="dy-row dy-exit"><b>2026-10-19</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">청산</span> <span class="dim">M50_HARD_INTRADAY · 체결가 10,276원 · 청산 전 마지막 점검 <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></span></div>
 </div>
 <div class="dim">변동 없는 점검·미점검 4회는 표시하지 않습니다.</div>
-
-
+<h2>📉 매도 분석 — 2026-10-19</h2><div class="card"><b>청산 원인</b><div class="section-body">검색으로는 10/19 코미팜의 개별 악재 뉴스와 당일 코스피·코스닥 마감 정보를 확인하지 못했습니다. 확인된 건 10/14 종가 11,340원(-1.8%)뿐이라 하락 원인은 단정할 수 없습니다. 진입(10/7) 후 평균단가 11,180원에서 밀려 장중 10,276원(-8.1%)에서 M50 하드바닥(-8% 안팎)이 발동했고, 아직 수익 구간을 거치지 못한 proven=False 상태여서 손절이 기계적으로 작동한 것으로 보입니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">돌파 후 약 8% 되밀린 미입증 포지션이라 하드바닥 매도는 규칙상 적절했고 손실을 제한했습니다. 재진입은 10,276원 부근 지지 확인 후 11,200원(이전 매수 구간) 회복과 거래량 동반 재돌파, 그리고 지수·바이오 섹터 안정이 확인될 때만 고려하세요.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">10/7 장 초반(09:10) 11,180원에 돌파 진입했습니다. 보유 12일 동안 상승폭을 지키지 못하고 되밀렸고, 10/19 장중에 M50 하드바닥이 발동해 10,276원에 전량 청산했습니다(-8.09%). 웹검색으로는 보유 기간의 개별 뉴스나 이슈를 확인하지 못했습니다. 검색에 나온 현재가(약 7,550원)는 매매 체결가대와 크게 달라 신뢰하기 어렵습니다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 근거(피벗, 거래량, VCP 수축)가 기록에 없어 평가하기 어렵고, 돌파 후 12일 만에 손절선에 닿았으니 follow-through가 약했던 것으로 보입니다. 청산은 -8%대에서 하드바닥이 작동해 손실이 더 커지지 않았으므로 규칙은 득이었습니다. 다만 proven=False 상태(수익 구간을 거친 적 없음)에서 12일을 끌었으므로, 더 일찍 약세 신호로 정리할 여지가 있었습니다.</div></div><div class="card"><b>교훈</b><div class="section-body">돌파 후 며칠 안에 진입가 위로 자리 잡지 못하는 종목은 하드바닥까지 기다리지 말고 시간 기준이나 약세 신호로 먼저 줄이세요. 진입 시 피벗과 거래량 근거도 기록해 두세요.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
