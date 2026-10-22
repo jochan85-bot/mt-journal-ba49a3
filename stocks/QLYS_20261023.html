@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>QLYS — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+/* [CARD-FMT-20260901] 모바일 겹침 수리 — 절대배치 폐기, 헤더 flex 2열.
+   구 구조: .rt 가 position:absolute(top:10 right:12) 3단 스택(≈72px)인데 회피용
+   padding-right 는 .l1 에만 있었다. .rt 가 .l2 를 지나 .l3 까지 내려오고 .l3/.l4 는
+   카드 우변까지 차므로 그 아래로 파고들었다(실측 rt 588~660 / l3 645~668, 우변 동일).
+   신 구조: .rt 를 정상 흐름에 넣어 겹침을 구조적으로 불가능하게 만든다.
+   → padding-right 회피값 자체가 불필요. 320·360·390·414·480px 전폭 겹침 0 실측. */
+.hd { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.hl { flex:1 1 auto; min-width:0; }   /* min-width:0 = 긴 종목명이 .rt 를 밀지 못하게 */
+.l1 { padding-right:0; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400;
+      display:inline-block; max-width:100%; overflow:hidden;
+      text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:static; flex:0 0 auto; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; row-gap:5px; margin-top:6px;
+      flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+/* [JOURNAL-REVAMP-20260905 §7] 위 뱃지 폭을 따라 늘어나지 않게 fit-content + 우측 정렬 */
+.rt .ev { display:block; width:fit-content; margin:2px 0 0 auto; }
+/* [CARD-FMT-20260901] 지표 칩 — 리포트 .g 칩과 같은 어법(라벨 dim + 값 bold + 색점) */
+.chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
+        border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
+        color:#cbd0de; background:#161923; white-space:nowrap; }
+.chip i { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:#4b5163; }
+.chip em { font-style:normal; color:var(--dim); }
+.chip b { font-weight:700; }
+.chip.fail { border-color:#7f1d1d; background:#1d1113; }
+.chip.fail b { color:#f87171; }
+.chip.na b, .chip.na em { color:#9ca3af; }
+.chip.na i { background:#4b5163; }
+@media (max-width:520px) {
+  .chip { font-size:0.68rem; padding:1px 6px; gap:3px; }
+  .l3 { gap:5px; }
+  .rt { font-size:0.92rem; }
+}
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>QLYS ☀️ <span class="dim" style="font-size:1rem">퀄리스</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.22yr, B2)</span></div>
+
+<div class="card">
+평균 매수가 <b>$206.13</b>
+
+· 수익률 <span class="pos">+0.18%</span> <span class="dim">(전기간 평균 — 현재 브로커 평단 없음)</span>
+· 보유 9주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">AI score 72/100 · 패스1 관망 conv 5점 (20261022 기준)</span></div>
+<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.89x">예측 1.60x → 확정 —</span></div>
+<div class="dim">2026-10-23 진입</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 9주 @ $206.13
+<div class="dim">2026-10-23 03:18 </div>
+</div></div>
+
+<h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-10-22 기준) 발췌</span></h2>
+<div class="card" style="border-left:3px solid var(--accent)"><b>AI 자동 조치 제품 출시, 피벗 직전 눌림 구간의 현금창출형 보안 플랫폼</b></div>
+<div class="card"><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">매출 성장</span> <b style="color:var(--green)">+11.0%</b> <span class="dim">최근 분기 구독 기반 성장</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">영업이익률</span> <b style="color:var(--green)">34.0%</b> <span class="dim">고수익 구독 모델</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">ROE</span> <b style="color:var(--green)">38.6%</b> <span class="dim">자본 효율 우수</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">분기 EPS 서프라이즈</span> <b style="color:var(--green)">+10.93%</b> <span class="dim">2026-08-04, 1.98 vs 추정 1.78</span></span></div>
+<div class="card"><b>사업</b><div class="section-body">Qualys는 클라우드 기반 취약점 관리·보안·컴플라이언스 플랫폼(Qualys Cloud Apps)을 구독형으로 제공해 기업 IT 조직에 파는 회사다. 자산 가시성을 확보하는 사이버보안 자산관리, 위험을 수치화하는 TruRisk 관리, 취약점 탐지·대응, 패치 관리, 클라우드 보안(TotalCloud) 등을 하나의 플랫폼에 묶어 B2B 구독료로 수익을 내는 구조다.</div></div>
+<div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· 실적 상회 흐름 지속</b><br><span class="section-body">최근 4개 분기 EPS가 모두 추정치를 웃돌았고 2026-08-04 분기는 1.98 대 1.78(+10.93%)이었다. 예상 상회가 반복되는 기업은 다음 실적 발표 전후로 기대가 이어지기 쉬운 구조다.</span></div><div style="margin-top:8px"><b>· 추정치 상향 개정</b><br><span class="section-body">올해 컨센서스 EPS는 90일 전 7.577에서 현재 7.814로 올랐고, 30일 내 상향 2명·하향 0명이었다. 추정치가 한 방향으로 움직이는 점은 이 종목에 대한 시장 평가가 개선 중이라는 신호다.</span></div></div>
+<div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 애널리스트 평균 목표가(181.03)가 현재가보다 낮고 의견이 중립(18명)이어서, 시장의 합의가 아직 상향 쪽으로 쏠리지 않았다. 목표가 상향이나 의견 상향이 나오지 않으면 피벗 돌파 시 추가 매수세가 제한될 수 있다.</div><div style="margin-top:6px">· 매출 성장률이 11.0%로 한 자릿수 후반~두 자릿수 초반에 머물러 성장 가속 서사의 근거가 약하다. 다음 실적(2026-11-03 추정)에서 성장 둔화가 확인되면 AI 제품 출시 기대가 훼손될 수 있다.</div></div></div>
+<div class="card"><b>셋업·전략</b><div class="section-body">진입 기준은 B² 피벗 $200.64 돌파이며, 현재가 $196.70에서 1.96% 남은 상태라 돌파일 거래량이 돌파 판정 게이트(예측 EOD 배수 1.6배)를 충족하는지가 유효성의 관건이다. 규칙엔진이 관리하는 초기 손절선은 $180.96(-8%)이며, 청산 판정은 장중이 아닌 마감 직전 하루 1회 종가 기준이고 정률 부분 익절 단계는 없다. 진입일 종가가 피벗 아래로 마감하거나 당일 거래량 배수가 문턱에 못 미치면 돌파 실패로 보고 다음 거래일 개장 직후 정리되므로 이 경우 셋업은 무효로 본다(전일 확정봉 기준 참고치이며 실제 체결가와 다를 수 있다).</div></div>
+
+
+
+<div class="dim" style="font-size:0.7rem;margin-top:12px">
+예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
