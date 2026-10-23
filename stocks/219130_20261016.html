@@ -122,22 +122,25 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>219130 <span class="dim" style="font-size:1rem">타이거일렉</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2u (1.21yr, B1)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록">📔 마지막 점검 2026-10-22 · 유지</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge kr">KR</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2u (1.21yr, B1)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록">📔 청산 전 마지막 점검 2026-10-22 · 유지</span></div>
 
 <div class="card">
-평균 매수가 <b>82,566원</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>82,567원</b></span>
+평균 매수가 <b>82,566원</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>82,567원</b></span> <span class="dim" title="1건 매도 정정값 합계">· 실현(브로커) <b>-90,016원</b></span>
+· 평균 매도가 <b>78,816원</b>
+· 수익률 <span class="neg">-4.54%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-4.54%</span>)</span>
 
-· 수익률 <span class="pos">+11.91%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="pos">+11.91%</span>)</span>
-· 보유 24주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">AI score 74/100 · 패스1 매수 가능 conv 6점 (20261014 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.63x">예측 1.40x → 확정 1.66x</span></div>
-<div class="dim">2026-10-16 진입</div>
+<div class="dim">2026-10-16 진입 → 2026-10-23 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
 <div class="timeline"><div class="tl-item buy">
 <b>매수</b> · 24주 @ 82,566원
 <div class="dim">2026-10-16 14:11 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 24주 @ 78,816원
+<div class="dim">2026-10-23 09:07  — M50 하드바닥 발동 (장중, 바닥 승격=예·재매수 적격=아니오, 기준=avg_cost_broker)</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-10-14 기준) 발췌</span></h2>
@@ -148,17 +151,18 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 메모리·AI향 PCB 공급 부족이 풀리면 판가 인상 효과가 약해질 수 있다. 반도체 설비투자 둔화 신호나 마진 증가 정체가 감시 포인트다.</div><div style="margin-top:6px">· 2026년 5월 전환사채 발행 결정 공시가 있어 전환 물량이 주가 상단을 누를 수 있다. 전환가 대비 주가 위치와 추가 자금조달 공시를 확인해야 한다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">진입 기준은 B² 피벗 ₩95,500 돌파이며, 돌파 당일 예측 EOD 거래량 배수가 판정 게이트 임계(1.4배)를 충족하고 종가가 피벗 위에서 확정되는 경우를 유효한 돌파로 본다. 규칙엔진이 관리하는 초기 손절선은 ₩78,108(진입가 -8% 기준 참고치)이고, 종가가 바닥선 아래면 전량 청산되며 정률 부분 익절 단계는 없다(종가 +16% 도달 후 하한선이 본전으로 상향). 진입일 종가가 피벗 아래이거나 당일 거래량 배수가 문턱에 못 미치면 돌파 실패로 보고 다음 거래일 개장 직후 정리되며, 전일 확정봉 기준 스냅샷이라 실시간 매수 확정이 아니다.</div></div>
 <style>.dy-tl{border-left:2px solid var(--border);padding-left:16px;margin:8px 0}.dy-row{margin-bottom:16px;position:relative}.dy-row::before{content:'';position:absolute;left:-21px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--dim)}.dy-row.dy-keep::before{background:var(--green)}.dy-row.dy-weak::before{background:#fbbf24}.dy-row.dy-review::before{background:var(--red)}.dy-row.dy-exit::before{background:var(--text)}.dy-tag{display:inline-block;margin-left:6px;padding:1px 7px;border:1px solid var(--border);border-radius:5px;font-size:0.72rem;color:var(--dim)}.dy-fixed{margin-top:6px;font-size:0.75rem;color:var(--dim)}</style>
-<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 마지막 점검 2026-10-22 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span></h2>
+<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 청산 전 마지막 점검 2026-10-22 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span></h2>
 <div class="dy-tl">
 <div class="dy-row dy-keep"><b>2026-10-16</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span><span class="dy-tag">가격·수급</span> <span class="dim">(첫 평가 · 기준선)</span><div class="dim">진입 당시 AI score 6/10(v6_3)</div><div class="section-body" style="margin-top:4px">보유 첫날이며 상승 추세와 매수세가 유지되어 보유 가치는 그대로입니다.
 오늘 종가 83,400원은 최근 50일 평균 가격(74,122원)과 200일 평균 가격(51,927원)보다 모두 위에 있어 상승 흐름이 이어지고 있습니다.
 최근 20거래일(9월 15일~10월 16일) 동안 외국인과 기관이 모두 크게 사들였고, 상대 강도는 전체 종목 중 상위 5%이며 반도체 업종은 77개 업종 중 3위입니다.
 다만 현재가는 전고점 부근의 다음 돌파 기준가 95,500원보다 13% 낮고, 오늘 거래량이 평소의 1.65배로 늘어 다음 날 이후 방향을 확인할 필요가 있습니다.
 진입한 10월 16일 이후 새로 나온 공시·실적·증권사 의견 변화는 검색에서 확인되지 않았습니다.</div><div class="dy-fixed">매도 집행은 청산 규칙과 오너 판단에 따릅니다.</div></div>
+<div class="dy-row dy-exit"><b>2026-10-23</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">청산</span> <span class="dim">M50_PROMOTED · 체결가 78,816원 · 청산 전 마지막 점검 <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span></span></div>
 </div>
 <div class="dim">변동 없는 점검·미점검 4회는 표시하지 않습니다.</div>
-
-
+<h2>📉 매도 분석 — 2026-10-23</h2><div class="card"><b>청산 원인</b><div class="section-body">검색으로는 10월 23일 당일 타이거일렉 시세와 시장·섹터 상황을 확인하지 못했습니다. 확인된 것은 10월 중순 외국인·기관 순매수와 키움증권의 27년 실적 전망(영업이익 +59%)뿐이라, 하락 원인은 단정할 수 없습니다. 10월 16일 진입가 82,566원에서 밀려 장 초반(09:07) 평균단가 대비 -4.5%인 78,816원이 되었고, 이 때문에 M50 하드바닥이 발동한 것으로 보입니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">진입 1주 만에 손실을 -4.5%에서 끊었고 기계적 바닥 규칙에 맞으니, 시스템 판단은 적절했습니다. 재매수 적격이 &#x27;아니오&#x27;이므로 재진입하려면 50일선을 회복하고 거래량이 늘어난 상태에서 새 VCP 피벗을 돌파하는지 확인해야 합니다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">10/14에 -8% 안팎의 급락이 나온 뒤인 10/16, 52주 고점(약 98,000~100,300원) 부근 급등주를 82,566원에 진입했다. 보유 중에는 고점 대비 조정이 이어졌고, 10/23 장중 M50 하드바닥이 발동해 78,816원에 전량 청산했다(-4.54%). 검색에서는 10/14 이후 시세와 별도의 악재를 확인하지 못했다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">급락 직후에 진입한 점은 돌파 매매의 질이 낮았지만(베이스 재정비 없이 고점 부근에서 매수), 하드바닥이 손실을 -4.5%에서 막았다는 점에서 청산 규칙은 득이었다. 재매수 부적격 판정도 추세 훼손 상황에 맞았다. 다만 진입 자체가 규칙 이탈에 가까웠다.</div></div><div class="card"><b>교훈</b><div class="section-body">고점권 종목이 급락한 직후의 반등 진입은 돌파가 아니라 추격 매수가 되기 쉬우므로, 거래량을 동반한 베이스 재구축 뒤에 진입해야 한다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
