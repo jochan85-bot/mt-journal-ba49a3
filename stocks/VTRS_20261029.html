@@ -122,22 +122,25 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>VTRS <span class="dim" style="font-size:1rem">비아트리스</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.00yr, B4)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록">📔 마지막 점검 2026-10-30 · 유지</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.00yr, B4)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록">📔 청산 전 마지막 점검 2026-10-30 · 유지</span></div>
 
 <div class="card">
-평균 매수가 <b>$19.05</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$19.06</b></span>
+평균 매수가 <b>$19.05</b>
+· 평균 매도가 <b>$19.23</b>
+· 수익률 <span class="pos">+0.94%</span> <span class="dim">(전기간 평균 — 정정열 없는 매도행 있음)</span>
 
-· 수익률 <span class="pos">+1.58%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="pos">+1.63%</span>)</span>
-· 보유 104주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">AI score 66/100 · 패스1 매수 가능 conv 6점 (20261029 기준)</span></div>
-<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 6.09x">예측 1.71x → 확정 —</span></div>
-<div class="dim">2026-10-29 진입</div>
+<div style="margin-top:6px">거래량: <span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 6.09x">예측 1.71x → 확정 1.25x</span></div>
+<div class="dim">2026-10-29 진입 → 2026-10-30 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
 <div class="timeline"><div class="tl-item buy">
 <b>매수</b> · 104주 @ $19.05
 <div class="dim">2026-10-29 22:45 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 104주 @ $19.23
+<div class="dim">2026-10-30 22:47  — 돌파 실패[BREAKOUT_FAIL_VOL] — 확정종가 19.2000 vs 피벗 18.9300(PASS) / EOD배수 1.2486 vs 문턱 1.4(FAIL) / 분모봉수 50 / 판정봉날짜 20261029</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-10-29 기준) 발췌</span></h2>
@@ -148,16 +151,17 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· Pacira 인수는 대규모 자금 투입과 통합 부담을 수반한다. 승인·종결 일정과 재무 영향에 대한 회사 설명이 감시 포인트다.</div><div style="margin-top:6px">· 11월 5일 실적에서 기대에 못 미치거나 가이던스가 실망스러우면 신고가권에서 차익 매물이 나올 수 있다. 성장패턴 S2(음전)와 감속 breadth 3/5는 검증되지 않은 관측 태그이며 매매 근거는 아니다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">진입 기준은 B² 피벗 $18.93 돌파이며, 거래량이 돌파 판정 게이트(예측 EOD 배수 1.6배)를 충족하는지 확인해야 유효하다. 규칙엔진이 관리하는 초기 손절선은 $17.27(-8%)이고 종가가 바닥선 아래면 전량 청산되며, 정률 부분 익절 단계는 없다. 진입일 종가가 피벗 아래로 마감하거나 거래량 배수가 문턱에 못 미치면 돌파 실패로 보고 다음 거래일 정리된다. 전일 확정봉 기준 스냅샷이므로 11월 5일 실적 전후 변동성에 유의해야 한다.</div></div>
 <style>.dy-tl{border-left:2px solid var(--border);padding-left:16px;margin:8px 0}.dy-row{margin-bottom:16px;position:relative}.dy-row::before{content:'';position:absolute;left:-21px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--dim)}.dy-row.dy-keep::before{background:var(--green)}.dy-row.dy-weak::before{background:#fbbf24}.dy-row.dy-review::before{background:var(--red)}.dy-row.dy-exit::before{background:var(--text)}.dy-tag{display:inline-block;margin-left:6px;padding:1px 7px;border:1px solid var(--border);border-radius:5px;font-size:0.72rem;color:var(--dim)}.dy-fixed{margin-top:6px;font-size:0.75rem;color:var(--dim)}</style>
-<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 마지막 점검 2026-10-30 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span></h2>
+<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 청산 전 마지막 점검 2026-10-30 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span></h2>
 <div class="dy-tl">
 <div class="dy-row dy-keep"><b>2026-10-30</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span><span class="dy-tag">가격·수급</span> <span class="dim">(첫 평가 · 기준선)</span><div class="dim">진입 당시 AI score 66/100</div><div class="section-body" style="margin-top:4px">진입 첫날은 신고가 바로 아래에서 마감했고, 보유 근거는 그대로 유지됩니다.
 10월 29일 종가는 19.20달러로 52주 최고가(19.23달러)보다 0.2% 낮았고, 거래량은 직전 50거래일 평균의 1.30배였습니다.
 주가는 50일 평균선(17.39달러)과 200일 평균선(15.71달러)보다 위에 있고, 50일선이 200일선 위에 놓인 상승 추세가 유지되고 있습니다.
 상대강도는 전체 종목 중 상위 12%이고, 올해와 내년 주당순이익 예상치는 90일 전보다 높아진 상태입니다.
 진입한 10월 29일 이후 나온 새 공시나 뉴스는 확인하지 못했고, 다음 실적 발표는 11월 5일로 예정돼 있습니다.</div><div class="dy-fixed">매도 집행은 청산 규칙과 오너 판단에 따릅니다.</div></div>
+<div class="dy-row dy-exit"><b>2026-10-30</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">청산</span> <span class="dim">BREAKOUT_FAIL_VOL · 체결가 $19.23 · 청산 전 마지막 점검 <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span></span></div>
 </div>
-
-
+<h2>📉 매도 분석 — 2026-10-30</h2><div class="card"><b>청산 원인</b><div class="section-body">VTRS는 52주 고점대(약 18.75) 부근에서 피벗 18.93을 종가 19.20으로 넘겼지만, 돌파일 거래량이 50일 평균의 1.25배에 그쳐 문턱 1.4배에 못 미쳤습니다. 수급 확신이 약한 돌파라 매수세가 이어지지 않았고, 진입 다음 날 시스템이 거래량 미달 돌파 실패로 판정했습니다. 당일 종목 뉴스와 10/29~30 시장 마감 자료는 검색으로 확인하지 못했습니다. 10/22에 나스닥이 -2.6% 빠지는 등 최근 시장 변동성은 컸지만, 이번 매도의 직접 원인은 거래량 부족으로 보입니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">종가가 피벗 위(19.20)였고 +0.9%로 거의 본전에 청산해 손실이 없었으므로, 거래량 기준을 엄격하게 적용한 판단은 타당했습니다. 다만 가격은 유지됐으므로 재진입은 피벗 18.93 위에서 종가를 지키고, 거래량이 50일 평균의 1.4배 이상으로 늘어난 재돌파가 나올 때 보는 것이 좋습니다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#60a5fa;color:#0f1117;font-weight:800;font-size:0.85rem">B</span></h2><div class="card"><b>요약</b><div class="section-body">VTRS는 52주 신고가권에서 피벗 18.93을 넘겨 10/29에 19.05로 진입했습니다. 10월 초 Pacira 인수 발표 이후 이어진 상승 추세 속에서 진입했습니다. 보유 중 가격은 19.20으로 피벗 위를 지켰지만 EOD 거래량 배수가 1.25배로 문턱 1.4배에 못 미쳤습니다. 그래서 10/30에 돌파 실패(거래량 부족)로 19.23에 청산했습니다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 신고가 돌파에 M&amp;A 재료가 겹친 정석 셋업이었습니다. 다만 거래량 확인이 약했고 애널리스트 평균 목표가(18.44)를 이미 넘어서 상단 여력이 제한적이었습니다. 청산 규칙은 가격이 피벗 위에서 버티는 중에도 거래량 미달을 이유로 1일 만에 작동했습니다. 결과는 소폭 이익(+0.94%)으로 손실 없이 자본을 보전했으니, 이 케이스에서는 규칙이 득이었습니다.</div></div><div class="card"><b>교훈</b><div class="section-body">거래량이 부족한 돌파는 진입 단계에서 걸러내거나 비중을 줄여야 합니다. 청산 규칙은 약한 돌파를 빨리 정리해 손실을 막았습니다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
