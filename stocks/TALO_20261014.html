@@ -122,22 +122,25 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>TALO <span class="dim" style="font-size:1rem">탈로스 에너지</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.03yr, B3)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24" title="보유 종목 경과 기록">📔 마지막 점검 2026-10-31 · 약화</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.03yr, B3)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24" title="보유 종목 경과 기록">📔 청산 전 마지막 점검 2026-10-31 · 약화</span></div>
 
 <div class="card">
-평균 매수가 <b>$17.67</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$17.68</b></span>
+평균 매수가 <b>$17.67</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$17.68</b></span> <span class="dim" title="1건 매도 정정값 합계">· 실현(브로커) <b>-$129.61</b></span>
+· 평균 매도가 <b>$16.52</b>
+· 수익률 <span class="neg">-6.55%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-6.51%</span>)</span>
 
-· 수익률 <span class="dim">—</span>
-· 보유 112주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">AI score 68/100 · 패스1 관망 conv 5점 (20261013 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 4.24x">예측 3.18x → 확정 3.35x</span></div>
-<div class="dim">2026-10-14 진입</div>
+<div class="dim">2026-10-14 진입 → 2026-11-03 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
 <div class="timeline"><div class="tl-item buy">
 <b>매수</b> · 112주 @ $17.67
 <div class="dim">2026-10-14 04:27 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 112주 @ $16.52
+<div class="dim">2026-11-03 05:55  — M50 바닥 발동 (M50-MA50(17.21))</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-10-13 기준) 발췌</span></h2>
@@ -148,7 +151,7 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 유가 하락 시 이익 민감도가 큰 구조라 동력이 빠르게 꺾일 수 있다. 원유 가격 반락과 섹터 동반 약세가 나타나는지 감시해야 한다.</div><div style="margin-top:6px">· 인수 자산의 통합·부채 부담과 해상 시설 특성상 허리케인 등 운영 차질이 실적 변동성을 키울 수 있다. 11월 4일 실적에서 생산량과 비용 가이던스가 어긋나는지 확인이 필요하다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">진입 기준은 B² 피벗 $17.54 돌파이며, 돌파 당일 거래량이 돌파 판정 게이트(예측 EOD 배수 1.6배)를 충족하는지가 유효성 판단의 핵심이다. 규칙엔진이 관리하는 초기 손절선은 $15.95(진입가 -8%)이고, 종가가 바닥선(50일선과 하한선 중 높은 쪽) 아래면 전량 청산되며 정률 부분 익절 단계는 없다. 진입일 종가가 피벗 아래로 마감하거나 거래량 배수가 문턱에 못 미치면 돌파 실패로 보고 다음 거래일 개장 직후 정리되므로 셋업이 무효가 된다. 본 내용은 전일 확정봉 기준 스냅샷이며 매수 확정이 아니다.</div></div>
 <style>.dy-tl{border-left:2px solid var(--border);padding-left:16px;margin:8px 0}.dy-row{margin-bottom:16px;position:relative}.dy-row::before{content:'';position:absolute;left:-21px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--dim)}.dy-row.dy-keep::before{background:var(--green)}.dy-row.dy-weak::before{background:#fbbf24}.dy-row.dy-review::before{background:var(--red)}.dy-row.dy-exit::before{background:var(--text)}.dy-tag{display:inline-block;margin-left:6px;padding:1px 7px;border:1px solid var(--border);border-radius:5px;font-size:0.72rem;color:var(--dim)}.dy-fixed{margin-top:6px;font-size:0.75rem;color:var(--dim)}</style>
-<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 마지막 점검 2026-10-31 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></h2>
+<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 청산 전 마지막 점검 2026-10-31 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></h2>
 <div class="dy-tl">
 <div class="dim" style="margin:10px 0 4px;font-size:0.78rem">▎세션 2026-10-13</div>
 <div class="dy-row dy-keep"><b>2026-10-14</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span><span class="dy-tag">장후</span><span class="dy-tag">가격·수급</span> <span class="dim">(첫 평가 · 기준선)</span><div class="dim">진입 당시 AI score 68/100</div><div class="section-body" style="margin-top:4px">보유 첫날로 돌파 기준가 부근에서 큰 거래량을 받으며 버텨 보유 가치는 그대로입니다.
@@ -214,10 +217,11 @@ a:hover { text-decoration:underline; }
 지분 10% 이상을 가진 대주주는 10월 27일과 28일에 주식을 판 뒤 직접 보유 주식이 20,491,414주로 줄었습니다. 그 뒤 추가 매도 공시는 이번 검색에서 확인하지 못했습니다.
 주가는 50일 평균선(17.23달러)과 200일 평균선(15.00달러)보다 위에 있습니다. 다른 종목과 비교한 주가 강도도 전체 상위 8%로 버티고 있습니다.
 다음 확인 지점은 11월 3일로 예정된 3분기 실적 발표입니다. 올해 이익 추정치는 최근 7일 사이 1.229에서 1.133으로 조금 낮아졌습니다.</div><div class="dy-fixed">매도 집행은 청산 규칙과 오너 판단에 따릅니다.</div></div>
+<div class="dy-row dy-exit"><b>2026-11-03</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">청산</span> <span class="dim">M50_MA50 · 체결가 $16.52 · 청산 전 마지막 점검 <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></span></div>
 </div>
 <div class="dim">변동 없는 점검·미점검 6회는 표시하지 않습니다.</div>
-
-
+<h2>📉 매도 분석 — 2026-11-03</h2><div class="card"><b>청산 원인</b><div class="section-body">검색으로는 11/2~11/3 당일 TALO 전용 악재나 유가·에너지 섹터 움직임을 확인하지 못했습니다. 확인된 것은 TALO가 2026년 내내 10달러대 중후반에서 급락을 반복했고, 7월에 투자의견이 &#x27;보유&#x27;로 내려가 컨센서스가 Hold였다는 점입니다. 진입가 17.67에서 16.52로 밀려 50일선(17.21)을 이탈하면서 M50 바닥 규칙이 발동한 것으로 보입니다. 원인은 개별 재료보다 기술적 추세 이탈일 가능성이 큽니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">50일선 이탈과 -6.5% 손실에서 규칙대로 청산했으므로 손절은 적절했고, 미너비니식 손실 제한(7~8%) 안쪽에서 끊어 추가 손실을 막았습니다. 재진입은 종가 기준으로 50일선(17.21)을 회복하고 거래량이 늘면서 변동성이 줄어드는 VCP 재형성이 확인될 때, 그리고 유가·에너지 섹터 강세가 뒷받침될 때만 검토하세요.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">TALO는 17.67에 돌파 진입했습니다. 보유 중 구체적인 악재나 뉴스는 웹검색(8월 말까지의 자료만 확인됨)으로 확인하지 못했습니다. 20일 만에 가격이 M50 바닥(17.21) 아래로 밀리면서 규칙에 따라 16.52에 청산됐고, 손실은 -6.51%였습니다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입 근거(피벗, 거래량 등)가 기록되지 않아 진입의 질은 평가하기 어렵습니다. 20일 동안 추세가 이어지지 못했다는 점에서 돌파의 follow-through가 약했던 것으로 보입니다. M50 이탈 청산은 규칙대로 작동했고 -6.51%에서 손실을 막아 득이었지만, 매수가 대비 손절선이 멀어 손실 폭이 컸습니다.</div></div><div class="card"><b>교훈</b><div class="section-body">돌파 후 일정 기간 안에 수익 쿠션이 쌓이지 않으면 M50 이탈까지 기다리지 말고 더 빨리 정리하세요. 진입 사유도 반드시 기록하세요.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
