@@ -122,16 +122,16 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>CVI <span class="dim" style="font-size:1rem">CVR 에너지</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.11yr, B1)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24" title="보유 종목 경과 기록">📔 마지막 점검 2026-11-03 · 약화</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.11yr, B1)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24" title="보유 종목 경과 기록">📔 청산 전 마지막 점검 2026-11-03 · 약화</span></div>
 
 <div class="card">
-평균 매수가 <b>$50.94</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$50.97</b></span> <span class="dim" title="8건 매도 정정값 합계">· 실현(브로커) <b>+$131.90</b></span>
-· 평균 매도가 <b>$52.46</b>
-· 수익률 <span class="pos">+1.10%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="pos">+4.04%</span>)</span>
-· 보유 38주
+평균 매수가 <b>$50.94</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$52.42</b></span> <span class="dim" title="9건 매도 정정값 합계">· 실현(브로커) <b>+$60.70</b></span>
+· 평균 매도가 <b>$51.63</b>
+· 수익률 <span class="pos">+1.35%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="pos">+1.36%</span>)</span>
+
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e74c3c;color:#fff;font-size:0.8rem;font-weight:700">관망</span> <span class="dim">conv 4점 (20260910 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.64x">예측 1.61x → 확정 1.72x</span></div>
-<div class="dim">2026-09-10 진입</div>
+<div class="dim">2026-09-10 진입 → 2026-11-03 청산</div>
 </div>
 
 <h2>거래 타임라인</h2>
@@ -168,6 +168,9 @@ a:hover { text-decoration:underline; }
 </div><div class="tl-item buy">
 <b>REBAL_BUY</b> · 16주 @ $54.40
 <div class="dim">2026-09-18 23:03  — REGIME_EXPAND</div>
+</div><div class="tl-item sell">
+<b>매도</b> · 38주 @ $50.55
+<div class="dim">2026-11-03 23:30  — M50 하드바닥 발동 (장중, proven=True, 기준=avg_cost_broker)</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-09-10 기준) 발췌</span></h2>
@@ -178,7 +181,7 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 2분기 EPS가 $0.34로 컨센서스 $0.92를 63% 하회하는 어닝쇼크가 발생했고, 이후 한 달간 주가가 27% 빠졌다. 정제마진 변동성이 커 다음 분기에도 실적 서프라이즈 리스크가 상존한다.</div><div style="margin-top:6px">· Mizuho와 J.P. Morgan 모두 Sell 등급을 유지 중이고 목표주가 컨센서스 $31.4는 현재가 대비 -34.2% 낮다. 월가 시각과 현재 주가 흐름 사이 괴리가 커 밸류 재평가가 아닌 단기 수급 반등일 가능성을 염두에 둬야 한다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 $47.85를 종가 기준으로 돌파하고 당일 확정 거래량 배수가 돌파 문턱을 충족해야 유효한 진입 신호로 본다. 진입 후 초기 손절선은 규칙엔진이 자동 관리하며 진입가 대비 -8% 수준(약 $43.91)에서 출발해 종가가 바닥선 아래로 마감하면 전량 청산되는 구조이고, 정률 부분 익절 단계는 없다. 진입일 종가가 피벗 아래로 마감하거나 거래량 배수가 문턱에 못 미치면 돌파 실패로 판정돼 다음 거래일 개장 직후 정리된다.</div></div>
 <style>.dy-tl{border-left:2px solid var(--border);padding-left:16px;margin:8px 0}.dy-row{margin-bottom:16px;position:relative}.dy-row::before{content:'';position:absolute;left:-21px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--dim)}.dy-row.dy-keep::before{background:var(--green)}.dy-row.dy-weak::before{background:#fbbf24}.dy-row.dy-review::before{background:var(--red)}.dy-row.dy-exit::before{background:var(--text)}.dy-tag{display:inline-block;margin-left:6px;padding:1px 7px;border:1px solid var(--border);border-radius:5px;font-size:0.72rem;color:var(--dim)}.dy-fixed{margin-top:6px;font-size:0.75rem;color:var(--dim)}</style>
-<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 마지막 점검 2026-11-03 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></h2>
+<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 청산 전 마지막 점검 2026-11-03 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></h2>
 <div class="dy-tl">
 <div class="dim" style="margin:10px 0 4px;font-size:0.78rem">▎세션 2026-10-07</div>
 <div class="dy-row dy-keep"><b>2026-10-08</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span><span class="dy-tag">장후</span><span class="dy-tag">가격·수급</span> <span class="dim">(첫 평가 · 기준선)</span><div class="dim">진입 당시 AI score 4/10(v6_3)</div><div class="section-body" style="margin-top:4px">52주 최고가 바로 아래에서 조용히 쉬고 있어 보유 근거가 그대로입니다.
@@ -237,10 +240,11 @@ a:hover { text-decoration:underline; }
 같은 날 회사는 마라톤의 정유공장 두 곳을 약 42억 달러에 사기로 했습니다. 이 돈의 일부는 지배주주와 트라피구라에 새 주식을 팔아 모으는 약 13억 달러로, 시가총액 56억 달러에 비해 작지 않은 규모여서 기존 주주의 지분이 묽어지는 부담이 생겼습니다. 나머지는 25억 달러의 빚과 보유 현금으로 충당합니다.
 장 전 시세는 53.00달러(미국 동부시간 오전 8시 38분)로 전일 종가 55.92달러보다 5.2% 낮습니다. 돌파 기준가 58.85달러와의 거리는 더 벌어졌지만, 아직 50일 평균선 52.63달러 위에는 있습니다.
 좋은 실적 발표에도 주가가 내린 것은 실적 기대보다 새 주식 발행과 빚 부담을 더 크게 본 반응으로 읽혀, 보유를 받치던 힘이 전일보다 조금 더 약해졌습니다.</div><div class="dim">· <a href="https://www.financialcontent.com/article/bizwire-2026-11-3-cvr-energy-reports-third-quarter-2026-results" rel="noopener nofollow">2026-11-03 — 출처</a> CVR Energy는 11월 3일 3분기 실적을 발표했습니다. 주당순이익은 5.67달러, 일회성 항목을 뺀 조정 주당순이익은 4.00달러, 매출은 32.8억 달러였고, 정유 부문 이익(감가상각 전)은 5.65억 달러로 회사 역사상 최대였습니다. 장 전 증권사 예상치(0.19~2.91달러)를 크게 웃돌았습니다.</div><div class="dim">· <a href="https://www.stocktitan.net/news/CVI/cvr-energy-announces-transformative-transaction-to-acquire-2-rkjcwtu0ocf7.html" rel="noopener nofollow">2026-11-03 — 출처</a> CVR Energy는 11월 3일 마라톤 페트롤리엄의 정유공장 두 곳(세인트폴파크·만단)과 관련 판매 사업을 약 42억 달러에 사기로 했습니다. 인수 대금은 차입 25억 달러, 지배주주의 5억 달러 지분 투자, 트라피구라의 8억 달러 지분 투자, 보유 현금으로 마련합니다. 거래는 연말 마무리를 목표로 하고 규제 승인이 조건입니다.</div><div class="dim">· 장전 시세 53.0 (전일 종가 대비 -5.22% · yfinance 1분봉(prepost) · 2026-11-03 08:38 ET)</div><div class="dy-fixed">매도 집행은 청산 규칙과 오너 판단에 따릅니다.</div></div>
+<div class="dy-row dy-exit"><b>2026-11-03</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">청산</span> <span class="dim">M50_HARD_INTRADAY · 체결가 $50.55 · 청산 전 마지막 점검 <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></span></div>
 </div>
 <div class="dim">변동 없는 점검·미점검 13회는 표시하지 않습니다.</div>
-
-
+<h2>📉 매도 분석 — 2026-11-03</h2><div class="card"><b>청산 원인</b><div class="section-body">검색으로는 2026-11-03 CVI의 당일 뉴스와 시장·섹터 동향을 확인하지 못했습니다. 종목 고유 악재가 있었는지, 정유업종 약세였는지는 알 수 없습니다. 확인된 것은 매수가 50.94 아래로 밀리며 M50 하드바닥(평균단가 기준)이 장중에 발동했다는 점입니다. CVI는 변동성이 크고 실적·배당 이슈로 급락한 이력이 있습니다. 11월 초는 3분기 실적 발표 시기라 이벤트 위험이 있었을 수 있습니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">손실 -0.8%에서 규칙대로 기계적으로 청산했으므로 손실 통제 면에서는 적절했습니다. 다만 당일 원인은 확인하지 못했습니다. 재진입은 50일선 회복과 거래량이 늘어난 종가 돌파가 나오고, 실적 발표 이후 불확실성이 해소되고 정유 마진·섹터 상대강도가 개선될 때 검토하는 것이 좋습니다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#60a5fa;color:#0f1117;font-weight:800;font-size:0.85rem">B</span></h2><div class="card"><b>요약</b><div class="section-body">9/10에 49.05로 50주를 돌파 진입했고, 이후 레짐에 따라 일부 축소(REGIME_TRIM)와 재확대(REGIME_EXPAND)를 반복하며 9/18에 54.4 부근까지 올랐다. 그 뒤 약 6주간 상승 탄력을 잃고 되밀렸고, 11/3 장중에 M50 하드바닥(평균단가 기준)이 발동해 38주를 50.55에 전량 청산했다. 웹검색(1회)에서는 이 기간의 확인된 개별 이슈를 찾지 못했다. 10/29 전후 3분기 실적 발표 가능성은 있으나 결과는 확인하지 못했다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 돌파 후 바로 53~54대까지 올라 초기 follow-through가 양호했다. 다만 54.4에서 추가 매수(REGIME_EXPAND)한 것은 피벗 대비 약 10% 위에서의 추격이라 평균단가를 올렸다. 청산은 M50 하드바닥이 원금 근처(+1.4%)에서 손실 확대를 막았으므로 규칙은 득이었다. 다만 9월 고점에서 이익을 확정하는 규칙은 없었다.</div></div><div class="card"><b>교훈</b><div class="section-body">고점 부근의 레짐 확대 매수는 평균단가를 올려 미실현 이익을 되돌리기 쉽다. 연장 구간에서는 증액하기보다 추적 손절을 끌어올리는 편이 낫다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>

@@ -122,22 +122,25 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>FLYW <span class="dim" style="font-size:1rem">플라이와이어</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.03yr, B3)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록">📔 마지막 점검 2026-11-03 · 유지</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.03yr, B3)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록">📔 청산 전 마지막 점검 2026-11-03 · 유지</span></div>
 
 <div class="card">
-평균 매수가 <b>$19.86</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$19.87</b></span>
+평균 매수가 <b>$19.86</b>
+· 평균 매도가 <b>$19.22</b>
+· 수익률 <span class="neg">-3.22%</span> <span class="dim">(전기간 평균 — 정정열 없는 매도행 있음)</span>
 
-· 수익률 <span class="neg">-2.02%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-1.99%</span>)</span>
-· 보유 100주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">AI score 66/100 · 패스1 매수 가능 conv 6점 (20261031 기준)</span></div>
-<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.07x">예측 1.62x → 확정 —</span></div>
-<div class="dim">2026-11-03 진입</div><div class="dim" style="margin-top:6px">진입가 19.86 vs MA50 18.30 (+8.5%)</div>
+<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.07x">예측 1.62x → 확정 1.81x</span></div>
+<div class="dim">2026-11-03 진입 → 2026-11-03 청산</div><div class="dim" style="margin-top:6px">진입가 19.86 vs MA50 18.30 (+8.5%)</div>
 </div>
 
 <h2>거래 타임라인</h2>
 <div class="timeline"><div class="tl-item buy">
 <b>매수</b> · 100주 @ $19.86
 <div class="dim">2026-11-03 02:53 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 100주 @ $19.22
+<div class="dim">2026-11-03 23:45  — 돌파 실패[BREAKOUT_FAIL_PRICE] — 확정종가 19.4900 vs 피벗 19.7900(FAIL) / EOD배수 1.8056 vs 문턱 1.4(PASS) / 분모봉수 50 / 판정봉날짜 20261102</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-10-31 기준) 발췌</span></h2>
@@ -148,16 +151,17 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 11월 3일 3분기 실적 발표 변동성이 크다. 직전 분기(2026-08-04) EPS가 0.11로 추정 0.12를 하회(-3.9%)했고, 재차 미달하면 돌파 시도가 꺾일 수 있다.</div><div style="margin-top:6px">· 영업이익률 -1.4%로 GAAP 기준 수익성이 아직 흑자 전환 전이다. 성장 패턴 태그가 S2(음전)이고 감속 breadth 2/5로 관측되나, 이는 검증되지 않은 관측 태그일 뿐 매매 게이트가 아니며 성장률 둔화 여부를 실적에서 확인해야 한다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 $19.79 돌파가 진입 기준이며, 돌파 판정 게이트의 예측 EOD 거래량 배수 1.6배(50일 평균 기준) 충족 여부를 함께 확인한다. 규칙엔진이 관리하는 초기 손절선은 $18.11(-8%)이고 종가가 50일선과 하한선 중 높은 쪽 아래면 전량 청산되며, 정률 부분 익절 단계는 없다. 진입일 종가가 피벗 아래로 마감하거나 확정 거래량이 문턱에 못 미치면 돌파 실패로 보고 다음 거래일 개장 직후 정리되므로, 11월 3일 실적 갭 변동을 감안해야 한다.</div></div>
 <style>.dy-tl{border-left:2px solid var(--border);padding-left:16px;margin:8px 0}.dy-row{margin-bottom:16px;position:relative}.dy-row::before{content:'';position:absolute;left:-21px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--dim)}.dy-row.dy-keep::before{background:var(--green)}.dy-row.dy-weak::before{background:#fbbf24}.dy-row.dy-review::before{background:var(--red)}.dy-row.dy-exit::before{background:var(--text)}.dy-tag{display:inline-block;margin-left:6px;padding:1px 7px;border:1px solid var(--border);border-radius:5px;font-size:0.72rem;color:var(--dim)}.dy-fixed{margin-top:6px;font-size:0.75rem;color:var(--dim)}</style>
-<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 마지막 점검 2026-11-03 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span></h2>
+<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 청산 전 마지막 점검 2026-11-03 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span></h2>
 <div class="dy-tl">
 <div class="dy-row dy-keep"><b>2026-11-03</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span><span class="dy-tag">가격·수급</span> <span class="dim">(첫 평가 · 기준선)</span><div class="dim">진입 당시 AI score 66/100</div><div class="section-body" style="margin-top:4px">돌파 기준가 바로 아래에서 마감했지만 추세는 살아 있고, 오늘 밤 실적 발표가 분기점입니다.
 11월 2일 종가는 19.49달러로 돌파 기준가 19.79달러보다 0.5% 낮게 끝났고, 이날 거래량은 최근 50거래일 평균의 1.83배로 많았습니다.
 돌파 기준가 위에서 마감하지 못한 점은 아쉽지만 보유 첫날 하루의 움직임이어서, 추세가 꺾였다고 보기는 이릅니다.
 주가는 50일 평균선(18.30달러)과 200일 평균선(15.55달러) 위에 있고, 상대강도도 전체 종목 중 상위 17%를 지키고 있습니다.
 진입 이후 새로 나온 뉴스나 공시는 확인되지 않았으며, 3분기 실적은 11월 3일 장 마감 후 발표될 예정입니다.</div><div class="dy-fixed">매도 집행은 청산 규칙과 오너 판단에 따릅니다.</div></div>
+<div class="dy-row dy-exit"><b>2026-11-03</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">청산</span> <span class="dim">BREAKOUT_FAIL_PRICE · 체결가 $19.22 · 청산 전 마지막 점검 <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span></span></div>
 </div>
-
-
+<h2>📉 매도 분석 — 2026-11-03</h2><div class="card"><b>청산 원인</b><div class="section-body">FLYW는 진입일(11/3) 종가가 19.49로 피벗 19.79를 못 넘겨 돌파가 확정되지 않았습니다. 거래량은 EOD 배수 1.81배로 문턱 1.4를 넘었지만, 가격 조건이 FAIL이라 BREAKOUT_FAIL 트리거가 발동했고 매도가는 19.22(-3.2%)였습니다. 11/3 장 마감 후 실적 발표(애프터마켓)가 예정돼 있었던 점이 이벤트 불확실성으로 작용했을 수 있습니다. 다만 당일 시장·섹터 종가는 검색으로 확인하지 못했고, 지수 약세가 원인이었는지는 확인되지 않았습니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">피벗 아래 마감이라 규칙상 청산은 일관됐고, 손실도 -3.2%로 제한됐습니다. 다만 실적 발표 직전의 진입이었다는 점은 감점 요인입니다. 재진입은 실적 반응(11/4)을 확인한 뒤, 19.79 위에서 평균 이상 거래량으로 종가 마감하는 경우에만 고려하세요.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">피벗 19.79를 넘긴 19.86에 진입했지만, 11/2 확정종가 19.49가 피벗 아래로 되밀려 돌파 실패 신호가 나왔다. 보유 중에는 FLYW 실적 발표(11/3 장마감 후)를 앞둔 상황이었고, 결과는 확인되지 않았다. 11/3 룰에 따라 19.22에 전량 청산해 -3.22% 손실로 마감했다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 거래량(EOD배수 1.81배, 문턱 1.4 통과)이 받쳐 줬지만 종가가 피벗 위에서 안착하지 못해 질이 보통이었다. 청산은 규칙대로 기계적으로 실행됐고, 손실을 -3% 대로 제한해 실적 발표 전 갭 위험을 줄였으므로 규칙은 득이었다. 다만 실적 직전에 진입한 것은 타이밍상 약점이었다.</div></div><div class="card"><b>교훈</b><div class="section-body">실적 발표 직전의 돌파는 종가 안착 확인이 어려우니, 발표 후로 진입을 미루거나 비중을 줄여야 한다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
