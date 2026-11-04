@@ -122,22 +122,25 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>TEVA <span class="dim" style="font-size:1rem">테바 파머슈티컬 인더스트리스</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.11yr, B3)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3" title="보유 종목 경과 기록 · 사유 data_unconfirmed:None">📔 마지막 점검 2026-11-04 · 미점검</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.11yr, B3)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3" title="보유 종목 경과 기록 · 사유 data_unconfirmed:None">📔 청산 전 마지막 점검 2026-11-04 · 미점검</span></div>
 
 <div class="card">
-평균 매수가 <b>$42.79</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$42.80</b></span>
+평균 매수가 <b>$42.79</b>
+· 평균 매도가 <b>$41.45</b>
+· 수익률 <span class="neg">-3.13%</span> <span class="dim">(전기간 평균 — 정정열 없는 매도행 있음)</span>
 
-· 수익률 <span class="neg">-2.52%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-2.50%</span>)</span>
-· 보유 46주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">AI score 66/100 · 패스1 매수 가능 conv 6점 (20261103 기준)</span></div>
-<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.25x">예측 1.61x → 확정 —</span></div>
-<div class="dim">2026-11-04 진입</div><div class="dim" style="margin-top:6px">진입가 42.79 vs MA50 39.27 (+9.0%)</div>
+<div style="margin-top:6px">거래량: <span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.25x">예측 1.61x → 확정 2.05x</span></div>
+<div class="dim">2026-11-04 진입 → 2026-11-04 청산</div><div class="dim" style="margin-top:6px">진입가 42.79 vs MA50 39.27 (+9.0%)</div>
 </div>
 
 <h2>거래 타임라인</h2>
 <div class="timeline"><div class="tl-item buy">
 <b>매수</b> · 46주 @ $42.79
 <div class="dim">2026-11-04 00:14 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 46주 @ $41.45
+<div class="dim">2026-11-04 23:45  — 돌파 실패[BREAKOUT_FAIL_PRICE] — 확정종가 41.9100 vs 피벗 42.5900(FAIL) / EOD배수 2.0525 vs 문턱 1.4(PASS) / 분모봉수 50 / 판정봉날짜 20261103</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-11-03 기준) 발췌</span></h2>
@@ -148,12 +151,13 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 11월 2일 emrusolmin(TEV-‘286) 2상 TOPAS-MSA 시험 중단 발표로 주가가 밀렸다. 이 자산 외에 다른 후기 파이프라인에서도 비슷한 중단이 나오는지가 감시 포인트다.</div><div style="margin-top:6px">· 2분기 조정 EPS가 추정 대비 큰 폭으로 부진했고 올해 EPS 가이던스 하단이 컨센서스보다 낮았다. 최근 7일 올해 EPS 추정을 낮춘 애널리스트가 1명 있어, 3분기에도 이익 부진이 반복되면 추정치 하향이 이어질 수 있다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">진입 기준은 B² 피벗 $42.59 돌파이며, 돌파 당일 종가가 피벗 위에서 확정되고 확정 거래량 배수가 돌파 문턱을 넘는지 확인해야 한다. 초기 손절선은 규칙엔진이 관리하는 $37.44(진입가 대비 -8%)이며, 청산은 마감 직전 하루 1회 종가가 바닥선(50일 이동평균선과 하한선 중 높은 쪽) 아래일 때 전량 이뤄지고 정률 부분 익절 단계는 없다. 진입일 종가가 피벗 아래이거나 거래량 배수가 문턱에 못 미치면 돌파 실패로 보고 다음 거래일 개장 직후 정리되며, 이 값들은 전일 확정봉 기준 참고치라 실제 체결가와 다를 수 있다.</div></div>
 <style>.dy-tl{border-left:2px solid var(--border);padding-left:16px;margin:8px 0}.dy-row{margin-bottom:16px;position:relative}.dy-row::before{content:'';position:absolute;left:-21px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--dim)}.dy-row.dy-keep::before{background:var(--green)}.dy-row.dy-weak::before{background:#fbbf24}.dy-row.dy-review::before{background:var(--red)}.dy-row.dy-exit::before{background:var(--text)}.dy-tag{display:inline-block;margin-left:6px;padding:1px 7px;border:1px solid var(--border);border-radius:5px;font-size:0.72rem;color:var(--dim)}.dy-fixed{margin-top:6px;font-size:0.75rem;color:var(--dim)}</style>
-<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 마지막 점검 2026-11-04 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">미점검</span> <span class="dim" style="font-size:0.8rem;font-weight:400">사유: data_unconfirmed:None</span></h2>
+<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 청산 전 마지막 점검 2026-11-04 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">미점검</span> <span class="dim" style="font-size:0.8rem;font-weight:400">사유: data_unconfirmed:None</span></h2>
 <div class="dy-tl">
+<div class="dy-row dy-exit"><b>2026-11-04</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">청산</span> <span class="dim">BREAKOUT_FAIL_PRICE · 체결가 $41.45 · 청산 전 마지막 점검 <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">미점검</span></span></div>
 </div>
 <div class="dim">변동 없는 점검·미점검 2회는 표시하지 않습니다.</div>
-
-
+<h2>📉 매도 분석 — 2026-11-04</h2><div class="card"><b>청산 원인</b><div class="section-body">검색으로는 11/4 당일 TEVA 종가와 시장 동향을 확인하지 못했습니다. 아래는 시스템 수치와 10/30 시세에 근거한 추정입니다. TEVA는 10/30 약 41.5달러로 52주 고점(약 42.0달러) 부근까지 오른 상태였고, 진입 당일 종가 41.91이 피벗 42.59를 회복하지 못해 돌파 실패(BREAKOUT_FAIL_PRICE)가 발동했습니다. 거래량은 EOD 배수 2.05배로 문턱 1.4배를 넘겼지만, 가격이 피벗 아래에서 마감해 고점 부근 매물 소화에 실패했고(분배 가능성), 다음 장 초반에 41.45까지 밀리며 매도가 체결됐습니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">피벗 아래 마감이라는 규칙이 명확했고 손실도 -3.1%로 제한했으니 시스템 매도는 규율상 적절했습니다. 다만 거래량이 평균의 2배 이상이었으므로 재진입은 피벗 42.59를 종가로 회복하고 거래량이 다시 붙는 경우에 한하고, 그때 시장 지수와 제약 섹터 흐름도 함께 확인해야 합니다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#60a5fa;color:#0f1117;font-weight:800;font-size:0.85rem">B</span></h2><div class="card"><b>요약</b><div class="section-body">TEVA는 피벗 42.59 부근에서 거래량이 평균의 약 2배(EOD 2.05배)로 늘며 돌파를 시도했고, 42.79에 매수했습니다. 하지만 11-03 확정종가가 41.91로 피벗 아래에서 마감해 돌파가 지켜지지 않았습니다. 같은 날 41.45에 청산되어 -3.13%로 끝났습니다. 웹검색에서는 보유 기간(11-04)의 특이 이슈를 확인하지 못했습니다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 거래량 조건(2.05배 vs 1.4)을 충족했지만 피벗 위 종가 확인 없이 들어간 점이 약점입니다. 청산은 피벗 이탈 규칙대로 하루 만에 손실을 -3% 수준에서 막았으므로, 이 케이스에서 규칙은 득이었습니다. 다만 매도가 41.45는 종가 판정가 41.91보다 낮아 슬리피지가 약 0.5 있었습니다.</div></div><div class="card"><b>교훈</b><div class="section-body">거래량이 붙은 돌파라도 피벗 위에서 종가가 확정되기 전에는 진입을 미루거나 비중을 줄여야 합니다. 돌파 실패 시 즉시 청산하는 규칙은 손실을 작게 묶어 줍니다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
