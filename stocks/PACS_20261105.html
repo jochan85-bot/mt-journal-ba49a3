@@ -122,22 +122,25 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>PACS <span class="dim" style="font-size:1rem">팍스 그룹</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.03yr, B2)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록">📔 마지막 점검 2026-11-05 · 유지</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.03yr, B2)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록">📔 청산 전 마지막 점검 2026-11-05 · 유지</span></div>
 
 <div class="card">
-평균 매수가 <b>$51.60</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$51.61</b></span>
+평균 매수가 <b>$51.60</b>
+· 평균 매도가 <b>$50.43</b>
+· 수익률 <span class="neg">-2.27%</span> <span class="dim">(전기간 평균 — 정정열 없는 매도행 있음)</span>
 
-· 수익률 <span class="neg">-0.25%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-0.23%</span>)</span>
-· 보유 38주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">AI score 68/100 · 패스1 관망 conv 5점 (20261104 기준)</span></div>
-<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.11x">예측 1.61x → 확정 —</span></div>
-<div class="dim">2026-11-05 진입</div><div class="dim" style="margin-top:6px">진입가 51.6 vs MA50 44.41 (+16.2%)</div>
+<div style="margin-top:6px">거래량: <span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.11x">예측 1.61x → 확정 2.31x</span></div>
+<div class="dim">2026-11-05 진입 → 2026-11-05 청산</div><div class="dim" style="margin-top:6px">진입가 51.6 vs MA50 44.41 (+16.2%)</div>
 </div>
 
 <h2>거래 타임라인</h2>
 <div class="timeline"><div class="tl-item buy">
 <b>매수</b> · 38주 @ $51.60
 <div class="dim">2026-11-05 02:31 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 38주 @ $50.43
+<div class="dim">2026-11-05 23:45  — 돌파 실패[BREAKOUT_FAIL_PRICE] — 확정종가 50.2600 vs 피벗 50.3800(FAIL) / EOD배수 2.3144 vs 문턱 1.4(PASS) / 분모봉수 50 / 판정봉날짜 20261104</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-11-04 기준) 발췌</span></h2>
@@ -148,16 +151,17 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 11월 3일 장 마감 후 3분기 실적이 나왔지만 세부 수치와 주가 반응은 확인하지 못했다. 시간외·당일 반응이 부정적이면 피벗 접근 시나리오가 무너질 수 있다.</div><div style="margin-top:6px">· 공매도 잔고가 직전월 374만 주에서 433만 주로 늘었고 최근 90일간 Form 4 19건·Form 144 10건의 내부자 거래 공시가 있다. 내부자 매도가 이어지면 수급 부담이 커질 수 있다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">B² 피벗 $50.38 돌파가 거래량 확인과 함께 나올 때가 진입 시나리오이며, 규칙엔진이 관리하는 초기 손절선은 $42.95(-8%)다. 청산은 마감 직전 하루 1회 종가 기준으로 판정되고 정률 부분 익절 단계는 없으며, 진입일 종가가 피벗 아래이거나 거래량 배수가 돌파 문턱에 못 미치면 돌파 실패로 다음 거래일 정리된다. 본 내용은 전일 확정봉 기준 참고치이며 실제 체결가와 다를 수 있다.</div></div>
 <style>.dy-tl{border-left:2px solid var(--border);padding-left:16px;margin:8px 0}.dy-row{margin-bottom:16px;position:relative}.dy-row::before{content:'';position:absolute;left:-21px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--dim)}.dy-row.dy-keep::before{background:var(--green)}.dy-row.dy-weak::before{background:#fbbf24}.dy-row.dy-review::before{background:var(--red)}.dy-row.dy-exit::before{background:var(--text)}.dy-tag{display:inline-block;margin-left:6px;padding:1px 7px;border:1px solid var(--border);border-radius:5px;font-size:0.72rem;color:var(--dim)}.dy-fixed{margin-top:6px;font-size:0.75rem;color:var(--dim)}</style>
-<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 마지막 점검 2026-11-05 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span></h2>
+<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 청산 전 마지막 점검 2026-11-05 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span></h2>
 <div class="dy-tl">
 <div class="dy-row dy-keep"><b>2026-11-05</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span><span class="dy-tag">가격·수급</span> <span class="dim">(첫 평가 · 기준선)</span><div class="dim">진입 당시 AI score 68/100</div><div class="section-body" style="margin-top:4px">실적 발표 다음 날 고점 근처에서 밀렸지만 상승 흐름은 아직 유지되고 있습니다.
 11월 4일 주가는 52주 최고가 51.68달러 가까이 올랐다가 50.26달러로 마감해 돌파 기준가 50.38달러를 조금 밑돌았고, 거래량은 평소 50일 평균의 2.35배였습니다.
 많은 거래량 속에 고점에서 되밀린 점은 경계할 신호지만, 보유 첫날 하루의 움직임이라 추세가 꺾였다고 보기는 이릅니다.
 주가는 50일 평균선(44.39달러)과 200일 평균선(39.86달러) 위에 있고, 상대강도는 전체 종목 중 상위 2%로 주도주 위치를 지키고 있습니다.
 11월 3일 발표된 3분기 실적은 시장 예상을 넘었고 회사는 연간 매출 목표를 올렸지만, 이는 보유 시작 전에 나온 내용이며 그 뒤에 확인된 새 소식은 없습니다.</div><div class="dy-fixed">매도 집행은 청산 규칙과 오너 판단에 따릅니다.</div></div>
+<div class="dy-row dy-exit"><b>2026-11-05</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">청산</span> <span class="dim">BREAKOUT_FAIL_PRICE · 체결가 $50.43 · 청산 전 마지막 점검 <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span></span></div>
 </div>
-
-
+<h2>📉 매도 분석 — 2026-11-05</h2><div class="card"><b>청산 원인</b><div class="section-body">검색으로는 11/5 PACS와 시장의 당일 데이터를 확인하지 못했습니다. 그래서 종목·시장 요인은 단정하지 않습니다. 시스템 기록으로 확인되는 것은 전일(11/4) 확정종가 50.26이 피벗 50.38을 0.12 밑돌았다는 점입니다. 거래량(EOD배수 2.31배, 문턱 1.4 통과)은 충분했지만 종가가 피벗을 회복하지 못해 BREAKOUT_FAIL_PRICE가 발동했습니다. 진입가 51.60도 피벗보다 높아 추격 진입이었고, 매도가 50.43까지 -2.3% 밀렸습니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">피벗 대비 이탈 폭이 0.2%로 작았지만, 돌파 당일 종가가 피벗 아래이고 진입이 추격이었기 때문에 규칙대로 손실을 -2.3%로 제한한 매도는 적절했습니다. 다만 이탈이 근소해 휩쏘일 가능성이 있습니다. 재진입은 피벗 50.38 위에서 종가가 마감되고 거래량이 다시 평균 이상으로 붙을 때, 그리고 지수 흐름이 우호적일 때만 보는 것이 좋습니다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#60a5fa;color:#0f1117;font-weight:800;font-size:0.85rem">B</span></h2><div class="card"><b>요약</b><div class="section-body">PACS는 52주 신고가 부근(7~8월 신고가, 컨센서스 목표가 약 $50.6)에서 피벗 50.38 위인 51.6에 매수했다. 보유 중 11월 4일 확정종가가 50.26으로 피벗 아래로 되돌려져 돌파가 실패했다. 11월 5일 규칙(BREAKOUT_FAIL_PRICE)에 따라 50.43에 전량 청산해 -2.27%로 마감했다. 웹검색에서 11월 기간의 개별 악재나 뉴스는 확인되지 않았다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 피벗을 약 2.4% 넘겨 추격 매수한 것이라 피벗 대비 여유가 작았고 질이 보통이었다. 거래량(EOD배수 2.31 대 문턱 1.4)은 통과했지만 종가가 피벗을 지키지 못했다. 규칙은 손실을 -2.3%에서 막았으므로 이 케이스에서는 득이었다.</div></div><div class="card"><b>교훈</b><div class="section-body">피벗에서 멀어진 추격 진입은 종가 기준 돌파 실패를 불러오기 쉽다. 피벗 근처에서 진입하거나 첫 종가 확인 뒤에 진입하는 편이 낫다.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>

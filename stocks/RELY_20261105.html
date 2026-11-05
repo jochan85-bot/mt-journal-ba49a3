@@ -122,22 +122,25 @@ a:hover { text-decoration:underline; }
 <body>
 <div class="dim"><a href="../index.html">← 매매일지</a></div>
 <h1>RELY <span class="dim" style="font-size:1rem">레미틀리 글로벌</span></h1>
-<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.51yr, B1)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24" title="보유 종목 경과 기록">📔 마지막 점검 2026-11-05 · 약화</span></div>
+<div><span class="badge closed">청산 완료</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.51yr, B1)</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24" title="보유 종목 경과 기록">📔 청산 전 마지막 점검 2026-11-05 · 약화</span></div>
 
 <div class="card">
-평균 매수가 <b>$26.44</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$26.45</b></span>
+평균 매수가 <b>$26.44</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$26.45</b></span> <span class="dim" title="1건 매도 정정값 합계">· 실현(브로커) <b>-$252.54</b></span>
+· 평균 매도가 <b>$23.08</b>
+· 수익률 <span class="neg">-12.73%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-12.71%</span>)</span>
 
-· 수익률 <span class="neg">-11.52%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-11.50%</span>)</span>
-· 보유 75주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">AI score 68/100 · 패스1 매수 가능 conv 6점 (20261104 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.83x">예측 2.24x → 확정 —</span></div>
-<div class="dim">2026-11-05 진입</div><div class="dim" style="margin-top:6px">진입가 26.44 vs MA50 23.73 (+11.4%)</div>
+<div class="dim">2026-11-05 진입 → 2026-11-05 청산</div><div class="dim" style="margin-top:6px">진입가 26.44 vs MA50 23.73 (+11.4%)</div>
 </div>
 
 <h2>거래 타임라인</h2>
 <div class="timeline"><div class="tl-item buy">
 <b>매수</b> · 75주 @ $26.44
 <div class="dim">2026-11-05 04:59 </div>
+</div><div class="tl-item sell">
+<b>매도</b> · 75주 @ $23.08
+<div class="dim">2026-11-05 23:30  — M50 하드바닥 발동 (장중, proven=False, 기준=avg_cost_broker)</div>
 </div></div>
 
 <h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-11-04 기준) 발췌</span></h2>
@@ -148,7 +151,7 @@ a:hover { text-decoration:underline; }
 <div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 11월 5일 실적 발표 전후 변동성이 크다. 12개월 내 +15%·-15% 일일 변동이 각 1회 있었고 최대 상승 후 고점 대비 -25.0%를 경험해 기대 미달 시 갭 하락 가능성이 있다.</div><div style="margin-top:6px">· 공매도 잔고가 직전월 18,265,219주에서 20,327,121주로 늘었다(유통주 대비 0.1015). 실적 이후 방향성에 대한 반대 베팅이 커진 상태로, 가이던스 실망 시 하락 압력이 확대될 수 있다.</div></div></div>
 <div class="card"><b>셋업·전략</b><div class="section-body">진입 기준은 B² 피벗 $25.86 돌파이며, 거래량이 돌파 판정 게이트(예측 EOD 배수 1.6배)를 충족하는지 확인이 필요하다. 규칙엔진이 관리하는 초기 손절선은 $23.35(-8%)이고, 마감 직전 하루 1회 종가 기준으로 판정하며 정률 부분 익절 단계는 없다. 진입일 종가가 피벗 아래이거나 거래량 배수가 문턱에 못 미치면 돌파 실패로 보고 다음 거래일 개장 직후 정리되므로 셋업이 무효가 된다. 본 내용은 전일 확정봉 기준 스냅샷이다.</div></div>
 <style>.dy-tl{border-left:2px solid var(--border);padding-left:16px;margin:8px 0}.dy-row{margin-bottom:16px;position:relative}.dy-row::before{content:'';position:absolute;left:-21px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--dim)}.dy-row.dy-keep::before{background:var(--green)}.dy-row.dy-weak::before{background:#fbbf24}.dy-row.dy-review::before{background:var(--red)}.dy-row.dy-exit::before{background:var(--text)}.dy-tag{display:inline-block;margin-left:6px;padding:1px 7px;border:1px solid var(--border);border-radius:5px;font-size:0.72rem;color:var(--dim)}.dy-fixed{margin-top:6px;font-size:0.75rem;color:var(--dim)}</style>
-<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 마지막 점검 2026-11-05 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></h2>
+<h2>📔 보유 종목 경과 기록 <span class="dim" style="font-size:0.8rem;font-weight:400">· 청산 전 마지막 점검 2026-11-05 · </span><span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></h2>
 <div class="dy-tl">
 <div class="dim" style="margin:10px 0 4px;font-size:0.78rem">▎세션 2026-11-04</div>
 <div class="dy-row dy-keep"><b>2026-11-05</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80">유지</span><span class="dy-tag">장후</span><span class="dy-tag">혼합</span> <span class="dim">(첫 평가 · 기준선)</span><div class="dim">진입 당시 AI score 68/100</div><div class="section-body" style="margin-top:4px">3분기 이익이 예상을 크게 웃돌았고 연간 전망도 올라 보유 근거가 유지됩니다.
@@ -162,9 +165,10 @@ a:hover { text-decoration:underline; }
 이 가격은 50일 평균 주가 23.74달러도 밑돌아 돌파 이후 상승 흐름이 크게 훼손될 수 있는 위치이지만, 정규장이 열리기 전이라 실제 거래량과 종가는 아직 확인되지 않았습니다.
 4분기 매출 전망 5억 3,100만~5억 3,300만 달러는 시장 예상과 비슷한 수준이어서 기대를 넘지 못했다는 보도가 있었고, 3분기 매출 대비 잉여현금흐름 비율도 직전 분기 26.9%에서 17.2%로 낮아졌습니다.
 3분기 이익이 예상을 크게 웃돈 점과 연간 전망 상향은 그대로이지만, 시장은 이를 하락으로 받아들이고 있어 실적이라는 재료의 힘이 약해졌습니다.</div><div class="dim">· <a href="https://www.globenewswire.com/news-release/2026/11/04/3395827/0/en/remitly-reports-record-third-quarter-results-and-raises-full-year-2026-outlook.html" rel="noopener nofollow">2026-11-04 — 출처</a> Remitly는 4분기 매출 전망을 5억 3,100만~5억 3,300만 달러(전년 대비 20~21% 증가), 조정 EBITDA 전망을 1억 400만~1억 600만 달러로 제시했습니다.</div><div class="dim">· <a href="https://www.financialcontent.com/article/stockstory-2026-11-4-remitly-nasdaqrely-posts-q3-2026-sales-in-line-with-estimates-but-stock-drops" rel="noopener nofollow">2026-11-04 — 출처</a> StockStory는 실적 발표 후 Remitly 주가가 하락했다고 보도했습니다. 다음 분기 매출 전망(약 5억 3,200만 달러)은 시장 예상과 비슷했고, 3분기 매출 대비 잉여현금흐름 비율은 직전 분기 26.9%에서 17.2%로 낮아졌다고 전했습니다.</div><div class="dim">· 장전 시세 23.31 (전일 종가 대비 -13.92% · yfinance 1분봉(prepost) · 2026-11-05 08:39 ET)</div><div class="dy-fixed">매도 집행은 청산 규칙과 오너 판단에 따릅니다.</div></div>
+<div class="dy-row dy-exit"><b>2026-11-05</b> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(139,144,163,0.15);color:#8b90a3">청산</span> <span class="dim">M50_HARD_INTRADAY · 체결가 $23.08 · 청산 전 마지막 점검 <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(251,191,36,0.15);color:#fbbf24">약화</span></span></div>
 </div>
-
-
+<h2>📉 매도 분석 — 2026-11-05</h2><div class="card"><b>청산 원인</b><div class="section-body">2026-11-05 당일 RELY 급락 원인을 확인하는 보도는 검색되지 않았습니다. 검색에 잡힌 것은 2025-11-06 3분기 실적 후 가이던스 실망으로 급락한 전년도 사례뿐이라, 이번 실적 반응도 같은 패턴일 수 있다고 추정할 뿐입니다. 진입일과 매도일이 같은 당일에 평균 매수가 26.44에서 23.08로 -12.7% 밀려 M50 하드바닥(장중, proven=False)이 발동했습니다. 진입 직후 돌파가 안착하지 못한 실패 신호로 보입니다.</div></div><div class="card"><b>시스템 판단 · 재진입 관점</b><div class="section-body">미입증 포지션이 진입 당일 -12.7%까지 밀렸으므로 하드바닥 매도는 규칙상 적절했고, 추가 손실을 막았다는 점에서 타당합니다. 재진입은 급락 원인(실적·가이던스)이 확인되고 주가가 50일선을 되찾아 거래량 동반 새 VCP 베이스나 피벗을 만든 뒤에 검토하는 것이 좋습니다.</div></div>
+<h2>🏁 종합 리뷰 <span style="padding:2px 10px;border-radius:6px;background:#fbbf24;color:#0f1117;font-weight:800;font-size:0.85rem">C</span></h2><div class="card"><b>요약</b><div class="section-body">RELY 돌파 진입(75주 @26.44) 후 같은 날 장중에 급락해 M50 하드바닥이 발동했고, 23.08에 전량 청산해 -12.71%로 마감했다. 검색으로는 2026-11-05 당일 하락 원인(실적·애널리스트 조정 등)을 확인하지 못했다. 검색에 나온 것은 2025년 자료뿐이라, 당일 이슈를 알 수 없고 원인은 미확인이다.</div></div><div class="card"><b>진입·청산의 질</b><div class="section-body">진입은 04:59에 이뤄졌고 당일 안에 하드바닥까지 밀렸으므로, 진입 타이밍이나 돌파 확인이 부실했을 가능성이 크다. 다만 진입 근거는 기록에 비어 있어 확정할 수 없다. 하드바닥이 -12.7%에서 손실을 막았다는 점에서 규칙은 득이었지만, 손절폭이 평소 허용치보다 컸고 갭이나 급락으로 슬리피지가 났을 수 있다.</div></div><div class="card"><b>교훈</b><div class="section-body">돌파 당일 되밀림이 -10%를 넘으면 진입 시점과 거래량 확인이 잘못됐을 가능성이 크니, 진입 근거와 당일 뉴스·실적 일정을 먼저 확인하고 그 전에는 비중을 줄여라.</div></div>
 
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
