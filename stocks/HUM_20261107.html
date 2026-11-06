@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>HUM — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+/* [CARD-FMT-20260901] 모바일 겹침 수리 — 절대배치 폐기, 헤더 flex 2열.
+   구 구조: .rt 가 position:absolute(top:10 right:12) 3단 스택(≈72px)인데 회피용
+   padding-right 는 .l1 에만 있었다. .rt 가 .l2 를 지나 .l3 까지 내려오고 .l3/.l4 는
+   카드 우변까지 차므로 그 아래로 파고들었다(실측 rt 588~660 / l3 645~668, 우변 동일).
+   신 구조: .rt 를 정상 흐름에 넣어 겹침을 구조적으로 불가능하게 만든다.
+   → padding-right 회피값 자체가 불필요. 320·360·390·414·480px 전폭 겹침 0 실측. */
+.hd { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.hl { flex:1 1 auto; min-width:0; }   /* min-width:0 = 긴 종목명이 .rt 를 밀지 못하게 */
+.l1 { padding-right:0; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400;
+      display:inline-block; max-width:100%; overflow:hidden;
+      text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:static; flex:0 0 auto; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; row-gap:5px; margin-top:6px;
+      flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+/* [JOURNAL-REVAMP-20260905 §7] 위 뱃지 폭을 따라 늘어나지 않게 fit-content + 우측 정렬 */
+.rt .ev { display:block; width:fit-content; margin:2px 0 0 auto; }
+/* [CARD-FMT-20260901] 지표 칩 — 리포트 .g 칩과 같은 어법(라벨 dim + 값 bold + 색점) */
+.chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
+        border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
+        color:#cbd0de; background:#161923; white-space:nowrap; }
+.chip i { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:#4b5163; }
+.chip em { font-style:normal; color:var(--dim); }
+.chip b { font-weight:700; }
+.chip.fail { border-color:#7f1d1d; background:#1d1113; }
+.chip.fail b { color:#f87171; }
+.chip.na b, .chip.na em { color:#9ca3af; }
+.chip.na i { background:#4b5163; }
+@media (max-width:520px) {
+  .chip { font-size:0.68rem; padding:1px 6px; gap:3px; }
+  .l3 { gap:5px; }
+  .rt { font-size:0.92rem; }
+}
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>HUM <span class="dim" style="font-size:1rem">휴매나</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.44yr, B2)</span></div>
+
+<div class="card">
+평균 매수가 <b>$428.15</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$428.15</b></span>
+
+· 수익률 <span class="neg">-0.06%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-0.06%</span>)</span>
+· 보유 4주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">AI score 68/100 · 패스1 매수 가능 conv 7점 (20261106 기준)</span></div>
+<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.74x">예측 1.83x → 확정 —</span></div>
+<div class="dim">2026-11-07 진입</div><div class="dim" style="margin-top:6px">진입가 428.15 vs MA50 403.21 (+6.2%)</div>
+</div>
+
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 4주 @ $428.15
+<div class="dim">2026-11-07 02:03 </div>
+</div></div>
+
+<h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-11-06 기준) 발췌</span></h2>
+<div class="card" style="border-left:3px solid var(--accent)"><b>실적 당일 앞둔 보험·CenterWell 결합 구조, 피벗 3.6% 아래 대기</b></div>
+<div class="card"><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">매출 성장</span> <b style="color:var(--green)">+26.2%</b> <span class="dim">전년 대비</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">EPS 성장</span> <b style="color:var(--green)">+27.3%</b> <span class="dim">최근 분기 서프라이즈 +8.79%(2026-07-29)</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">Forward PE</span> <b style="color:var(--green)">24.1x</b> <span class="dim">컨센서스 EPS 상향 추세</span></span><span style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.85rem"><span class="dim">목표가 상승여력</span> <b style="color:var(--green)">+13.0%</b> <span class="dim">평균 $465.125 · 애널리스트 24명</span></span></div>
+<div class="card"><b>사업</b><div class="section-body">Humana는 메디케어 어드밴티지(65세 이상 고령층 대상 민간 운영 건강보험) 상품을 팔아 보험료를 받고, 자회사 CenterWell의 일차 진료센터와 약국으로 의료 이용까지 직접 관리하는 건강보험 회사다. 보험 부문은 개인·단체 메디케어 어드밴티지, 처방약 단독 보험(PDP), 치과·시력 등 보조보험을 정부와 가입자 대상으로 판매하고, CenterWell은 노인 중심 가치 기반(진료 성과에 따라 보상받는 방식) 진료센터를 운영하는 구조다.</div></div>
+<div class="card"><b>강세 근거</b><div style="margin-top:8px"><b>· 실적 서프라이즈 이력</b><br><span class="section-body">최근 4개 분기 모두 EPS가 추정치를 상회했고 직전 분기(2026-07-29)는 7.61 대 7.0으로 8.79% 앞섰다. 실적 신뢰도가 쌓여 오늘 발표를 앞둔 기대감을 받치는 재료다.</span></div><div style="margin-top:8px"><b>· 추정치 상향 흐름</b><br><span class="section-body">올해 컨센서스 EPS는 90일 전 8.956에서 9.159로, 내년은 16.031에서 17.088로 올랐고 30일 기준 상향 6명 대 하향 1명이다. 이익 전망이 꾸준히 올라가는 종목은 돌파 시 추가 매수세가 붙기 쉽다.</span></div></div>
+<div class="card"><b>리스크</b><div class="section-body"><div style="margin-top:6px">· 오늘(2026-11-06) 3분기 실적 발표가 예정돼 있어 결과와 가이던스에 따라 주가가 크게 흔들릴 수 있다. 메디케어 의료비 증가나 가입자 마진 악화가 확인되면 상승 논리가 약해진다.</div><div style="margin-top:6px">· 영업이익률 3.5%, ROE 6.9%로 수익성 여유가 얇아 의료비 비율이 조금만 변해도 이익이 크게 달라진다. 정부 지급률·메디케어 규제 변화가 감시 포인트다.</div></div></div>
+<div class="card"><b>셋업·전략</b><div class="section-body">진입 기준은 B² 피벗 $427.07 돌파이며, 실적 발표 직후 변동성 구간에서는 돌파 시 거래량 확인이 유효성 판단의 핵심이다. 규칙엔진이 관리하는 초기 손절선은 $378.85(진입가 대비 -8%)로, 종가가 바닥선(50일선과 하한선 중 높은 쪽) 아래면 전량 청산되고 정률 부분 익절 단계는 없다. 진입일 종가가 피벗 아래로 마감하거나 확정 거래량 배수가 돌파 문턱에 못 미치면 돌파 실패로 판정돼 다음 거래일 개장 직후 정리된다.</div></div>
+
+
+
+<div class="dim" style="font-size:0.7rem;margin-top:12px">
+예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
+<div class="footer">MacTrader auto-journal</div>
+</body></html>
