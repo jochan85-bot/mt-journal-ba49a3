@@ -127,13 +127,14 @@ a:hover { text-decoration:underline; }
 <div class="card">
 평균 매수가 <b>$59.67</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$59.67</b></span>
 
-· 수익률 <span class="pos">+13.91%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="pos">+13.91%</span>)</span>
+· 수익률 <span class="pos">+13.37%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="pos">+13.37%</span>)</span>
 · 보유 33주
 <div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#2ecc71;color:#fff;font-size:0.8rem;font-weight:700">매수 고려</span> <span class="dim">AI score 84/100 · 패스1 매수 가능 conv 7점 (20261107 기준)</span></div>
 <div style="margin-top:6px">거래량: <span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.07x">예측 1.61x → 확정 2.11x</span></div>
 <div class="dim">2026-11-10 진입</div><div class="dim" style="margin-top:6px">진입가 59.669999999999995 vs MA50 54.80 (+8.9%)</div>
 </div>
 
+<div class="mtc-slot" data-mtc-market="US" data-mtc-ticker="ETON" data-mtc-pivot="58.59" data-mtc-markers="[{&quot;date&quot;:&quot;2026-11-09&quot;,&quot;side&quot;:&quot;buy&quot;,&quot;price&quot;:59.67}]" data-mtc-focus="{&quot;from&quot;:&quot;2026-08-09&quot;,&quot;to&quot;:&quot;2026-11-11&quot;}"></div>
 <h2>거래 타임라인</h2>
 <div class="timeline"><div class="tl-item buy">
 <b>매수</b> · 33주 @ $59.67
@@ -174,4 +175,31 @@ a:hover { text-decoration:underline; }
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
 <div class="footer">MacTrader auto-journal</div>
+<style>.mtc-slot{margin:14px 0 4px;}.mtc-slot .mtc-fb{font-size:12px;color:var(--dim);padding:4px 0;}</style>
+<link rel="stylesheet" href="https://jochan85-bot.github.io/mt-charts/assets/mtchart.v1.css">
+<script src="https://jochan85-bot.github.io/mt-charts/assets/mtchart.v1.js" id="mtc-js" defer></script>
+<script>
+(function(){
+  try{
+    var FAIL='차트를 불러오지 못했습니다.';
+    function fb(s){s.setAttribute('data-mtc','0');s.innerHTML='<div class="mtc-fb"></div>';s.firstChild.textContent=FAIL;}
+    function J(s,k){try{var v=s.getAttribute(k);return v?JSON.parse(v):undefined;}catch(e){return undefined;}}
+    function run(failed){
+      var ss=document.querySelectorAll('.mtc-slot[data-mtc-ticker]');
+      for(var i=0;i<ss.length;i++){
+        var s=ss[i]; if(s.getAttribute('data-mtc'))continue;
+        if(!failed&&window.MTChart&&window.MTChart.mount){
+          s.setAttribute('data-mtc','1');
+          try{window.MTChart.mount(s,{market:s.getAttribute('data-mtc-market'),ticker:s.getAttribute('data-mtc-ticker'),pivot:s.getAttribute('data-mtc-pivot'),markers:J(s,'data-mtc-markers'),focus:J(s,'data-mtc-focus'),range:'y1'});}catch(e){fb(s);}
+        }else{fb(s);}
+      }
+    }
+    var js=document.getElementById('mtc-js');
+    if(js){
+      js.addEventListener('load',function(){try{run(!window.MTChart);}catch(e){}});
+      js.addEventListener('error',function(){try{run(true);}catch(e){}});
+    }else{run(true);}
+  }catch(e){}
+})();
+</script>
 </body></html>

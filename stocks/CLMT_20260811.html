@@ -134,6 +134,7 @@ a:hover { text-decoration:underline; }
 <div class="dim">2026-08-11 진입 → 2026-08-27 청산</div>
 </div>
 
+<div class="mtc-slot" data-mtc-market="US" data-mtc-ticker="CLMT" data-mtc-pivot="45.1" data-mtc-markers="[{&quot;date&quot;:&quot;2026-08-10&quot;,&quot;side&quot;:&quot;buy&quot;,&quot;price&quot;:45.31},{&quot;date&quot;:&quot;2026-08-10&quot;,&quot;side&quot;:&quot;buy&quot;,&quot;price&quot;:45.33},{&quot;date&quot;:&quot;2026-08-20&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:48.88},{&quot;date&quot;:&quot;2026-08-20&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:49.61},{&quot;date&quot;:&quot;2026-08-20&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:49.95},{&quot;date&quot;:&quot;2026-08-20&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:49.54},{&quot;date&quot;:&quot;2026-08-20&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:49.15},{&quot;date&quot;:&quot;2026-08-20&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:48.49},{&quot;date&quot;:&quot;2026-08-20&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:48.42},{&quot;date&quot;:&quot;2026-08-21&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:48.6},{&quot;date&quot;:&quot;2026-08-21&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:48.51},{&quot;date&quot;:&quot;2026-08-21&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:48.48},{&quot;date&quot;:&quot;2026-08-21&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:48.41},{&quot;date&quot;:&quot;2026-08-21&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:48.49},{&quot;date&quot;:&quot;2026-08-21&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:49.24},{&quot;date&quot;:&quot;2026-08-21&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:49.37},{&quot;date&quot;:&quot;2026-08-21&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:49.38},{&quot;date&quot;:&quot;2026-08-21&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:49.02},{&quot;date&quot;:&quot;2026-08-25&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:47.42},{&quot;date&quot;:&quot;2026-08-26&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:46.8},{&quot;date&quot;:&quot;2026-08-26&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:47.02},{&quot;date&quot;:&quot;2026-08-26&quot;,&quot;side&quot;:&quot;sell&quot;,&quot;price&quot;:47.71}]" data-mtc-focus="{&quot;from&quot;:&quot;2026-05-10&quot;,&quot;to&quot;:&quot;2026-09-26&quot;}"></div>
 <h2>거래 타임라인</h2>
 <div class="timeline"><div class="tl-item buy">
 <b>매수</b> · 65주 @ $45.31
@@ -250,4 +251,31 @@ a:hover { text-decoration:underline; }
 <div class="dim" style="font-size:0.7rem;margin-top:12px">
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
 <div class="footer">MacTrader auto-journal</div>
+<style>.mtc-slot{margin:14px 0 4px;}.mtc-slot .mtc-fb{font-size:12px;color:var(--dim);padding:4px 0;}</style>
+<link rel="stylesheet" href="https://jochan85-bot.github.io/mt-charts/assets/mtchart.v1.css">
+<script src="https://jochan85-bot.github.io/mt-charts/assets/mtchart.v1.js" id="mtc-js" defer></script>
+<script>
+(function(){
+  try{
+    var FAIL='차트를 불러오지 못했습니다.';
+    function fb(s){s.setAttribute('data-mtc','0');s.innerHTML='<div class="mtc-fb"></div>';s.firstChild.textContent=FAIL;}
+    function J(s,k){try{var v=s.getAttribute(k);return v?JSON.parse(v):undefined;}catch(e){return undefined;}}
+    function run(failed){
+      var ss=document.querySelectorAll('.mtc-slot[data-mtc-ticker]');
+      for(var i=0;i<ss.length;i++){
+        var s=ss[i]; if(s.getAttribute('data-mtc'))continue;
+        if(!failed&&window.MTChart&&window.MTChart.mount){
+          s.setAttribute('data-mtc','1');
+          try{window.MTChart.mount(s,{market:s.getAttribute('data-mtc-market'),ticker:s.getAttribute('data-mtc-ticker'),pivot:s.getAttribute('data-mtc-pivot'),markers:J(s,'data-mtc-markers'),focus:J(s,'data-mtc-focus'),range:'y1'});}catch(e){fb(s);}
+        }else{fb(s);}
+      }
+    }
+    var js=document.getElementById('mtc-js');
+    if(js){
+      js.addEventListener('load',function(){try{run(!window.MTChart);}catch(e){}});
+      js.addEventListener('error',function(){try{run(true);}catch(e){}});
+    }else{run(true);}
+  }catch(e){}
+})();
+</script>
 </body></html>
