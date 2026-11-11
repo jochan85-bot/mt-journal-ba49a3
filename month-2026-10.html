@@ -143,12 +143,16 @@ a:hover { text-decoration:underline; }
 @media (max-width:520px) {
   .perf .prow { font-size:0.78rem; gap:6px; row-gap:3px; }
 }
+
+/* [JOURNAL-CARD-SECTOR-DAYS-20261111] 종목명(업종) 은 말줄임 대신 줄바꿈 — 좁은 화면 잘림 0. 상태 배지는 다음 줄(.l2b). */
+.nm.sx { display:inline; white-space:normal; overflow:visible; text-overflow:clip; word-break:keep-all; overflow-wrap:anywhere; }
+.l2.l2b { margin-top:3px; }
 </style></head>
 <body>
 <h1>📓 매매일지 · 2026-10</h1>
 <div class="dim">매수일 기준 월별 기록 · 2026-09-07 이후 정상 거래 · Prototype 제외</div>
-<div class="nav"><a class="nv" href="index.html">전체</a><select class="nvsel on" onchange="if(this.value)location.href=this.value"><option value="">월별 ▾</option><option value="month-2026-11.html">2026.11</option><option value="month-2026-10.html" selected>2026.10</option><option value="month-2026-09.html">2026.09</option></select><a class="nv proto" href="prototype.html" style="margin-left:auto">🧪 Prototype</a></div><div class="card perf"><div class="ph">전체 실적<span class="dim"> (계좌 기준 + 일지 집계 · Prototype 제외)</span></div><div class="prow"><span class="pl">보유 15건</span><span class="pl">청산 97건</span><span class="pl">승률 23%</span><span class="pl">평균 -3.53%</span><span class="pl dim" title="청산건 개별 수익률의 자 — 브로커 평단(원장 정정열) 우선, 없으면 전기간 매수 가중평균 [CLEANUP-SETTLE-20260927-B2 #06]">브로커 평단 77 · 전기간 평균 20</span></div><div class="prow"><span class="badge kr">KR</span><span class="tag">계좌</span><span class="pl" title="현금 50,922원 + 평가 0원">총자산 50,922원</span><span class="dim">원금 40,000,000원</span><b class="neg">-99.87%</b></div><div class="prow"><span class="badge us">US</span><span class="tag">계좌</span><span class="pl" title="투입원금 + 기초 잔액 포함 누적 손익 · 장부 기준 11-11 20:30 · 사이징 기준 자산 $41,354.06 (원금 하한 미적용)">순자산 $37,154.42</span><span class="dim">원금 $40,000.00</span><b class="neg">-7.11%</b></div><div class="prow"><span class="badge kr">KR</span><span class="tag">일지</span><span class="pl">실현 <span class="neg">-2,121,815원</span></span><span class="pl" title="브로커 이동평균 기준 정정값 [U56-CORRECT-20260922 §4-4] · 65건">실현(브로커) <span class="neg">-2,646,976원</span></span> <span class="dim">(7건 산출불가)</span><span class="pl">평가 <span class="pos">+0원</span></span><span class="dim" title="투입원금 40,000,000원">원금 대비</span><b class="neg">-5.30%</b></div><div class="prow"><span class="badge us">US</span><span class="tag">일지</span><span class="pl">실현 <span class="neg">-$4,021.34</span></span><span class="pl" title="브로커 이동평균 기준 정정값 [U56-CORRECT-20260922 §4-4] · 106건">실현(브로커) <span class="neg">-$3,129.62</span></span> <span class="dim">(22건 산출불가)</span><span class="pl">평가 <span class="pos">+$1,917.59</span></span><span class="dim" title="투입원금 $40,000.00">원금 대비</span><b class="neg">-5.26%</b></div></div><div class="card perf"><div class="ph">2026-10 실적<span class="dim"> (매수일 기준)</span></div><div class="prow"><span class="pl">보유 2건</span><span class="pl">청산 43건</span><span class="pl">승률 9%</span><span class="pl">평균 -5.39%</span><span class="pl dim" title="청산건 개별 수익률의 자 — 브로커 평단(원장 정정열) 우선, 없으면 전기간 매수 가중평균 [CLEANUP-SETTLE-20260927-B2 #06]">브로커 평단 35 · 전기간 평균 8</span></div><div class="prow"><span class="badge kr">KR</span><span class="tag">일지</span><span class="pl">실현 <span class="neg">-1,203,891원</span></span><span class="pl" title="브로커 이동평균 기준 정정값 [U56-CORRECT-20260922 §4-4] · 19건">실현(브로커) <span class="neg">-1,985,020원</span></span> <span class="dim">(3건 산출불가)</span><span class="pl">평가 <span class="pos">+0원</span></span><span class="dim" title="투입원금 40,000,000원">원금 대비</span><b class="neg">-3.01%</b></div><div class="prow"><span class="badge us">US</span><span class="tag">일지</span><span class="pl">실현 <span class="neg">-$2,661.99</span></span><span class="pl" title="브로커 이동평균 기준 정정값 [U56-CORRECT-20260922 §4-4] · 16건">실현(브로커) <span class="neg">-$2,272.96</span></span> <span class="dim">(8건 산출불가)</span><span class="pl">평가 <span class="pos">+$443.29</span></span><span class="dim" title="투입원금 $40,000.00">원금 대비</span><b class="neg">-5.55%</b></div><div class="dim" style="font-size:.72rem;margin-top:6px">계좌 = 실제 잔고(현금+평가) 대비 투입원금 — 정시 계좌현황 보고와 같은 산식. 일지 = 이 사이트에 기록된 거래의 체결가 기준 실현·평가 손익(수수료·세금 제외, 2026-07-05 기록 개시 이전 거래 미포함)이라 계좌 수치와 차이가 납니다. 실현손익에는 보유중 종목의 부분매도 체결분이 포함됩니다. 국장/미장은 통화가 달라 합산하지 않습니다.</div></div><div class="card">
-<div class="dim">예측/확정 중앙 (이번 달): 예측 1.60x (n=48) · 확정 2.01x (n=48)</div><div class="dim">마지막 갱신: 2026-11-11 23:56 KST</div>
+<div class="nav"><a class="nv" href="index.html">전체</a><select class="nvsel on" onchange="if(this.value)location.href=this.value"><option value="">월별 ▾</option><option value="month-2026-11.html">2026.11</option><option value="month-2026-10.html" selected>2026.10</option><option value="month-2026-09.html">2026.09</option></select><a class="nv proto" href="prototype.html" style="margin-left:auto">🧪 Prototype</a></div><div class="card perf"><div class="ph">전체 실적<span class="dim"> (계좌 기준 + 일지 집계 · Prototype 제외)</span></div><div class="prow"><span class="pl">보유 15건</span><span class="pl">청산 97건</span><span class="pl">승률 23%</span><span class="pl">평균 -3.53%</span><span class="pl dim" title="청산건 개별 수익률의 자 — 브로커 평단(원장 정정열) 우선, 없으면 전기간 매수 가중평균 [CLEANUP-SETTLE-20260927-B2 #06]">브로커 평단 77 · 전기간 평균 20</span></div><div class="prow"><span class="badge kr">KR</span><span class="tag">계좌</span><span class="pl" title="현금 50,922원 + 평가 0원">총자산 50,922원</span><span class="dim">원금 40,000,000원</span><b class="neg">-99.87%</b></div><div class="prow"><span class="badge us">US</span><span class="tag">계좌</span><span class="pl" title="투입원금 + 기초 잔액 포함 누적 손익 · 장부 기준 11-11 20:30 · 사이징 기준 자산 $41,354.06 (원금 하한 미적용)">순자산 $37,154.42</span><span class="dim">원금 $40,000.00</span><b class="neg">-7.11%</b></div><div class="prow"><span class="badge kr">KR</span><span class="tag">일지</span><span class="pl">실현 <span class="neg">-2,121,815원</span></span><span class="pl" title="브로커 이동평균 기준 정정값 [U56-CORRECT-20260922 §4-4] · 65건">실현(브로커) <span class="neg">-2,646,976원</span></span> <span class="dim">(7건 산출불가)</span><span class="pl">평가 <span class="pos">+0원</span></span><span class="dim" title="투입원금 40,000,000원">원금 대비</span><b class="neg">-5.30%</b></div><div class="prow"><span class="badge us">US</span><span class="tag">일지</span><span class="pl">실현 <span class="neg">-$4,021.34</span></span><span class="pl" title="브로커 이동평균 기준 정정값 [U56-CORRECT-20260922 §4-4] · 106건">실현(브로커) <span class="neg">-$3,129.62</span></span> <span class="dim">(22건 산출불가)</span><span class="pl">평가 <span class="pos">+$1,598.45</span></span><span class="dim" title="투입원금 $40,000.00">원금 대비</span><b class="neg">-6.06%</b></div></div><div class="card perf"><div class="ph">2026-10 실적<span class="dim"> (매수일 기준)</span></div><div class="prow"><span class="pl">보유 2건</span><span class="pl">청산 43건</span><span class="pl">승률 9%</span><span class="pl">평균 -5.39%</span><span class="pl dim" title="청산건 개별 수익률의 자 — 브로커 평단(원장 정정열) 우선, 없으면 전기간 매수 가중평균 [CLEANUP-SETTLE-20260927-B2 #06]">브로커 평단 35 · 전기간 평균 8</span></div><div class="prow"><span class="badge kr">KR</span><span class="tag">일지</span><span class="pl">실현 <span class="neg">-1,203,891원</span></span><span class="pl" title="브로커 이동평균 기준 정정값 [U56-CORRECT-20260922 §4-4] · 19건">실현(브로커) <span class="neg">-1,985,020원</span></span> <span class="dim">(3건 산출불가)</span><span class="pl">평가 <span class="pos">+0원</span></span><span class="dim" title="투입원금 40,000,000원">원금 대비</span><b class="neg">-3.01%</b></div><div class="prow"><span class="badge us">US</span><span class="tag">일지</span><span class="pl">실현 <span class="neg">-$2,661.99</span></span><span class="pl" title="브로커 이동평균 기준 정정값 [U56-CORRECT-20260922 §4-4] · 16건">실현(브로커) <span class="neg">-$2,272.96</span></span> <span class="dim">(8건 산출불가)</span><span class="pl">평가 <span class="pos">+$418.40</span></span><span class="dim" title="투입원금 $40,000.00">원금 대비</span><b class="neg">-5.61%</b></div><div class="dim" style="font-size:.72rem;margin-top:6px">계좌 = 실제 잔고(현금+평가) 대비 투입원금 — 정시 계좌현황 보고와 같은 산식. 일지 = 이 사이트에 기록된 거래의 체결가 기준 실현·평가 손익(수수료·세금 제외, 2026-07-05 기록 개시 이전 거래 미포함)이라 계좌 수치와 차이가 납니다. 실현손익에는 보유중 종목의 부분매도 체결분이 포함됩니다. 국장/미장은 통화가 달라 합산하지 않습니다.</div></div><div class="card">
+<div class="dim">예측/확정 중앙 (이번 달): 예측 1.60x (n=48) · 확정 2.01x (n=48)</div><div class="dim">마지막 갱신: 2026-11-12 00:22 KST</div>
 </div><div class="fbar">
  <div class="frow"><span class="flab">시장</span>
   <button class="on" onclick="setf('mkt','ALL',this)">전체</button>
@@ -187,8 +191,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/HP_20261031.html"><span class="tk">HP ☀️</span></a>
-     <span class="nm">헬머리치 앤 페인</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.31 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.03</span></div>
+     <span class="nm sx">헬머리치 앤 페인 (Oil &amp; Gas Drilling)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.31 (1일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.03</span></div>
   </div>
   <div class="rt"><span class="neg">-8.12%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.19x">예측 1.83x → 확정 2.09x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div>
  </div>
@@ -207,8 +212,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/TGTX_20261031.html"><span class="tk">TGTX</span></a>
-     <span class="nm">TG 테라퓨틱스</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.31 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.10</span></div>
+     <span class="nm sx">TG 테라퓨틱스 (Biotechnology)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.31 (6일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.10</span></div>
   </div>
   <div class="rt"><span class="neg">-8.11%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.85x">예측 1.60x → 확정 1.61x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.9%</span></div>
  </div>
@@ -227,8 +233,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/LNG_20261031.html"><span class="tk">LNG</span></a>
-     <span class="nm">셰니어 에너지</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.31 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.04</span></div>
+     <span class="nm sx">셰니어 에너지 (Oil &amp; Gas Midstream)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.31 (3일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.04</span></div>
   </div>
   <div class="rt"><span class="neg">-8.34%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.26x">예측 1.60x → 확정 2.22x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.0%</span></div>
  </div>
@@ -247,8 +254,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/WST_20261029.html"><span class="tk">WST</span></a>
-     <span class="nm">웨스트 파마슈티컬 서비시스</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.29 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.06</span></div>
+     <span class="nm sx">웨스트 파마슈티컬 서비시스 (Medical Instruments &amp; Supplies)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.29 (6일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.06</span></div>
   </div>
   <div class="rt"><span class="neg">-6.91%</span><span class="ev dim" style="font-size:.62rem" title="정정열 없는 매도행 있음">전기간 평균</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 4.16x">예측 1.74x → 확정 3.35x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.9%</span></div>
  </div>
@@ -267,8 +275,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/VTRS_20261029.html"><span class="tk">VTRS</span></a>
-     <span class="nm">비아트리스</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.29 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.30</span></div>
+     <span class="nm sx">비아트리스 (Drug Manufacturers - Specialty &amp; Generic)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.29 (1일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.30</span></div>
   </div>
   <div class="rt"><span class="pos">+0.94%</span><span class="ev dim" style="font-size:.62rem" title="정정열 없는 매도행 있음">전기간 평균</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 6.09x">예측 1.71x → 확정 1.25x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div>
  </div>
@@ -287,8 +296,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/MANH_20261029.html"><span class="tk">MANH</span></a>
-     <span class="nm">맨해튼 어소시에이츠</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.29 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.29</span></div>
+     <span class="nm sx">맨해튼 어소시에이츠 (Software - Application)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.29 (1일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.29</span></div>
   </div>
   <div class="rt"><span class="neg">-2.24%</span><span class="ev dim" style="font-size:.62rem" title="정정열 없는 매도행 있음">전기간 평균</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.77x">예측 2.11x → 확정 2.60x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div>
  </div>
@@ -307,8 +317,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/052460_20261028.html"><span class="tk">052460 ☀️</span></a>
-     <span class="nm">아이크래프트</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.28 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.30</span></div>
+     <span class="nm sx">아이크래프트 (IT서비스)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.28 (2일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.30</span></div>
   </div>
   <div class="rt"><span class="neg">-8.23%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.96x">예측 1.42x → 확정 1.41x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.3%</span></div>
  </div>
@@ -327,8 +338,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/003010_20261028.html"><span class="tk">003010</span></a>
-     <span class="nm">혜인</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.28 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.28</span></div>
+     <span class="nm sx">혜인 (기계)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.28 (0일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.28</span></div>
   </div>
   <div class="rt"><span class="neg">-0.11%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.08x">예측 1.53x → 확정 1.07x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.9%</span></div>
  </div>
@@ -347,8 +359,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/080580_20261028.html"><span class="tk">080580 ☀️</span></a>
-     <span class="nm">오킨스전자</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.28 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.29</span></div>
+     <span class="nm sx">오킨스전자 (반도체와반도체장비)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.28 (1일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.29</span></div>
   </div>
   <div class="rt"><span class="neg">-0.18%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.79x">예측 1.42x → 확정 3.53x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.0%</span></div>
  </div>
@@ -367,8 +380,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/005160_20261027.html"><span class="tk">005160</span></a>
-     <span class="nm">동국산업</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.27 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.28</span></div>
+     <span class="nm sx">동국산업 (철강)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.27 (1일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.28</span></div>
   </div>
   <div class="rt"><span class="pos">+2.11%</span><span class="ev dim" style="font-size:.62rem" title="정정열 없는 매도행 있음">전기간 평균</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.59x">예측 1.43x → 확정 1.46x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.9%</span></div>
  </div>
@@ -387,8 +401,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/098120_20261027.html"><span class="tk">098120</span></a>
-     <span class="nm">마이크로컨텍솔</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.27 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.27</span></div>
+     <span class="nm sx">마이크로컨텍솔 (반도체와반도체장비)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.27 (0일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.27</span></div>
   </div>
   <div class="rt"><span class="pos">+4.55%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.77x">예측 1.43x → 확정 1.83x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.0%</span></div>
  </div>
@@ -407,8 +422,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/252990_20261027.html"><span class="tk">252990</span></a>
-     <span class="nm">샘씨엔에스</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.27 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.30</span></div>
+     <span class="nm sx">샘씨엔에스 (반도체와반도체장비)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.27 (3일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.30</span></div>
   </div>
   <div class="rt"><span class="neg">-0.25%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.09x">예측 1.49x → 확정 1.91x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.9%</span></div>
  </div>
@@ -427,8 +443,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/091580_20261027.html"><span class="tk">091580 ☀️</span></a>
-     <span class="nm">상신이디피</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.27 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.03</span></div>
+     <span class="nm sx">상신이디피 (전기제품)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.27 (5일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.03</span></div>
   </div>
   <div class="rt"><span class="neg">-8.20%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.57x">예측 1.42x → 확정 1.42x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.8%</span></div>
  </div>
@@ -447,8 +464,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/028050_20261027.html"><span class="tk">028050 ☀️</span></a>
-     <span class="nm">삼성E&amp;A</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.27 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.05</span></div>
+     <span class="nm sx">삼성E&amp;A (건설)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.27 (7일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.05</span></div>
   </div>
   <div class="rt"><span class="pos">+5.07%</span><span class="ev dim" style="font-size:.62rem" title="정정열 없는 매도행 있음">전기간 평균</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 6.20x">예측 1.69x → 확정 2.29x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.0%</span></div>
  </div>
@@ -467,8 +485,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/PACS_20261024.html"><span class="tk">PACS</span></a>
-     <span class="nm">팍스 그룹</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.24 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.02</span></div>
+     <span class="nm sx">팍스 그룹 (Medical Care Facilities)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.24 (6일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.02</span></div>
   </div>
   <div class="rt"><span class="neg">-4.26%</span><span class="ev dim" style="font-size:.62rem" title="정정열 없는 매도행 있음">전기간 평균</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.90x">예측 1.62x → 확정 1.99x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.6%</span></div>
  </div>
@@ -487,8 +506,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/VET_20261024.html"><span class="tk">VET ☀️</span></a>
-     <span class="nm">버밀리언 에너지</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.24 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.02</span></div>
+     <span class="nm sx">버밀리언 에너지 (Oil &amp; Gas E&amp;P)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.24 (6일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.02</span></div>
   </div>
   <div class="rt"><span class="neg">-8.95%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.85x">예측 1.84x → 확정 1.65x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.0%</span></div>
  </div>
@@ -507,8 +527,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/BWLP_20260825-L2.html"><span class="tk">BWLP</span></a>
-     <span class="nm">BW LPG</span> <span class="badge" title="같은 종목의 2개 왕복 중 2번째. 원장을 시간순으로 훑어 매도 누계가 매수 누계에 도달한 시점마다 끊었다.">2/2다리</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.23 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.26</span></div>
+     <span class="nm sx">BW LPG (Oil &amp; Gas Midstream)</span> <span class="badge" title="같은 종목의 2개 왕복 중 2번째. 원장을 시간순으로 훑어 매도 누계가 매수 누계에 도달한 시점마다 끊었다.">2/2다리</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.23 (1일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.26</span></div>
   </div>
   <div class="rt"><span class="pos">+1.68%</span><span class="ev dim" style="font-size:.62rem" title="정정열 없는 매도행 있음">전기간 평균</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 4.19x">예측 1.75x → 확정 1.23x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.3%</span></div>
  </div>
@@ -527,8 +548,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/RNG_20261023.html"><span class="tk">RNG</span></a>
-     <span class="nm">링센트럴</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.23 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.03</span></div>
+     <span class="nm sx">링센트럴 (Software - Application)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.23 (7일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.03</span></div>
   </div>
   <div class="rt"><span class="neg">-8.69%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 7.10x">예측 2.14x → 확정 3.06x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.1%</span></div>
  </div>
@@ -547,8 +569,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/E_20261023.html"><span class="tk">E</span></a>
-     <span class="nm">애니 SpA(ADR)</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.23 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.05</span></div>
+     <span class="nm sx">애니 SpA(ADR) (Oil &amp; Gas Integrated)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.23 (8일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.05</span></div>
   </div>
   <div class="rt"><span class="neg">-8.03%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 8.09x">예측 1.86x → 확정 1.86x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.9%</span></div>
  </div>
@@ -567,8 +590,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/QLYS_20261023.html"><span class="tk">QLYS ☀️</span></a>
-     <span class="nm">퀄리스</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.23 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.03</span></div>
+     <span class="nm sx">퀄리스 (Software - Infrastructure)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.23 (8일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.03</span></div>
   </div>
   <div class="rt"><span class="neg">-0.57%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.89x">예측 1.60x → 확정 1.81x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.6%</span></div>
  </div>
@@ -587,8 +611,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/CRL_20261023.html"><span class="tk">CRL</span></a>
-     <span class="nm">찰스 리버 래버러토리스 인터내셔널</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.23 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.23</span></div>
+     <span class="nm sx">찰스 리버 래버러토리스 인터내셔널 (Diagnostics &amp; Research)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.23 (1일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.23</span></div>
   </div>
   <div class="rt"><span class="neg">-4.27%</span><span class="ev dim" style="font-size:.62rem" title="정정열 없는 매도행 있음">전기간 평균</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.32x">예측 2.08x → 확정 2.72x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div>
  </div>
@@ -607,8 +632,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/APPN_20261023.html"><span class="tk">APPN ☀️</span></a>
-     <span class="nm">애피안</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.23 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.10</span></div>
+     <span class="nm sx">애피안 (Software - Infrastructure)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.23 (13일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.10</span></div>
   </div>
   <div class="rt"><span class="neg">-1.95%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.22x">예측 1.60x → 확정 2.10x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.6%</span></div>
  </div>
@@ -627,8 +653,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/PRCH_20261022.html"><span class="tk">PRCH</span></a>
-     <span class="nm">포치 그룹</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.22 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.29</span></div>
+     <span class="nm sx">포치 그룹 (Insurance - Property &amp; Casualty)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.22 (5일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.29</span></div>
   </div>
   <div class="rt"><span class="neg">-9.16%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.19x">예측 1.65x → 확정 1.79x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.7%</span></div>
  </div>
@@ -647,8 +674,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/059090_20261021.html"><span class="tk">059090</span></a>
-     <span class="nm">미코</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.21 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.26</span></div>
+     <span class="nm sx">미코 (반도체와반도체장비)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.21 (3일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.26</span></div>
   </div>
   <div class="rt"><span class="neg">-6.73%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.20x">예측 1.41x → 확정 0.79x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.9%</span></div>
  </div>
@@ -667,8 +695,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/144960_20261020.html"><span class="tk">144960</span></a>
-     <span class="nm">뉴파워프라즈마</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.20 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.02</span></div>
+     <span class="nm sx">뉴파워프라즈마 (반도체와반도체장비)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.20 (9일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.02</span></div>
   </div>
   <div class="rt"><span class="neg">-0.24%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.72x">예측 1.45x → 확정 1.79x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.0%</span></div>
  </div>
@@ -687,8 +716,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/006400_20261019.html"><span class="tk">006400 ☀️</span></a>
-     <span class="nm">삼성SDI</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.19 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.22</span></div>
+     <span class="nm sx">삼성SDI (전기제품)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.19 (3일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.22</span></div>
   </div>
   <div class="rt"><span class="neg">-8.17%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.48x">예측 1.67x → 확정 2.36x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.3%</span></div>
  </div>
@@ -707,8 +737,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/091580_20261019.html"><span class="tk">091580 ☀️</span></a>
-     <span class="nm">상신이디피</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.19 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.23</span></div>
+     <span class="nm sx">상신이디피 (전기제품)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.19 (4일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.23</span></div>
   </div>
   <div class="rt"><span class="neg">-8.22%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.19x">예측 1.52x → 확정 1.82x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div>
  </div>
@@ -727,8 +758,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/CBRL_20261017.html"><span class="tk">CBRL</span></a>
-     <span class="nm">크래커 배럴 올드 컨트리 스토어</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.17 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.10</span></div>
+     <span class="nm sx">크래커 배럴 올드 컨트리 스토어 (Restaurants)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.17 (16일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.10</span></div>
   </div>
   <div class="rt"><span class="neg">-4.59%</span><span class="ev dim" style="font-size:.62rem" title="정정열 없는 매도행 있음">전기간 평균</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.03x">예측 1.65x → 확정 2.03x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.6%</span></div>
  </div>
@@ -736,7 +768,7 @@ a:hover { text-decoration:underline; }
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.33yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 66</span><span class="dim" style="font-size:.7rem"> 패스1 가능 6</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 가능"
  data-mon="2026-10"
- data-date="2026-10-17T02:45:40.004414+09:00" data-ret="13.858697430326977"
+ data-date="2026-10-17T02:45:40.004414+09:00" data-ret="13.286132141525053"
  data-rs="81.0"
  data-rvol="1.95"
  data-pred="1.6038"
@@ -747,10 +779,11 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/RPRX_20261017.html"><span class="tk">RPRX</span></a>
-     <span class="nm">로열티 파마</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.17 <span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-11">경과 유지</span> </div>
+     <span class="nm sx">로열티 파마 (Biotechnology)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.17 (17일 보유)</div>
+   <div class="l2 l2b"><span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-11">경과 유지</span> </div>
   </div>
-  <div class="rt"><span class="pos">+13.86%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.95x">예측 1.60x → 확정 1.93x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.2%</span></div>
+  <div class="rt"><span class="pos">+13.29%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.95x">예측 1.60x → 확정 1.93x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.2%</span></div>
  </div>
  <div class="l3"><span class="rs">RS 81</span><span class="chip" title="원전 COMP 100점 · 최신 관찰값(20261110) — 진입 시점 값 아님 · 판정 무영향"><i style="background:#1E3A8A"></i><em>COMP</em> <b>56.8</b></span><span class="chip"><i style="background:#9E9E9E"></i><em>VCP</em> <b>무형</b></span><span class="chip" title="리포트 2026-10-16 기준"><i></i><em>수축깊이</em> <b>9.3%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.72yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 66</span><span class="dim" style="font-size:.7rem"> 패스1 가능 6</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
@@ -767,8 +800,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/AMN_20261017.html"><span class="tk">AMN</span></a>
-     <span class="nm">AMN 헬스케어 서비시스</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.17 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.09</span></div>
+     <span class="nm sx">AMN 헬스케어 서비시스 (Medical Care Facilities)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.17 (16일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.09</span></div>
   </div>
   <div class="rt"><span class="neg">-10.00%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.29x">예측 1.63x → 확정 2.29x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.9%</span></div>
  </div>
@@ -787,8 +821,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/219130_20261016.html"><span class="tk">219130</span></a>
-     <span class="nm">타이거일렉</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.16 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.23</span></div>
+     <span class="nm sx">타이거일렉 (반도체와반도체장비)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.16 (5일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.23</span></div>
   </div>
   <div class="rt"><span class="neg">-4.54%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.63x">예측 1.40x → 확정 1.66x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.0%</span></div>
  </div>
@@ -807,8 +842,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/064290_20261016.html"><span class="tk">064290 ☀️</span></a>
-     <span class="nm">인텍플러스</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.16 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.23</span></div>
+     <span class="nm sx">인텍플러스 (반도체와반도체장비)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.16 (5일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.23</span></div>
   </div>
   <div class="rt"><span class="neg">-4.16%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.40x">예측 1.80x → 확정 1.98x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div>
  </div>
@@ -827,8 +863,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/FTRE_20261016.html"><span class="tk">FTRE ☀️</span></a>
-     <span class="nm">포트리아 홀딩스</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.16 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.29</span></div>
+     <span class="nm sx">포트리아 홀딩스 (Biotechnology)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.16 (10일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.29</span></div>
   </div>
   <div class="rt"><span class="neg">-1.11%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.80x">예측 1.60x → 확정 2.03x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.9%</span></div>
  </div>
@@ -847,8 +884,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/VEEV_20261016.html"><span class="tk">VEEV ☀️</span></a>
-     <span class="nm">비바 시스템즈</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.16 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.06</span></div>
+     <span class="nm sx">비바 시스템즈 (Health Information Services)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.16 (15일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.06</span></div>
   </div>
   <div class="rt"><span class="neg">-2.14%</span><span class="ev dim" style="font-size:.62rem" title="정정열 없는 매도행 있음">전기간 평균</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.24x">예측 1.60x → 확정 1.68x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.1%</span></div>
  </div>
@@ -856,7 +894,7 @@ a:hover { text-decoration:underline; }
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.13yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 72</span><span class="dim" style="font-size:.7rem"> 패스1 가능 7</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 가능"
  data-mon="2026-10"
- data-date="2026-10-15T23:42:59.710365+09:00" data-ret="8.88474230781707"
+ data-date="2026-10-15T23:42:59.710365+09:00" data-ret="8.176257390009859"
  data-rs="96.0"
  data-rvol="2.83"
  data-pred="1.6227"
@@ -867,10 +905,11 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/GCT_20261015.html"><span class="tk">GCT</span></a>
-     <span class="nm">기가클라우드 테크놀로지</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.15 <span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-11">경과 유지</span> </div>
+     <span class="nm sx">기가클라우드 테크놀로지 (Software - Infrastructure)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.15 (18일 보유)</div>
+   <div class="l2 l2b"><span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-11">경과 유지</span> </div>
   </div>
-  <div class="rt"><span class="pos">+8.88%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.83x">예측 1.62x → 확정 1.79x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div>
+  <div class="rt"><span class="pos">+8.18%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.83x">예측 1.62x → 확정 1.79x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div>
  </div>
  <div class="l3"><span class="rs hi">RS 96</span><span class="chip" title="원전 COMP 100점 · 최신 관찰값(20261110) — 진입 시점 값 아님 · 판정 무영향"><i style="background:#1E3A8A"></i><em>COMP</em> <b>65.3</b></span><span class="chip"><i style="background:#8B6F4E"></i><em>VCP</em> <b>수축이탈</b></span><span class="chip" title="리포트 2026-10-15 기준"><i></i><em>수축깊이</em> <b>11.1%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.19yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 72</span><span class="dim" style="font-size:.7rem"> 패스1 가능 7</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
@@ -887,8 +926,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/KNSA_20261015.html"><span class="tk">KNSA</span></a>
-     <span class="nm">키닉사 파마슈티컬스 인터내셔널</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.15 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.24</span></div>
+     <span class="nm sx">키닉사 파마슈티컬스 인터내셔널 (Drug Manufacturers - Specialty &amp; Generic)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.15 (6일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.24</span></div>
   </div>
   <div class="rt"><span class="neg">-6.43%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.42x">예측 1.64x → 확정 3.01x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.5%</span></div>
  </div>
@@ -907,8 +947,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/HALO_20261015.html"><span class="tk">HALO</span></a>
-     <span class="nm">할로자임 테라퓨틱스</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.15 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.09</span></div>
+     <span class="nm sx">할로자임 테라퓨틱스 (Biotechnology)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.15 (18일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.09</span></div>
   </div>
   <div class="rt"><span class="neg">-12.24%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.17x">예측 1.73x → 확정 1.62x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.9%</span></div>
  </div>
@@ -927,8 +968,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/TALO_20261014.html"><span class="tk">TALO</span></a>
-     <span class="nm">탈로스 에너지</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.14 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.03</span></div>
+     <span class="nm sx">탈로스 에너지 (Oil &amp; Gas E&amp;P)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.14 (14일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.03</span></div>
   </div>
   <div class="rt"><span class="neg">-6.55%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 4.24x">예측 3.18x → 확정 3.35x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div>
  </div>
@@ -947,8 +989,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/TEN_20261013.html"><span class="tk">TEN</span></a>
-     <span class="nm">차코스 에너지 내비게이션</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.13 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.20</span></div>
+     <span class="nm sx">차코스 에너지 내비게이션 (Oil &amp; Gas Midstream)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.13 (5일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.20</span></div>
   </div>
   <div class="rt"><span class="neg">-8.23%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.10x">예측 1.69x → 확정 2.07x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.6%</span></div>
  </div>
@@ -967,8 +1010,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/DHT_20261012.html"><span class="tk">DHT</span></a>
-     <span class="nm">DHT 홀딩스</span></div>
-   <div class="l2"><span class="badge us">US</span> 26.10.12 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.15</span></div>
+     <span class="nm sx">DHT 홀딩스 (Oil &amp; Gas Midstream)</span></div>
+   <div class="l2"><span class="badge us">US</span> 26.10.12 (3일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.15</span></div>
   </div>
   <div class="rt"><span class="neg">-9.46%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.21x">예측 1.60x → 확정 2.13x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+5.0%</span></div>
  </div>
@@ -987,8 +1031,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/028670_20261012.html"><span class="tk">028670</span></a>
-     <span class="nm">팬오션</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.12 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.23</span></div>
+     <span class="nm sx">팬오션 (해운사)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.12 (9일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.23</span></div>
   </div>
   <div class="rt"><span class="neg">-2.35%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.19x">예측 1.41x → 확정 3.00x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.8%</span></div>
  </div>
@@ -1007,8 +1052,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/059090_20261008.html"><span class="tk">059090</span></a>
-     <span class="nm">미코</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.08 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.15</span></div>
+     <span class="nm sx">미코 (반도체와반도체장비)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.08 (4일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.15</span></div>
   </div>
   <div class="rt"><span class="neg">-8.41%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.39x">예측 1.47x → 확정 2.93x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div>
  </div>
@@ -1027,8 +1073,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/192820_20261007.html"><span class="tk">192820 ☀️</span></a>
-     <span class="nm">코스맥스</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.15</span></div>
+     <span class="nm sx">코스맥스 (화장품)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.07 (5일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.15</span></div>
   </div>
   <div class="rt"><span class="neg">-9.30%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.05x">예측 1.41x → 확정 1.52x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.3%</span></div>
  </div>
@@ -1047,8 +1094,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/096530_20261007.html"><span class="tk">096530</span></a>
-     <span class="nm">씨젠</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.15</span></div>
+     <span class="nm sx">씨젠 (생명과학도구및서비스)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.07 (5일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.15</span></div>
   </div>
   <div class="rt"><span class="neg">-9.51%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.30x">예측 1.42x → 확정 2.92x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+2.5%</span></div>
  </div>
@@ -1067,8 +1115,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/003350_20261007.html"><span class="tk">003350 ☀️</span></a>
-     <span class="nm">한국화장품제조</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.13</span></div>
+     <span class="nm sx">한국화장품제조 (화장품)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.07 (3일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.13</span></div>
   </div>
   <div class="rt"><span class="neg">-8.84%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.14x">예측 1.41x → 확정 3.47x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+3.5%</span></div>
  </div>
@@ -1087,8 +1136,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/041960_20261007.html"><span class="tk">041960 ☀️</span></a>
-     <span class="nm">코미팜</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.07 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.19</span></div>
+     <span class="nm sx">코미팜 (제약)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.07 (7일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.19</span></div>
   </div>
   <div class="rt"><span class="neg">-8.09%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 5.82x">예측 1.66x → 확정 2.80x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+4.8%</span></div>
  </div>
@@ -1107,8 +1157,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/083450_20261001.html"><span class="tk">083450 ☀️</span></a>
-     <span class="nm">GST</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.01 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.15</span></div>
+     <span class="nm sx">GST (반도체와반도체장비)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.01 (8일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.10.15</span></div>
   </div>
   <div class="rt"><span class="neg">-12.02%</span><span class="ev dim" style="font-size:.62rem" title="매도 1건 정정열">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.22x">예측 1.63x → 확정 2.56x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div>
  </div>
@@ -1127,8 +1178,9 @@ a:hover { text-decoration:underline; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/396300_20261001.html"><span class="tk">396300 ☀️</span></a>
-     <span class="nm">HT로보틱스</span></div>
-   <div class="l2"><span class="badge kr">KR</span> 26.10.01 <span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.05</span></div>
+     <span class="nm sx">HT로보틱스 (전자장비와기기)</span></div>
+   <div class="l2"><span class="badge kr">KR</span> 26.10.01 (23일 보유)</div>
+   <div class="l2 l2b"><span class="badge closed">청산</span> <span class="dim" style="font-size:.7rem">→ 26.11.05</span></div>
   </div>
   <div class="rt"><span class="pos">+32.52%</span><span class="ev dim" style="font-size:.62rem" title="정정열 없는 매도행 있음">전기간 평균</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 1.89x">예측 1.42x → 확정 6.29x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.9%</span></div>
  </div>
