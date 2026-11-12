@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ECO — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+/* [CARD-FMT-20260901] 모바일 겹침 수리 — 절대배치 폐기, 헤더 flex 2열.
+   구 구조: .rt 가 position:absolute(top:10 right:12) 3단 스택(≈72px)인데 회피용
+   padding-right 는 .l1 에만 있었다. .rt 가 .l2 를 지나 .l3 까지 내려오고 .l3/.l4 는
+   카드 우변까지 차므로 그 아래로 파고들었다(실측 rt 588~660 / l3 645~668, 우변 동일).
+   신 구조: .rt 를 정상 흐름에 넣어 겹침을 구조적으로 불가능하게 만든다.
+   → padding-right 회피값 자체가 불필요. 320·360·390·414·480px 전폭 겹침 0 실측. */
+.hd { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.hl { flex:1 1 auto; min-width:0; }   /* min-width:0 = 긴 종목명이 .rt 를 밀지 못하게 */
+.l1 { padding-right:0; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400;
+      display:inline-block; max-width:100%; overflow:hidden;
+      text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:static; flex:0 0 auto; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; row-gap:5px; margin-top:6px;
+      flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+/* [JOURNAL-REVAMP-20260905 §7] 위 뱃지 폭을 따라 늘어나지 않게 fit-content + 우측 정렬 */
+.rt .ev { display:block; width:fit-content; margin:2px 0 0 auto; }
+/* [CARD-FMT-20260901] 지표 칩 — 리포트 .g 칩과 같은 어법(라벨 dim + 값 bold + 색점) */
+.chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
+        border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
+        color:#cbd0de; background:#161923; white-space:nowrap; }
+.chip i { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:#4b5163; }
+.chip em { font-style:normal; color:var(--dim); }
+.chip b { font-weight:700; }
+.chip.fail { border-color:#7f1d1d; background:#1d1113; }
+.chip.fail b { color:#f87171; }
+.chip.na b, .chip.na em { color:#9ca3af; }
+.chip.na i { background:#4b5163; }
+@media (max-width:520px) {
+  .chip { font-size:0.68rem; padding:1px 6px; gap:3px; }
+  .l3 { gap:5px; }
+  .rt { font-size:0.92rem; }
+}
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>ECO <span class="dim" style="font-size:1rem">오케아니스 에코 탱커스</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (1.30yr, B3)</span></div>
+
+<div class="card">
+평균 매수가 <b>$86.53</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$86.53</b></span>
+
+· 수익률 <span class="neg">-0.24%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-0.24%</span>)</span>
+· 보유 23주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#f1c40f;color:#fff;font-size:0.8rem;font-weight:700">매수 가능</span> <span class="dim">AI score 72/100 · 패스1 매수 가능 conv 6점 (20261112 기준)</span></div>
+<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.38x">예측 1.68x → 확정 —</span></div>
+<div class="dim">2026-11-13 진입</div><div class="dim" style="margin-top:6px">진입가 86.53 vs MA50 85.92 (+0.7%)</div>
+</div>
+
+<div class="mtc-slot" data-mtc-market="US" data-mtc-ticker="ECO" data-mtc-pivot="86.24" data-mtc-markers="[{&quot;date&quot;:&quot;2026-11-12&quot;,&quot;side&quot;:&quot;buy&quot;,&quot;price&quot;:86.53}]" data-mtc-focus="{&quot;from&quot;:&quot;2026-08-12&quot;,&quot;to&quot;:&quot;2026-11-12&quot;}"></div>
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 23주 @ $86.53
+<div class="dim">2026-11-13 01:59 </div>
+</div></div>
+
+<h2>📋 진입 시점 기업 분석 <span class="dim" style="font-size:0.8rem;font-weight:400">· 진입 전 마지막 리포트 (2026-11-11 기준)</span></h2>
+<div class="card"><b>기업 개요</b><div class="section-body">Okeanis Eco Tankers는 VLCC(초대형 원유운반선) 8척과 Suezmax(중대형 원유운반선) 10척 등 현대식 탱커 18척을 굴려 정유·트레이딩 업체에 원유 운송 서비스를 파는 해운사다. 선박을 단기 시장운임(스팟)과 기간 용선 계약으로 빌려주고 일일 용선료(TCE)를 받는 구조라, 운임이 오르면 매출과 이익이 거의 그대로 불어난다.
+
+업황이 좋을 때 순이익의 약 90%를 배당으로 돌려주는 정책을 앞세워 같은 탱커 선사인 Scorpio Tankers 등과 경쟁한다. 선단 인도가 마무리되며 1년 전 14척에서 18척으로 늘었고, 2분기에 사상 최대 실적을 낸 점이 최근 전환점이다.</div></div>
+<div class="card"><b>상승 동력 진단</b><div class="section-body">2분기에 EPS $5.91(추정 $4.41)과 매출·EBITDA 사상 최고치를 기록하고 주당 $5.25 배당을 지급하면서 탱커 운임 강세가 이익으로 확인됐다. 이후 3분기 VLCC 약 48%가 일 $207,000에 선계약됐다는 보도가 나오며 8월 이후 주가가 약 45% 올랐다.
+
+3분기 선계약 운임이 2분기 TCE에 근접해 실적 동력은 살아 있지만, Suezmax 스팟 약화와 호르무즈 물동량 회복 둔화는 감시할 신호다. Q3 실적과 배당 공시가 11-12에 나왔으나 수치는 확인하지 못해, 전일 판단을 바꿀 새 사실은 없다.</div></div>
+<div class="card"><b>카탈리스트</b><div class="section-body">2026-11-11 장마감 후 Q3 실적 발표(11-12 06:15 헤드라인으로 게재 확인, 수치는 미확인) / 11-12 14:30 CET 웹캐스트 / Q3 배당 공시(11-12 헤드라인) 및 연말 누적 배당 $10억 목표 달성 여부</div></div>
+<div class="card"><b>🤖 돌파 적합도 (AI 의견) · 매수 가능 · 돌파 적합도 72/100</b><div class="section-body"><div style="font-weight:600;margin-top:8px">업종 1위 주도주, 실적 가속 속 운임 조정이 변수</div><div style="margin-top:8px"><b>① 주도주 여부</b> <span class="dim">[좋음]</span> RS(최근 1년 주가 흐름의 전체 순위)는 상위 3%이고, 최근 52주 수익률은 +193%로 전체 상위 1%입니다. 강세 업종(해운)에서 업종 내 RS 1위이며, 최근 4주만 조정(-10%)을 받았습니다. 상장 약 3.2년, 시가총액은 $3.4B입니다.</div><div style="margin-top:8px"><b>② 가격 패턴</b> VCP(돌파 전 변동 폭이 줄어드는 수축 패턴)는 미통과이고, 수축은 3번이었으며 폭은 18%에서 마지막 8.6%로 줄었습니다. 피벗(돌파 기준가) $86.24보다 현재가가 0.6% 낮습니다. 52주 고가보다 16% 낮고, 50일·200일 평균선 위에서 정배열입니다.</div><div style="margin-top:8px"><b>③ 거래량</b> 수축 구간 거래량은 평소와 비슷하거나 더 많았습니다. 11월 11일 거래량은 직전 50거래일 평균의 0.91배였습니다.</div><div style="margin-top:8px"><b>④ 수급</b> <span class="dim">[보통]</span> 공매도 잔고 비율은 유통주의 6.3%로 직전월 대비 53% 늘었습니다. 기관 보유 비율은 31%이나 분기 지연 공시라 참고용입니다. 일별 기관 매매 방향은 확인되지 않았습니다.</div><div style="margin-top:8px"><b>⑤ 실적·전망</b> <span class="dim">[좋음]</span> 최근 4개 분기 모두 시장 예상을 크게 웃돌았고, 8월 4일 발표 분기에는 주당순이익 5.91로 예상보다 34% 높았습니다. 올해 이익 전망치는 90일 전보다 크게 올랐고 최근 30일은 상향 1명, 하향 0명입니다. 11월 11일 장마감 후 3분기 실적이 발표됐으나 수치는 확인되지 않았고, 시장은 직전 분기보다 낮은 이익을 예상했습니다.</div><div style="margin-top:8px"><b>⑥ 공시·물량 부담</b> <span class="dim">[보통]</span> 최근 90일 공시는 6-K(해외기업 수시 보고) 2건과 내부자 거래 보고 2건이며, 8-K(미국 수시 공시)는 없었습니다. 증자 등 물량 부담은 확인되지 않았습니다. 결격 사유 검토에서는 회피 대상이 아니라고 판정됐습니다.</div><div style="margin-top:8px"><b>⑦ 증권사 평가</b> <span class="dim">[보통]</span> 커버 애널리스트는 1명이고 평균 목표가는 $100.00으로 현재가보다 17% 높습니다. 최근 60일 등급 변경은 순증 0입니다. 커버리지가 적은 것은 중립 사실로 봅니다.</div><div style="margin-top:8px"><b>⑧ 뉴스·재료</b> <span class="dim">[보통]</span> 선단 18척(VLCC 8척·Suezmax 10척)이 완전 인도됐고, 2분기 사상 최대 실적과 주당 $5.25 배당(순이익의 약 90%)이 주가를 이끌었습니다. 3분기 VLCC 약 48%가 일 $207,000 수준으로 선계약됐으나, 검색에서 10~11월 VLCC 현물 운임이 고점에서 큰 폭 조정됐다는 보도와 2027년 신조선 인도 증가 우려가 확인됐습니다. 운임은 역사적 고수준이라 논지는 유지되지만, 3분기 실제 수치는 확인되지 않았습니다.</div><div style="margin-top:8px"><b>⑨ 시장 환경</b> 미장 진입 경보 1/4단계입니다. 이 점수에는 반영하지 않았습니다.</div></div></div>
+
+
+
+<div class="dim" style="font-size:0.7rem;margin-top:12px">
+예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
+<div class="footer">MacTrader auto-journal</div>
+<style>.mtc-slot{margin:14px 0 4px;}.mtc-slot .mtc-fb{font-size:12px;color:var(--dim);padding:4px 0;}</style>
+<link rel="stylesheet" href="https://jochan85-bot.github.io/mt-charts/assets/mtchart.v1.css">
+<script src="https://jochan85-bot.github.io/mt-charts/assets/mtchart.v1.js" id="mtc-js" defer></script>
+<script>
+(function(){
+  try{
+    var FAIL='차트를 불러오지 못했습니다.';
+    function fb(s){s.setAttribute('data-mtc','0');s.innerHTML='<div class="mtc-fb"></div>';s.firstChild.textContent=FAIL;}
+    function J(s,k){try{var v=s.getAttribute(k);return v?JSON.parse(v):undefined;}catch(e){return undefined;}}
+    function run(failed){
+      var ss=document.querySelectorAll('.mtc-slot[data-mtc-ticker]');
+      for(var i=0;i<ss.length;i++){
+        var s=ss[i]; if(s.getAttribute('data-mtc'))continue;
+        if(!failed&&window.MTChart&&window.MTChart.mount){
+          s.setAttribute('data-mtc','1');
+          try{window.MTChart.mount(s,{market:s.getAttribute('data-mtc-market'),ticker:s.getAttribute('data-mtc-ticker'),pivot:s.getAttribute('data-mtc-pivot'),markers:J(s,'data-mtc-markers'),focus:J(s,'data-mtc-focus'),range:'y1'});}catch(e){fb(s);}
+        }else{fb(s);}
+      }
+    }
+    var js=document.getElementById('mtc-js');
+    if(js){
+      js.addEventListener('load',function(){try{run(!window.MTChart);}catch(e){}});
+      js.addEventListener('error',function(){try{run(true);}catch(e){}});
+    }else{run(true);}
+  }catch(e){}
+})();
+</script>
+</body></html>
