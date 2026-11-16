@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>CHYM — 매매일지</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+/* [CARD-FMT-20260901] 모바일 겹침 수리 — 절대배치 폐기, 헤더 flex 2열.
+   구 구조: .rt 가 position:absolute(top:10 right:12) 3단 스택(≈72px)인데 회피용
+   padding-right 는 .l1 에만 있었다. .rt 가 .l2 를 지나 .l3 까지 내려오고 .l3/.l4 는
+   카드 우변까지 차므로 그 아래로 파고들었다(실측 rt 588~660 / l3 645~668, 우변 동일).
+   신 구조: .rt 를 정상 흐름에 넣어 겹침을 구조적으로 불가능하게 만든다.
+   → padding-right 회피값 자체가 불필요. 320·360·390·414·480px 전폭 겹침 0 실측. */
+.hd { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.hl { flex:1 1 auto; min-width:0; }   /* min-width:0 = 긴 종목명이 .rt 를 밀지 못하게 */
+.l1 { padding-right:0; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400;
+      display:inline-block; max-width:100%; overflow:hidden;
+      text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:static; flex:0 0 auto; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; row-gap:5px; margin-top:6px;
+      flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+/* [JOURNAL-REVAMP-20260905 §7] 위 뱃지 폭을 따라 늘어나지 않게 fit-content + 우측 정렬 */
+.rt .ev { display:block; width:fit-content; margin:2px 0 0 auto; }
+/* [CARD-FMT-20260901] 지표 칩 — 리포트 .g 칩과 같은 어법(라벨 dim + 값 bold + 색점) */
+.chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
+        border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
+        color:#cbd0de; background:#161923; white-space:nowrap; }
+.chip i { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:#4b5163; }
+.chip em { font-style:normal; color:var(--dim); }
+.chip b { font-weight:700; }
+.chip.fail { border-color:#7f1d1d; background:#1d1113; }
+.chip.fail b { color:#f87171; }
+.chip.na b, .chip.na em { color:#9ca3af; }
+.chip.na i { background:#4b5163; }
+@media (max-width:520px) {
+  .chip { font-size:0.68rem; padding:1px 6px; gap:3px; }
+  .l3 { gap:5px; }
+  .rt { font-size:0.92rem; }
+}
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+</style></head>
+<body>
+<div class="dim"><a href="../index.html">← 매매일지</a></div>
+<h1>CHYM ☀️ <span class="dim" style="font-size:1rem">차임 파이낸셜</span></h1>
+<div><span class="badge open">보유중</span> <span class="badge us">US</span> <span style="font-size:0.8rem;padding:2px 6px;border-radius:4px;background:#1E293B;color:#94A3B8">Stage2 (0.24yr, B1)</span></div>
+
+<div class="card">
+평균 매수가 <b>$34.21</b> <span class="dim" title="브로커 이동평균 기준 [U56-CORRECT-20260922 §4-4]">· 브로커 평단 <b>$34.21</b></span>
+
+· 수익률 <span class="neg">-0.03%</span> <span class="dim">(브로커 평단 · 전기간 평균 <span class="neg">-0.03%</span>)</span>
+· 보유 58주
+<div style="margin-top:6px">리포트 AI 판단: <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#2ecc71;color:#fff;font-size:0.8rem;font-weight:700">매수 고려</span> <span class="dim">AI score 78/100 · 패스1 매수 가능 conv 6점 (20261114 기준)</span></div>
+<div style="margin-top:6px">거래량: <span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.48x">예측 1.63x → 확정 —</span></div>
+<div class="dim">2026-11-17 진입</div><div class="dim" style="margin-top:6px">진입가 34.21 vs MA50 29.94 (+14.3%)</div>
+</div>
+
+<div class="mtc-slot" data-mtc-market="US" data-mtc-ticker="CHYM" data-mtc-pivot="33.83" data-mtc-markers="[{&quot;date&quot;:&quot;2026-11-16&quot;,&quot;side&quot;:&quot;buy&quot;,&quot;price&quot;:34.21}]" data-mtc-focus="{&quot;from&quot;:&quot;2026-08-16&quot;,&quot;to&quot;:&quot;2026-11-16&quot;}"></div>
+<h2>거래 타임라인</h2>
+<div class="timeline"><div class="tl-item buy">
+<b>매수</b> · 58주 @ $34.21
+<div class="dim">2026-11-17 00:08 </div>
+</div></div>
+
+<h2>📋 진입 전 기업 리포트 <span class="dim" style="font-size:0.8rem;font-weight:400">(2026-11-13 기준)</span></h2>
+<div class="card"><b>기업 개요</b><div class="section-body">Chime Financial은 수수료 없는 모바일 체크계좌·직불카드를 미국 소비자에게 제공하고, 월급 선지급 서비스 MyPay·Instant Loans·SpotMe 같은 소액 유동성 상품으로 수익을 내는 핀테크 회사다. 결제 때 발생하는 수수료(결제 매출)와 대출·플랫폼 이용 수익(플랫폼 관련 매출)이 두 축이며, 활성 회원 1,090만 명을 개인(B2C) 중심으로 확보한 구조다.
+
+전통 은행의 낮은 문턱 부재와 높은 수수료를 파고드는 디지털 은행이라는 위치에서 경쟁하며, 최근에는 대출 상품이 결제보다 빠르게 성장하며 전환점을 맞고 있다. 3분기 플랫폼 관련 매출은 52% 증가한 2.74억 달러로 결제 매출 22% 증가를 크게 웃돌았고, Stride Bank 인수(2027년 상반기 종료 목표)로 자체 은행 기반 확보를 추진하는 중이다.</div></div>
+<div class="card"><b>상승 동력 진단</b><div class="section-body">2026년 11월 4일 3분기 매출이 32% 증가한 7.18억 달러로 2분기 27%에서 가속하고 3분기 연속 GAAP 흑자를 기록하며 주가 동력이 형성됐다. 여기에 연간 가이던스 상향과 Stride Bank 5.9억 달러 인수에 대한 애널리스트 호평이 더해졌다.
+
+실적 발표 이후에도 EPS 추정치 상향(7일 전 0.469에서 현재 0.522)과 &#x27;RS 라인 신고점 근접&#x27; 기사가 이어져 동력은 살아 있다. 다만 신용 손실과 희석이 약점이라 소비 지표 악화 시 내러티브가 흔들릴 수 있다.</div></div>
+<div class="card"><b>카탈리스트</b><div class="section-body">2027-01~02 4분기 실적 발표(추정 2027-02-24), 4분기 매출 가이던스 7.57억~7.67억 달러 달성 여부, Stride Bank 인수 규제 승인 및 2027년 상반기 종료</div></div>
+<div class="card"><b>🤖 돌파 적합도 (AI 의견) · 매수 고려 · 돌파 적합도 78/100</b><div class="section-body"><div style="font-weight:600;margin-top:8px">실적 가속과 강한 주가 흐름을 갖춘 주도주</div><div style="margin-top:8px"><b>① 주도주 여부</b> <span class="dim">[좋음]</span> RS(최근 1년 주가 흐름의 전체 순위)가 상위 9%이고, 가장 긴 상승 구간인 최근 25주 수익률은 상위 2%입니다. 소프트웨어 업종은 강세 업종에 속하고, 업종 안에서는 중상위권입니다. 상장 후 약 1.4년 된 종목이며 시가총액은 $12.9B입니다.</div><div style="margin-top:8px"><b>② 가격 패턴</b> VCP(돌파 전 변동 폭이 줄어드는 수축 패턴) 기준은 통과하지 못했지만, 5번의 수축에서 폭이 점차 줄어드는 형태입니다. 현재가는 피벗(돌파 기준가)보다 0.8% 낮고 52주 고가보다 5.6% 낮습니다. 주가는 50일·200일 평균선 위에 있고 50일선이 200일선 위에 있는 정배열입니다.</div><div style="margin-top:8px"><b>③ 거래량</b> 수축 구간의 거래량은 평소보다 크게 줄었습니다. 11월 13일 거래량은 직전 50거래일 평균의 1.16배였습니다.</div><div style="margin-top:8px"><b>④ 수급</b> <span class="dim">[보통]</span> 공매도 잔고는 유통주의 8.1%이고 직전월보다 줄었습니다. 기관 보유 비율은 95%로 높지만 분기 지연 공시라 참고로만 봅니다. 일별 기관 순매수는 확인되지 않았습니다.</div><div style="margin-top:8px"><b>⑤ 실적·전망</b> <span class="dim">[좋음]</span> 3분기 매출은 전년보다 32% 늘었고 3분기 연속 흑자를 냈습니다. 매출과 EPS(주당순이익) 모두 추정치를 웃돌았고 연간 가이던스를 상향했습니다. 올해와 내년 EPS 추정치도 계속 상향되고 있습니다.</div><div style="margin-top:8px"><b>⑥ 공시·물량 부담</b> <span class="dim">[보통]</span> 최근 90일간 증자 관련 서류는 접수되지 않았습니다. 내부자 관련 공시(Form 4·Form 144)가 많지만 구체 규모와 성격은 확인되지 않았습니다. 패스1 결격 사유 검토는 회피 아님으로 나왔고, 희석 주식 수는 전년보다 늘었습니다.</div><div style="margin-top:8px"><b>⑦ 증권사 평가</b> <span class="dim">[좋음]</span> 커버 애널리스트는 21명이고 컨센서스는 강력 매수입니다. 평균 목표가와 현재가의 괴리는 25%입니다. 최근 60일 등급 변경은 소폭 상향 우위입니다.</div><div style="margin-top:8px"><b>⑧ 뉴스·재료</b> <span class="dim">[좋음]</span> 11월 4일 실적에서 대출 부문(MyPay 등) 성장이 매출 증가를 이끌었고, 이어진 추정치 상향 기사가 주가를 받치고 있습니다. Stride Bank 인수는 규제 승인을 전제로 2027년 상반기 종료를 예상하며 애널리스트 반응은 호의적입니다. 핀테크·결제 테마에서는 후발이고, 신용충당금 증가가 부담이지만 논지를 훼손할 사실은 확인되지 않았습니다.</div><div style="margin-top:8px"><b>⑨ 시장 환경</b> 미장 진입 경보 3/4단계입니다. 이 점수에는 반영하지 않았습니다.</div><div style="margin-top:8px"><b>⑩ 종합·주의할 점</b> 돌파 거래량이 붙는다면 이후 상승 여력이 좋은 주도주로 판단합니다. 강한 상대강도와 강세 업종, 매출 가속·가이던스 상향·추정치 상향이 같은 방향이라 동력이 살아 있습니다. 실적 발표 뒤 주가 상승분이 유지되고 있어 시장의 신뢰도 확인됩니다. 가장 큰 리스크는 대출 확대에 따른 신용 손실 부담과 희석 주식 수 증가, 그리고 Stride 인수의 규제 승인 불확실성입니다. 매수는 거래량이 동반된 돌파가 확인될 때만 하고, 손절선(진입가 대비 −8%)은 시스템이 관리합니다.</div></div></div>
+
+
+
+<div class="dim" style="font-size:0.7rem;margin-top:12px">
+예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
+<div class="footer">MacTrader auto-journal</div>
+<style>.mtc-slot{margin:14px 0 4px;}.mtc-slot .mtc-fb{font-size:12px;color:var(--dim);padding:4px 0;}</style>
+<link rel="stylesheet" href="https://jochan85-bot.github.io/mt-charts/assets/mtchart.v1.css">
+<script src="https://jochan85-bot.github.io/mt-charts/assets/mtchart.v1.js" id="mtc-js" defer></script>
+<script>
+(function(){
+  try{
+    var FAIL='차트를 불러오지 못했습니다.';
+    function fb(s){s.setAttribute('data-mtc','0');s.innerHTML='<div class="mtc-fb"></div>';s.firstChild.textContent=FAIL;}
+    function J(s,k){try{var v=s.getAttribute(k);return v?JSON.parse(v):undefined;}catch(e){return undefined;}}
+    function run(failed){
+      var ss=document.querySelectorAll('.mtc-slot[data-mtc-ticker]');
+      for(var i=0;i<ss.length;i++){
+        var s=ss[i]; if(s.getAttribute('data-mtc'))continue;
+        if(!failed&&window.MTChart&&window.MTChart.mount){
+          s.setAttribute('data-mtc','1');
+          try{window.MTChart.mount(s,{market:s.getAttribute('data-mtc-market'),ticker:s.getAttribute('data-mtc-ticker'),pivot:s.getAttribute('data-mtc-pivot'),markers:J(s,'data-mtc-markers'),focus:J(s,'data-mtc-focus'),range:'y1'});}catch(e){fb(s);}
+        }else{fb(s);}
+      }
+    }
+    var js=document.getElementById('mtc-js');
+    if(js){
+      js.addEventListener('load',function(){try{run(!window.MTChart);}catch(e){}});
+      js.addEventListener('error',function(){try{run(true);}catch(e){}});
+    }else{run(true);}
+  }catch(e){}
+})();
+</script>
+</body></html>
