@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>📓 매매일지 · 재매수 대상</title><style>
+:root { --bg:#0f1117; --card:#1a1d27; --border:#2a2e3d; --text:#e2e5ee;
+        --dim:#8b90a3; --green:#4ade80; --red:#f87171; --accent:#60a5fa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       max-width:960px; margin:0 auto; padding:24px 16px; line-height:1.6; }
+h1 { font-size:1.5rem; margin-bottom:4px; }
+h2 { font-size:1.15rem; margin:28px 0 12px; color:var(--accent); }
+h3 { font-size:1rem; margin:20px 0 8px; }
+.dim { color:var(--dim); font-size:0.85rem; }
+.card { background:var(--card); border:1px solid var(--border);
+        border-radius:12px; padding:16px 20px; margin:12px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; }
+th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border);
+         font-size:0.9rem; }
+th { color:var(--dim); font-weight:600; cursor:pointer; user-select:none;
+     white-space:nowrap; }
+th:hover { color:var(--accent); }
+tr:hover td { background:rgba(96,165,250,0.05); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pos { color:var(--green); font-weight:600; }
+.neg { color:var(--red); font-weight:600; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px;
+         font-size:0.75rem; font-weight:600; }
+.badge.open { background:rgba(74,222,128,0.15); color:var(--green); }
+.badge.closed { background:rgba(139,144,163,0.15); color:var(--dim); }
+.badge.us { background:rgba(96,165,250,0.15); color:var(--accent); }
+.badge.kr { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.timeline { border-left:2px solid var(--border); padding-left:16px; margin:8px 0; }
+.tl-item { margin-bottom:14px; position:relative; }
+.tl-item::before { content:''; position:absolute; left:-21px; top:6px;
+                   width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.tl-item.sell::before { background:var(--red); }
+.tl-item.buy::before { background:var(--green); }
+.section-body { white-space:pre-wrap; font-size:0.92rem; }
+.empty { text-align:center; padding:60px 20px; color:var(--dim); }
+.footer { margin-top:40px; text-align:center; font-size:0.75rem; color:var(--dim); }
+.table-wrap { overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch; }
+.table-wrap table { margin:0; }
+@media (max-width:520px) {
+  body { padding:14px 8px; }
+  h1 { font-size:1.25rem; }
+  th, td { padding:8px 4px; font-size:0.8rem; }
+  .badge { padding:2px 5px; font-size:0.68rem; }
+  .card { padding:12px 14px; }
+}
+
+/* ── [CARD-UI 2026-08-11] 목록 카드형 전환 (테이블 폐기) ───────────── */
+.fbar { margin:12px 0 4px; }
+.frow { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.flab { font-size:0.68rem; color:#5f6478; width:34px; flex-shrink:0; }
+.fbar button { background:#161923; border:1px solid var(--border); color:var(--dim);
+               border-radius:14px; padding:3px 10px; font-size:0.73rem; font-weight:600;
+               cursor:pointer; }
+.fbar button.on { border-color:var(--accent); color:var(--accent);
+                  background:rgba(96,165,250,0.10); }
+.list { display:grid; grid-template-columns:1fr; gap:8px; margin-top:8px; }
+@media (min-width:720px) { .list { grid-template-columns:1fr 1fr; gap:9px; } }
+.tr { background:var(--card); border:1px solid var(--border); border-radius:11px;
+      padding:10px 12px; position:relative; }
+.tr.hide { display:none; }
+/* [CARD-FMT-20260901] 모바일 겹침 수리 — 절대배치 폐기, 헤더 flex 2열.
+   구 구조: .rt 가 position:absolute(top:10 right:12) 3단 스택(≈72px)인데 회피용
+   padding-right 는 .l1 에만 있었다. .rt 가 .l2 를 지나 .l3 까지 내려오고 .l3/.l4 는
+   카드 우변까지 차므로 그 아래로 파고들었다(실측 rt 588~660 / l3 645~668, 우변 동일).
+   신 구조: .rt 를 정상 흐름에 넣어 겹침을 구조적으로 불가능하게 만든다.
+   → padding-right 회피값 자체가 불필요. 320·360·390·414·480px 전폭 겹침 0 실측. */
+.hd { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.hl { flex:1 1 auto; min-width:0; }   /* min-width:0 = 긴 종목명이 .rt 를 밀지 못하게 */
+.l1 { padding-right:0; }
+.tk { font-weight:700; font-size:1rem; }
+.nm { color:var(--dim); font-size:0.78rem; margin-left:5px; font-weight:400;
+      display:inline-block; max-width:100%; overflow:hidden;
+      text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; }
+.rt { font-size:1rem; white-space:nowrap; text-align:right;
+      position:static; flex:0 0 auto; }
+.l2 { display:flex; align-items:center; gap:6px; margin-top:4px;
+      font-size:0.74rem; color:var(--dim); flex-wrap:wrap; }
+.l3 { display:flex; align-items:center; gap:7px; row-gap:5px; margin-top:6px;
+      flex-wrap:wrap; }
+.l4 { margin-top:5px; padding-top:5px; border-top:1px dashed #232734;
+      font-size:0.68rem; color:#6b7080; }
+.rs { display:inline-block; padding:1px 6px; border-radius:5px; font-size:0.72rem;
+      font-weight:700; background:rgba(96,165,250,0.16); color:#93c5fd; }
+.rs.hi { background:rgba(96,165,250,0.30); color:#dbeafe; }
+.ptag { display:inline-flex; align-items:center; gap:4px; font-size:0.75rem; color:#cbd0de; }
+.ptag i { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ptag b { color:var(--text); }
+.ai { display:inline-block; padding:1px 6px; border-radius:5px;
+      font-size:0.71rem; font-weight:700; color:#111; }
+/* [RVOL-PIVOT 2026-08-13] 진입 활성도 뱃지 (RVOL · 피벗 대비 돌파율) — 수익률 아래 스택 */
+.ev { display:inline-block; margin-left:5px; padding:1px 5px; border-radius:5px;
+      font-size:0.67rem; font-weight:600; white-space:nowrap;
+      background:#171a24; border:1px solid var(--border); color:#8f95a8; }
+.ev.na { color:#5f6478; background:transparent; border-color:transparent; }
+/* [JOURNAL-REVAMP-20260905 §7] 위 뱃지 폭을 따라 늘어나지 않게 fit-content + 우측 정렬 */
+.rt .ev { display:block; width:fit-content; margin:2px 0 0 auto; }
+/* [CARD-FMT-20260901] 지표 칩 — 리포트 .g 칩과 같은 어법(라벨 dim + 값 bold + 색점) */
+.chip { display:inline-flex; align-items:center; gap:4px; padding:1px 7px;
+        border:1px solid var(--border); border-radius:5px; font-size:0.72rem;
+        color:#cbd0de; background:#161923; white-space:nowrap; }
+.chip i { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:#4b5163; }
+.chip em { font-style:normal; color:var(--dim); }
+.chip b { font-weight:700; }
+.chip.fail { border-color:#7f1d1d; background:#1d1113; }
+.chip.fail b { color:#f87171; }
+.chip.na b, .chip.na em { color:#9ca3af; }
+.chip.na i { background:#4b5163; }
+@media (max-width:520px) {
+  .chip { font-size:0.68rem; padding:1px 6px; gap:3px; }
+  .l3 { gap:5px; }
+  .rt { font-size:0.92rem; }
+}
+.nores { text-align:center; padding:26px 10px; color:var(--dim); font-size:0.85rem; }
+
+.nav { display:flex; gap:6px; flex-wrap:wrap; margin:12px 0 4px; }
+.nav .nv { background:#161923; border:1px solid var(--border); color:var(--dim);
+           border-radius:14px; padding:4px 11px; font-size:0.76rem; font-weight:600;
+           text-decoration:none; }
+.nav .nv:hover { color:var(--text); text-decoration:none; }
+.nav .nv.on { border-color:var(--accent); color:var(--accent);
+              background:rgba(96,165,250,0.10); }
+.card.perf { padding:13px 16px; }
+.perf .ph { font-size:0.8rem; color:var(--accent); font-weight:700; margin-bottom:6px; }
+.perf .prow { font-size:0.86rem; display:flex; align-items:center; gap:8px;
+              flex-wrap:wrap; margin-top:3px; }
+.perf .prow .pl { white-space:nowrap; }
+.perf .badge { flex:0 0 auto; }
+.perf .tag { flex:0 0 auto; font-size:0.66rem; font-weight:700; color:var(--dim);
+             border:1px solid var(--border); border-radius:5px; padding:1px 5px; }
+.nav .nvsel { background:#161923; border:1px solid var(--border); color:var(--dim);
+              border-radius:14px; padding:4px 11px; font-size:0.76rem; font-weight:600;
+              -webkit-appearance:none; appearance:none; cursor:pointer; }
+.nav .nvsel.on { border-color:var(--accent); color:var(--accent);
+                 background:rgba(96,165,250,0.10); }
+/* [JOURNAL-REVAMP-20260905 §2] 모바일 실적 행 — 항목 단위로만 줄바꿈되게 축소 */
+@media (max-width:520px) {
+  .perf .prow { font-size:0.78rem; gap:6px; row-gap:3px; }
+}
+
+/* [JOURNAL-CARD-SECTOR-DAYS-20261111] 종목명(업종) 은 말줄임 대신 줄바꿈 — 좁은 화면 잘림 0. 상태 배지는 다음 줄(.l2b). */
+.nm.sx { display:inline; white-space:normal; overflow:visible; text-overflow:clip; word-break:keep-all; overflow-wrap:anywhere; }
+.l2.l2b { margin-top:3px; }
+
+/* [JOURNAL-NAV-SECTOR-20261117-v2] 섹터 칩 — 대섹터(색 채움)·소섹터(옅게). 한 덩어리로 줄바꿈(좁은 화면에서는 종목명 아랫줄 맨 앞). */
+.secw { display:inline-block; white-space:nowrap; margin-left:5px; vertical-align:baseline; }
+.sec1 { display:inline-block; font-size:.68rem; font-weight:700; color:#fff; border-radius:5px; padding:1px 7px; line-height:1.4; }
+.sec2 { display:inline-block; font-size:.66rem; font-weight:500; color:var(--dim); border:1px solid var(--border); border-radius:5px;
+        padding:0 6px; margin-left:3px; line-height:1.4; }
+h1 .secw { margin-left:8px; }
+.gh { margin:12px 2px 2px; font-size:.85rem; font-weight:700; color:var(--accent); }
+</style></head>
+<body>
+<h1>📓 매매일지 · 재매수 대상</h1>
+<div class="dim">청산된 뒤 다시 살 수 있도록 올려 둔 종목</div>
+<div class="nav"><a class="nv" href="index.html">보유중</a><a class="nv" href="all.html">전체 거래</a><select class="nvsel" onchange="if(this.value)location.href=this.value"><option value="">월별 거래 ▾</option><option value="month-2026-11.html">2026.11</option><option value="month-2026-10.html">2026.10</option><option value="month-2026-09.html">2026.09</option></select><a class="nv on" href="rebuy.html">재매수 대상 (0)</a><a class="nv proto" href="prototype.html" style="margin-left:auto">🧪 Prototype</a></div><div class="card"><h2 style="margin:0 0 6px">🔁 재매수 대상 리스트</h2><div class="dim" style="font-size:.72rem;margin-bottom:6px">청산된 뒤 다시 살 수 있도록 올려 둔 종목입니다. 기준선 위로 종가가 올라서면 재진입합니다.</div><div class="dim">대상 없음</div></div>
+<div class="footer">MacTrader auto-journal</div>
+<script>
+const S={mkt:'ALL',st:'ALL',ai:'ALL',mon:'ALL',sort:'date',dir:-1,grp:false};  // dir -1=내림차순 / 1=오름차순
+function setf(g,v,el){S[g]=v;
+  el.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on'); apply();}
+// 같은 정렬 버튼 재클릭 = 방향 토글 / 다른 버튼 = 내림차순부터
+function setsort(v,el){
+  S.grp=false;
+  if(S.sort===v){ S.dir=-S.dir; } else { S.sort=v; S.dir=-1; }
+  el.parentNode.querySelectorAll('button').forEach(b=>{
+    b.classList.remove('on');
+    b.textContent=b.dataset.lab;
+  });
+  el.classList.add('on');
+  el.textContent=el.dataset.lab+(S.dir<0?' ↓':' ↑');
+  apply();
+}
+function apply(){
+  const L=document.getElementById('list'); if(!L) return;
+  const cs=[...L.querySelectorAll('.tr')];
+  let n=0;
+  cs.forEach(c=>{
+    const ok=(S.mkt==='ALL'||c.dataset.mkt===S.mkt)
+          && (S.st==='ALL'||c.dataset.st===S.st)
+          && (S.ai==='ALL'||c.dataset.ai===S.ai)
+          && (S.mon==='ALL'||c.dataset.mon===S.mon);
+    c.classList.toggle('hide',!ok); if(ok) n++;
+  });
+  const num={date:false,ret:true,rs:true,rvol:true,pred:true,conf:true,pivot:true,rev:true,comp:true}[S.sort];
+  const key={date:c=>c.dataset.date,ret:c=>parseFloat(c.dataset.ret),
+             rs:c=>parseFloat(c.dataset.rs),
+             rvol:c=>parseFloat(c.dataset.rvol),
+             pred:c=>parseFloat(c.dataset.pred),
+             conf:c=>parseFloat(c.dataset.conf),
+             pivot:c=>parseFloat(c.dataset.pivot),
+             rev:c=>parseFloat(c.dataset.rev),
+             comp:c=>parseFloat(c.dataset.comp)}[S.sort];
+  cs.sort((a,b)=>{const x=key(a),y=key(b);
+    const r = num ? (x-y) : (x<y?-1:x>y?1:0);
+    return S.dir<0 ? -r : r;});
+  cs.forEach(c=>L.appendChild(c));
+  L.querySelectorAll('.gh').forEach(h=>h.remove());
+  if(S.grp){
+    const ORD=[["it", "IT"], ["healthcare", "헬스케어"], ["comm", "커뮤"], ["financial", "금융"], ["cons-cyclical", "경기소비"], ["cons-defensive", "필수소비"], ["industrial", "산업"], ["materials", "소재"], ["energy", "에너지"], ["utilities", "유틸"], ["realestate", "부동산"], ["unknown", "미분류"]];
+    const byDate=(a,b)=>a.dataset.date<b.dataset.date?1:(a.dataset.date>b.dataset.date?-1:0);
+    ORD.forEach(g=>{
+      const gc=cs.filter(c=>(c.dataset.sec||'unknown')===g[0]).sort(byDate);
+      if(!gc.length) return;
+      const vis=gc.filter(c=>!c.classList.contains('hide')).length;
+      const h=document.createElement('div'); h.className='gh'; h.textContent=g[1]+' · '+vis+'건';
+      if(!vis) h.style.display='none';
+      L.appendChild(h); gc.forEach(c=>L.appendChild(c));
+    });
+  }
+  const nr=document.getElementById('nores'); if(nr) nr.style.display = n?'none':'block';
+}
+
+function togsec(el){
+  const row=el.parentNode;
+  if(S.grp){ S.sort=''; const b=row.querySelector('button[data-lab="매수일"]'); if(b) b.click(); return; }
+  S.grp=true;
+  row.querySelectorAll('button').forEach(b=>{b.classList.remove('on'); b.textContent=b.dataset.lab;});
+  el.classList.add('on'); apply();
+}
+</script>
+</body></html>
