@@ -160,8 +160,10 @@ h1 .secw { margin-left:8px; }
 <h1>📓 매매일지 · 보유중</h1>
 <div class="dim">현재 보유 종목 · 2026-09-07 이후 정상 거래 · Prototype 제외</div>
 <div class="nav"><a class="nv on" href="index.html">보유중</a><a class="nv" href="all.html">전체 거래</a><select class="nvsel" onchange="if(this.value)location.href=this.value"><option value="">월별 거래 ▾</option><option value="month-2026-11.html">2026.11</option><option value="month-2026-10.html">2026.10</option><option value="month-2026-09.html">2026.09</option></select><a class="nv" href="rebuy.html">재매수 대상 (0)</a><a class="nv proto" href="prototype.html" style="margin-left:auto">🧪 Prototype</a></div><div class="card">
-<div class="dim">마지막 갱신: 2026-11-17 17:40 KST</div>
+<div class="dim">마지막 갱신: 2026-11-17 18:54 KST</div>
 </div><div class="fbar">
+ <div class="frow"><span class="flab">섹터</span>
+  <button class="on" onclick="setf('sec','ALL',this)">전체 11</button><button onclick="setf('sec','it',this)">IT 2</button><button onclick="setf('sec','healthcare',this)">헬스케어 7</button><button onclick="setf('sec','comm',this)">커뮤 0</button><button onclick="setf('sec','financial',this)">금융 2</button><button onclick="setf('sec','cons-cyclical',this)">경기소비 0</button><button onclick="setf('sec','cons-defensive',this)">필수소비 0</button><button onclick="setf('sec','industrial',this)">산업 0</button><button onclick="setf('sec','materials',this)">소재 0</button><button onclick="setf('sec','energy',this)">에너지 0</button><button onclick="setf('sec','utilities',this)">유틸 0</button><button onclick="setf('sec','realestate',this)">부동산 0</button><button onclick="setf('sec','unknown',this)">기타 0</button></div>
  <div class="frow"><span class="flab">시장</span>
   <button class="on" onclick="setf('mkt','ALL',this)">전체</button>
   <button onclick="setf('mkt','KR',this)">KR</button>
@@ -181,11 +183,11 @@ h1 .secw { margin-left:8px; }
   <button data-lab="확정량" onclick="setsort('conf',this)">확정량</button>
   <button data-lab="피벗%" onclick="setsort('pivot',this)">피벗%</button>
   <button data-lab="매출감속" onclick="setsort('rev',this)">매출감속</button>
-  <button data-lab="COMP" onclick="setsort('comp',this)">COMP</button><button data-lab="섹터" onclick="togsec(this)">섹터</button></div>
+  <button data-lab="COMP" onclick="setsort('comp',this)">COMP</button></div>
 </div>
 <div class="list" id="list"><div class="tr" data-mkt="US" data-st="open" data-ai="매수 고려"
  data-mon="2026-11"
- data-date="2026-11-17T00:08:12.036604+09:00" data-ret="0.2923121894183029"
+ data-date="2026-11-17T00:08:12.036604+09:00" data-ret="-0.8769365682549086"
  data-rs="91.0"
  data-rvol="3.48"
  data-pred="1.6256"
@@ -196,17 +198,17 @@ h1 .secw { margin-left:8px; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/CHYM_20261117.html"><span class="tk">CHYM ☀️</span></a>
-     <span class="nm sx">차임 파이낸셜</span><span class="secw"><span class="sec1" style="background:#1D4ED8" title="대섹터">IT</span><span class="sec2" title="소섹터">응용SW</span></span></div>
+     <span class="nm sx">차임 파이낸셜</span><span class="secw"><span class="sec1" style="background:#1D4ED8" title="섹터">IT(응용SW)</span></span></div>
    <div class="l2"><span class="badge us">US</span> 26.11.17 (0일 보유)</div>
    <div class="l2 l2b"><span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-17">경과 보유</span> </div>
   </div>
-  <div class="rt"><span class="pos">+0.29%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.48x">예측 1.63x → 확정 —</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.1%</span></div>
+  <div class="rt"><span class="neg">-0.88%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.48x">예측 1.63x → 확정 —</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.1%</span></div>
  </div>
  <div class="l3"><span class="rs hi">RS 91</span><span class="chip" title="원전 COMP 100점 · 최신 관찰값(20261116) — 진입 시점 값 아님 · 판정 무영향"><i style="background:#1E3A8A"></i><em>COMP</em> <b>63.2</b></span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="리포트 2026-11-16 기준"><i></i><em>수축깊이</em> <b>9.8%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.24yr, B1)</b></span><span class="ai" style="background:#2ecc71">AI 고려 78</span><span class="dim" style="font-size:.7rem"> 패스1 가능 6</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 가능"
  data-mon="2026-11"
- data-date="2026-11-11T02:43:51.559925+09:00" data-ret="0.31505196006206854"
+ data-date="2026-11-11T02:43:51.559925+09:00" data-ret="1.5062932020878093"
  data-rs="80.0"
  data-rvol="2.12"
  data-pred="1.6303"
@@ -217,11 +219,11 @@ h1 .secw { margin-left:8px; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/AIZ_20261111.html"><span class="tk">AIZ</span></a>
-     <span class="nm sx">어슈런트</span><span class="secw"><span class="sec1" style="background:#059669" title="대섹터">금융</span><span class="sec2" title="소섹터">손해보험</span></span></div>
+     <span class="nm sx">어슈런트</span><span class="secw"><span class="sec1" style="background:#059669" title="섹터">금융(손해보험)</span></span></div>
    <div class="l2"><span class="badge us">US</span> 26.11.11 (4일 보유)</div>
    <div class="l2 l2b"><span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-17">경과 보유</span> </div>
   </div>
-  <div class="rt"><span class="pos">+0.32%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.12x">예측 1.63x → 확정 1.62x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.3%</span></div>
+  <div class="rt"><span class="pos">+1.51%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.12x">예측 1.63x → 확정 1.62x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.3%</span></div>
  </div>
  <div class="l3"><span class="rs">RS 80</span><span class="chip" title="원전 COMP 100점 · 최신 관찰값(20261116) — 진입 시점 값 아님 · 판정 무영향"><i style="background:#1E3A8A"></i><em>COMP</em> <b>68.6</b></span><span class="chip"><i style="background:#D98E32"></i><em>VCP</em> <b>확장</b></span><span class="chip" title="리포트 2026-11-11 기준"><i></i><em>수축깊이</em> <b>5.3%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.09yr, B3)</b></span><span class="ai" style="background:#f1c40f">AI 가능 74</span><span class="dim" style="font-size:.7rem"> 패스1 가능 7</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
@@ -238,7 +240,7 @@ h1 .secw { margin-left:8px; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/GRDN_20261111.html"><span class="tk">GRDN</span></a>
-     <span class="nm sx">가디언 파마시 서비시스</span><span class="secw"><span class="sec1" style="background:#0891B2" title="대섹터">헬스케어</span><span class="sec2" title="소섹터">의료시설</span></span></div>
+     <span class="nm sx">가디언 파마시 서비시스</span><span class="secw"><span class="sec1" style="background:#0891B2" title="섹터">헬스케어(의료시설)</span></span></div>
    <div class="l2"><span class="badge us">US</span> 26.11.11 (4일 보유)</div>
    <div class="l2 l2b"><span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-17">경과 보유</span> </div>
   </div>
@@ -248,7 +250,7 @@ h1 .secw { margin-left:8px; }
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.22yr, B6)</b></span><span class="ai" style="background:#f1c40f">AI 가능 68</span><span class="dim" style="font-size:.7rem"> 패스1 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 가능"
  data-mon="2026-11"
- data-date="2026-11-10T03:56:27.938618+09:00" data-ret="2.23871131405378"
+ data-date="2026-11-10T03:56:27.938618+09:00" data-ret="1.9533231861998883"
  data-rs="82.0"
  data-rvol="2.25"
  data-pred="1.7841"
@@ -259,17 +261,17 @@ h1 .secw { margin-left:8px; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/PLMR_20261110.html"><span class="tk">PLMR</span></a>
-     <span class="nm sx">팔로마 홀딩스</span><span class="secw"><span class="sec1" style="background:#059669" title="대섹터">금융</span><span class="sec2" title="소섹터">손해보험</span></span></div>
+     <span class="nm sx">팔로마 홀딩스</span><span class="secw"><span class="sec1" style="background:#059669" title="섹터">금융(손해보험)</span></span></div>
    <div class="l2"><span class="badge us">US</span> 26.11.10 (5일 보유)</div>
    <div class="l2 l2b"><span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-17">경과 보유</span> </div>
   </div>
-  <div class="rt"><span class="pos">+2.24%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.25x">예측 1.78x → 확정 1.87x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div>
+  <div class="rt"><span class="pos">+1.95%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.25x">예측 1.78x → 확정 1.87x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.5%</span></div>
  </div>
  <div class="l3"><span class="rs">RS 82</span><span class="chip" title="원전 COMP 100점 · 최신 관찰값(20261116) — 진입 시점 값 아님 · 판정 무영향"><i style="background:#1E3A8A"></i><em>COMP</em> <b>70.4</b></span><span class="chip"><i style="background:#4A7EBB"></i><em>VCP</em> <b>수축</b></span><span class="chip" title="리포트 2026-11-10 기준"><i></i><em>수축깊이</em> <b>8.2%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.31yr, B2)</b></span><span class="ai" style="background:#f1c40f">AI 가능 74</span><span class="dim" style="font-size:.7rem"> 패스1 가능 6</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 고려"
  data-mon="2026-11"
- data-date="2026-11-10T02:43:57.927375+09:00" data-ret="7.072230601642364"
+ data-date="2026-11-10T02:43:57.927375+09:00" data-ret="7.055471761354115"
  data-rs="98.0"
  data-rvol="2.07"
  data-pred="1.6066"
@@ -280,17 +282,17 @@ h1 .secw { margin-left:8px; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/ETON_20261110.html"><span class="tk">ETON</span></a>
-     <span class="nm sx">이턴 파마슈티컬스</span><span class="secw"><span class="sec1" style="background:#0891B2" title="대섹터">헬스케어</span><span class="sec2" title="소섹터">특수제약</span></span></div>
+     <span class="nm sx">이턴 파마슈티컬스</span><span class="secw"><span class="sec1" style="background:#0891B2" title="섹터">헬스케어(특수제약)</span></span></div>
    <div class="l2"><span class="badge us">US</span> 26.11.10 (5일 보유)</div>
    <div class="l2 l2b"><span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-17">경과 보유</span> </div>
   </div>
-  <div class="rt"><span class="pos">+7.07%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.07x">예측 1.61x → 확정 2.11x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.8%</span></div>
+  <div class="rt"><span class="pos">+7.06%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.07x">예측 1.61x → 확정 2.11x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+1.8%</span></div>
  </div>
  <div class="l3"><span class="rs hi">RS 98</span><span class="chip" title="원전 COMP 100점 · 최신 관찰값(20261116) — 진입 시점 값 아님 · 판정 무영향"><i style="background:#1E3A8A"></i><em>COMP</em> <b>52.5</b></span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="리포트 2026-11-10 기준"><i></i><em>수축깊이</em> <b>10.7%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.74yr, B1)</b></span><span class="ai" style="background:#2ecc71">AI 고려 84</span><span class="dim" style="font-size:.7rem"> 패스1 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 가능"
  data-mon="2026-11"
- data-date="2026-11-07T02:03:59.326889+09:00" data-ret="5.136050449608785"
+ data-date="2026-11-07T02:03:59.326889+09:00" data-ret="4.806726614504273"
  data-rs="88.0"
  data-rvol="2.74"
  data-pred="1.8343"
@@ -301,17 +303,17 @@ h1 .secw { margin-left:8px; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/HUM_20261107.html"><span class="tk">HUM</span></a>
-     <span class="nm sx">휴매나</span><span class="secw"><span class="sec1" style="background:#0891B2" title="대섹터">헬스케어</span><span class="sec2" title="소섹터">건강보험</span></span></div>
+     <span class="nm sx">휴매나</span><span class="secw"><span class="sec1" style="background:#0891B2" title="섹터">헬스케어(건강보험)</span></span></div>
    <div class="l2"><span class="badge us">US</span> 26.11.07 (6일 보유)</div>
    <div class="l2 l2b"><span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-17">경과 보유</span> </div>
   </div>
-  <div class="rt"><span class="pos">+5.14%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.74x">예측 1.83x → 확정 1.98x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.3%</span></div>
+  <div class="rt"><span class="pos">+4.81%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.74x">예측 1.83x → 확정 1.98x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.3%</span></div>
  </div>
  <div class="l3"><span class="rs">RS 88</span><span class="chip" title="원전 COMP 100점 · 최신 관찰값(20261116) — 진입 시점 값 아님 · 판정 무영향"><i style="background:#1E3A8A"></i><em>COMP</em> <b>55.7</b></span><span class="chip"><i style="background:#6B8E9F"></i><em>VCP</em> <b>플랫</b></span><span class="chip" title="리포트 2026-11-06 기준"><i></i><em>수축깊이</em> <b>7.8%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.44yr, B2)</b></span><span class="ai" style="background:#f1c40f">AI 가능 68</span><span class="dim" style="font-size:.7rem"> 패스1 가능 7</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 가능"
  data-mon="2026-11"
- data-date="2026-11-07T00:08:20.909433+09:00" data-ret="20.78674020369661"
+ data-date="2026-11-07T00:08:20.909433+09:00" data-ret="20.714456098248547"
  data-rs="96.0"
  data-rvol="3.56"
  data-pred="1.6408"
@@ -322,11 +324,11 @@ h1 .secw { margin-left:8px; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/XERS_20261107.html"><span class="tk">XERS</span></a>
-     <span class="nm sx">제리스 바이오파마</span><span class="secw"><span class="sec1" style="background:#0891B2" title="대섹터">헬스케어</span><span class="sec2" title="소섹터">특수제약</span></span></div>
+     <span class="nm sx">제리스 바이오파마</span><span class="secw"><span class="sec1" style="background:#0891B2" title="섹터">헬스케어(특수제약)</span></span></div>
    <div class="l2"><span class="badge us">US</span> 26.11.07 (6일 보유)</div>
    <div class="l2 l2b"><span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-17">경과 보유</span> </div>
   </div>
-  <div class="rt"><span class="pos">+20.79%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.56x">예측 1.64x → 확정 2.84x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div>
+  <div class="rt"><span class="pos">+20.71%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" style="color:#fb923c;font-weight:700" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 3.56x">예측 1.64x → 확정 2.84x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.4%</span></div>
  </div>
  <div class="l3"><span class="rs hi">RS 96</span><span class="chip na" title="원전 COMP 100점 · 최신 관찰값(20261116) — 진입 시점 값 아님 · 판정 무영향 · 결측: 컨센서스부재 · NA = 부정 신호 아님(D16)"><i></i><em>COMP</em> <b>NA</b></span><span class="chip"><i style="background:#7B5EA7"></i><em>VCP</em> <b>눌림</b></span><span class="chip" title="리포트 2026-11-06 기준"><i></i><em>수축깊이</em> <b>8.0%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>안마름</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (0.32yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 74</span><span class="dim" style="font-size:.7rem"> 패스1 가능 6</span><span class="chip na" title="no_revenue_stage(avail=3)"><i></i><em>매출 감속</em> <b>NA</b></span></div>
@@ -343,7 +345,7 @@ h1 .secw { margin-left:8px; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/CON_20261105.html"><span class="tk">CON</span></a>
-     <span class="nm sx">콘센트라 그룹 홀딩스</span><span class="secw"><span class="sec1" style="background:#0891B2" title="대섹터">헬스케어</span><span class="sec2" title="소섹터">의료시설</span></span></div>
+     <span class="nm sx">콘센트라 그룹 홀딩스</span><span class="secw"><span class="sec1" style="background:#0891B2" title="섹터">헬스케어(의료시설)</span></span></div>
    <div class="l2"><span class="badge us">US</span> 26.11.05 (8일 보유)</div>
    <div class="l2 l2b"><span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-17">경과 보유</span> </div>
   </div>
@@ -364,7 +366,7 @@ h1 .secw { margin-left:8px; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/REPL_20261103.html"><span class="tk">REPL ☀️</span></a>
-     <span class="nm sx">레플리뮨 그룹</span><span class="secw"><span class="sec1" style="background:#0891B2" title="대섹터">헬스케어</span><span class="sec2" title="소섹터">바이오</span></span></div>
+     <span class="nm sx">레플리뮨 그룹</span><span class="secw"><span class="sec1" style="background:#0891B2" title="섹터">헬스케어(바이오)</span></span></div>
    <div class="l2"><span class="badge us">US</span> 26.11.03 (10일 보유)</div>
    <div class="l2 l2b"><span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-17">경과 보유</span> </div>
   </div>
@@ -385,7 +387,7 @@ h1 .secw { margin-left:8px; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/RPRX_20261017.html"><span class="tk">RPRX</span></a>
-     <span class="nm sx">로열티 파마</span><span class="secw"><span class="sec1" style="background:#0891B2" title="대섹터">헬스케어</span><span class="sec2" title="소섹터">바이오</span></span></div>
+     <span class="nm sx">로열티 파마</span><span class="secw"><span class="sec1" style="background:#0891B2" title="섹터">헬스케어(바이오)</span></span></div>
    <div class="l2"><span class="badge us">US</span> 26.10.17 (21일 보유)</div>
    <div class="l2 l2b"><span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-17">경과 보유</span> </div>
   </div>
@@ -395,7 +397,7 @@ h1 .secw { margin-left:8px; }
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.72yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 66</span><span class="dim" style="font-size:.7rem"> 패스1 가능 6</span><span class="chip"><i style="background:#4ade80"></i><em>매출 감속</em> <b>X</b></span></div>
 </div><div class="tr" data-mkt="US" data-st="open" data-ai="매수 가능"
  data-mon="2026-10"
- data-date="2026-10-15T23:42:59.710365+09:00" data-ret="9.243252748153253"
+ data-date="2026-10-15T23:42:59.710365+09:00" data-ret="9.516403559837967"
  data-rs="96.0"
  data-rvol="2.83"
  data-pred="1.6227"
@@ -406,11 +408,11 @@ h1 .secw { margin-left:8px; }
  <div class="hd">
   <div class="hl">
    <div class="l1"><a href="stocks/GCT_20261015.html"><span class="tk">GCT</span></a>
-     <span class="nm sx">기가클라우드 테크놀로지</span><span class="secw"><span class="sec1" style="background:#1D4ED8" title="대섹터">IT</span><span class="sec2" title="소섹터">인프라SW</span></span></div>
+     <span class="nm sx">기가클라우드 테크놀로지</span><span class="secw"><span class="sec1" style="background:#1D4ED8" title="섹터">IT(인프라SW)</span></span></div>
    <div class="l2"><span class="badge us">US</span> 26.10.15 (22일 보유)</div>
    <div class="l2 l2b"><span class="badge open">보유중</span> <span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(74,222,128,0.15);color:#4ade80" title="보유 종목 경과 기록 · 마지막 점검 2026-11-17">경과 보유</span> </div>
   </div>
-  <div class="rt"><span class="pos">+9.24%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.83x">예측 1.62x → 확정 1.79x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div>
+  <div class="rt"><span class="pos">+9.52%</span><span class="ev dim" style="font-size:.62rem" title="현재 브로커 평단">브로커 평단</span><span class="ev" title="예측 EOD 배수 → D+1 확정 EOD 배수 (B2 예측기 v1.2) · 중간값(RVOL) 2.83x">예측 1.62x → 확정 1.79x</span><span class="ev" title="피벗 대비 진입 돌파율">피벗+0.6%</span></div>
  </div>
  <div class="l3"><span class="rs hi">RS 96</span><span class="chip" title="원전 COMP 100점 · 최신 관찰값(20261116) — 진입 시점 값 아님 · 판정 무영향"><i style="background:#1E3A8A"></i><em>COMP</em> <b>67.3</b></span><span class="chip"><i style="background:#8B6F4E"></i><em>VCP</em> <b>수축이탈</b></span><span class="chip" title="리포트 2026-10-15 기준"><i></i><em>수축깊이</em> <b>11.1%</b></span><span class="chip"><i style="background:#5C6B7A"></i><em>거래량</em> <b>중간</b></span></div>
  <div class="l4"><span class="chip"><i></i><em>Stage</em> <b>Stage2 (1.19yr, B1)</b></span><span class="ai" style="background:#f1c40f">AI 가능 72</span><span class="dim" style="font-size:.7rem"> 패스1 가능 7</span><span class="chip fail"><i style="background:#f87171"></i><em>매출 감속</em> <b>O</b></span></div>
@@ -425,13 +427,12 @@ VCP 패턴·수축깊이·거래량·Stage = 관찰 태그 (매매 판정 무관
 예측·확정배수는 2026-09-04 이전 진입분의 경우 당시 기록된 상대거래량으로 소급 산출한 값.</div>
 <div class="footer">MacTrader auto-journal</div>
 <script>
-const S={mkt:'ALL',st:'ALL',ai:'ALL',mon:'ALL',sort:'date',dir:-1,grp:false};  // dir -1=내림차순 / 1=오름차순
+const S={mkt:'ALL',st:'ALL',ai:'ALL',mon:'ALL',sec:'ALL',sort:'date',dir:-1};  // dir -1=내림차순 / 1=오름차순
 function setf(g,v,el){S[g]=v;
   el.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));
   el.classList.add('on'); apply();}
 // 같은 정렬 버튼 재클릭 = 방향 토글 / 다른 버튼 = 내림차순부터
 function setsort(v,el){
-  S.grp=false;
   if(S.sort===v){ S.dir=-S.dir; } else { S.sort=v; S.dir=-1; }
   el.parentNode.querySelectorAll('button').forEach(b=>{
     b.classList.remove('on');
@@ -449,7 +450,8 @@ function apply(){
     const ok=(S.mkt==='ALL'||c.dataset.mkt===S.mkt)
           && (S.st==='ALL'||c.dataset.st===S.st)
           && (S.ai==='ALL'||c.dataset.ai===S.ai)
-          && (S.mon==='ALL'||c.dataset.mon===S.mon);
+          && (S.mon==='ALL'||c.dataset.mon===S.mon)
+          && (S.sec==='ALL'||(c.dataset.sec||'unknown')===S.sec);
     c.classList.toggle('hide',!ok); if(ok) n++;
   });
   const num={date:false,ret:true,rs:true,rvol:true,pred:true,conf:true,pivot:true,rev:true,comp:true}[S.sort];
@@ -465,28 +467,7 @@ function apply(){
     const r = num ? (x-y) : (x<y?-1:x>y?1:0);
     return S.dir<0 ? -r : r;});
   cs.forEach(c=>L.appendChild(c));
-  L.querySelectorAll('.gh').forEach(h=>h.remove());
-  if(S.grp){
-    const ORD=[["it", "IT"], ["healthcare", "헬스케어"], ["comm", "커뮤"], ["financial", "금융"], ["cons-cyclical", "경기소비"], ["cons-defensive", "필수소비"], ["industrial", "산업"], ["materials", "소재"], ["energy", "에너지"], ["utilities", "유틸"], ["realestate", "부동산"], ["unknown", "미분류"]];
-    const byDate=(a,b)=>a.dataset.date<b.dataset.date?1:(a.dataset.date>b.dataset.date?-1:0);
-    ORD.forEach(g=>{
-      const gc=cs.filter(c=>(c.dataset.sec||'unknown')===g[0]).sort(byDate);
-      if(!gc.length) return;
-      const vis=gc.filter(c=>!c.classList.contains('hide')).length;
-      const h=document.createElement('div'); h.className='gh'; h.textContent=g[1]+' · '+vis+'건';
-      if(!vis) h.style.display='none';
-      L.appendChild(h); gc.forEach(c=>L.appendChild(c));
-    });
-  }
   const nr=document.getElementById('nores'); if(nr) nr.style.display = n?'none':'block';
-}
-
-function togsec(el){
-  const row=el.parentNode;
-  if(S.grp){ S.sort=''; const b=row.querySelector('button[data-lab="매수일"]'); if(b) b.click(); return; }
-  S.grp=true;
-  row.querySelectorAll('button').forEach(b=>{b.classList.remove('on'); b.textContent=b.dataset.lab;});
-  el.classList.add('on'); apply();
 }
 </script>
 </body></html>

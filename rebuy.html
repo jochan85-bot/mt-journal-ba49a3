@@ -162,13 +162,12 @@ h1 .secw { margin-left:8px; }
 <div class="nav"><a class="nv" href="index.html">보유중</a><a class="nv" href="all.html">전체 거래</a><select class="nvsel" onchange="if(this.value)location.href=this.value"><option value="">월별 거래 ▾</option><option value="month-2026-11.html">2026.11</option><option value="month-2026-10.html">2026.10</option><option value="month-2026-09.html">2026.09</option></select><a class="nv on" href="rebuy.html">재매수 대상 (0)</a><a class="nv proto" href="prototype.html" style="margin-left:auto">🧪 Prototype</a></div><div class="card"><h2 style="margin:0 0 6px">🔁 재매수 대상 리스트</h2><div class="dim" style="font-size:.72rem;margin-bottom:6px">청산된 뒤 다시 살 수 있도록 올려 둔 종목입니다. 기준선 위로 종가가 올라서면 재진입합니다.</div><div class="dim">대상 없음</div></div>
 <div class="footer">MacTrader auto-journal</div>
 <script>
-const S={mkt:'ALL',st:'ALL',ai:'ALL',mon:'ALL',sort:'date',dir:-1,grp:false};  // dir -1=내림차순 / 1=오름차순
+const S={mkt:'ALL',st:'ALL',ai:'ALL',mon:'ALL',sec:'ALL',sort:'date',dir:-1};  // dir -1=내림차순 / 1=오름차순
 function setf(g,v,el){S[g]=v;
   el.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));
   el.classList.add('on'); apply();}
 // 같은 정렬 버튼 재클릭 = 방향 토글 / 다른 버튼 = 내림차순부터
 function setsort(v,el){
-  S.grp=false;
   if(S.sort===v){ S.dir=-S.dir; } else { S.sort=v; S.dir=-1; }
   el.parentNode.querySelectorAll('button').forEach(b=>{
     b.classList.remove('on');
@@ -186,7 +185,8 @@ function apply(){
     const ok=(S.mkt==='ALL'||c.dataset.mkt===S.mkt)
           && (S.st==='ALL'||c.dataset.st===S.st)
           && (S.ai==='ALL'||c.dataset.ai===S.ai)
-          && (S.mon==='ALL'||c.dataset.mon===S.mon);
+          && (S.mon==='ALL'||c.dataset.mon===S.mon)
+          && (S.sec==='ALL'||(c.dataset.sec||'unknown')===S.sec);
     c.classList.toggle('hide',!ok); if(ok) n++;
   });
   const num={date:false,ret:true,rs:true,rvol:true,pred:true,conf:true,pivot:true,rev:true,comp:true}[S.sort];
@@ -202,28 +202,7 @@ function apply(){
     const r = num ? (x-y) : (x<y?-1:x>y?1:0);
     return S.dir<0 ? -r : r;});
   cs.forEach(c=>L.appendChild(c));
-  L.querySelectorAll('.gh').forEach(h=>h.remove());
-  if(S.grp){
-    const ORD=[["it", "IT"], ["healthcare", "헬스케어"], ["comm", "커뮤"], ["financial", "금융"], ["cons-cyclical", "경기소비"], ["cons-defensive", "필수소비"], ["industrial", "산업"], ["materials", "소재"], ["energy", "에너지"], ["utilities", "유틸"], ["realestate", "부동산"], ["unknown", "미분류"]];
-    const byDate=(a,b)=>a.dataset.date<b.dataset.date?1:(a.dataset.date>b.dataset.date?-1:0);
-    ORD.forEach(g=>{
-      const gc=cs.filter(c=>(c.dataset.sec||'unknown')===g[0]).sort(byDate);
-      if(!gc.length) return;
-      const vis=gc.filter(c=>!c.classList.contains('hide')).length;
-      const h=document.createElement('div'); h.className='gh'; h.textContent=g[1]+' · '+vis+'건';
-      if(!vis) h.style.display='none';
-      L.appendChild(h); gc.forEach(c=>L.appendChild(c));
-    });
-  }
   const nr=document.getElementById('nores'); if(nr) nr.style.display = n?'none':'block';
-}
-
-function togsec(el){
-  const row=el.parentNode;
-  if(S.grp){ S.sort=''; const b=row.querySelector('button[data-lab="매수일"]'); if(b) b.click(); return; }
-  S.grp=true;
-  row.querySelectorAll('button').forEach(b=>{b.classList.remove('on'); b.textContent=b.dataset.lab;});
-  el.classList.add('on'); apply();
 }
 </script>
 </body></html>
